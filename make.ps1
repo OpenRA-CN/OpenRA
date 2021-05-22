@@ -72,7 +72,7 @@ function Version-Command
 	if ($version -ne $null)
 	{
 		$version | out-file ".\VERSION"
-		$mods = @("mods/ra/mod.yaml", "mods/cnc/mod.yaml", "mods/d2k/mod.yaml", "mods/ts/mod.yaml", "mods/modcontent/mod.yaml", "mods/all/mod.yaml")
+		$mods = @("mods/ra2/mod.yaml", "mods/ts/mod.yaml", "mods/modcontent/mod.yaml", "mods/all/mod.yaml")
 		foreach ($mod in $mods)
 		{
 			$replacement = (gc $mod) -Replace "Version:.*", ("Version: {0}" -f $version)
@@ -98,14 +98,10 @@ function Test-Command
 	}
 
 	Write-Host "Testing mods..." -ForegroundColor Cyan
+	Write-Host "Testing Red Alert 2 mod MiniYAML..." -ForegroundColor Cyan
+	InvokeCommand "$utilityPath ra2 --check-yaml"
 	Write-Host "Testing Tiberian Sun mod MiniYAML..." -ForegroundColor Cyan
 	InvokeCommand "$utilityPath ts --check-yaml"
-	Write-Host "Testing Dune 2000 mod MiniYAML..." -ForegroundColor Cyan
-	InvokeCommand "$utilityPath d2k --check-yaml"
-	Write-Host "Testing Tiberian Dawn mod MiniYAML..." -ForegroundColor Cyan
-	InvokeCommand "$utilityPath cnc --check-yaml"
-	Write-Host "Testing Red Alert mod MiniYAML..." -ForegroundColor Cyan
-	InvokeCommand "$utilityPath ra --check-yaml"
 }
 
 function Check-Command
