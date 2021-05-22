@@ -13,7 +13,7 @@ else
 fi
 
 Name="${Name:-"Dedicated Server"}"
-Mod="${Mod:-"ra"}"
+Mod="${Mod:-"ra2"}"
 ListenPort="${ListenPort:-"1234"}"
 AdvertiseOnline="${AdvertiseOnline:-"True"}"
 Password="${Password:-""}"

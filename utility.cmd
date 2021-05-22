@@ -8,10 +8,8 @@ call bin\OpenRA.Utility.exe
 echo Enter --exit to exit
 set /P mod="Please enter a modname: OpenRA.Utility.exe "
 if /I "%mod%" EQU "--exit" (exit /b)
-if /I "%mod%" EQU "ra" (goto help)
-if /I "%mod%" EQU "cnc" (goto help)
+if /I "%mod%" EQU "ra2" (goto help)
 if /I "%mod%" EQU "ts" (goto help)
-if /I "%mod%" EQU "d2k" (goto help)
 echo.
 echo Unknown mod: %mod%
 echo.
