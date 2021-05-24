@@ -136,6 +136,29 @@ namespace OpenRA.Graphics
 			};
 		}
 
+		/// <summary>
+		/// 它将按照当前帧数“继续”播放序列并循环，
+		/// 如果当前序列帧数不足以“继续”，那就从0开始倒放。
+		/// 如果帧数足够，那就从第frame帧开始继续播放序列，
+		/// 当首次播放完成后，从0帧开始继续循环播放。
+		/// </summary>
+		public void PlayContinueRepeating(string sequenceName)
+		{
+			backwards = false;
+			tickAlways = false;
+			PlaySequence(sequenceName);
+
+			if (frame >= CurrentSequence.Length || frame < 0)
+				frame = 0;
+
+			tickFunc = () =>
+			{
+				++frame;
+				if (frame >= CurrentSequence.Length)
+					frame = 0;
+			};
+		}
+
 		public bool ReplaceAnim(string sequenceName)
 		{
 			if (!HasSequence(sequenceName))
@@ -170,6 +193,91 @@ namespace OpenRA.Graphics
 		{
 			PlayThen(sequenceName, after);
 			backwards = true;
+		}
+
+		/// <summary>
+		/// 它将按照当前帧数“继续”播放序列。
+		/// 如果当前序列帧数不足以“继续”，那就从0开始倒放。
+		/// 如果帧数足够，那就从第frame帧开始继续播放序列。
+		/// 播放结束后执行action
+		/// </summary>
+		public void PlayContinueThen(string sequenceName, Action after)
+		{
+			backwards = false;
+			tickAlways = false;
+			PlaySequence(sequenceName);
+
+			if (frame >= CurrentSequence.Length || frame < 0)
+				frame = 0;
+
+			tickFunc = () =>
+			{
+				++frame;
+				if (frame >= CurrentSequence.Length)
+				{
+					frame = CurrentSequence.Length - 1;
+					tickFunc = () => { };
+					after?.Invoke();
+				}
+			};
+		}
+
+		/// <summary>
+		/// 它将按照当前帧数的翻转帧“继续”播放序列，
+		/// 如果当前序列帧数不足以“继续”，那就从0开始倒放。
+		/// 如果帧数足够，那就从“倒数第frame帧”开始播放序列
+		/// 播放结束后执行action
+		/// </summary>
+		public void PlayBackContinueThen(string sequenceName, Action after)
+		{
+			backwards = false;
+			tickAlways = false;
+			PlaySequence(sequenceName);
+
+			if (frame >= CurrentSequence.Length || frame < 0)
+				frame = 0;
+			else
+				frame = CurrentSequence.Length - frame - 1;
+
+			tickFunc = () =>
+			{
+				++frame;
+				if (frame >= CurrentSequence.Length)
+				{
+					frame = CurrentSequence.Length - 1;
+					tickFunc = () => { };
+					after?.Invoke();
+				}
+			};
+		}
+
+		/// <summary>
+		/// 它将按照当前帧数的翻转帧“继续倒放”序列，
+		/// 如果当前序列帧数不足以“继续”，那就从0开始倒放。
+		/// 如果帧数足够，那就从“倒数第frame帧”开始“倒放”序列
+		/// 播放结束后执行action
+		/// </summary>
+		public void PlayContinueBackwardsThen(string sequenceName, Action after)
+		{
+			backwards = true;
+			tickAlways = false;
+			PlaySequence(sequenceName);
+
+			if (frame >= CurrentSequence.Length || frame < 0)
+				frame = 0;
+			else
+				frame = CurrentSequence.Length - frame - 1;
+
+			tickFunc = () =>
+			{
+				++frame;
+				if (frame >= CurrentSequence.Length)
+				{
+					frame = CurrentSequence.Length - 1;
+					tickFunc = () => { };
+					after?.Invoke();
+				}
+			};
 		}
 
 		public void PlayFetchIndex(string sequenceName, Func<int> func)
