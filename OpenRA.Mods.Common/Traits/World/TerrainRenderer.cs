@@ -98,7 +98,9 @@ namespace OpenRA.Mods.Common.Traits
 
 			var sprite = tileCache.TileSprite(tile);
 			var paletteReference = worldRenderer.Palette(palette);
-			spriteLayer.Update(cell, sprite, paletteReference);
+
+			// 放大地形为2倍
+			spriteLayer.Update(cell, sprite, paletteReference, 2f);
 		}
 
 		void IRenderTerrain.RenderTerrain(WorldRenderer wr, Viewport viewport)
