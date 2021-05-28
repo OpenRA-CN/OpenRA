@@ -3,7 +3,7 @@ Background@ASSETBROWSER_PANEL:
 	X: (WINDOW_RIGHT - WIDTH) / 2
 	Y: (WINDOW_BOTTOM - HEIGHT) / 2
 	Width: 700
-	Height: 500
+	Height: 550
 	Children:
 		LogicTicker@ANIMATION_TICKER:
 		Label@ASSETBROWSER_TITLE:
@@ -116,8 +116,9 @@ Background@ASSETBROWSER_PANEL:
 					Visible: false
 					Text: Error displaying file. See assetbrowser.log for details.
 		Container@FRAME_SELECTOR:
-			X: 190
-			Y: 425
+			X: 75
+			Y: 450
+			Width: PARENT_RIGHT - 150
 			Children:
 				Button@BUTTON_PREV:
 					X: 0
@@ -183,22 +184,23 @@ Background@ASSETBROWSER_PANEL:
 				Slider@FRAME_SLIDER:
 					X: 140
 					Y: 3
-					Width: 300
+					Width: PARENT_RIGHT - 140 - 10 - 5
 					Height: 20
 					MinimumValue: 0
 				Label@FRAME_COUNT:
-					X: 445
+					X: PARENT_RIGHT - WIDTH
 					Y: 1
-					Width: 40
+					Width: 10
 					Height: 25
 					Font: TinyBold
 					Align: Left
 		Container@VOXEL_SELECTOR:
-			X: 60
-			Y: 425
+			X: 75
+			Y: 435
+			Width: PARENT_RIGHT - 150
 			Children:
 				Label@ROLL:
-					X: 140
+					X: 0
 					Y: 1
 					Width: 40
 					Height: 25
@@ -206,14 +208,14 @@ Background@ASSETBROWSER_PANEL:
 					Align: Left
 					Text: Roll
 				Slider@ROLL_SLIDER:
-					X: 165
+					X: 25
 					Y: 3
-					Width: 100
+					Width: 148
 					Height: 20
 					MinimumValue: 1
 					MaximumValue: 1023
 				Label@PITCH:
-					X: 310
+					X: 203
 					Y: 1
 					Width: 40
 					Height: 25
@@ -221,14 +223,14 @@ Background@ASSETBROWSER_PANEL:
 					Align: Left
 					Text: Pitch
 				Slider@PITCH_SLIDER:
-					X: 335
+					X: 228
 					Y: 3
-					Width: 100
+					Width: 148
 					Height: 20
 					MinimumValue: 1
 					MaximumValue: 1023
 				Label@YAW:
-					X: 480
+					X: 406
 					Y: 1
 					Width: 40
 					Height: 25
@@ -236,12 +238,78 @@ Background@ASSETBROWSER_PANEL:
 					Align: Left
 					Text: Yaw
 				Slider@YAW_SLIDER:
-					X: 505
+					X: 431
 					Y: 3
-					Width: 100
+					Width: 148
 					Height: 20
 					MinimumValue: 1
 					MaximumValue: 1023
+				Label@LIGHT_PITCH:
+					X: 0
+					Y: 27
+					Width: 40
+					Height: 25
+					Font: TinyBold
+					Align: Left
+					Text: Light Pitch
+				Slider@LIGHT_PITCH_SLIDER:
+					X: 45
+					Y: 31
+					Width: 200
+					Height: 20
+					MinimumValue: 0
+					MaximumValue: 255
+				Label@LIGHT_PITCH_NUM:
+					X: 245
+					Y: 27
+					Width: 10
+					Height: 25
+					Font: TinyBold
+					Align: Left
+				Label@LIGHT_YAW:
+					X: 275
+					Y: 27
+					Width: 40
+					Height: 25
+					Font: TinyBold
+					Align: Left
+					Text: Light Yaw
+				Slider@LIGHT_YAW_SLIDER:
+					X: 320
+					Y: 31
+					Width: 200
+					Height: 20
+					MinimumValue: 0
+					MaximumValue: 1023
+				Label@LIGHT_YAW_NUM:
+					X: 520
+					Y: 27
+					Width: 10
+					Height: 25
+					Font: TinyBold
+					Align: Left
+				Label@SCALE:
+					X: 0
+					Y: 53
+					Width: 40
+					Height: 25
+					Font: TinyBold
+					Align: Left
+					Text: Scale
+				Slider@SCALE_SLIDER:
+					X: 30
+					Y: 59
+					Width: 215
+					Height: 20
+					MinimumValue: 1
+					MaximumValue: 100
+				Label@SCALE_NUM:
+					X: 245
+					Y: 53
+					Width: 10
+					Height: 25
+					Font: TinyBold
+					Align: Left
 		Button@CLOSE_BUTTON:
 			Key: escape
 			X: PARENT_RIGHT - 180
