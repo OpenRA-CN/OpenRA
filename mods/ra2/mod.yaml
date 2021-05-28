@@ -275,7 +275,7 @@ SpriteSequenceFormat: ExtendedTilesetSpecificSpriteSequence
 ModelSequenceFormat: VoxelModelSequence
 
 AssetBrowser:
-	SupportedExtensions: .shp, .tem, .urb, .sno
+	SupportedExtensions: .shp, .tem, .urb, .sno, .vxl
 
 GameSpeeds:
 	DefaultSpeed: default

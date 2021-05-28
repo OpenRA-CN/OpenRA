@@ -50,6 +50,9 @@ namespace OpenRA.Mods.Common.Widgets.Logic
 		bool isLoadError = false;
 		int currentFrame;
 		WRot modelOrientation;
+		int lightPitch = 142;
+		int lightYaw = 682;
+		float scale = 12f;
 
 		[ObjectCreator.UseCtor]
 		public AssetBrowserLogic(Widget widget, Action onExit, ModData modData, WorldRenderer worldRenderer)
@@ -106,6 +109,9 @@ namespace OpenRA.Mods.Common.Widgets.Logic
 				modelWidget.GetPalette = () => currentPalette;
 				modelWidget.GetPlayerPalette = () => currentPalette;
 				modelWidget.GetRotation = () => modelOrientation;
+				modelWidget.GetLightPitch = () => lightPitch;
+				modelWidget.GetLightYaw = () => lightYaw;
+				modelWidget.GetScale = () => scale;
 				modelWidget.IsVisible = () => !isVideoLoaded && !isLoadError && currentVoxel != null;
 			}
 
@@ -270,6 +276,51 @@ namespace OpenRA.Mods.Common.Widgets.Logic
 
 				yawSlider.GetValue = () => modelOrientation.Yaw.Angle;
 			}
+
+			var lightPitchSlider = panel.GetOrNull<SliderWidget>("LIGHT_PITCH_SLIDER");
+			if (lightPitchSlider != null)
+			{
+				lightPitchSlider.OnChange += x =>
+				{
+					lightPitch = (int)x;
+				};
+
+				lightPitchSlider.GetValue = () => lightPitch;
+			}
+
+			var lightPitchNum = panel.GetOrNull<LabelWidget>("LIGHT_PITCH_NUM");
+			if (lightPitchNum != null)
+				lightPitchNum.GetText = () => $"{lightPitch}";
+
+			var lightYawSlider = panel.GetOrNull<SliderWidget>("LIGHT_YAW_SLIDER");
+			if (lightYawSlider != null)
+			{
+				lightYawSlider.OnChange += x =>
+				{
+					lightYaw = (int)x;
+				};
+
+				lightYawSlider.GetValue = () => lightYaw;
+			}
+
+			var lightYawNum = panel.GetOrNull<LabelWidget>("LIGHT_YAW_NUM");
+			if (lightYawNum != null)
+				lightYawNum.GetText = () => $"{lightYaw}";
+
+			var scaleSlider = panel.GetOrNull<SliderWidget>("SCALE_SLIDER");
+			if (scaleSlider != null)
+			{
+				scaleSlider.OnChange += x =>
+				{
+					scale = x;
+				};
+
+				scaleSlider.GetValue = () => scale;
+			}
+
+			var scaleNum = panel.GetOrNull<LabelWidget>("SCALE_NUM");
+			if (scaleNum != null)
+				scaleNum.GetText = () => $"{scale}";
 
 			var assetBrowserModData = modData.Manifest.Get<AssetBrowser>();
 			allowedExtensions = assetBrowserModData.SupportedExtensions;

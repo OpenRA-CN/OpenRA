@@ -189,7 +189,7 @@ namespace OpenRA.Mods.Common.Widgets
 
 			var animations = new ModelAnimation[] { animation };
 
-			ModelPreview preview = new ModelPreview(
+			var preview = new ModelPreview(
 				new ModelAnimation[] { animation }, WVec.Zero, 0,
 				cachedScale,
 				new WAngle(cachedLightPitch),
@@ -208,7 +208,7 @@ namespace OpenRA.Mods.Common.Widgets
 			var camera = new WRot(WAngle.Zero, cachedCameraAngle - new WAngle(256), new WAngle(256));
 			var modelRenderable = new UIModelRenderable(
 				animations, WPos.Zero, origin, 0, camera, scale,
-				WRot.None, cachedLightAmbientColor, cachedLightDiffuseColor,
+				new WRot(WAngle.Zero, new WAngle(cachedLightPitch), new WAngle(cachedLightYaw)), cachedLightAmbientColor, cachedLightDiffuseColor,
 				paletteReferencePlayer, paletteReferenceNormals, paletteReferenceShadow);
 
 			renderable = modelRenderable.PrepareRender(WorldRenderer);
