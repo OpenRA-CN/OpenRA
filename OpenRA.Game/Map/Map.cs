@@ -852,7 +852,7 @@ namespace OpenRA
 			// (c) u, v coordinates run diagonally to the cell axes, and we define
 			//     1024 as the length projected onto the primary cell axis
 			//  - 512 * sqrt(2) = 724
-			var z = Height.Contains(cell) ? 724 * Height[cell] + Grid.Ramps[Ramp[cell]].CenterHeightOffset : 0;
+			var z = Height.Contains(cell) ? 418 * Height[cell] + Grid.Ramps[Ramp[cell]].CenterHeightOffset : 0;
 			return new WPos(724 * (cell.X - cell.Y + 1), 724 * (cell.X + cell.Y + 1), z);
 		}
 
@@ -903,7 +903,7 @@ namespace OpenRA
 			if (Grid.Type == MapGridType.Rectangular)
 				return new WVec(1024 * delta.X, 1024 * delta.Y, 0);
 
-			return new WVec(724 * (delta.X - delta.Y), 724 * (delta.X + delta.Y), 724 * dz);
+			return new WVec(724 * (delta.X - delta.Y), 724 * (delta.X + delta.Y), 418 * dz);
 		}
 
 		/// <summary>
@@ -911,7 +911,7 @@ namespace OpenRA
 		/// </summary>
 		/// RectangularIsometric defines 1024 units along the diagonal axis,
 		/// giving a half-tile height step of sqrt(2) * 512
-		public WDist CellHeightStep => new WDist(Grid.Type == MapGridType.RectangularIsometric ? 724 : 512);
+		public WDist CellHeightStep => new WDist(Grid.Type == MapGridType.RectangularIsometric ? 418 : 512);
 
 		public CPos CellContaining(WPos pos)
 		{
@@ -933,7 +933,7 @@ namespace OpenRA
 
 		public PPos ProjectedCellCovering(WPos pos)
 		{
-			var projectedPos = pos - new WVec(0, pos.Z, pos.Z);
+			var projectedPos = pos - new WVec(0, pos.Z * 1774 / 1024, pos.Z);
 			return (PPos)CellContaining(projectedPos).ToMPos(Grid.Type);
 		}
 

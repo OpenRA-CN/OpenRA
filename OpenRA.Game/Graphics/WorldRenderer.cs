@@ -354,13 +354,13 @@ namespace OpenRA.Graphics
 		// Conversion between world and screen coordinates
 		public float2 ScreenPosition(WPos pos)
 		{
-			return new float2((float)TileSize.Width * pos.X / TileScale, (float)TileSize.Height * (pos.Y - pos.Z) / TileScale);
+			return new float2((float)TileSize.Width * pos.X / TileScale, (float)TileSize.Height * (pos.Y * 1024 - pos.Z * 1774) / TileScale / 1024);
 		}
 
 		public float3 Screen3DPosition(WPos pos)
 		{
 			var z = ZPosition(pos, 0) * (float)TileSize.Height / TileScale;
-			return new float3((float)TileSize.Width * pos.X / TileScale, (float)TileSize.Height * (pos.Y - pos.Z) / TileScale, z);
+			return new float3((float)TileSize.Width * pos.X / TileScale, (float)TileSize.Height * (pos.Y * 1024 - pos.Z * 1774) / TileScale / 1024, z);
 		}
 
 		public int2 ScreenPxPosition(WPos pos)
@@ -382,8 +382,8 @@ namespace OpenRA.Graphics
 		{
 			return new float3(
 				(float)TileSize.Width * vec.X / TileScale,
-				(float)TileSize.Height * (vec.Y - vec.Z) / TileScale,
-				(float)TileSize.Height * vec.Z / TileScale);
+				(float)TileSize.Height * (vec.Y * 1024 - vec.Z * 1774) / TileScale / 1024,
+				(float)TileSize.Height * (vec.Y * 1774 + vec.Z * 1024) / TileScale / 1024);
 		}
 
 		// For scaling vectors to pixel sizes in the model renderer
@@ -407,7 +407,7 @@ namespace OpenRA.Graphics
 
 		static int ZPosition(WPos pos, int offset)
 		{
-			return pos.Y + pos.Z + offset;
+			return (pos.Y * 1774 + pos.Z * 1024 + offset * 1024) / 1024;
 		}
 
 		/// <summary>

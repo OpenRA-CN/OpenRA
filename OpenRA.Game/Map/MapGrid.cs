@@ -34,10 +34,10 @@ namespace OpenRA
 			{
 				Corners = new[]
 				{
-					new WVec(0, -724, 724 * (int)tl),
-					new WVec(724, 0, 724 * (int)tr),
-					new WVec(0, 724, 724 * (int)br),
-					new WVec(-724, 0, 724 * (int)bl),
+					new WVec(0, -724, 418 * (int)tl),
+					new WVec(724, 0, 418 * (int)tr),
+					new WVec(0, 724, 418 * (int)br),
+					new WVec(-724, 0, 418 * (int)bl),
 				};
 			}
 			else
@@ -176,6 +176,9 @@ namespace OpenRA
 			};
 
 			TilesByDistance = CreateTilesByDistance();
+
+			if (Type == MapGridType.RectangularIsometric)
+				TileSize = new Size(TileSize.Height * 2, TileSize.Height);
 		}
 
 		CVec[][] CreateTilesByDistance()
