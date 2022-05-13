@@ -149,6 +149,10 @@
 		G: 0
 		B: 0
 		A: 180
+	PaletteFromVPL@vpl:
+		Name: vpl
+		FilePath: voxels.vpl
+		AllowModifiers: true
 	TSShroudPalette@shroud:
 		Name: shroud
 	ShroudRenderer:

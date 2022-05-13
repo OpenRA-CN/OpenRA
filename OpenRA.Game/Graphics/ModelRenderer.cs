@@ -43,6 +43,7 @@ namespace OpenRA.Graphics
 		static readonly float[] FlipMtx = Util.ScaleMatrix(1, -1, 1);
 		static readonly float[] ShadowScaleFlipMtx = Util.ScaleMatrix(2, -2, 2);
 
+		static readonly float[] WorldLightDir = new float[] { 0, 0, -1 };
 		readonly Renderer renderer;
 		readonly IShader shader;
 
@@ -92,6 +93,9 @@ namespace OpenRA.Graphics
 			// Correct for bogus light source definition
 			var lightYaw = Util.MakeFloatMatrix(new WRot(WAngle.Zero, WAngle.Zero, -lightSource.Yaw).AsMatrix());
 			var lightPitch = Util.MakeFloatMatrix(new WRot(WAngle.Zero, -lightSource.Pitch, WAngle.Zero).AsMatrix());
+
+			// var lightYaw = Util.MakeFloatMatrix(new WRot(WAngle.Zero, WAngle.Zero, WAngle.Zero).AsMatrix());
+			// var lightPitch = Util.MakeFloatMatrix(new WRot(WAngle.Zero, WAngle.Zero, WAngle.Zero).AsMatrix());
 			var shadowTransform = Util.MatrixMultiply(lightPitch, lightYaw);
 
 			var invShadowTransform = Util.MatrixInverse(shadowTransform);
@@ -178,7 +182,7 @@ namespace OpenRA.Graphics
 			var correctionTransform = Util.MatrixMultiply(translateMtx, FlipMtx);
 			var shadowCorrectionTransform = Util.MatrixMultiply(shadowTranslateMtx, ShadowScaleFlipMtx);
 
-			doRender.Add((sprite.Sheet, () =>
+			doRender.Add((sprite.Sheet, new Action(() =>
 			{
 				foreach (var m in models)
 				{
@@ -210,20 +214,44 @@ namespace OpenRA.Graphics
 						// Transform light vector from shadow -> world -> limb coords
 						var lightDirection = ExtractRotationVector(Util.MatrixMultiply(it, lightTransform));
 
+						// ugly fix normal palette bug temply
+						normals = FixNoramlPalette(wr, m.Model);
 						Render(rd, wr.World.ModelCache, Util.MatrixMultiply(transform, t), lightDirection,
-							lightAmbientColor, lightDiffuseColor, color.TextureMidIndex, normals.TextureMidIndex);
+							lightAmbientColor, lightDiffuseColor, color.TextureMidIndex, normals.TextureMidIndex, color.VplStartIndex, color.HardwardPaletteHeight);
 
 						// Disable shadow normals by forcing zero diffuse and identity ambient light
 						if (m.ShowShadow)
 							Render(rd, wr.World.ModelCache, Util.MatrixMultiply(shadow, t), lightDirection,
-								ShadowAmbient, ShadowDiffuse, shadowPalette.TextureMidIndex, normals.TextureMidIndex);
+								ShadowAmbient, ShadowDiffuse, shadowPalette.TextureMidIndex, normals.TextureMidIndex, color.VplStartIndex, color.HardwardPaletteHeight);
 					}
 				}
-			}));
+			})));
 
 			var screenLightVector = Util.MatrixVectorMultiply(invShadowTransform, ZVector);
 			screenLightVector = Util.MatrixVectorMultiply(cameraTransform, screenLightVector);
 			return new ModelRenderProxy(sprite, shadowSprite, screenCorners, -screenLightVector[2] / screenLightVector[1]);
+		}
+
+		static PaletteReference FixNoramlPalette(WorldRenderer wr, IModel model)
+		{
+			var p = model.GetType().GetProperty("NormalType");
+			int normalType = (int)p.GetValue(model);
+			PaletteReference ret = null;
+			if (normalType == 2)
+			{
+				ret = wr.Palette("ts-normals");
+			}
+			else if (normalType == 4)
+			{
+				ret = wr.Palette("normals");
+			}
+			else
+			{
+				ret = null;
+				Console.WriteLine("Cant Find This Normal");
+			}
+
+			return ret;
 		}
 
 		static void CalculateSpriteGeometry(float2 tl, float2 br, float scale, out Size size, out int2 offset)
@@ -264,7 +292,7 @@ namespace OpenRA.Graphics
 			IModelCache cache,
 			float[] t, float[] lightDirection,
 			float[] ambientLight, float[] diffuseLight,
-			float colorPaletteTextureMidIndex, float normalsPaletteTextureMidIndex)
+			float colorPaletteTextureMidIndex, float normalsPaletteTextureMidIndex, int vplStart = 0, int paletteCount = 0)
 		{
 			shader.SetTexture("DiffuseTexture", renderData.Sheet.GetTexture());
 			shader.SetVec("PaletteRows", colorPaletteTextureMidIndex, normalsPaletteTextureMidIndex);
@@ -272,6 +300,8 @@ namespace OpenRA.Graphics
 			shader.SetVec("LightDirection", lightDirection, 4);
 			shader.SetVec("AmbientLight", ambientLight, 3);
 			shader.SetVec("DiffuseLight", diffuseLight, 3);
+			shader.SetVec("VplInfo", vplStart, paletteCount);
+			shader.SetVec("WorldLight", WorldLightDir, 3);
 
 			shader.PrepareRender();
 			renderer.DrawBatch(cache.VertexBuffer, renderData.Start, renderData.Count, PrimitiveType.TriangleList);

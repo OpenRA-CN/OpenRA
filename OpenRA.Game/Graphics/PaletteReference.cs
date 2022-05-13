@@ -30,5 +30,9 @@ namespace OpenRA.Graphics
 		}
 
 		public bool HasColorShift => hardwarePalette.HasColorShift(Name);
+
+		public int VplStartIndex => hardwarePalette.GetPaletteIndex("vpl0");
+
+		public int HardwardPaletteHeight => hardwarePalette.Height;
 	}
 }
