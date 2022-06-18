@@ -433,6 +433,13 @@ namespace OpenRA.Graphics
 				(float)TileSize.Height * vec.Z / TileScale);
 		}
 
+		// For scaling vectors to pixel sizes in the model renderer
+		public float[] ScreenVector(in WVec vec)
+		{
+			var xyz = ScreenVectorComponents(vec);
+			return new[] { xyz.X, xyz.Y, xyz.Z, 1f };
+		}
+
 		public int2 ScreenPxOffset(in WVec vec)
 		{
 			// Round to nearest pixel
