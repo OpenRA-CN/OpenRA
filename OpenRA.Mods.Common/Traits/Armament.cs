@@ -451,6 +451,9 @@ namespace OpenRA.Mods.Common.Traits
 
 			for (var i = 0; i < Info.BurstsPerFire && Burst > 0; i++)
 			{
+				if (IsTraitDisabled || IsTraitPaused)
+					return barrel;
+
 				// If Weapon.Burst == 1, cycle through all LocalOffsets, otherwise use the offset corresponding to current Burst
 				currentBarrel %= barrelCount;
 				barrel = Weapon.Burst == 1 ? Barrels[currentBarrel] : Barrels[Burst % Barrels.Length];
