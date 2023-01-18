@@ -18,6 +18,7 @@ uniform sampler2DArray Tiles;
 uniform sampler2DArray TilesNorm;
 
 uniform bool UseMapTint;
+uniform bool ThreeFacingTerrainBlend;
 
 uniform vec2 Offset;
 uniform vec2 Range;
@@ -145,9 +146,26 @@ float MaskNoise2(int layer)
 	return mask;
 }
 
+vec4 GetThreeFacingColor(int layer){
+	int tileIndex = GetTileIndex(layer);
+	float noiseC = MaskNoise2(layer) * 0.25 + 0.85;
+
+	vec3 xyz = vFragPos / TileScales[tileIndex];
+	vec3 blend = abs(TBN[2]);
+	blend /= blend.x + blend.y + blend.z;
+
+	vec3 cx = texture(Tiles, vec3(xyz.yz, float(tileIndex))).rgb;
+	vec3 cy = texture(Tiles, vec3(xyz.xz, float(tileIndex))).rgb;
+	vec3 cz = texture(Tiles, vec3(xyz.xy, float(tileIndex))).rgb;
+	return vec4((cx * blend.x + cy * blend.y + cz * blend.z) * noiseC, 1.0);
+}
+
 // alpha channel use for height map
 vec4 GetTileColor(int layer)
 {
+	if (ThreeFacingTerrainBlend)
+		return GetThreeFacingColor(layer);
+
 	int tileIndex = GetTileIndex(layer);
 	// float noiseUV = MaskNoise(layer);
 	// float noiseUV2 = MaskNoise(layer+1);
@@ -163,8 +181,24 @@ vec4 GetTileColor(int layer)
 	return color;
 }
 
+vec4 GetThreeFacingCombine(int layer){
+	int tileIndex = GetTileIndex(layer);
+
+	vec3 xyz = vFragPos / TileScales[tileIndex];
+	vec3 blend = abs(TBN[2]);
+	blend /= blend.x + blend.y + blend.z;
+
+	vec4 cx = texture(TilesNorm, vec3(xyz.yz, float(tileIndex)));
+	vec4 cy = texture(TilesNorm, vec3(xyz.xz, float(tileIndex)));
+	vec4 cz = texture(TilesNorm, vec3(xyz.xy, float(tileIndex)));
+	return cx * blend.x + cy * blend.y + cz * blend.z;
+}
+
 vec4 GetTileCombines(int layer)
 {
+	if (ThreeFacingTerrainBlend)
+		return GetThreeFacingCombine(layer);
+
 	int tileIndex = GetTileIndex(layer);
 	// float noise = MaskNoise(layer);
 	// float noiseB = MaskNoise(layer+1);

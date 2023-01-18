@@ -237,6 +237,9 @@ namespace OpenRA
 		public readonly int EditorBrushMaxHistoryCache = 32;
 
 		public bool FxAA = false;
+
+		public bool ThreeFacingTerrainBlend = false;
+
 	}
 
 	public enum ShadowSampleType

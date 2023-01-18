@@ -325,7 +325,10 @@ namespace OpenRA.Graphics
 		public readonly int TileType1, TileType2, TileType3, TileType4;
 		public readonly int TileType5, TileType6, TileType7, TileType8;
 
+		public readonly float PX, PY, PZ;
+
 		public TerrainBlendingVertex(
+									in float3 pos,
 									in float2 xy,
 									in float2 uv,
 									in float2 maskuv,
@@ -342,7 +345,8 @@ namespace OpenRA.Graphics
 				  tbn.B.X, tbn.B.Y, tbn.B.Z,
 				  tbn.N.X, tbn.N.Y, tbn.N.Z,
 				  t1, t2, t3, t4,
-				  t5, t6, t7, t8)
+				  t5, t6, t7, t8,
+				  pos.X, pos.Y, pos.Z)
 		{ }
 
 		public TerrainBlendingVertex(
@@ -361,7 +365,8 @@ namespace OpenRA.Graphics
 			tbn.B.X, tbn.B.Y, tbn.B.Z,
 			tbn.N.X, tbn.N.Y, tbn.N.Z,
 			vert.TileType1, vert.TileType2, vert.TileType3, vert.TileType4,
-			vert.TileType5, vert.TileType6, vert.TileType7, vert.TileType8)
+			vert.TileType5, vert.TileType6, vert.TileType7, vert.TileType8,
+			vert.PX, vert.PY, vert.PZ)
 		{ }
 
 		public TerrainBlendingVertex(
@@ -373,7 +378,8 @@ namespace OpenRA.Graphics
 									float bx, float by, float bz,
 									float nx, float ny, float nz,
 									int t1, int t2, int t3, int t4,
-									int t5, int t6, int t7, int t8)
+									int t5, int t6, int t7, int t8,
+									float px, float py, float pz)
 		{
 			X = x; Y = y;
 			U = u; V = v;
@@ -384,6 +390,7 @@ namespace OpenRA.Graphics
 			NX = nx; NY = ny; NZ = nz;
 			TileType1 = t1; TileType2 = t2; TileType3 = t3; TileType4 = t4;
 			TileType5 = t5; TileType6 = t6; TileType7 = t7; TileType8 = t8;
+			PX = px;  PY = py; PZ = pz;
 		}
 	};
 

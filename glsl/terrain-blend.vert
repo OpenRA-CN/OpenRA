@@ -17,7 +17,7 @@ in vec3 aVertexBitangent;
 in vec3 aVertexNormal;
 in ivec4 aTileType1234;
 in ivec4 aTileType5678;
-
+in vec3 aVertexPosition;
 
 out vec2 vUV;
 out vec2 vMaskUV;
@@ -43,4 +43,5 @@ void main()
 	vNormal = aVertexNormal;
 	vTileType1234 = aTileType1234;
 	vTileType5678 = aTileType5678;
+	vFragPos = aVertexPosition;
 }
