@@ -625,7 +625,7 @@ NAWAST:
 		MaxHeightDelta: 1100
 	Targetable@AIveinBomb:
 		TargetTypes: AIvein
-	TiberianSunRefinery:
+	Refinery:
 		DockAngle: 640
 		DockOffset: 2,1
 		DiscardExcessResources: true
