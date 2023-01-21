@@ -1,19 +1,15 @@
 pfind:
-	icon: pathfinder_icon.png
-		UseTilesetCode: false
-	 	AddExtension: false
+	icon:
+		Filename: pathfinder_icon.png
 		Offset: 0, 0, 0
-	pic: pathfinder_pic.png
-		UseTilesetCode: false
-	 	AddExtension: false
+	pic:
+		Filename: pathfinder_pic.png
 		Offset: 0, 0, 0
 
 bhcmmdo:
-	icon: bhcmmdo_icon.png
-		UseTilesetCode: false
-	 	AddExtension: false
+	icon:
+		Filename: bhcmmdo_icon.png
 		Offset: 0, 0, 0
-	pic: bhcmmdo_pic.png
-		UseTilesetCode: false
-	 	AddExtension: false
+	pic:
+		Filename: bhcmmdo_pic.png
 		Offset: 0, 0, 0

@@ -1,30 +1,35 @@
 a10:
 	Inherits: ^VehicleOverlays
-	icon: a10_icon.png
-		UseTilesetCode: false
-	 	AddExtension: false
+	icon:
+		Filename: a10_icon.png
 		Offset: 0, 0, 0
 
 orca:
 	Inherits: ^VehicleOverlays
-	icon: orcaicon
+	icon:
+		Filename: orcaicon.shp
 
 orcab:
 	Inherits: ^VehicleOverlays
-	icon: obmbicon
+	icon:
+		Filename: obmbicon.shp
 
 trnsport:
 	Inherits: ^VehicleOverlays
-	icon: otrnicon
+	icon:
+		Filename: otrnicon.shp
 
 scrin:
 	Inherits: ^VehicleOverlays
-	icon: proicon
+	icon:
+		Filename: proicon.shp
 
 apache:
 	Inherits: ^VehicleOverlays
-	icon: apchicon
-	rotor: harpyrotor
+	icon:
+		Filename: apchicon.shp
+	rotor:
+		Filename: harpyrotor.shp
 		Start: 32
 		Length: 31
 		Offset: 0, 0, 0
@@ -32,7 +37,8 @@ apache:
 		ZRamp: 1
 		Tick: 25
 		MeshType: Plane
-	slow-rotor: harpyrotor
+	slow-rotor:
+		Filename: harpyrotor.shp
 		Length: 31
 		Offset: 0, 0, 0
 		ZOffset: 1500
@@ -43,16 +49,20 @@ apache:
 
 orcatran:
 	Inherits: ^VehicleOverlays
-	icon: crryicon
+	icon:
+		Filename: crryicon.shp
 
 pod:
 	Inherits: ^VehicleOverlays
 	idle:
+		Filename: pod.shp
 		Facings: 1
 		Length: 1
 
 
 quaddrone-mini:
+	Defaults:
+		Filename: quaddrone-mini.shp
 	Inherits: ^VehicleOverlays
 	idle:
 		Facings: 1
@@ -66,7 +76,8 @@ quaddrone-mini:
 		Facings: 1
 		Length: *
 		Scale: 0.95
-	die: explosml
+	die:
+		Filename: explosml.shp
 		ZOffset: 511
 		Offset: 0, 0, 24
 		AlphaFade: True
@@ -75,6 +86,8 @@ quaddrone-mini:
 		BlendMode: Additive #Additive
 
 rpgdrone:
+	Defaults:
+		Filename: rpgdrone.shp
 	Inherits: ^VehicleOverlays
 	idle:
 		Facings: -32
@@ -85,7 +98,8 @@ rpgdrone:
 	run:
 		Facings: -32
 		Length: 1
-	die: explosml
+	die:
+		Filename: explosml.shp
 		ZOffset: 511
 		Offset: 0, 0, 24
 		AlphaFade: True
@@ -94,6 +108,8 @@ rpgdrone:
 		BlendMode: Additive #Additive
 
 repairdrone-mini:
+	Defaults:
+		Filename: repairdrone-mini.shp
 	Inherits: ^VehicleOverlays
 	idle:
 		Facings: -32
@@ -104,7 +120,8 @@ repairdrone-mini:
 	run:
 		Facings: -32
 		Length: 1
-	die: explosml
+	die:
+		Filename: explosml.shp
 		ZOffset: 511
 		Offset: 0, 0, 24
 		AlphaFade: True
