@@ -177,7 +177,7 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			var repairers = world.ActorsHavingTrait<IPositionable>()
-				.Where(a => Info.EngineerActorTypes.Contains(a.Info.Name) && a.Owner == player && !unitCannotBeOrdered(a) && !stuckEngineers.Contains(a) && a.Info.HasTraitInfo<EngineerRepairInfo>())
+				.Where(a => Info.EngineerActorTypes.Contains(a.Info.Name) && a.Owner == player && !unitCannotBeOrdered(a) && !stuckEngineers.Contains(a) && a.Info.HasTraitInfo<InstantlyRepairsInfo>())
 				.ToArray();
 
 			if (repairers.Length == 0)
@@ -216,7 +216,7 @@ namespace OpenRA.Mods.Common.Traits
 					if (health == null || health.DamageState < Info.RepairableDamageState)
 						return false;
 
-					var buildingrepair = target.TraitOrDefault<EngineerRepairable>();
+					var buildingrepair = target.TraitOrDefault<InstantlyRepairable>();
 					if (buildingrepair == null)
 						return false;
 
