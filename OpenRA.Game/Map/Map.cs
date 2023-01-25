@@ -725,14 +725,24 @@ namespace OpenRA
 					toPackage.Update(file, Package.GetStream(file).ReadAllBytes());
 
 			if (!LockPreview)
-				toPackage.Update("map.png", SavePreview());
+			{
+				var previewData = SavePreview();
+				if (Package != toPackage || !Enumerable.SequenceEqual(previewData, Package.GetStream("map.png").ReadAllBytes()))
+					toPackage.Update("map.png", previewData);
+			}
 
 			// Update the package with the new map data
-			var s = root.WriteToString();
-			toPackage.Update("map.yaml", Encoding.UTF8.GetBytes(s));
-			toPackage.Update("map.bin", SaveBinaryData());
+			var textData = Encoding.UTF8.GetBytes(root.WriteToString());
+			if (Package != toPackage || !Enumerable.SequenceEqual(textData, Package.GetStream("map.yaml").ReadAllBytes()))
+				toPackage.Update("map.yaml", textData);
 
-			toPackage.Update("cell.bin", SaveCellData());
+			var binaryData = SaveBinaryData();
+			if (Package != toPackage || !Enumerable.SequenceEqual(binaryData, Package.GetStream("map.bin").ReadAllBytes()))
+				toPackage.Update("map.bin", binaryData);
+
+			var cellData = SaveCellData();
+			if (Package != toPackage || !Enumerable.SequenceEqual(cellData, Package.GetStream("cell.bin").ReadAllBytes()))
+				toPackage.Update("cell.bin", cellData);
 
 			if (TerrainBlocks != null)
 			{
