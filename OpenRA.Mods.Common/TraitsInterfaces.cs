@@ -152,13 +152,6 @@ namespace OpenRA.Mods.Common.Traits
 	}
 
 	[RequireExplicitImplementation]
-	public interface INotifyBeingResupplied
-	{
-		void StartingResupply(Actor self, Actor host);
-		void StoppingResupply(Actor self, Actor host);
-	}
-
-	[RequireExplicitImplementation]
 	public interface INotifyTakeOff { void TakeOff(Actor self); }
 	[RequireExplicitImplementation]
 	public interface INotifyLanding { void Landing(Actor self); }
@@ -173,7 +166,11 @@ namespace OpenRA.Mods.Common.Traits
 	public interface INotifyProduction { void UnitProduced(Actor self, Actor other, CPos exit); }
 	public interface INotifyOtherProduction { void UnitProducedByOther(Actor self, Actor producer, Actor produced, string productionType, TypeDictionary init); }
 	public interface INotifyDelivery { void IncomingDelivery(Actor self); void Delivered(Actor self); }
-	public interface INotifyDocking { void Docked(Actor self, Actor harvester); void Undocked(Actor self, Actor harvester); }
+
+	[RequireExplicitImplementation]
+	public interface INotifyDockHost { void Docked(Actor self, Actor client); void Undocked(Actor self, Actor client); }
+	[RequireExplicitImplementation]
+	public interface INotifyDockClient { void Docked(Actor self, Actor host); void Undocked(Actor self, Actor host); }
 
 	[RequireExplicitImplementation]
 	public interface INotifyResourceAccepted { void OnResourceAccepted(Actor self, Actor refinery, string resourceType, int count, int value); }
@@ -213,8 +210,6 @@ namespace OpenRA.Mods.Common.Traits
 		void MovingToRefinery(Actor self, Actor refineryActor);
 		void MovementCancelled(Actor self);
 		void Harvested(Actor self, string resourceType);
-		void Docked();
-		void Undocked();
 	}
 
 	[RequireExplicitImplementation]
@@ -353,14 +348,6 @@ namespace OpenRA.Mods.Common.Traits
 	public interface IActorPreviewInitModifier
 	{
 		void ModifyActorPreviewInit(Actor self, TypeDictionary inits);
-	}
-
-	[RequireExplicitImplementation]
-	public interface INotifyRearm
-	{
-		void RearmingStarted(Actor host, Actor other);
-		void Rearming(Actor host, Actor other);
-		void RearmingFinished(Actor host, Actor other);
 	}
 
 	[RequireExplicitImplementation]

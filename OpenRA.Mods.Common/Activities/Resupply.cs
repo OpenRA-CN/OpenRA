@@ -28,7 +28,8 @@ namespace OpenRA.Mods.Common.Activities
 		readonly RepairableNear repairableNear;
 		readonly Rearmable rearmable;
 		readonly INotifyResupply[] notifyResupplies;
-		readonly INotifyBeingResupplied[] notifyBeingResupplied;
+		readonly INotifyDockHost[] notifyDockHosts;
+		readonly INotifyDockClient[] notifyDockClients;
 		readonly ICallForTransport[] transportCallers;
 		readonly IMove move;
 		readonly Aircraft aircraft;
@@ -55,7 +56,8 @@ namespace OpenRA.Mods.Common.Activities
 			repairableNear = self.TraitOrDefault<RepairableNear>();
 			rearmable = self.TraitOrDefault<Rearmable>();
 			notifyResupplies = host.TraitsImplementing<INotifyResupply>().ToArray();
-			notifyBeingResupplied = self.TraitsImplementing<INotifyBeingResupplied>().ToArray();
+			notifyDockHosts = host.TraitsImplementing<INotifyDockHost>().ToArray();
+			notifyDockClients = self.TraitsImplementing<INotifyDockClient>().ToArray();
 			transportCallers = self.TraitsImplementing<ICallForTransport>().ToArray();
 			move = self.Trait<IMove>();
 			aircraft = move as Aircraft;
@@ -151,15 +153,18 @@ namespace OpenRA.Mods.Common.Activities
 				foreach (var notifyResupply in notifyResupplies)
 					notifyResupply.BeforeResupply(host.Actor, self, activeResupplyTypes);
 
-				foreach (var br in notifyBeingResupplied)
-					br.StartingResupply(self, host.Actor);
+				foreach (var nd in notifyDockClients)
+					nd.Docked(self, host.Actor);
+
+				foreach (var nd in notifyDockHosts)
+					nd.Docked(host.Actor, self);
 			}
 
 			if (activeResupplyTypes.HasFlag(ResupplyType.Repair))
 				RepairTick(self);
 
-			if (activeResupplyTypes.HasFlag(ResupplyType.Rearm))
-				RearmTick(self);
+			if (activeResupplyTypes.HasFlag(ResupplyType.Rearm) && rearmable.RearmTick(self))
+				activeResupplyTypes &= ~ResupplyType.Rearm;
 
 			foreach (var notifyResupply in notifyResupplies)
 				notifyResupply.ResupplyTick(host.Actor, self, activeResupplyTypes);
@@ -242,8 +247,11 @@ namespace OpenRA.Mods.Common.Activities
 					QueueChild(move.MoveToTarget(self, host));
 			}
 
-			foreach (var br in notifyBeingResupplied)
-				br.StoppingResupply(self, isHostInvalid ? null : host.Actor);
+			foreach (var nd in notifyDockClients)
+				nd.Undocked(self, host.Actor);
+
+			foreach (var nd in notifyDockHosts)
+				nd.Undocked(host.Actor, self);
 		}
 
 		void RepairTick(Actor self)
@@ -295,30 +303,6 @@ namespace OpenRA.Mods.Common.Activities
 			}
 			else
 				--remainingTicks;
-		}
-
-		void RearmTick(Actor self)
-		{
-			var rearmComplete = true;
-			foreach (var ammoPool in rearmable.RearmableAmmoPools)
-			{
-				if (!ammoPool.HasFullAmmo)
-				{
-					if (--ammoPool.RemainingTicks <= 0)
-					{
-						ammoPool.RemainingTicks = ammoPool.Info.ReloadDelay;
-						if (!string.IsNullOrEmpty(ammoPool.Info.RearmSound))
-							Game.Sound.PlayToPlayer(SoundType.World, self.Owner, ammoPool.Info.RearmSound, self.CenterPosition);
-
-						ammoPool.GiveAmmo(self, ammoPool.Info.ReloadCount);
-					}
-
-					rearmComplete = false;
-				}
-			}
-
-			if (rearmComplete)
-				activeResupplyTypes &= ~ResupplyType.Rearm;
 		}
 	}
 }

@@ -1,5 +1,6 @@
 doggie:
 	Defaults:
+		Filename: doggie.shp
 		Tick: 80
 		Offset: 0, 0, 0
 	stand:
@@ -27,7 +28,8 @@ doggie:
 		Start: 91
 		Length: 8
 		ShadowStart: 210
-	webguy: webguySP
+	webguy:
+		Filename: webguySP.shp
 		Length: 6
 		ShadowStart: 6
 		Facings: 1
@@ -39,7 +41,8 @@ doggie:
 		Start: 99
 		Length: 10
 		ShadowStart: 218
-	die-exploding: s_bang34
+	die-exploding:
+		Filename: s_bang34.shp
 		Length: *
 	die-crushed:
 		Start: 105
@@ -56,7 +59,8 @@ doggie:
 		Start: 109
 		Length: 10
 		ShadowStart: 228
-	icon: xxicon
+	icon:
+		Filename: xxicon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
@@ -66,11 +70,13 @@ doggie:
 
 vissml:
 	idle:
+		Filename: vissml.shp
 		Length: 90
 		ShadowStart: 90
 		Tick: 80
 		Offset: 0, 0, 16
-	icon: xxicon
+	icon:
+		Filename: xxicon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
@@ -78,16 +84,19 @@ vissml:
 
 vislrg:
 	idle:
+		Filename: vislrg.shp
 		Length: 90
 		ShadowStart: 90
 		Tick: 80
 		Offset: 0, 0, 16
 	attack:
 		Combine:
-			vislgatk:
+			0:
+				Filename: vislgatk.shp
 				Start: 5
 				Length: 35
-			vislgatk:
+			1:
+				Filename: vislgatk.shp
 				Start: 0
 				Length: 5
 		Facings: -8
@@ -95,7 +104,8 @@ vislrg:
 		Tick: 80
 		Offset: 0, 0, 16
 		# ShadowStart: 40 # TODO: enable shadow frames
-	icon: xxicon
+	icon:
+		Filename: xxicon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
@@ -103,6 +113,7 @@ vislrg:
 
 floater:
 	Defaults:
+		Filename: floater.shp
 		ZOffset: 400
 		MeshType: TileOverlay
 	idle:
@@ -122,7 +133,8 @@ floater:
 		Tick: 100
 		Offset: 0, 0, 16
 		IgnoreWorldTint: True
-	icon: xxicon
+	icon:
+		Filename: xxicon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
@@ -130,16 +142,18 @@ floater:
 
 minivein:
 	Defaults:
-		UseTilesetExtension: false
+		Filename: minivein.shp
 		Offset: 0,0
 	idle:
 		Length: 39
-	dead: minivein_dead
+	dead:
+		Filename: minivein_dead.shp
 		Length: *
 		Tick: 35
 	stand:
 		Length: 39
-	make: minivein_make
+	make:
+		Filename: minivein_make.shp
 		Length: *
 		Tick: 35
 	shoot:

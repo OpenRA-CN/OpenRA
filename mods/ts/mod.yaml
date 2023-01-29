@@ -354,12 +354,6 @@ VideoFormats: Vqa
 TerrainFormat: DefaultTerrain
 
 SpriteSequenceFormat: TilesetSpecificSpriteSequence
-	TilesetExtensions:
-		TEMPERATE: .tem
-		SNOW: .sno
-	TilesetCodes:
-		TEMPERATE: t
-		SNOW: a
 
 ModelSequenceFormat: DefaultModelSequence
 

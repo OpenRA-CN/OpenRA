@@ -3,7 +3,8 @@
 		Offset: 0, 0, 16
 		ShadowZOffset: 10
 		ZOffset: 14
-	icon: xxicon
+	icon:
+		Filename: xxicon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
@@ -14,11 +15,13 @@
 		Offset: 0, 0, 16
 		ShadowZOffset: 10
 		ZOffset: 14
-	webguy: webguySP
+	webguy:
+		Filename: webguySP.shp
 		Length: 6
 		ShadowStart: 6
 		Facings: 1
-	icon: xxicon
+	icon:
+		Filename: xxicon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
@@ -64,7 +67,8 @@
 		Start: 149
 		Length: 15
 		ShadowStart: 441
-	die-exploding: s_bang34
+	die-exploding:
+		Filename: s_bang34.shp
 		Length: *
 	die-crushed:
 		Start: 159
@@ -77,7 +81,8 @@
 		Length: 2
 		Facings: 8
 		ShadowStart: 552
-	die-melting: electro
+	die-melting:
+		Filename: electro.shp
 		Frames: 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
 		Length: *
 		IgnoreWorldTint: True
@@ -109,94 +114,143 @@
 e1.gdi:
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
-	Defaults: e1
-	icon: sidebar-gdi|e1icon
+	Defaults:
+		Filename: e1.shp
+	icon:
+		Filename: sidebar-gdi|e1icon.shp
 
 e1.nod:
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
-	Defaults: e1
-	icon: sidebar-nod|e1icon
+	Defaults:
+		Filename: e1.shp
+	icon:
+		Filename: sidebar-nod|e1icon.shp
 
 altnode1:
+	Defaults:
+		Filename: altnode1.shp
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
-	icon: sidebar-nod|e1icon
+	icon:
+		Filename: sidebar-nod|e1icon.shp
 
 gdie1:
 	Inherits@1: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
-	Defaults: gdie1
-	icon: sidebar-gdi|e1icon
+	Defaults:
+		Filename: gdie1.shp
+	icon:
+		Filename: sidebar-gdi|e1icon.shp
 
 e2:
+	Defaults:
+		Filename: e2.shp
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
-	icon: e2icon
+	icon:
+		Filename: e2icon.shp
 
 e3:
+	Defaults:
+		Filename: e3.shp
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
 	attack-muzzle:
 		Tick: 80
-	icon: e4icon
+	icon:
+		Filename: e4icon.shp
 
 engineer.gdi:
 	Inherits: ^BasicInfantry
-	Defaults: engineer
-	icon: sidebar-gdi|engnicon
+	Defaults:
+		Filename: engineer.shp
+	icon:
+		Filename: sidebar-gdi|engnicon.shp
 
 engineer.nod:
 	Inherits: ^BasicInfantry
-	Defaults: nodengineer
-	icon: sidebar-nod|engnicon
+	Defaults:
+		Filename: nodengineer.shp
+	icon:
+		Filename: sidebar-nod|engnicon.shp
 
 umagon:
+	Defaults:
+		Filename: umagon.shp
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
-	icon: umagicon
+	icon:
+		Filename: umagicon.shp
 
 ghost:
+	Defaults:
+		Filename: ghost.shp
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
-	icon: gosticon
+	icon:
+		Filename: gosticon.shp
 
 mhijack:
+	Defaults:
+		Filename: mhijack.shp
 	Inherits: ^BasicInfantry
-	icon: chamicon
+	icon:
+		Filename: chamicon.shp
 
 chamspy:
+	Defaults:
+		Filename: chamspy.shp
 	Inherits: ^BasicInfantry
-	icon: chamicon
+	icon:
+		Filename: chamicon.shp
 
 mutant:
+	Defaults:
+		Filename: mutant.shp
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
-	icon: mutcicon
+	icon:
+		Filename: mutcicon.shp
 
 mwmn:
+	Defaults:
+		Filename: mwmn.shp
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
-	icon: mutcicon
+	icon:
+		Filename: mutcicon.shp
 
 mutant3:
+	Defaults:
+		Filename: mutant3.shp
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
-	icon: mutcicon
+	icon:
+		Filename: mutcicon.shp
 
 tratos:
+	Defaults:
+		Filename: tratos.shp
 	Inherits: ^BasicInfantry
-	icon: mutcicon
+	icon:
+		Filename: mutcicon.shp
 
 oxanna:
+	Defaults:
+		Filename: oxanna.shp
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
 
 slav:
+	Defaults:
+		Filename: slav.shp
 	Inherits: ^BasicInfantry
 	Inherits@attack: ^BasicInfantryAttack
 
 civ1:
+	Defaults:
+		Filename: civ1.shp
 	Inherits: ^BasicInfantry
 	attack:
 		Start: 164
@@ -219,6 +273,8 @@ civ1:
 		ShadowStart: 292
 
 civ2:
+	Defaults:
+		Filename: civ2.shp
 	Inherits: ^BasicInfantry
 	panic-run:
 		Start: 86
@@ -230,11 +286,14 @@ civ2:
 		ShadowStart: 292
 
 civ3:
+	Defaults:
+		Filename: civ3.shp
 	Inherits: civ1
 
 cyborg:
 	Inherits@defaults: ^InfantryBase
 	Defaults:
+		Filename: cyborg.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	stand:
@@ -285,16 +344,19 @@ cyborg:
 		Facings: 8
 		Tick: 14
 		IgnoreWorldTint: True
-	emp-overlay: emp_fx01
+	emp-overlay:
+		Filename: emp_fx01.shp
 		Length: *
 		ZOffset: 512
 		BlendMode: Additive
 		IgnoreWorldTint: True
-	icon: cybiicon
+	icon:
+		Filename: cybiicon.shp
 
 cyc2:
 	Inherits@defaults: ^InfantryBase
 	Defaults:
+		Filename: cyc2.shp
 		Offset: 0, 0, 16
 	stand:
 		Facings: 8
@@ -345,16 +407,19 @@ cyc2:
 		Facings: 8
 		ShadowStart: 568
 		IgnoreWorldTint: True
-	emp-overlay: emp_fx01
+	emp-overlay:
+		Filename: emp_fx01.shp
 		Length: *
 		ZOffset: 512
 		BlendMode: Additive
 		IgnoreWorldTint: True
-	icon: cybcicon
+	icon:
+		Filename: cybcicon.shp
 
 medic:
 	Inherits@defaults: ^InfantryBase
 	Defaults:
+		Filename: medic.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	stand:
@@ -391,7 +456,8 @@ medic:
 		Start: 149
 		Length: 15
 		ShadowStart: 455
-	die-exploding: s_bang34
+	die-exploding:
+		Filename: s_bang34.shp
 		Length: *
 	die-crushed:
 		Start: 159
@@ -408,14 +474,17 @@ medic:
 		Start: 292
 		Length: 14
 		ShadowStart: 599
-	die-melting: electro
+	die-melting:
+		Filename: electro.shp
 		Frames: 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
 		Length: *
-	icon: mediicon
+	icon:
+		Filename: mediicon.shp
 
 jumpjet:
 	Inherits@defaults: ^InfantryBase
 	Defaults:
+		Filename: jumpjet.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	stand:
@@ -464,9 +533,11 @@ jumpjet:
 		Start: 445
 		Length: 6
 		ShadowStart: 896
-	die-splash: h2o_exp2
+	die-splash:
+		Filename: h2o_exp2.shp
 		Length: *
-	die-exploding: s_bang34
+	die-exploding:
+		Filename: s_bang34.shp
 		Length: *
 	die-crushed:
 		Start: 450
@@ -509,15 +580,18 @@ jumpjet:
 		Length: 2
 		Facings: 8
 		ShadowStart: 711
-	die-melting: electro
+	die-melting:
+		Filename: electro.shp
 		Frames: 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
 		Length: *
-	icon: jjeticon
+	icon:
+		Filename: jjeticon.shp
 
 
 jumpjetair:
 	Inherits@1: ^InfantryBase
-	Defaults: jumpjet
+	Defaults:
+		Filename: jumpjet.shp
 	stand:
 		Start: 340
 		Length: 6
@@ -530,11 +604,13 @@ jumpjetair:
 		Start: 388
 		Length: 6
 		Facings: 8
-	icon: jjeticon
+	icon:
+		Filename: jjeticon.shp
 
 weedguy:
 	Inherits@defaults: ^InfantryBase
-	Defaults: weed
+	Defaults:
+		Filename: weed.shp
 		Tick: 80
 		Offset: 0, 0, 16
 		Scale: 1.1
@@ -594,7 +670,8 @@ weedguy:
 		Start: 177
 		Length: 20
 		ShadowStart: 379
-	die-melting: electro
+	die-melting:
+		Filename: electro.shp
 		Frames: 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
 		Length: *
 	die-crushed:
@@ -602,12 +679,14 @@ weedguy:
 		Length: 3
 		ShadowStart: 376
 		Tick: 1000
-	icon: weaticon
+	icon:
+		Filename: weaticon.shp
 		Scale: 1
 
 flameguy:
 	Inherits@defaults: ^InfantryBase
 	Defaults:
+		Filename: flameguy.shp
 		Facings: 8
 		Tick: 80
 		ShadowStart: 148
@@ -623,4 +702,3 @@ flameguy:
 		Length: 104
 		ShadowStart: 192
 		AlphaFade: True
-

@@ -95,8 +95,7 @@ namespace OpenRA.Mods.Common.Traits
 	}
 
 	public class Cloak : PausableConditionalTrait<CloakInfo>, IRenderModifier, INotifyDamage, INotifyUnload, INotifyDemolition, INotifyInfiltration,
-		INotifyAttack, ITick, IVisibilityModifier, IRadarColorModifier, INotifyCreated, INotifyHarvesterAction, INotifyBeingResupplied
-		, ITwistActorMesh
+		INotifyAttack, ITick, IVisibilityModifier, IRadarColorModifier, INotifyCreated, INotifyDockClient, ITwistActorMesh
 	{
 		[Sync]
 		int remainingTime;
@@ -279,15 +278,7 @@ namespace OpenRA.Mods.Common.Traits
 			return color;
 		}
 
-		void INotifyHarvesterAction.MovingToResources(Actor self, CPos targetCell) { }
-
-		void INotifyHarvesterAction.MovingToRefinery(Actor self, Actor refineryActor) { }
-
-		void INotifyHarvesterAction.MovementCancelled(Actor self) { }
-
-		void INotifyHarvesterAction.Harvested(Actor self, string resourceType) { }
-
-		void INotifyHarvesterAction.Docked()
+		void INotifyDockClient.Docked(Actor self, Actor host)
 		{
 			if (Info.UncloakOn.HasFlag(UncloakType.Dock))
 			{
@@ -296,9 +287,10 @@ namespace OpenRA.Mods.Common.Traits
 			}
 		}
 
-		void INotifyHarvesterAction.Undocked()
+		void INotifyDockClient.Undocked(Actor self, Actor host)
 		{
-			isDocking = false;
+			if (Info.UncloakOn.HasFlag(UncloakType.Dock))
+				isDocking = false;
 		}
 
 		void INotifyUnload.Unloading(Actor self)
@@ -317,21 +309,6 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			if (Info.UncloakOn.HasFlag(UncloakType.Infiltrate))
 				Uncloak();
-		}
-
-		void INotifyBeingResupplied.StartingResupply(Actor self, Actor host)
-		{
-			if (Info.UncloakOn.HasFlag(UncloakType.Dock))
-			{
-				isDocking = true;
-				Uncloak();
-			}
-		}
-
-		void INotifyBeingResupplied.StoppingResupply(Actor self, Actor host)
-		{
-			if (Info.UncloakOn.HasFlag(UncloakType.Dock))
-				isDocking = false;
 		}
 	}
 }
