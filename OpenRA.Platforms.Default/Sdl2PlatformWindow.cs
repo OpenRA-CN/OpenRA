@@ -525,7 +525,7 @@ namespace OpenRA.Platforms.Default
 			SDL.SDL_GL_SetAttribute(SDL.SDL_GLattr.SDL_GL_ALPHA_SIZE, 0);
 
 			var useAngle = profile == GLProfile.ANGLE ? "1" : "0";
-			SDL.SDL_SetHint("SDL_OPENGL_ES_DRIVER", useAngle);
+			SDL.SDL_SetHint("SDL_OPENGL_ES_DRIVER", "opengles");
 
 			switch (profile)
 			{
@@ -583,13 +583,13 @@ namespace OpenRA.Platforms.Default
 
 			// Distinguish between ANGLE and native GLES
 			var success = true;
-			if (profile == GLProfile.ANGLE || profile == GLProfile.Embedded)
-			{
-				var isAngle = SDL.SDL_GL_ExtensionSupported("GL_ANGLE_texture_usage") == SDL.SDL_bool.SDL_TRUE;
-				success = isAngle ^ (profile != GLProfile.ANGLE);
-				if (!success)
-					errorLog.Add(isAngle ? "GL profile is ANGLE" : "GL profile is Embedded");
-			}
+			//if (profile == GLProfile.ANGLE || profile == GLProfile.Embedded)
+			//{
+			//	var isAngle = SDL.SDL_GL_ExtensionSupported("GL_ANGLE_texture_usage") == SDL.SDL_bool.SDL_TRUE;
+			//	success = isAngle ^ (profile != GLProfile.ANGLE);
+			//	if (!success)
+			//		errorLog.Add(isAngle ? "GL profile is ANGLE" : "GL profile is Embedded");
+			//}
 
 			SDL.SDL_GL_DeleteContext(context);
 			SDL.SDL_DestroyWindow(window);

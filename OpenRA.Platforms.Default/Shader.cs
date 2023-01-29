@@ -42,8 +42,9 @@ namespace OpenRA.Platforms.Default
 			else
 				code = File.ReadAllText(Path.Combine(Platform.EngineDir, "glsl", filename));
 
-			var version = OpenGL.Profile == GLProfile.Embedded ? "300 es" :
-				OpenGL.Profile == GLProfile.Legacy ? "120" : "140";
+			// var version = OpenGL.Profile == GLProfile.Embedded ? "300 es" :
+			// 	OpenGL.Profile == GLProfile.Legacy ? "120" : "140";
+			var version = "300 es";
 
 			code = code.Replace("{VERSION}", version);
 
