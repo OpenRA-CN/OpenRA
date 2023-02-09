@@ -35,9 +35,9 @@ elif [[ ${TAG} == playtest* ]]; then
 fi
 
 if command -v curl >/dev/null 2>&1; then
-	curl -s -L -O https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-x64.exe
+	curl -s -L -O http://file.openra.org.cn/package_tools/WindowsRcedit/rcedit-x64.exe
 else
-	wget -cq https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-x64.exe
+	wget -cq http://file.openra.org.cn/package_tools/WindowsRcedit/rcedit-x64.exe
 fi
 
 function makelauncher()
@@ -65,22 +65,20 @@ function build_platform()
 	fi
 
 	install_assemblies "${SRCDIR}" "${BUILTDIR}" "win-${PLATFORM}" "net6" "False" "True" "True"
-	install_data "${SRCDIR}" "${BUILTDIR}" "cnc" "d2k" "ra"
+	install_data "${SRCDIR}" "${BUILTDIR}" "ts"
 	set_engine_version "${TAG}" "${BUILTDIR}"
-	set_mod_version "${TAG}" "${BUILTDIR}/mods/cnc/mod.yaml" "${BUILTDIR}/mods/d2k/mod.yaml" "${BUILTDIR}/mods/ra/mod.yaml"  "${BUILTDIR}/mods/modcontent/mod.yaml"
+	set_mod_version "${TAG}" "${BUILTDIR}/mods/ts/mod.yaml"  "${BUILTDIR}/mods/modcontent/mod.yaml"
 
 	echo "Compiling Windows launchers (${PLATFORM})"
-	makelauncher "RedAlert" "Red Alert" "ra" "${PLATFORM}"
-	makelauncher "TiberianDawn" "Tiberian Dawn" "cnc" "${PLATFORM}"
-	makelauncher "Dune2000" "Dune 2000" "d2k" "${PLATFORM}"
+	makelauncher "TiberianSun" "Tiberian Sun" "ts" "${PLATFORM}"
 
 	echo "Building Windows setup.exe ($1)"
-	makensis -V2 -DSRCDIR="${BUILTDIR}" -DTAG="${TAG}" -DSUFFIX="${SUFFIX}" -DOUTFILE="${OUTPUTDIR}/OpenRA-${TAG}-${PLATFORM}.exe" ${USE_PROGRAMFILES32} OpenRA.nsi
+	makensis -V2 -DSRCDIR="${BUILTDIR}" -DTAG="${TAG}" -DSUFFIX="${SUFFIX}" -DOUTFILE="${OUTPUTDIR}/OpenMeow-${TAG}-${PLATFORM}.exe" ${USE_PROGRAMFILES32} OpenRA.nsi
 
 	echo "Packaging zip archive ($1)"
 	pushd "${BUILTDIR}" > /dev/null
-	zip "OpenRA-${TAG}-${PLATFORM}-winportable.zip" -r -9 ./* --quiet
-	mv "OpenRA-${TAG}-${PLATFORM}-winportable.zip" "${OUTPUTDIR}"
+	zip "OpenMeow-${TAG}-${PLATFORM}-winportable.zip" -r -9 ./* --quiet
+	mv "OpenMeow-${TAG}-${PLATFORM}-winportable.zip" "${OUTPUTDIR}"
 	popd > /dev/null
 
 	rm -rf "${BUILTDIR}"
@@ -88,4 +86,5 @@ function build_platform()
 
 build_platform "x86"
 build_platform "x64"
+
 rm rcedit-x64.exe

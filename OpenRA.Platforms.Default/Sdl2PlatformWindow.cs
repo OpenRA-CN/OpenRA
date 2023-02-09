@@ -147,7 +147,7 @@ namespace OpenRA.Platforms.Default
 
 				// Decide which OpenGL profile to use.
 				// Prefer standard GL over GLES provided by the native driver
-				var testProfiles = new List<GLProfile> { GLProfile.ANGLE, GLProfile.Modern, GLProfile.Embedded };
+				var testProfiles = new List<GLProfile> { GLProfile.ANGLE, GLProfile.Embedded };
 				if (enableLegacyGL)
 					testProfiles.Add(GLProfile.Legacy);
 
@@ -234,7 +234,7 @@ namespace OpenRA.Platforms.Default
 				if (Platform.CurrentPlatform == PlatformType.OSX && windowMode == WindowMode.Fullscreen)
 					SDL.SDL_SetHint(SDL.SDL_HINT_VIDEO_HIGHDPI_DISABLED, "1");
 
-				window = SDL.SDL_CreateWindow("OpenRA", SDL.SDL_WINDOWPOS_CENTERED_DISPLAY(videoDisplay), SDL.SDL_WINDOWPOS_CENTERED_DISPLAY(videoDisplay),
+				window = SDL.SDL_CreateWindow("OpenMeow", SDL.SDL_WINDOWPOS_CENTERED_DISPLAY(videoDisplay), SDL.SDL_WINDOWPOS_CENTERED_DISPLAY(videoDisplay),
 					windowSize.Width, windowSize.Height, windowFlags);
 
 				if (Platform.CurrentPlatform == PlatformType.Linux)

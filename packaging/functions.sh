@@ -121,7 +121,7 @@ install_data() (
 
 	while [ -n "${1}" ]; do
 		MOD_ID="${1}"
-		if [ "${MOD_ID}" = "ra" ] || [ "${MOD_ID}" = "cnc" ] || [ "${MOD_ID}" = "d2k" ]; then
+		if [ "${MOD_ID}" = "ts" ]; then
 			echo "Installing mod ${MOD_ID} to ${DEST_PATH}"
 			cp -r "${SRC_PATH}/mods/${MOD_ID}" "${DEST_PATH}/mods/"
 			cp -r "${SRC_PATH}/mods/modcontent" "${DEST_PATH}/mods/"
@@ -234,18 +234,8 @@ install_linux_shortcuts() (
 
 	while [ -n "${1}" ]; do
 		MOD_ID="${1}"
-		if [ "${MOD_ID}" = "ra" ] || [ "${MOD_ID}" = "cnc" ] || [ "${MOD_ID}" = "d2k" ]; then
-			if [ "${MOD_ID}" = "cnc" ]; then
-				MOD_NAME="Tiberian Dawn"
-			fi
-
-			if [ "${MOD_ID}" = "d2k" ]; then
-				MOD_NAME="Dune 2000"
-			fi
-
-			if [ "${MOD_ID}" = "ra" ]; then
-				MOD_NAME="Red Alert"
-			fi
+		if [ "${MOD_ID}" = "ts" ]; then
+			MOD_NAME="Tiberian Sun"
 
 			# wrapper scripts
 			install -d "${BUILD_PATH}/${BIN_PATH}"
@@ -267,10 +257,8 @@ install_linux_shortcuts() (
 				install -m644 "${SRC_PATH}/packaging/artwork/${MOD_ID}_${SIZE}.png" "${BUILD_PATH}${SHARE_PATH}/icons/hicolor/${SIZE}/apps/openra-${MOD_ID}.png"
 			done
 
-			if [ "${MOD_ID}" = "ra" ] || [ "${MOD_ID}" = "cnc" ]; then
-				install -d "${BUILD_PATH}${SHARE_PATH}/icons/hicolor/scalable/apps"
-				install -m644 "${SRC_PATH}/packaging/artwork/${MOD_ID}_scalable.svg" "${BUILD_PATH}${SHARE_PATH}/icons/hicolor/scalable/apps/openra-${MOD_ID}.svg"
-			fi
+			install -d "${BUILD_PATH}${SHARE_PATH}/icons/hicolor/scalable/apps"
+			install -m644 "${SRC_PATH}/packaging/artwork/${MOD_ID}_scalable.svg" "${BUILD_PATH}${SHARE_PATH}/icons/hicolor/scalable/apps/openra-${MOD_ID}.svg"
 
 			# MIME info
 			install -d "${BUILD_PATH}${SHARE_PATH}/mime/packages"
@@ -300,29 +288,15 @@ install_linux_appdata() (
 	shift 3
 	while [ -n "${1}" ]; do
 		MOD_ID="${1}"
-		SCREENSHOT_CNC=
-		SCREENSHOT_D2K=
-		SCREENSHOT_RA=
-		if [ "${MOD_ID}" = "ra" ] || [ "${MOD_ID}" = "cnc" ] || [ "${MOD_ID}" = "d2k" ]; then
-			if [ "${MOD_ID}" = "cnc" ]; then
-				MOD_NAME="Tiberian Dawn"
-				SCREENSHOT_CNC=" type=\"default\""
-			fi
-
-			if [ "${MOD_ID}" = "d2k" ]; then
-				MOD_NAME="Dune 2000"
-				SCREENSHOT_D2K=" type=\"default\""
-			fi
-
-			if [ "${MOD_ID}" = "ra" ]; then
-				MOD_NAME="Red Alert"
-				SCREENSHOT_RA=" type=\"default\""
-			fi
+		SCREENSHOT_TS=
+		if [ "${MOD_ID}" = "ts" ]; then
+			MOD_NAME="Tiberian Sun"
+			SCREENSHOT_CNC=" type=\"default\""
 		fi
 
 		install -d "${BUILD_PATH}${SHARE_PATH}/metainfo"
 
-		sed -e "s/{MODID}/${MOD_ID}/g" -e "s/{MOD_NAME}/${MOD_NAME}/g" -e "s/{SCREENSHOT_RA}/${SCREENSHOT_RA}/g" -e "s/{SCREENSHOT_CNC}/${SCREENSHOT_CNC}/g" -e "s/{SCREENSHOT_D2K}/${SCREENSHOT_D2K}/g" "${SRC_PATH}/packaging/linux/openra.metainfo.xml.in" > "${SRC_PATH}/packaging/linux/openra-${MOD_ID}.metainfo.xml"
+		sed -e "s/{MODID}/${MOD_ID}/g" -e "s/{MOD_NAME}/${MOD_NAME}/g" -e "s/{SCREENSHOT_TS}/${SCREENSHOT_TS}/g" "${SRC_PATH}/packaging/linux/openra.metainfo.xml.in" > "${SRC_PATH}/packaging/linux/openra-${MOD_ID}.metainfo.xml"
 		install -m644 "${SRC_PATH}/packaging/linux/openra-${MOD_ID}.metainfo.xml" "${BUILD_PATH}${SHARE_PATH}/metainfo"
 		rm "${SRC_PATH}/packaging/linux/openra-${MOD_ID}.metainfo.xml"
 

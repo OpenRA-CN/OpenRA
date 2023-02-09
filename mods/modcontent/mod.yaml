@@ -73,3 +73,7 @@ TerrainFormat: DefaultTerrain
 SpriteSequenceFormat: DefaultSpriteSequence
 
 ModelSequenceFormat: DefaultModelSequence
+
+MeshSequenceFormat: DefaultMeshSequence
+
+MapGrid:

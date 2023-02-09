@@ -105,9 +105,9 @@ namespace OpenRA
 			{
 				case PlatformType.Windows:
 				{
-					modernUserSupportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OpenRA") + Path.DirectorySeparatorChar;
-					legacyUserSupportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "OpenRA") + Path.DirectorySeparatorChar;
-					systemSupportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "OpenRA") + Path.DirectorySeparatorChar;
+					modernUserSupportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "OpenMeow") + Path.DirectorySeparatorChar;
+					legacyUserSupportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "OpenMeow") + Path.DirectorySeparatorChar;
+					systemSupportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "OpenMeow") + Path.DirectorySeparatorChar;
 					break;
 				}
 
@@ -115,30 +115,30 @@ namespace OpenRA
 				{
 					modernUserSupportPath = legacyUserSupportPath = Path.Combine(
 						Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-						"Library", "Application Support", "OpenRA") + Path.DirectorySeparatorChar;
+						"Library", "Application Support", "OpenMeow") + Path.DirectorySeparatorChar;
 
-					systemSupportPath = "/Library/Application Support/OpenRA/";
+					systemSupportPath = "/Library/Application Support/OpenMeow/";
 					break;
 				}
 
 				case PlatformType.Linux:
 				{
-					legacyUserSupportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".openra") + Path.DirectorySeparatorChar;
+					legacyUserSupportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".openmeow") + Path.DirectorySeparatorChar;
 
 					var xdgConfigHome = Environment.GetEnvironmentVariable("XDG_CONFIG_HOME");
 					if (string.IsNullOrEmpty(xdgConfigHome))
 						xdgConfigHome = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".config") + Path.DirectorySeparatorChar;
 
-					modernUserSupportPath = Path.Combine(xdgConfigHome, "openra") + Path.DirectorySeparatorChar;
-					systemSupportPath = "/var/games/openra/";
+					modernUserSupportPath = Path.Combine(xdgConfigHome, "openmeow") + Path.DirectorySeparatorChar;
+					systemSupportPath = "/var/games/openmeow/";
 
 					break;
 				}
 
 				default:
 				{
-					modernUserSupportPath = legacyUserSupportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".openra") + Path.DirectorySeparatorChar;
-					systemSupportPath = "/var/games/openra/";
+					modernUserSupportPath = legacyUserSupportPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".openmeow") + Path.DirectorySeparatorChar;
+					systemSupportPath = "/var/games/openmeow/";
 					break;
 				}
 			}
