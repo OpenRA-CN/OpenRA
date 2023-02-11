@@ -9,6 +9,7 @@
 		SpecialResourceValues:
 			Veins:
 				Chemicals: 1
+		DefaultCash: 10000
 
 EditorPlayer:
 	Inherits: ^BasePlayer
