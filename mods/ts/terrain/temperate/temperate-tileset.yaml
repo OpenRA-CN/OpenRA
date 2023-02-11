@@ -9,7 +9,7 @@ TypeDefine:
 	cliff: 2
 		cliff01: TileCliff1 	#1 cliff
 			Scale: 7
-			FlatSpecular: 0.55
+			FlatSpecular: 0.25
 	conc: 3
 		conc01: TileConc1  		#2 road
 			Scale: 2.5

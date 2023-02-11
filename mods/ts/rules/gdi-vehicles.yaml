@@ -210,6 +210,7 @@ SMECH:
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
+		RequiresCondition: !empdisable && !carring
 	Selectable:
 		Bounds: 603, 1930, 0, -482
 	Passenger:
@@ -261,6 +262,7 @@ MMCH:
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
+		RequiresCondition: !empdisable && !carring
 	Turreted:
 		TurnSpeed: 20
 	Turreted@droneCheck:
@@ -427,6 +429,7 @@ HMEC:
 	-WithModelBody:
 	WithModelWalkerBody:
 		TickRate: 1
+		PauseOnCondition: empdisable || carring
 	RenderModels:
 		Scale: 2
 	Selectable:
@@ -543,6 +546,7 @@ JUGG:
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
+		RequiresCondition: !empdisable && !carring
 	GrantConditionOnDeploy:
 		PauseOnCondition: empdisable || being-captured
 		DeployedCondition: deployed

@@ -515,6 +515,7 @@ SAPC:
 	WithModelWalkerBody:
 		TickRate: 1
 		RequiresCondition: !submerged
+		PauseOnCondition: empdisable || carring
 	Targetable:
 		RequiresCondition: !inside-tunnel && !submerged
 	Targetable@UNDERGROUND:
@@ -767,6 +768,7 @@ REAPER:
 		Speed: 180
 		JumpAngle: 128
 		Voice: Attack
+	-AttachCarryable:
 
 ICBM:
 	Inherits: ^Vehicle
