@@ -177,6 +177,16 @@ pips:
 		Start: 4
 	pip-blue-building:
 		Start: 5
+	pip-mislammo: ammopips-misl
+		Scale: 1.2
+	pip-mislammoempty: ammopips-misl
+		Start: 1
+		Scale: 1.2
+	pip-misl2ammo: ammopips-mislb
+		Scale: 1.2
+	pip-misl2ammoempty: ammopips-mislb
+		Start: 1
+		Scale: 1.2
 
 explosion:
 	Defaults:

@@ -404,24 +404,24 @@ Dragon:
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 
-Hellfire:
-	Inherits: ^DefaultMissile
-	ReloadDelay: 30
-	Report: orcamis1.aud
-	ValidTargets: Ground, Water, Air
-	Warhead@1Dam: Spread3DDamage
-		Spread: 72
-		Damage: 3000
-		ValidTargets: Ground, Water, Air
-		Versus:
-			None: 30
-			Wood: 65
-			Light: 150
-			Heavy: 100
-			Concrete: 30
+# Hellfire:
+# 	Inherits: ^DefaultMissile
+# 	ReloadDelay: 30
+# 	Report: orcamis1.aud
+# 	ValidTargets: Ground, Water, Air
+# 	Warhead@1Dam: Spread3DDamage
+# 		Spread: 72
+# 		Damage: 3000
+# 		ValidTargets: Ground, Water, Air
+# 		Versus:
+# 			None: 30
+# 			Wood: 65
+# 			Light: 150
+# 			Heavy: 100
+# 			Concrete: 30
 
 PulseHellfire:
-	Inherits: VectorHellfire
+	Inherits: Hellfire
 	ReloadDelay: 100
 	Burst: 6
 	BurstDelays: 5
@@ -458,10 +458,10 @@ PulseHellfire:
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Air
 
-
-VectorHellfire:
+Hellfire:
 	Inherits: ^VectorBooster
 	ReloadDelay: 10
+	ValidTargets: Ground, Water
 	Report: orcamis1.aud
 	Projectile: VectorBooster
 		HorizonRotationRate: 14
@@ -480,7 +480,7 @@ VectorHellfire:
 		UseLockOnVerticalInaccuracy: false
 	Warhead@1Dam: Spread3DDamage
 		Spread: 128
-		Damage: 3000
+		Damage: 4000
 		ValidTargets: Ground, Water, Air, Trees
 		Versus:
 			None: 40
@@ -488,6 +488,51 @@ VectorHellfire:
 			Light: 150
 			Heavy: 100
 			Concrete: 30
+
+SkyFire:
+	Inherits: ^VectorBooster
+	ReloadDelay: 45
+	Range: 10c0
+	Report: samshot1.aud
+	ValidTargets: Air
+	Projectile: VectorBooster
+		HorizonRotationRate: 13
+		VerticalRotationRate: 9
+		Acceleration: 17
+		Speed: 165
+		LockOnDelay: 1
+		IgnitionDelay: 0
+		LaunchAngle: 64
+		MinSpeed: 88
+		MaxSpeed: 422
+		LifeTime: 75
+		Width: 40
+		MeshScale: 1.7
+		ProximityRange: 215
+		DetectTargetOnCurve: false
+		Blockable: false
+	Warhead@1Dam: Spread3DDamage
+		Spread: 0c128
+		Falloff: 100, 50, 25, 12, 6, 3, 0
+		Damage: 6400
+		ValidTargets: Ground, Water, Air, Trees
+		Versus:
+			None: 45
+			Wood: 45
+			Light: 100
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: SmallExplosionDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: large_grey_explosion
+		ImpactSounds: expnew13.aud
+		ImpactActors: false
+	Warhead@ShockWave:	CreateEffect
+		Image: twist
+		Explosions: roundshock
+		ExplosionPalette: twist
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
 
 RedEye2:
 	Inherits: ^VectorBooster

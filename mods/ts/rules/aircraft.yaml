@@ -288,21 +288,36 @@ ORCA:
 	AutoTarget:
 		InitialStance: HoldFire
 		InitialStanceAI: AttackAnything
-	Armament:
-		Weapon: VectorHellfire
+	Armament@AG:
+		Name: primary
+		Weapon: Hellfire
 		LocalOffset: 300,195,70, 300,-195,70
 		LocalYaw: -110, 110
-		PauseOnCondition: !ammo
+		PauseOnCondition: !ag-ammo
+	Armament@AA:
+		Name: secondary
+		Weapon: Skyfire
+		LocalOffset: 300,195,70, 300,-195,70
+		LocalYaw: -110, 110
+		PauseOnCondition: !aa-ammo
 	AttackAircraft:
 		FacingTolerance: 80
 		PersistentTargeting: false
 		Voice: Attack
 		PauseOnCondition: empdisable
 		AttackType: Hover
-	AmmoPool:
-		Ammo: 10
+	AmmoPool@hellfire:
+		Ammo: 6
+		Name: primary
+		Armaments: primary
 		ReloadCount: 2
-		AmmoCondition: ammo
+		AmmoCondition: ag-ammo
+	AmmoPool@skyfire:
+		Ammo: 6
+		Name: secondary
+		Armaments: secondary
+		ReloadCount: 2
+		AmmoCondition: aa-ammo
 	RenderSprites:
 	SpawnActorOnDeath:
 		Actor: ORCA.Husk
@@ -312,14 +327,27 @@ ORCA:
 		RequiresCondition: empdisable && airborne
 	Rearmable:
 		RearmActors: gahpad, nahpad
-	WithAmmoPipsDecoration:
+		AmmoPools: primary, secondary
+	WithAmmoPipsDecoration@HellFire:
+		AmmoPools: primary
 		Position: BottomLeft
 		RequiresSelection: true
-		Margin: 4, 5
-		FullSequence: pip-ammo
-		EmptySequence: pip-ammoempty
+		Margin: 5, 5
+		FullSequence: pip-misl2ammo
+		EmptySequence: pip-misl2ammoempty
 		Palette: pips
-		PipCount: 5
+		PipStride: 8,0
+	WithAmmoPipsDecoration@SkyFire:
+		AmmoPools: secondary
+		Position: BottomLeft
+		RequiresSelection: true
+		Margin: 5, 20
+		FullSequence: pip-mislammo
+		EmptySequence: pip-mislammoempty
+		Palette: pips
+		PipStride: 8,0
+
+
 
 ORCAB:
 	Inherits: ^EMPableAircraft

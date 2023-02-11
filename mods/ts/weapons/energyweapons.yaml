@@ -553,7 +553,7 @@ KittenRailGun:
 # banshee proton pulse cannon
 ProtonPulse:
 	ReloadDelay: 50
-	Range: 7c0
+	Range: 8c512
 	Burst: 12
 	BurstDelays: 3
 	Report: scrin5b.aud

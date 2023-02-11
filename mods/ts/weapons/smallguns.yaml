@@ -247,9 +247,9 @@ JumpVulcan:
 		Spread: 0c117
 		Versus:
 			None: 100
-			Wood: 60
-			Light: 40
-			Heavy: 25
+			Wood: 35
+			Light: 25
+			Heavy: 8
 			Concrete: 10
 		DamageTypes: Prone70Percent, TriggerProne, BulletDeath
 
@@ -276,6 +276,12 @@ HarpyClaw:
 	Warhead@1Dam: Spread3DDamage
 		Damage: 1200
 		Spread: 0c42
+		Versus:
+			None: 100
+			Wood: 10
+			Light: 25
+			Heavy: 8
+			Concrete: 8
 		DamageTypes:  Prone100Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Eff: CreateEffect
 		ExplosionPalette: effectgreen
