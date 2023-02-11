@@ -758,6 +758,14 @@ REAPER:
 	-SpawnActorOnDeath@ctech:
 	-DamagedByTerrain@VEINS:
 	-LeavesTrails@VEINS:
+	LongJumpSkill:
+		ChargeDelay: 200
+		TargetCursor: ability
+		TakeOffWeapon: JumpTakeOffExplode
+		LandWeapon: JumpLandExplode
+		Speed: 180
+		JumpAngle: 128
+		Voice: Attack
 
 ICBM:
 	Inherits: ^Vehicle

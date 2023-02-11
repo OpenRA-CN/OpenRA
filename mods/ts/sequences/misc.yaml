@@ -1529,6 +1529,7 @@ jumpring:
 		Filename: podring.shp
 		Length: *
 		AlphaFade: True
+		Tick: 20
 
 fire1:
 	idle-overlay:

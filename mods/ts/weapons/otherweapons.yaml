@@ -661,40 +661,11 @@ JumpTakeOffExplode:
 	Warhead@1Eff: CreateEffect
 		Image: jumpring
 		Explosions: idle
-		ImpactSounds: expnew13.aud
 
 JumpLandExplode:
-	Warhead@1Dam: Spread3DDamage
-		Spread: 256
-		Falloff: 100, 50, 25, 12, 6, 3, 0
-		Damage: 50000
-		Versus:
-			None: 100
-			Wood: 50
-			Light: 50
-			Heavy: 35
-			Concrete: 35
-		DamageTypes: TriggerProne, CrushedDeath
-		ValidTargets: Ground, Trees
-		ValidRelationships: Neutral, Enemy # no friendly damage
-	Warhead@Spray: FireRadius
-		Weapon: DirtCloudLauncher
-		StartOffset: 0,-1024,0
-		FireCount: 8
-		ForceTargetGround: true
-		ValidTargets: Ground, Trees
-	Warhead@shakeScreen: ShakeScreen
-		Duration: 3
-		Intensity: 1
-		Multiplier: 1,1
-		ValidTargets: Ground, Trees
-	Warhead@2Eff: CreateEffect
-		Explosions: large_brnl, large_bang, medium_twlt
-		ImpactSounds: expnew09.aud, expnew10.aud, expnew12.aud
-		ValidTargets: Ground, Trees, Air
-	Warhead@4Smu: LeaveSmudge
-		SmudgeType: MediumCrater
-		InvalidTargets: Building, Wall
+	Warhead@1Eff: CreateEffect
+		Image: jumpring
+		Explosions: idle
 
 Consume:
 	ValidTargets: Ground, Water, Air, Trees
