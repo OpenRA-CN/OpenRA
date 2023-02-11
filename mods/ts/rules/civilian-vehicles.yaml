@@ -67,7 +67,7 @@
 		Voice: Attack
 		Armaments: primary1,primary2,SECONDARY
 		Turrets: primary
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		FacingToTarget: true
 	ChangesHealth:
 		Step: 500

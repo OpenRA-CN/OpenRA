@@ -72,7 +72,7 @@ APC:
 		OutsideRangeCursor: move
 		ShowInActorInfo: false
 	AttackFollow:
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		Voice: Move
 		TargetLineColor: FFFF00
 	AutoDeployer@AI:
@@ -131,7 +131,7 @@ HVR:
 		Offset: -154,0,0
 	AttackTurreted:
 		Voice: Attack
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 	WithModelTurret:
 	Hovers:
 		RequiresCondition: !empdisable
@@ -187,7 +187,7 @@ SMECH:
 		Range: 7c0
 	AttackFrontal:
 		Voice: Attack
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		FacingTolerance: 16
 	Armament:
 		LocalOffset: 111,200,255, 111,-220,255
@@ -277,7 +277,7 @@ MMCH:
 	AttackTurreted:
 		Armaments: primary, secondary, rpg, check
 		Voice: Attack
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		Turrets: primary, check
 	AutoTarget:
 		ScanRadius: 9 #PREF: save trait looks up and scan armaments
@@ -404,7 +404,7 @@ HMEC:
 		MaxHeightDelta: 1665
 	AttackFrontal:
 		Voice: Attack
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		FacingTolerance: 256
 		FacingFullOnTarget: true
 	WithMuzzleOverlay:
@@ -474,7 +474,7 @@ SONIC:
 		NotCheckRangeToExhaustAllBurst: true
 	AttackTurreted:
 		Voice: Attack
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		OpportunityFire: False
 	Turreted:
 		TurnSpeed: 20
@@ -561,6 +561,7 @@ JUGG:
 	 	Armaments: todeploy
 	 	FacingTolerance: 512
 	 	RequiresCondition: undeployed
+		PauseOnCondition: empdisable || carring
 	Armament@todeploy:
 	 	Name: todeploy
 	 	Weapon: Jugg90mmDeployCheck
@@ -625,7 +626,7 @@ JUGG:
 		Armaments: deployed1, deployed2, deployed3
 		Turrets: deployed
 		RequiresCondition: deployed && !init-barrel
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		TargetFrozenActors: True
 		ForceFireIgnoresActors: True
 		OutsideRangeRequiresForceFire: True
@@ -731,7 +732,7 @@ LIMPED:
 	AttackFrontal:
 		Armaments: deployed, todeploy
 		FacingTolerance: 512
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 	AutoTarget:
 		ScanRadius: 7 #PREF: save trait looks up and scan armaments
 	Armament@1:

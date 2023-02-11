@@ -46,7 +46,7 @@ BGGY:
 		Offset: -215,0,0
 	AttackTurreted:
 		Voice: Attack
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 	WithModelTurret:
 	WithMuzzleOverlay:
 	-DamagedByTerrain@VEINS:
@@ -112,7 +112,7 @@ BIKE:
 		LocalYaw: 128, -128
 	AttackFrontal:
 		Voice: Attack
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		FacingTolerance: 16
 	-DamagedByTerrain@VEINS:
 	-LeavesTrails@VEINS:
@@ -192,7 +192,7 @@ TTNK:
 	AttackFrontal:
 		Voice: Attack
 		RequiresCondition: undeployed
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		FacingTolerance: 16
 	Turreted:
 		TurnSpeed: 24
@@ -215,7 +215,7 @@ TTNK:
 		Armaments: deployed
 		Turrets: deployed
 		RequiresCondition: deployed
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		OutsideRangeRequiresForceFire: True
 	Armament@deployed:
 		Name: deployed
@@ -306,6 +306,7 @@ ART2:
 	 	FacingTolerance: 512
 	 	RequiresCondition: undeployed
 		Armaments: todeploy
+		PauseOnCondition: empdisable || carring
 	Armament@todeploy:
 	 	Name: todeploy
 	 	Weapon: 155mmDeployCheck
@@ -347,7 +348,7 @@ ART2:
 		Armaments: deployed
 		Turrets: deployed
 		RequiresCondition: deployed && !init-barrel
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		TargetFrozenActors: True
 		ForceFireIgnoresActors: True
 		OutsideRangeRequiresForceFire: True
@@ -407,7 +408,7 @@ REPAIR:
 	WithMuzzleOverlay:
 	AttackFrontal:
 		Voice: Attack
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		FacingTolerance: 16
 	AutoTarget:
 		ScanRadius: 8
@@ -588,7 +589,7 @@ SUBTANK:
 		RequiresCondition: !submerged
 	AttackFrontal:
 		Voice: Attack
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		FacingTolerance: 23
 		FacingFullOnTarget: true
 		RequiresCondition: !submerged
@@ -675,7 +676,7 @@ STNK:
 		LocalYaw: 100, -100
 	AttackFrontal:
 		Voice: Attack
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		FacingTolerance: 16
 	AutoTarget:
 		InitialStance: HoldFire
@@ -741,7 +742,7 @@ REAPER:
 		UseDeathTypeSuffix: false
 	AttackFrontal:
 		Voice: Attack
-		PauseOnCondition: empdisable
+		PauseOnCondition: empdisable || carring
 		FacingTolerance: 2
 	#AttackFollowFrontal:
 	#	Voice: Attack
