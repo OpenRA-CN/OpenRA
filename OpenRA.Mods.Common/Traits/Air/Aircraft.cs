@@ -225,7 +225,7 @@ namespace OpenRA.Mods.Common.Traits
 
 	public class Aircraft : PausableConditionalTrait<AircraftInfo>, ITick, ISync, IFacing, IPositionable, IMove,
 		INotifyAddedToWorld, INotifyRemovedFromWorld, INotifyActorDisposing, INotifyBecomingIdle, ICreationActivity,
-		IActorPreviewInitModifier, IDeathActorInitModifier, IIssueDeployOrder, IIssueOrder, IResolveOrder, IOrderVoice
+		IActorPreviewInitModifier, IDeathActorInitModifier, IIssueDeployOrder, IIssueOrder, IResolveOrder, IOrderVoice, IMover
 	{
 		readonly Actor self;
 
@@ -430,6 +430,8 @@ namespace OpenRA.Mods.Common.Traits
 
 		protected virtual void Tick(Actor self)
 		{
+			MoveTowardInner(moveDir);
+
 			// Add land activity if Aircraft trait is paused and the actor can land at the current location.
 			if (!ForceLanding && IsTraitPaused && airborne && CanLand(self.Location)
 				&& !((self.CurrentActivity is Land) || self.CurrentActivity is Turn))
@@ -478,6 +480,12 @@ namespace OpenRA.Mods.Common.Traits
 			currentPos = CenterPosition;
 			currentSpeed = currentPos - lastPos;
 			lastPos = currentPos;
+
+			if (self.IsIdle)
+			{
+				// Sometimes the aircraft might lost activity
+				OnBecomingIdle(self);
+			}
 		}
 
 		public void Repulse()
@@ -1028,7 +1036,10 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			get
 			{
-				yield return new EnterAlliedActorTargeter<BuildingInfo>(
+				if (!IsTraitDisabled && !UnderControl)
+				{
+
+					yield return new EnterAlliedActorTargeter<BuildingInfo>(
 					"ForceEnter",
 					6,
 					Info.EnterCursor,
@@ -1036,22 +1047,94 @@ namespace OpenRA.Mods.Common.Traits
 					(target, modifiers) => Info.CanForceLand && modifiers.HasModifier(TargetModifiers.ForceMove) && AircraftCanEnter(target),
 					target => Reservable.IsAvailableFor(target, self) && AircraftCanResupplyAt(target, true));
 
-				yield return new EnterAlliedActorTargeter<BuildingInfo>(
-					"Enter",
-					5,
-					Info.EnterCursor,
-					Info.EnterBlockedCursor,
-					AircraftCanEnter,
-					target => Reservable.IsAvailableFor(target, self) && AircraftCanResupplyAt(target, !Info.TakeOffOnResupply));
+					yield return new EnterAlliedActorTargeter<BuildingInfo>(
+						"Enter",
+						5,
+						Info.EnterCursor,
+						Info.EnterBlockedCursor,
+						AircraftCanEnter,
+						target => Reservable.IsAvailableFor(target, self) && AircraftCanResupplyAt(target, !Info.TakeOffOnResupply));
 
-				yield return new AircraftMoveOrderTargeter(this);
+					yield return new AircraftMoveOrderTargeter(this);
+				}
 			}
+		}
+
+		public bool CanMove => !IsTraitDisabled && !IsTraitPaused;
+
+		public bool UnderControl { get; set; }
+
+		public bool UnderControlMoving { get; private set; }
+		public bool UnderControlTurning { get; private set; }
+
+		public WAngle UnderControlDesiredFacing { get; set; }
+
+		WVec moveDir;
+		public void MoveToward(WVec mVec)
+		{
+			moveDir = mVec;
+		}
+
+		public void MoveTowardInner(WVec mVec)
+		{
+			if (!UnderControl || self.CurrentActivity is Land || self.World.Map.DistanceAboveTerrain(self.CenterPosition) < LandAltitude)
+				return;
+
+			UnderControlMoving = false;
+			UnderControlTurning = false;
+
+			var isIdleTurner = Info.IdleSpeed > 0 || (!Info.CanHover && Info.IdleSpeed < 0);
+
+			var desiredFacing = UnderControlDesiredFacing;
+			if (UnderControlDesiredFacing != Facing)
+			{
+				UnderControlTurning = true;
+			}
+			else if (mVec.X != 0)
+			{
+				UnderControlTurning = true;
+				desiredFacing += (mVec.X < 0 ? TurnSpeed : -TurnSpeed);
+			}
+
+			var speed = 0;
+
+			if (mVec.Y < 0)
+			{
+				UnderControlMoving = true;
+				speed = MovementSpeed;
+			}
+			else if (mVec.Y > 0)
+			{
+				UnderControlMoving = true;
+				speed = -MovementSpeed;
+			}
+
+			if (isIdleTurner)
+			{
+				var move = FlyStep(speed == 0 ? IdleMovementSpeed : MovementSpeed, Facing);
+
+				if (!UnderControlTurning && !UnderControlMoving)
+					desiredFacing = Facing + new WAngle(256);
+
+				Fly.FlyTick(self, this, desiredFacing, Info.CruiseAltitude, move, false);
+			}
+			else if (speed != 0)
+			{
+				var move = FlyStep(speed, Facing);
+				Fly.FlyTick(self, this, desiredFacing, Info.CruiseAltitude, move, false);
+			}
+			else
+			{
+				Fly.FlyTick(self, this, desiredFacing, Info.CruiseAltitude, WVec.Zero, false, true);
+			}
+
+			UnderControlDesiredFacing = Facing;
 		}
 
 		public Order IssueOrder(Actor self, IOrderTargeter order, in Target target, bool queued)
 		{
 			if (!IsTraitDisabled &&
-				(order.OrderID == "Enter" || order.OrderID == "Move" || order.OrderID == "Land" || order.OrderID == "ForceEnter"))
+				(order.OrderID == "Enter" || (!UnderControl && order.OrderID == "Move") || order.OrderID == "Land" || order.OrderID == "ForceEnter"))
 				return new Order(order.OrderID, self, target, queued);
 
 			return null;
@@ -1101,7 +1184,7 @@ namespace OpenRA.Mods.Common.Traits
 				return;
 
 			var orderString = order.OrderString;
-			if (orderString == "Move")
+			if (!UnderControl && orderString == "Move")
 			{
 				var cell = self.World.Map.Clamp(self.World.Map.CellContaining(order.Target.CenterPosition));
 				if (!Info.MoveIntoShroud && !self.Owner.Shroud.IsExplored(cell))

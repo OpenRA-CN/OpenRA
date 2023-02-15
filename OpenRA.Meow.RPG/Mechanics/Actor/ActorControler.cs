@@ -145,7 +145,7 @@ namespace OpenRA.Meow.RPG
 
 					hoffset += thisZoffset / a.Armaments.Count();
 
-					if (!(a is AttackFollow))
+					if (!(a is AttackFollow) || a is AttackAircraft)
 					{
 						attackFace = a.Info.FiringAngle;
 						turnFacing = true;
@@ -170,9 +170,17 @@ namespace OpenRA.Meow.RPG
 
 				if (facing != null && turnFacing && moving)
 				{
-					var desiredFacing = (attackTarget.CenterPosition - self.CenterPosition).Yaw;
-					if (desiredFacing + attackFace != facing.Facing)
-						facing.Facing = Util.TickFacing(facing.Facing, desiredFacing + attackFace, facing.TurnSpeed);
+					if (mover is Aircraft)
+					{
+						(mover as Aircraft).UnderControlDesiredFacing = (attackTarget.CenterPosition - self.CenterPosition).Yaw;
+					}
+					else
+					{
+						var desiredFacing = (attackTarget.CenterPosition - self.CenterPosition).Yaw;
+						if (desiredFacing + attackFace != facing.Facing)
+							facing.Facing = Util.TickFacing(facing.Facing, desiredFacing + attackFace, facing.TurnSpeed);
+					}
+
 				}
 
 				foreach (var a in attacks)
@@ -180,7 +188,7 @@ namespace OpenRA.Meow.RPG
 					if (a.IsTraitDisabled)
 						continue;
 
-					if (a is AttackFollow && UnderControl)
+					if (a is AttackFollow && !(a is AttackAircraft) && UnderControl)
 					{
 						(a as AttackFollow).SetRequestedTarget(attackTarget, true);
 					}

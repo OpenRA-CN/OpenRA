@@ -51,7 +51,10 @@ namespace OpenRA.Mods.Common.Activities
 				foreach (var tickIdle in tickIdles)
 					tickIdle.TickIdle(self);
 
-			if (isIdleTurner)
+			if (aircraft.UnderControlMoving)
+				return false;
+
+			if (isIdleTurner && !aircraft.UnderControl)
 			{
 				// This override is necessary, otherwise aircraft with CanSlide would circle sideways
 				var move = aircraft.FlyStep(aircraft.IdleMovementSpeed, aircraft.Facing);

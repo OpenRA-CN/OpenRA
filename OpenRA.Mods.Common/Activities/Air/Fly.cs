@@ -63,12 +63,14 @@ namespace OpenRA.Mods.Common.Activities
 			this.minRange = minRange;
 		}
 
-		public static void FlyTick(Actor self, Aircraft aircraft, WAngle desiredFacing, WDist desiredAltitude, in WVec moveOverride, bool idleTurn = false)
+		public static void FlyTick(Actor self, Aircraft aircraft, WAngle desiredFacing, WDist desiredAltitude, in WVec moveOverride, bool idleTurn = false, bool noMovement = false)
 		{
 			var dat = self.World.Map.DistanceAboveTerrain(aircraft.CenterPosition);
 			var move = aircraft.Info.CanSlide ? aircraft.FlyStep(desiredFacing) : aircraft.FlyStep(aircraft.Facing);
 			if (moveOverride != WVec.Zero)
 				move = moveOverride;
+			if (noMovement)
+				move = WVec.Zero;
 
 			var oldFacing = aircraft.Facing;
 			var turnSpeed = aircraft.GetTurnSpeed(idleTurn);
@@ -83,8 +85,14 @@ namespace OpenRA.Mods.Common.Activities
 				aircraft.Roll = Util.TickFacing(aircraft.Roll, desiredRoll, aircraft.Info.RollSpeed);
 			}
 
-			if (aircraft.Info.Pitch != WAngle.Zero)
-				aircraft.Pitch = Util.TickFacing(aircraft.Pitch, aircraft.Info.Pitch, aircraft.Info.PitchSpeed);
+			if (aircraft.Info.Pitch != WAngle.Zero && move != WVec.Zero)
+			{
+				var dir = new WVec(0, -1024, 0).Rotate(WRot.FromYaw(aircraft.Facing));
+				if (WVec.Dot(move, dir) > 0)
+					aircraft.Pitch = Util.TickFacing(aircraft.Pitch, aircraft.Info.Pitch, aircraft.Info.PitchSpeed);
+				else
+					aircraft.Pitch = Util.TickFacing(aircraft.Pitch, -aircraft.Info.Pitch, aircraft.Info.PitchSpeed);
+			}
 
 			// Note: we assume that if move.Z is not zero, it's intentional and we want to move in that vertical direction instead of towards desiredAltitude.
 			// If that is not desired, the place that calls this should make sure moveOverride.Z is zero.
