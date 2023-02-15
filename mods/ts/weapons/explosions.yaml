@@ -125,7 +125,7 @@ BlueTiberiumChainReaction:
 		Delay: 0
 		Spread: 454
 		Damage: 15000
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+		DamageTypes: Prone100Percent, TriggerProne, ExplosionDeath
 		ImpactActors: false
 	Warhead@ChainReaction: FireCluster
 		Delay: 10
@@ -149,3 +149,10 @@ BlueTiberiumChainReaction:
 		ResourceTypes: Tiberium, BlueTiberium
 		ImpactActors: false
 	-Warhead@4Smu:
+	Warhead@ShockWave:	CreateEffect #ShockWave
+		Image: twist
+		Explosions: shockgroundarti
+		ExplosionPalette: twist
+		ForceDisplayAtGroundLevel: true
+		ImpactActors: false
+		AirThreshold: 625
