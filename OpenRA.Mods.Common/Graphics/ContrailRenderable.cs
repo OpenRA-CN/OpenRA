@@ -36,11 +36,14 @@ namespace OpenRA.Mods.Common.Graphics
 
 		// Store trail positions in a circular buffer
 		readonly WPos[] trail;
+		readonly WVec[] trailPointMove;
+
 		readonly WDist width;
+		readonly bool spread;
 
 		readonly bool useInnerOuterColor;
 
-		readonly Animation anim;
+		public readonly Animation Anim;
 		readonly string palette;
 		readonly bool flipSprite;
 
@@ -69,16 +72,17 @@ namespace OpenRA.Mods.Common.Graphics
 		int length;
 		readonly int skip;
 
-		public ContrailRenderable(Animation anim, string palette, bool flipSprite, World world, Color startcolor, Color endcolor, WDist width, int length, int skip, int zOffset, float widthFadeRate, BlendMode blendMode)
-			: this(anim, palette, flipSprite, world, new WPos[length], width, 0, 0, skip, startcolor, endcolor, zOffset, widthFadeRate, blendMode) { }
+		public ContrailRenderable(Animation anim, string palette, bool flipSprite, World world, Color startcolor, Color endcolor, WDist width, int length, int skip, int zOffset, float widthFadeRate, BlendMode blendMode, bool spread)
+			: this(anim, palette, flipSprite, world, new WPos[length], new WVec[length], width, 0, 0, skip, startcolor, endcolor, zOffset, widthFadeRate, blendMode, spread) { }
 
-		public ContrailRenderable(Animation anim, string palette, bool flipSprite, World world, Color startcolor, Color endcolor, WDist width, int length, int skip, int zOffset, float widthFadeRate, BlendMode blendMode, Color startcolorOuter, Color endcolorOuter)
-			: this(anim, palette, flipSprite, world, new WPos[length], width, 0, 0, skip, startcolor, endcolor, zOffset, widthFadeRate, blendMode, startcolorOuter, endcolorOuter) { }
+		public ContrailRenderable(Animation anim, string palette, bool flipSprite, World world, Color startcolor, Color endcolor, WDist width, int length, int skip, int zOffset, float widthFadeRate, BlendMode blendMode, bool spread, Color startcolorOuter, Color endcolorOuter)
+			: this(anim, palette, flipSprite, world, new WPos[length], new WVec[length], width, 0, 0, skip, startcolor, endcolor, zOffset, widthFadeRate, blendMode, spread, startcolorOuter, endcolorOuter) { }
 
-		ContrailRenderable(Animation anim, string palette, bool flipSprite, World world, WPos[] trail, WDist width, int next, int length, int skip, Color startcolor, Color endcolor, int zOffset, float widthFadeRate, BlendMode blendMode)
+		ContrailRenderable(Animation anim, string palette, bool flipSprite, World world, WPos[] trail, WVec[] trailPointMove, WDist width, int next, int length, int skip, Color startcolor, Color endcolor, int zOffset, float widthFadeRate, BlendMode blendMode, bool spread)
 		{
 			this.world = world;
 			this.trail = trail;
+			this.trailPointMove = trailPointMove;
 			this.width = width;
 			this.next = next;
 			this.length = length;
@@ -89,19 +93,20 @@ namespace OpenRA.Mods.Common.Graphics
 			this.widthFadeRate = widthFadeRate;
 			this.blendMode = blendMode;
 			this.useInnerOuterColor = false;
-
+			this.spread = spread;
 			if (anim != null)
 			{
-				this.anim = anim;
+				this.Anim = anim;
 				this.palette = palette;
 				this.flipSprite = flipSprite;
 			}
 		}
 
-		ContrailRenderable(Animation anim, string palette, bool flipSprite, World world, WPos[] trail, WDist width, int next, int length, int skip, Color startcolor, Color endcolor, int zOffset, float widthFadeRate, BlendMode blendMode, Color startcolorOuter, Color endcolorOuter)
+		ContrailRenderable(Animation anim, string palette, bool flipSprite, World world, WPos[] trail, WVec[] trailPointMove, WDist width, int next, int length, int skip, Color startcolor, Color endcolor, int zOffset, float widthFadeRate, BlendMode blendMode, bool spread, Color startcolorOuter, Color endcolorOuter)
 		{
 			this.world = world;
 			this.trail = trail;
+			this.trailPointMove = trailPointMove;
 			this.width = width;
 			this.next = next;
 			this.length = length;
@@ -114,10 +119,10 @@ namespace OpenRA.Mods.Common.Graphics
 			this.useInnerOuterColor = true;
 			this.startcolorOuter = startcolorOuter;
 			this.endcolorOuter = endcolorOuter;
-
+			this.spread = spread;
 			if (anim != null)
 			{
-				this.anim = anim;
+				this.Anim = anim;
 				this.palette = palette;
 				this.flipSprite = flipSprite;
 			}
@@ -132,9 +137,9 @@ namespace OpenRA.Mods.Common.Graphics
 
 		public IRenderable WithZOffset(int newOffset) {
 			if (useInnerOuterColor)
-				return new ContrailRenderable(anim, palette, flipSprite, world, (WPos[])trail.Clone(), width, next, length, skip, startcolor, endcolor, newOffset, widthFadeRate, blendMode, startcolorOuter, endcolorOuter);
+				return new ContrailRenderable(Anim, palette, flipSprite, world, (WPos[])trail.Clone(), (WVec[])trailPointMove.Clone(), width, next, length, skip, startcolor, endcolor, newOffset, widthFadeRate, blendMode, spread, startcolorOuter, endcolorOuter);
 			else
-				return new ContrailRenderable(anim, palette, flipSprite, world, (WPos[])trail.Clone(), width, next, length, skip, startcolor, endcolor, newOffset, widthFadeRate, blendMode);
+				return new ContrailRenderable(Anim, palette, flipSprite, world, (WPos[])trail.Clone(), (WVec[])trailPointMove.Clone(), width, next, length, skip, startcolor, endcolor, newOffset, widthFadeRate, blendMode, spread);
 		}
 
 		public IRenderable OffsetBy(in WVec vec)
@@ -142,9 +147,9 @@ namespace OpenRA.Mods.Common.Graphics
 			// Lambdas can't use 'in' variables, so capture a copy for later
 			var offset = vec;
 			if (useInnerOuterColor)
-				return new ContrailRenderable(anim, palette, flipSprite, world, trail.Select(pos => pos + offset).ToArray(), width, next, length, skip, startcolor, endcolor, zOffset, widthFadeRate, blendMode, startcolorOuter, endcolorOuter);
+				return new ContrailRenderable(Anim, palette, flipSprite, world, trail.Select(pos => pos + offset).ToArray(), (WVec[])trailPointMove.Clone(), width, next, length, skip, startcolor, endcolor, zOffset, widthFadeRate, blendMode, spread, startcolorOuter, endcolorOuter);
 			else
-				return new ContrailRenderable(anim, palette, flipSprite, world, trail.Select(pos => pos + offset).ToArray(), width, next, length, skip, startcolor, endcolor, zOffset, widthFadeRate, blendMode);
+				return new ContrailRenderable(Anim, palette, flipSprite, world, trail.Select(pos => pos + offset).ToArray(), (WVec[])trailPointMove.Clone(), width, next, length, skip, startcolor, endcolor, zOffset, widthFadeRate, blendMode, spread);
 		}
 
 		public IRenderable AsDecoration() { return this; }
@@ -182,19 +187,24 @@ namespace OpenRA.Mods.Common.Graphics
 				var nextColor = Exts.ColorLerp(nextUVOffset, startcolor, endcolor);
 				var nextColorOuter = Exts.ColorLerp(nextUVOffset, startcolorOuter, endcolorOuter);
 
-				var nextX = 0L;
-				var nextY = 0L;
-				var nextZ = 0L;
-				var k = 0;
-				for (; k < renderLength - i && k < MaxSmoothLength; k++)
-				{
-					var prepos = trail[Index(j - k)];
-					nextX += prepos.X;
-					nextY += prepos.Y;
-					nextZ += prepos.Z;
-				}
+				var nextPos = trail[Index(j)];
 
-				var nextPos = new WPos((int)(nextX / k), (int)(nextY / k), (int)(nextZ / k));
+				if (!spread)
+				{
+					var nextX = 0L;
+					var nextY = 0L;
+					var nextZ = 0L;
+					var k = 0;
+					for (; k < renderLength - i && k < MaxSmoothLength; k++)
+					{
+						var prepos = trail[Index(j - k)];
+						nextX += prepos.X;
+						nextY += prepos.Y;
+						nextZ += prepos.Z;
+					}
+
+					nextPos = new WPos((int)(nextX / k), (int)(nextY / k), (int)(nextZ / k));
+				}
 
 				if (!world.FogObscures(curPos) && !world.FogObscures(nextPos))
 				{
@@ -243,13 +253,13 @@ namespace OpenRA.Mods.Common.Graphics
 				var endUp = i == partToRender.Count - 1 ? partToRender[i].EndUp : Vector3.Lerp(partToRender[i].EndUp, partToRender[i + 1].StartUp, 0.5f);
 				var endDown = i == partToRender.Count - 1 ? partToRender[i].EndDown : Vector3.Lerp(partToRender[i].EndDown, partToRender[i + 1].StartDown, 0.5f);
 
-				if (anim != null)
+				if (Anim != null)
 				{
 					var startColor = Color.PremultiplyAlpha(partToRender[i].StartColor);
 					var endColor = Color.PremultiplyAlpha(partToRender[i].EndColor);
 
-					var sprite = anim.Image;
-					var spriteAlpha = anim.CurrentSequence.GetAlpha(anim.CurrentFrame);
+					var sprite = Anim.Image;
+					var spriteAlpha = Anim.CurrentSequence.GetAlpha(Anim.CurrentFrame);
 					if (BlendMode == BlendMode.Alpha)
 						Game.Renderer.WorldSpriteRenderer.DrawDirectionSprite(sprite, palette,
 						new float3(flipSprite ? startUp : endUp), new float3(flipSprite ? startDown : endDown),
@@ -303,11 +313,24 @@ namespace OpenRA.Mods.Common.Graphics
 			return j < 0 ? j + trail.Length : j;
 		}
 
-		public void Update(WPos pos)
+		public void Update(WPos pos, WVec move, bool spread = true)
 		{
+
+			if (this.spread && spread)
+			{
+				var ni = next;
+				for (var i = 0; i < length; i++)
+				{
+					trail[ni] = trail[ni] + trailPointMove[ni];
+					ni = Index(ni - 1);
+				}
+			}
+
 			trail[next] = pos;
+			trailPointMove[next] = move;
+
 			next = Index(next + 1);
-			anim?.Tick();
+			Anim?.Tick();
 
 			if (length < trail.Length)
 				length++;

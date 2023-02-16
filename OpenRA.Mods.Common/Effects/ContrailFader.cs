@@ -20,6 +20,12 @@ namespace OpenRA.Mods.Common.Effects
 	{
 		readonly WPos pos;
 		readonly ContrailRenderable trail;
+		public WAngle AngleStep = WAngle.Zero;
+		public WDist SpreadStep = WDist.Zero;
+		public WAngle SpreadAngle = WAngle.Zero;
+		public WVec LeftVector;
+		public WVec UpVector;
+
 		int ticks;
 
 		public ContrailFader(WPos pos, ContrailRenderable trail)
@@ -33,7 +39,17 @@ namespace OpenRA.Mods.Common.Effects
 			if (ticks++ == trail.Length)
 				world.AddFrameEndTask(w => w.Remove(this));
 
-			trail.Update(pos);
+			var moveStep = WVec.Zero;
+			if (SpreadStep != WDist.Zero)
+			{
+				// Note: WAngle.Sin(x) = 1024 * Math.Sin(2pi/1024 * x)
+				moveStep = SpreadStep.Length * SpreadAngle.Cos() * LeftVector / (1024 * 1024)
+					+ SpreadStep.Length * SpreadAngle.Sin() * UpVector / (1024 * 1024);
+
+				SpreadAngle += AngleStep;
+			}
+
+			trail.Update(pos, moveStep);
 		}
 
 		public IEnumerable<IRenderable> Render(WorldRenderer wr)

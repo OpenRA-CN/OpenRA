@@ -193,6 +193,14 @@ namespace OpenRA.Mods.Common.Projectiles
 		[Desc("Contrail will fade with contrail width. Set 1.0 to make contrail fades just by length. Can be set with negative value")]
 		public readonly float ContrailWidthFadeRate = 0;
 
+		public readonly WAngle AngleStep = WAngle.Zero;
+
+		public readonly WDist SpreadStep = WDist.Zero;
+
+		public readonly WAngle SpreadInitAngle = WAngle.Zero;
+
+		public readonly int ContrailCopyCount = 0;
+
 		[Desc("Contrail blendmode.")]
 		public readonly BlendMode ContrailBlendMode = BlendMode.Alpha;
 	}
@@ -224,7 +232,11 @@ namespace OpenRA.Mods.Common.Projectiles
 		readonly float3 shadowColor;
 		readonly float shadowAlpha;
 
-		readonly ContrailRenderable contrail;
+		readonly ContrailRenderable[] contrails;
+		WAngle[] contrailInitSpreadAngles;
+		public WVec LeftVector { get; private set; }
+		public WVec UpVector { get; private set; }
+
 		int trailTicks, renderTick;
 		WPos trailLastPos, pos, matLastPos;
 		TSMatrix4x4 effectMatrix;
@@ -287,14 +299,20 @@ namespace OpenRA.Mods.Common.Projectiles
 				var startcolor = info.ContrailStartColorUsePlayerColor ? Color.FromArgb(info.ContrailStartColorAlpha, args.SourceActor.Owner.Color) : Color.FromArgb(info.ContrailStartColorAlpha, info.ContrailStartColor);
 				var endcolor = info.ContrailEndColorUsePlayerColor ? Color.FromArgb(info.ContrailEndColorAlpha, args.SourceActor.Owner.Color) : Color.FromArgb(info.ContrailEndColorAlpha, info.ContrailEndColor);
 
-				if (info.ContrailUseInnerOuterColor)
+				contrails = new ContrailRenderable[info.ContrailCopyCount + 1];
+				contrailInitSpreadAngles = new WAngle[info.ContrailCopyCount + 1];
+				for (var i = 0; i < contrails.Length; i++)
 				{
-					var startcolorOuter = info.ContrailStartColorUsePlayerColor ? Color.FromArgb(info.ContrailStartColorAlphaOuter, args.SourceActor.Owner.Color) : Color.FromArgb(info.ContrailStartColorAlphaOuter, info.ContrailStartColorOuter);
-					var endcolorOuter = info.ContrailEndColorUsePlayerColor ? Color.FromArgb(info.ContrailEndColorAlphaOuter, args.SourceActor.Owner.Color) : Color.FromArgb(info.ContrailEndColorAlphaOuter, info.ContrailEndColorOuter);
-					contrail = new ContrailRenderable(contrailAnim, contrailPal, info.ContrailSpriteTopToDown, world, startcolor, endcolor, info.ContrailWidth, info.ContrailLength, info.ContrailDelay, info.ContrailZOffset, info.ContrailWidthFadeRate, info.ContrailBlendMode, startcolorOuter, endcolorOuter);
+					contrailInitSpreadAngles[i] = info.SpreadInitAngle + new WAngle(i * (1024 / contrails.Length));
+					if (info.ContrailUseInnerOuterColor)
+					{
+						var startcolorOuter = info.ContrailStartColorUsePlayerColor ? Color.FromArgb(info.ContrailStartColorAlphaOuter, args.SourceActor.Owner.Color) : Color.FromArgb(info.ContrailStartColorAlphaOuter, info.ContrailStartColorOuter);
+						var endcolorOuter = info.ContrailEndColorUsePlayerColor ? Color.FromArgb(info.ContrailEndColorAlphaOuter, args.SourceActor.Owner.Color) : Color.FromArgb(info.ContrailEndColorAlphaOuter, info.ContrailEndColorOuter);
+						contrails[i] = new ContrailRenderable(contrailAnim, contrailPal, info.ContrailSpriteTopToDown, world, startcolor, endcolor, info.ContrailWidth, info.ContrailLength, info.ContrailDelay, info.ContrailZOffset, info.ContrailWidthFadeRate, info.ContrailBlendMode, info.SpreadStep != WDist.Zero, startcolorOuter, endcolorOuter);
+					}
+					else
+						contrails[i] = new ContrailRenderable(contrailAnim, contrailPal, info.ContrailSpriteTopToDown, world, startcolor, endcolor, info.ContrailWidth, info.ContrailLength, info.ContrailDelay, info.ContrailZOffset, info.ContrailWidthFadeRate, info.ContrailBlendMode, info.SpreadStep != WDist.Zero);
 				}
-				else
-					contrail = new ContrailRenderable(contrailAnim, contrailPal, info.ContrailSpriteTopToDown, world, startcolor, endcolor, info.ContrailWidth, info.ContrailLength, info.ContrailDelay, info.ContrailZOffset, info.ContrailWidthFadeRate, info.ContrailBlendMode);
 			}
 
 			trailTicks = info.TrailDelay;
@@ -320,6 +338,7 @@ namespace OpenRA.Mods.Common.Projectiles
 		}
 
 		bool renderTickStarted = false;
+
 		protected virtual void RenderTick(World world, in WPos pos)
 		{
 			if (renderTick > info.ContrailDelay)
@@ -334,8 +353,37 @@ namespace OpenRA.Mods.Common.Projectiles
 
 			if (info.ContrailLength > 0 && renderContrail)
 			{
-				contrailAnim?.Tick();
-				contrail.Update(pos);
+				if (info.SpreadStep != WDist.Zero)
+				{
+					// An easy vector to find which is perpendicular vector to forwardStep, with 0 Z component
+					LeftVector = new WVec(matVec.Y, -matVec.X, 0);
+					if (LeftVector.LengthSquared != 0)
+						LeftVector = 1024 * LeftVector / LeftVector.Length;
+
+					// Vector that is pointing upwards from the ground
+					UpVector = new WVec(
+						-matVec.X * matVec.Z,
+						-matVec.Z * matVec.Y,
+						matVec.X * matVec.X + matVec.Y * matVec.Y);
+
+					if (UpVector.LengthSquared != 0)
+						UpVector = 1024 * UpVector / UpVector.Length;
+				}
+
+				for (var i = 0; i < contrails.Length; i++)
+				{
+					var moveStep = WVec.Zero;
+					if (info.SpreadStep != WDist.Zero)
+					{
+						// Note: WAngle.Sin(x) = 1024 * Math.Sin(2pi/1024 * x)
+						moveStep = info.SpreadStep.Length * contrailInitSpreadAngles[i].Cos() * LeftVector / (1024 * 1024)
+							+ info.SpreadStep.Length * contrailInitSpreadAngles[i].Sin() * UpVector / (1024 * 1024);
+
+						contrailInitSpreadAngles[i] += info.AngleStep;
+					}
+
+					contrails[i].Update(pos, moveStep);
+				}
 			}
 
 			if (hasInitPal)
@@ -384,7 +432,8 @@ namespace OpenRA.Mods.Common.Projectiles
 			}
 
 			if (info.ContrailLength > 0 && renderContrail)
-				yield return contrail;
+				foreach (var c in contrails)
+					yield return c;
 
 			if (explode)
 				yield break;
@@ -428,7 +477,28 @@ namespace OpenRA.Mods.Common.Projectiles
 		protected virtual void RenderExplode(World world, WPos pos)
 		{
 			if (info.ContrailLength > 0)
-				world.AddFrameEndTask(w => w.Add(new ContrailFader(pos, contrail)));
+			{
+				var left = LeftVector;
+				var up = UpVector;
+				for (var i = 0; i < contrails.Length; i++)
+				{
+					var index = i;
+					world.AddFrameEndTask(w =>
+					{
+						var c = new ContrailFader(pos, contrails[index])
+						{
+							UpVector = up,
+							LeftVector = left,
+							SpreadStep = info.SpreadStep,
+							SpreadAngle = contrailInitSpreadAngles[index],
+							AngleStep = info.AngleStep
+						};
+
+						w.Add(c);
+					});
+				}
+			}
+
 		}
 
 		public bool FirstValidTargetsOnLine(World world, WPos lineStart, WPos lineEnd, WDist lineWidth, Actor firedBy, bool checkTargetType, Actor targetActor, out WPos hitPos, out Actor hitActor, bool onlyBlockers = false)

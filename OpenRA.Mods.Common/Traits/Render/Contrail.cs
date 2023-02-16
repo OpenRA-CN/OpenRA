@@ -128,10 +128,10 @@ namespace OpenRA.Mods.Common.Traits
 				startcolorOuter = info.StartColorUsePlayerColor ? Color.FromArgb(info.StartColorAlphaOuter, self.Owner.Color) : Color.FromArgb(info.StartColorAlphaOuter, info.StartColorOuter);
 				endcolorOuter = info.EndColorUsePlayerColor ? Color.FromArgb(info.EndColorAlphaOuter, self.Owner.Color) : Color.FromArgb(info.EndColorAlphaOuter, info.EndColorOuter);
 
-				trail = new ContrailRenderable(anim, palette, info.SpriteTopToDown, self.World, startcolor, endcolor, info.TrailWidth, info.TrailLength, info.TrailDelay, info.ZOffset, info.WidthFadeRate, info.BlendMode, startcolorOuter, endcolorOuter);
+				trail = new ContrailRenderable(anim, palette, info.SpriteTopToDown, self.World, startcolor, endcolor, info.TrailWidth, info.TrailLength, info.TrailDelay, info.ZOffset, info.WidthFadeRate, info.BlendMode, false, startcolorOuter, endcolorOuter);
 			}
 			else
-				trail = new ContrailRenderable(anim, palette, info.SpriteTopToDown, self.World, startcolor, endcolor, info.TrailWidth, info.TrailLength, info.TrailDelay, info.ZOffset, info.WidthFadeRate, info.BlendMode);
+				trail = new ContrailRenderable(anim, palette, info.SpriteTopToDown, self.World, startcolor, endcolor, info.TrailWidth, info.TrailLength, info.TrailDelay, info.ZOffset, info.WidthFadeRate, info.BlendMode, false);
 
 			body = self.Trait<BodyOrientation>();
 		}
@@ -141,7 +141,7 @@ namespace OpenRA.Mods.Common.Traits
 			// We want to update the trails' position even while the trait is disabled,
 			// otherwise we might get visual 'jumps' when the trait is re-enabled.
 			var local = info.Offset.Rotate(body.QuantizeOrientation(self.Orientation));
-			trail.Update(self.CenterPosition + body.LocalToWorld(local));
+			trail.Update(self.CenterPosition + body.LocalToWorld(local), WVec.Zero);
 			anim?.Tick();
 		}
 
@@ -162,9 +162,9 @@ namespace OpenRA.Mods.Common.Traits
 		void INotifyAddedToWorld.AddedToWorld(Actor self)
 		{
 			if (info.UseInnerOuterColor)
-				trail = new ContrailRenderable(anim, palette, info.SpriteTopToDown, self.World, startcolor, endcolor, info.TrailWidth, info.TrailLength, info.TrailDelay, info.ZOffset, info.WidthFadeRate, info.BlendMode, startcolorOuter, endcolorOuter);
+				trail = new ContrailRenderable(anim, palette, info.SpriteTopToDown, self.World, startcolor, endcolor, info.TrailWidth, info.TrailLength, info.TrailDelay, info.ZOffset, info.WidthFadeRate, info.BlendMode, false, startcolorOuter, endcolorOuter);
 			else
-				trail = new ContrailRenderable(anim, palette, info.SpriteTopToDown, self.World, startcolor, endcolor, info.TrailWidth, info.TrailLength, info.TrailDelay, info.ZOffset, info.WidthFadeRate, info.BlendMode);
+				trail = new ContrailRenderable(anim, palette, info.SpriteTopToDown, self.World, startcolor, endcolor, info.TrailWidth, info.TrailLength, info.TrailDelay, info.ZOffset, info.WidthFadeRate, info.BlendMode, false);
 		}
 	}
 }

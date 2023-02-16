@@ -19,7 +19,7 @@
 		DetectTargetFromLengthPercentage: 10
 		ContrailZOffset: 22
 		ContrailLength: 15
-		ContrailWidth: 200
+		ContrailWidth: 96
 		ContrailImage: lineidle_loop
 		ContrailSequences: railgun
 		ContrailStartColor: 33FFFF
@@ -29,14 +29,17 @@
 		ContrailWidthFadeRate: 0
 		ContrailDelay: 0
 		ContrailBlendMode: Additive
+		AngleStep: 128
+		SpreadStep: 64
+		ContrailCopyCount: 2
 
-		TrailImage: fxring
-		TrailSequences: sonicburst
-		TrailDelay: 0
-		TrailInterval: 1
-		TrailLikeSmokeRing: true
-		TrailScaleAnimStart: 0.2
-		TrailScaleAnimEnd: 2
+		# TrailImage: fxring
+		# TrailSequences: sonicburst
+		# TrailDelay: 0
+		# TrailInterval: 1
+		# TrailLikeSmokeRing: true
+		# TrailScaleAnimStart: 0.2
+		# TrailScaleAnimEnd: 2
 
 
 		Speed: 1550
@@ -125,7 +128,7 @@ MechRailgun:
 	Report: railuse5.aud
 	Projectile: Bullet
 		ContrailLength: 18
-		ContrailWidth: 335
+		ContrailWidth: 128 #335
 		TrailScaleAnimStart: 0.2
 		TrailScaleAnimEnd: 2.3
 		LineWeapon: MechEmpLineDamage
