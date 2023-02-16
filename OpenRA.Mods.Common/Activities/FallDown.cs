@@ -51,7 +51,7 @@ namespace OpenRA.Mods.Common.Activities
 			weapon = null;
 		}
 
-		public FallDown(Actor self, WPos dropPosition, int fallRate, int maxVelocity, WeaponInfo weapon, int gravityChangeInterval,	int maxGravity,	int gravityAcceleration, BitSet<DamageType> fallDamageTypes)
+		public FallDown(Actor self, WPos dropPosition, int fallRate, int maxFallSpeed, WeaponInfo weapon, int gravityChangeInterval,	int maxGravity,	int gravityAcceleration, BitSet<DamageType> fallDamageTypes, bool brutalland = true)
 		{
 			enableAdvanceFallDown = true;
 			pos = self.TraitOrDefault<IPositionable>();
@@ -60,11 +60,12 @@ namespace OpenRA.Mods.Common.Activities
 			speed = fallRate;
 			fallVector = new WVec(0, 0, speed);
 			this.weapon = weapon;
-			this.maxVelocity = maxVelocity;
+			this.maxVelocity = maxFallSpeed;
 			this.gravityChangeInterval = gravityChangeInterval;
 			this.maxGravity = maxGravity;
 			this.gravityAcceleration = gravityAcceleration;
 			this.fallDamageTypes = fallDamageTypes;
+			BrutalLand = brutalland;
 		}
 
 		bool FirstTick(Actor self)

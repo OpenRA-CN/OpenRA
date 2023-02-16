@@ -167,7 +167,7 @@ namespace OpenRA.Meow.RPG.Mechanics
 						WDist.FromCells(maxDistance.Value), targetLineColor: Info.TargetLineColor));
 				self.QueueActivity(new JumpTo(self, info, order.Target.CenterPosition));
 				self.QueueActivity(new FallDown(self, WPos.Zero, info.Speed.Length,
-					 0, Info.LandingWeapon, 0, 0, 0, default));
+					 512, Info.LandingWeapon, 0, 0, 0, default, false));
 				self.ShowTargetLines();
 			}
 		}
@@ -243,7 +243,7 @@ namespace OpenRA.Meow.RPG.Mechanics
 		{
 			ActivityType = ActivityType.Move;
 			this.info = info;
-			IsInterruptible = false;
+			IsInterruptible = true;
 
 			mobile = self.TraitOrDefault<Mobile>();
 			facing = self.Trait<IFacing>();
@@ -322,6 +322,7 @@ namespace OpenRA.Meow.RPG.Mechanics
 				}
 
 				started = true;
+				IsInterruptible = false;
 
 				if (conditionToken == Actor.InvalidConditionToken)
 					conditionToken = self.GrantCondition(info.Condition);
