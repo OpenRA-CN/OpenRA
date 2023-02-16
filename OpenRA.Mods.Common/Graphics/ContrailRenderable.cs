@@ -318,11 +318,9 @@ namespace OpenRA.Mods.Common.Graphics
 
 			if (this.spread && spread)
 			{
-				var ni = next;
-				for (var i = 0; i < length; i++)
+				for (var i = 0; i < trail.Length; i++)
 				{
-					trail[ni] = trail[ni] + trailPointMove[ni];
-					ni = Index(ni - 1);
+					trail[i] += trailPointMove[i];
 				}
 			}
 

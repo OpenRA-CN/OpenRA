@@ -330,7 +330,6 @@ namespace OpenRA.Mods.Common.Projectiles
 			shadowColor = new float3(info.ShadowColor.R, info.ShadowColor.G, info.ShadowColor.B) / 255f;
 			shadowAlpha = info.ShadowColor.A / 255f;
 
-			UpdateContrail();
 		}
 
 		protected virtual WAngle GetEffectiveFacing()

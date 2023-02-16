@@ -17,20 +17,20 @@
 	# 	HelixRadiusDeltaPerTick: 2
 	Projectile: Bullet
 		DetectTargetFromLengthPercentage: 10
-		ContrailZOffset: 22
-		ContrailLength: 15
-		ContrailWidth: 111
+		ContrailZOffset: 1444
+		ContrailLength: 25
+		ContrailWidth: 128
 		ContrailImage: lineidle_loop
 		ContrailSequences: railgun
 		ContrailStartColor: 33FFFF
 		ContrailStartColorAlpha: 255
-		ContrailEndColor: 2565BB
-		ContrailEndColorAlpha: 64
-		ContrailWidthFadeRate: 0
+		ContrailEndColor: 25ADEE
+		ContrailEndColorAlpha: 200
+		ContrailWidthFadeRate: 0.5
 		ContrailDelay: 0
 		ContrailBlendMode: Additive
 		AngleStep: 128
-		SpreadStep: 45
+		SpreadStep: 32
 		ContrailCopyCount: 2
 		FadePosSpread: false
 
