@@ -106,7 +106,7 @@ namespace OpenRA.Meow.RPG.Mechanics
 		}
 	}
 
-	public class LongJumpSkill : PausableConditionalTrait<LongJumpSkillInfo>, IIssueOrder, IResolveOrder, ITick, ISelectionBar, IOrderVoice, ISync
+	public class LongJumpSkill : PausableConditionalTrait<LongJumpSkillInfo>, IIssueOrder, IResolveOrder, ITick, ISelectionBar, IOrderVoice, ISync, IRenderAnnotations
 	{
 		readonly LongJumpSkillInfo info;
 		readonly Actor self;
@@ -140,7 +140,7 @@ namespace OpenRA.Meow.RPG.Mechanics
 				if (IsTraitDisabled)
 					yield break;
 
-				yield return new LongJumpOrderTargeter(Info);
+				yield return new LongJumpOrderTargeter(this, Info);
 			}
 		}
 
@@ -193,6 +193,8 @@ namespace OpenRA.Meow.RPG.Mechanics
 		Color ISelectionBar.GetColor() { return Color.Magenta; }
 		bool ISelectionBar.DisplayWhenEmpty => false;
 
+		bool IRenderAnnotations.SpatiallyPartitionable => false;
+
 		protected override void TraitDisabled(Actor self)
 		{
 			ResetChargeTime();
@@ -208,6 +210,24 @@ namespace OpenRA.Meow.RPG.Mechanics
 			self.QueueActivity(false, new JumpTo(self, info, target, after));
 		}
 
+		public bool RenderCircle = false;
+		IEnumerable<IRenderable> IRenderAnnotations.RenderAnnotations(Actor self, WorldRenderer wr)
+		{
+			if (!self.IsInWorld || self.Owner != self.World.LocalPlayer)
+				yield break;
+
+			if (!info.HasDistanceLimit || !RenderCircle)
+				yield break;
+
+			yield return new RangeCircleAnnotationRenderable(
+				self.CenterPosition,
+				WDist.FromCells(info.MaxDistance),
+				0,
+				info.CircleColor,
+				info.CircleWidth,
+				info.CircleBorderColor,
+				info.CircleBorderWidth);
+		}
 	}
 
 	public class JumpTo : Activity
@@ -402,9 +422,11 @@ namespace OpenRA.Meow.RPG.Mechanics
 	class LongJumpOrderTargeter : IOrderTargeter
 	{
 		readonly LongJumpSkillInfo info;
+		readonly LongJumpSkill longJumpSkill;
 
-		public LongJumpOrderTargeter(LongJumpSkillInfo info)
+		public LongJumpOrderTargeter(LongJumpSkill longJumpSkill,LongJumpSkillInfo info)
 		{
+			this.longJumpSkill = longJumpSkill;
 			this.info = info;
 		}
 
@@ -417,6 +439,8 @@ namespace OpenRA.Meow.RPG.Mechanics
 		{
 			if (modifiers.HasModifier(TargetModifiers.ForceMove))
 			{
+				longJumpSkill.RenderCircle = true;
+
 				var xy = self.World.Map.CellContaining(target.CenterPosition);
 
 				IsQueued = modifiers.HasModifier(TargetModifiers.ForceQueue);
@@ -430,6 +454,10 @@ namespace OpenRA.Meow.RPG.Mechanics
 
 				//cursor = info.TargetBlockedCursor;
 				return false;
+			}
+			else
+			{
+				longJumpSkill.RenderCircle = false;
 			}
 
 			return false;
