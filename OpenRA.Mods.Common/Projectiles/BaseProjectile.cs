@@ -201,6 +201,8 @@ namespace OpenRA.Mods.Common.Projectiles
 
 		public readonly int ContrailCopyCount = 0;
 
+		public readonly bool FadePosSpread = false;
+
 		[Desc("Contrail blendmode.")]
 		public readonly BlendMode ContrailBlendMode = BlendMode.Alpha;
 	}
@@ -489,7 +491,7 @@ namespace OpenRA.Mods.Common.Projectiles
 						{
 							UpVector = up,
 							LeftVector = left,
-							SpreadStep = info.SpreadStep,
+							SpreadStep = info.FadePosSpread ? info.SpreadStep : WDist.Zero,
 							SpreadAngle = contrailInitSpreadAngles[index],
 							AngleStep = info.AngleStep
 						};
