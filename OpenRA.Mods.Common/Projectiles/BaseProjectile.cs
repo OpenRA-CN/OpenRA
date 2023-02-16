@@ -274,6 +274,10 @@ namespace OpenRA.Mods.Common.Projectiles
 					() => true,
 					null));
 			}
+			else
+			{
+				matVec = args.PassiveTarget - args.Source;
+			}
 
 			if (!string.IsNullOrEmpty(info.Image))
 			{
@@ -320,10 +324,13 @@ namespace OpenRA.Mods.Common.Projectiles
 			trailTicks = info.TrailDelay;
 			renderTick = 0;
 			trailLastPos = args.Source;
-			matLastPos = args.Source - matVec;
+			matLastPos = args.Source - 2 * matVec;
+			pos = args.Source;
 
 			shadowColor = new float3(info.ShadowColor.R, info.ShadowColor.G, info.ShadowColor.B) / 255f;
 			shadowAlpha = info.ShadowColor.A / 255f;
+
+			UpdateContrail();
 		}
 
 		protected virtual WAngle GetEffectiveFacing()
@@ -341,17 +348,10 @@ namespace OpenRA.Mods.Common.Projectiles
 
 		bool renderTickStarted = false;
 
-		protected virtual void RenderTick(World world, in WPos pos)
+		void UpdateContrail()
 		{
 			if (renderTick > info.ContrailDelay)
 				renderContrail = true;
-			renderTick++;
-			anim?.Tick();
-			if (renderJet)
-				jetanim?.Tick();
-			this.pos = pos;
-			matVec = pos - matLastPos;
-			matLastPos = pos;
 
 			if (info.ContrailLength > 0 && renderContrail)
 			{
@@ -387,9 +387,14 @@ namespace OpenRA.Mods.Common.Projectiles
 					contrails[i].Update(pos, moveStep);
 				}
 			}
+		}
 
+		void RenderTrail(World world)
+		{
 			if (hasInitPal)
 			{
+				renderFirstTrail = false;
+
 				if (info.TrailImage != null && info.TrailCount > 0 && --trailTicks <= 0 && renderTrail)
 				{
 					var v = (pos - trailLastPos) / info.TrailCount;
@@ -406,6 +411,26 @@ namespace OpenRA.Mods.Common.Projectiles
 					trailLastPos = pos;
 				}
 			}
+		}
+
+		bool renderFirstTrail = true;
+		protected virtual void RenderTick(World world, in WPos pos)
+		{
+			if (renderFirstTrail)
+			{
+				RenderTrail(world);
+			}
+
+			renderTick++;
+			anim?.Tick();
+			if (renderJet)
+				jetanim?.Tick();
+			this.pos = pos;
+			matVec = pos - matLastPos;
+			matLastPos = pos;
+
+			UpdateContrail();
+			RenderTrail(world);
 
 			renderTickStarted = true;
 		}

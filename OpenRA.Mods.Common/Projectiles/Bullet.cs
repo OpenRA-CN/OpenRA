@@ -220,8 +220,9 @@ namespace OpenRA.Mods.Common.Projectiles
 
 		public void Tick(World world)
 		{
-			RenderTick(world, pos);
 			SelfTick(world);
+			RenderTick(world, pos);
+
 		}
 
 		protected virtual void SelfTick(World world)

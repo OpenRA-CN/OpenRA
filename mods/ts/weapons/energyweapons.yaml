@@ -19,7 +19,7 @@
 		DetectTargetFromLengthPercentage: 10
 		ContrailZOffset: 22
 		ContrailLength: 15
-		ContrailWidth: 96
+		ContrailWidth: 111
 		ContrailImage: lineidle_loop
 		ContrailSequences: railgun
 		ContrailStartColor: 33FFFF
@@ -30,16 +30,17 @@
 		ContrailDelay: 0
 		ContrailBlendMode: Additive
 		AngleStep: 128
-		SpreadStep: 64
+		SpreadStep: 45
 		ContrailCopyCount: 2
+		FadePosSpread: false
 
-		# TrailImage: fxring
-		# TrailSequences: sonicburst
-		# TrailDelay: 0
-		# TrailInterval: 1
-		# TrailLikeSmokeRing: true
-		# TrailScaleAnimStart: 0.2
-		# TrailScaleAnimEnd: 2
+		TrailImage: fxring
+		TrailSequences: sonicburst
+		TrailDelay: 0
+		TrailInterval: 99999
+		TrailLikeSmokeRing: true
+		TrailScaleAnimStart: 0.2
+		TrailScaleAnimEnd: 2
 
 
 		Speed: 1550
