@@ -94,7 +94,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (!WeaponIsValidAgainst(target, self.World, self))
 				return false;
 
-			if (attachTurret == null && hasFacingTolerance && facing != null)
+			if (attachTurret == null && HasFacingTolerance && facing != null)
 			{
 				var delta = target.CenterPosition - self.CenterPosition;
 				return Util.FacingWithinTolerance(facing.Facing, delta.Yaw + Info.FiringAngle, Info.FacingTolerance);

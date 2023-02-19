@@ -127,7 +127,7 @@ namespace OpenRA
 			var fs = modData.DefaultFileSystem;
 
 			Ruleset ruleset = null;
-			Action f = () =>
+			void LoadRuleset()
 			{
 				var actors = MergeOrDefault("Manifest,Rules", fs, m.Rules, null, null,
 					k => new ActorInfo(modData.ObjectCreator, k.Key.ToLowerInvariant(), k.Value),
@@ -159,7 +159,7 @@ namespace OpenRA
 			{
 				modData.HandleLoadingProgress();
 
-				var loader = new Task(f);
+				var loader = new Task(LoadRuleset);
 				loader.Start();
 
 				// Animate the loadscreen while we wait
@@ -167,7 +167,7 @@ namespace OpenRA
 					modData.HandleLoadingProgress();
 			}
 			else
-				f();
+				LoadRuleset();
 
 			return ruleset;
 		}
@@ -189,7 +189,7 @@ namespace OpenRA
 			var dr = modData.DefaultRules;
 
 			Ruleset ruleset = null;
-			Action f = () =>
+			void LoadRuleset()
 			{
 				var actors = MergeOrDefault("Rules", fileSystem, m.Rules, mapRules, dr.Actors,
 					k => new ActorInfo(modData.ObjectCreator, k.Key.ToLowerInvariant(), k.Value),
@@ -231,7 +231,7 @@ namespace OpenRA
 			{
 				modData.HandleLoadingProgress();
 
-				var loader = new Task(f);
+				var loader = new Task(LoadRuleset);
 				loader.Start();
 
 				// Animate the loadscreen while we wait
@@ -239,7 +239,7 @@ namespace OpenRA
 					modData.HandleLoadingProgress();
 			}
 			else
-				f();
+				LoadRuleset();
 
 			return ruleset;
 		}

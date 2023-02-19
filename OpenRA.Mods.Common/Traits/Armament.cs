@@ -14,9 +14,6 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenRA.GameRules;
 using OpenRA.Mods.Common.Projectiles;
-using OpenRA.Mods.Common.Traits.Render;
-using OpenRA.Mods.Common.Traits.Trait3D;
-using OpenRA.Primitives;
 using OpenRA.Traits;
 using TrueSync;
 
@@ -172,8 +169,7 @@ namespace OpenRA.Mods.Common.Traits
 		int ticksSinceLastShot;
 		protected int currentBarrel;
 		protected int barrelCount;
-        protected readonly bool hasFacingTolerance;
-		readonly int[] boneIds;
+		protected readonly bool HasFacingTolerance;
 		readonly List<(int Ticks, int Burst, Action<int> Func)> delayedActions = new List<(int, int, Action<int>)>();
 
 		public WDist Recoil;
@@ -191,7 +187,7 @@ namespace OpenRA.Mods.Common.Traits
 		{
 			this.self = self;
 
-			hasFacingTolerance = info.FacingTolerance.Angle != 512;
+			HasFacingTolerance = info.FacingTolerance.Angle != 512;
 
 			Weapon = info.WeaponInfo;
 			Burst = Weapon.Burst;
@@ -324,7 +320,7 @@ namespace OpenRA.Mods.Common.Traits
 				var move = target.Actor.TraitOrDefault<IMove>();
 				if (move != null)
 				{
-					int projSpeed = 0;
+					var projSpeed = 0;
 					if (weapon.Projectile is BulletInfo)
 					{
 						var bullet = weapon.Projectile as BulletInfo;
@@ -386,7 +382,6 @@ namespace OpenRA.Mods.Common.Traits
 						}
 					}
 				}
-
 			}
 
 			return offset;
@@ -400,7 +395,7 @@ namespace OpenRA.Mods.Common.Traits
 			var keepFireWithOutFacingCheck = Info.ExhaustAllBurst && persistentTarget.Type != TargetType.Invalid && Info.NotCheckFacingToExhaustAllBurst;
 			var keepFireWithOutRangeCheck = Info.ExhaustAllBurst && persistentTarget.Type != TargetType.Invalid && Info.NotCheckRangeToExhaustAllBurst;
 
-			if (!keepFireWithOutFacingCheck && (turret != null && !turret.HasAchievedDesiredFacing))
+			if (!keepFireWithOutFacingCheck && turret != null && !turret.HasAchievedDesiredFacing)
 				return false;
 
 			if (!keepFireWithOutRangeCheck &&
@@ -411,7 +406,7 @@ namespace OpenRA.Mods.Common.Traits
 			if (!WeaponIsValidAgainst(target, self.World, self))
 				return false;
 
-			if (turret == null && hasFacingTolerance && facing != null)
+			if (turret == null && HasFacingTolerance && facing != null)
 			{
 				var delta = target.CenterPosition - self.CenterPosition;
 				return Util.FacingWithinTolerance(facing.Facing, delta.Yaw + Info.FiringAngle, Info.FacingTolerance) || keepFireWithOutFacingCheck;
@@ -422,13 +417,13 @@ namespace OpenRA.Mods.Common.Traits
 
 		public virtual bool TargetInFiringArc(in Target target)
 		{
-			if (hasFacingTolerance && facing != null)
+			if (HasFacingTolerance && facing != null)
 			{
 				var delta = target.CenterPosition - self.CenterPosition;
 				return Util.FacingWithinTolerance(facing.Facing, delta.Yaw + Info.FiringAngle, Info.FacingTolerance);
 			}
 
-			if (hasFacingTolerance && facing == null)
+			if (HasFacingTolerance && facing == null)
 				return false;
 			return true;
 		}
@@ -478,10 +473,10 @@ namespace OpenRA.Mods.Common.Traits
 			foreach (var na in notifyAttacks)
 				na.PreparingAttack(self, target, this, barrel);
 
-			Func<WPos> muzzlePosition = () => MuzzleWPos(self, barrel);
-			Func<WAngle> muzzleFacing = () => MuzzleOrientation(self, barrel).Yaw;
-			var muzzleOrientation = WRot.FromYaw(muzzleFacing());
-			var passiveTarget = Weapon.TargetActorCenter ? target.CenterPosition : target.Positions.PositionClosestTo(muzzlePosition());
+			WPos MuzzlePosition() => MuzzleWPos(self, barrel);
+			WAngle MuzzleFacing() => MuzzleOrientation(self, barrel).Yaw;
+			var muzzleOrientation = WRot.FromYaw(MuzzleFacing());
+			var passiveTarget = Weapon.TargetActorCenter ? target.CenterPosition : target.Positions.PositionClosestTo(MuzzlePosition());
 			var initialOffset = Weapon.FirstBurstTargetOffset;
 			if (initialOffset != WVec.Zero)
 			{
@@ -501,8 +496,8 @@ namespace OpenRA.Mods.Common.Traits
 			var args = new ProjectileArgs
 			{
 				Weapon = Weapon,
-				Facing = muzzleFacing(),
-				CurrentMuzzleFacing = muzzleFacing,
+				Facing = MuzzleFacing(),
+				CurrentMuzzleFacing = MuzzleFacing,
 
 				DamageModifiers = damageModifiers.ToArray(),
 
@@ -510,8 +505,8 @@ namespace OpenRA.Mods.Common.Traits
 
 				RangeModifiers = rangeModifiers.ToArray(),
 
-				Source = muzzlePosition(),
-				CurrentSource = muzzlePosition,
+				Source = MuzzlePosition(),
+				CurrentSource = MuzzlePosition,
 				SourceActor = self,
 				PassiveTarget = passiveTarget,
 				GuidedTarget = target,
@@ -520,10 +515,10 @@ namespace OpenRA.Mods.Common.Traits
 
 			if (Info.UseBlindage)
 			{
-				var toend = (passiveTarget - args.Source);
+				var toend = passiveTarget - args.Source;
 				var end = args.Source + toend * Info.BlindageDetectWidth.Length * 2 / toend.Length;
 
-				foreach (Actor a in self.World.FindBlockingActorsOnLine(args.Source, end, Info.BlindageDetectWidth))
+				foreach (var a in self.World.FindBlockingActorsOnLine(args.Source, end, Info.BlindageDetectWidth))
 				{
 					if (a.TraitsImplementing<IBlocksProjectiles>().Any(b => b.IsBindage))
 						args.IgnoredActors.Add(a);
@@ -540,7 +535,7 @@ namespace OpenRA.Mods.Common.Traits
 					var targetOffset = AimTargetOn(self, args.Source, delayedTarget, Weapon);
 					if (Info.RecalculateBeforeDelayFire && delayTick != 0 &&
 					delayedTarget.Type == TargetType.Actor && delayedTarget.Actor.IsInWorld && !delayedTarget.Actor.IsDead)
-						args.PassiveTarget = Weapon.TargetActorCenter ? delayedTarget.CenterPosition : delayedTarget.Positions.PositionClosestTo(muzzlePosition()) + targetOffset;
+						args.PassiveTarget = Weapon.TargetActorCenter ? delayedTarget.CenterPosition : delayedTarget.Positions.PositionClosestTo(MuzzlePosition()) + targetOffset;
 					else
 						args.PassiveTarget += targetOffset;
 					var projectile = args.Weapon.Projectile.Create(args);

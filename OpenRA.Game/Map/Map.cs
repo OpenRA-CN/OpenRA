@@ -537,17 +537,17 @@ namespace OpenRA
 			AllEdgeCells = UpdateEdgeCells();
 
 			// Invalidate the entry for a cell if anything could cause the terrain index to change.
-			Action<CPos> invalidateTerrainIndex = c =>
+			void InvalidateTerrainIndex(CPos c)
 			{
 				if (cachedTerrainIndexes != null)
 					cachedTerrainIndexes[c] = InvalidCachedTerrainIndex;
-			};
+			}
 
 			// Even though the cache is lazily initialized, we must attach these event handlers on init.
 			// This ensures our handler to invalidate the cache runs first,
 			// so other listeners to these same events will get correct data when calling GetTerrainIndex.
-			CustomTerrain.CellEntryChanged += invalidateTerrainIndex;
-			Tiles.CellEntryChanged += invalidateTerrainIndex;
+			CustomTerrain.CellEntryChanged += InvalidateTerrainIndex;
+			Tiles.CellEntryChanged += InvalidateTerrainIndex;
 
 			var listMPos = new List<MPos>();
 			for (var y = 0; y < MapSize.Y; y++)
@@ -799,7 +799,7 @@ namespace OpenRA
 			var vertexTerrType = new int[VertexArrayWidth * VertexArrayHeight];
 
 			Dictionary<string, byte> terrainTypeNameIndex = new Dictionary<string, byte>();
-			for (int i = 0; i < Rules.TerrainInfo.TerrainTypes.Length; i++) 
+			for (var i = 0; i < Rules.TerrainInfo.TerrainTypes.Length; i++)
 			{
 				terrainTypeNameIndex.Add(Rules.TerrainInfo.TerrainTypes[i].Type, (byte)i);
 			}
@@ -866,7 +866,7 @@ namespace OpenRA
 					var mlb = CellInfo.CalTBN(pm, pl, pb, uvm, uvl, uvb);
 					var mbr = CellInfo.CalTBN(pm, pb, pr, uvm, uvb, uvr);
 
-					TerrainVertices[im].TBN = (tlm * 0.25f + tmr * 0.25f + mlb * 0.25f + mbr * 0.25f);
+					TerrainVertices[im].TBN = tlm * 0.25f + tmr * 0.25f + mlb * 0.25f + mbr * 0.25f;
 
 					if (vertexNmlCaled[it])
 						TerrainVertices[it].TBN = 0.25f * (tlm * 0.5f + tmr * 0.5f) + TerrainVertices[it].TBN;
@@ -894,11 +894,11 @@ namespace OpenRA
 					vertexNmlCaled[il] = true;
 					vertexNmlCaled[ir] = true;
 
-					WPos wposm = TerrainVertices[im].LogicPos;
-					WPos wpost = TerrainVertices[it].LogicPos;
-					WPos wposb = TerrainVertices[ib].LogicPos;
-					WPos wposl = TerrainVertices[il].LogicPos;
-					WPos wposr = TerrainVertices[ir].LogicPos;
+					var wposm = TerrainVertices[im].LogicPos;
+					var wpost = TerrainVertices[it].LogicPos;
+					var wposb = TerrainVertices[ib].LogicPos;
+					var wposl = TerrainVertices[il].LogicPos;
+					var wposr = TerrainVertices[ir].LogicPos;
 
 					var tlNml = CellInfo.CalLogicNml(wposm, wpost, wposl);
 					var trNml = CellInfo.CalLogicNml(wposm, wposr, wpost);
@@ -914,14 +914,14 @@ namespace OpenRA
 					MiniCells[mid.Y, mid.X - 1] = new MiniCell(il, im, ibl, ib, MiniCellType.TLBR); // bl
 					MiniCells[mid.Y, mid.X] = new MiniCell(im, ir, ib, ibr, MiniCellType.TRBL); // br
 
-					bool flatCell = false;
+					var flatCell = false;
 					if (TerrainVertices[im].LogicPos.Z == TerrainVertices[it].LogicPos.Z &&
 						TerrainVertices[im].LogicPos.Z == TerrainVertices[ib].LogicPos.Z &&
 						TerrainVertices[im].LogicPos.Z == TerrainVertices[ir].LogicPos.Z &&
 						TerrainVertices[im].LogicPos.Z == TerrainVertices[il].LogicPos.Z)
 						flatCell = true;
 
-					CellInfo cellInfo = new CellInfo(TerrainVertices[im].LogicPos, Math.Min(
+					var cellInfo = new CellInfo(TerrainVertices[im].LogicPos, Math.Min(
 						Math.Min(
 							Math.Min(
 								Math.Min(TerrainVertices[im].LogicPos.Z,
@@ -935,7 +935,7 @@ namespace OpenRA
 						tlNml, trNml, blNml, brNml, this);
 					var cpos = uv.ToCPos(this);
 					cellInfo.TileType = Tiles[cpos].Type;
-					string terrtype = "Clear";
+					var terrtype = "Clear";
 					terrtype = GetTerrainType(vertexTerrType[im]);
 
 					cellInfo.TerrainType = terrainTypeNameIndex[terrtype];
@@ -943,21 +943,21 @@ namespace OpenRA
 				}
 			}
 
-			for (int i = 0; i < TerrainVertices.Length; i++)
+			for (var i = 0; i < TerrainVertices.Length; i++)
 			{
 				TerrainVertices[i].TBN = CellInfo.NormalizeTBN(TerrainVertices[i].TBN);
 			}
 
 			// uv retarget
-			float texScale = 1f;
-			for (int i = 0; i < TerrainVertices.Length; i++)
+			var texScale = 1f;
+			for (var i = 0; i < TerrainVertices.Length; i++)
 			{
 				TerrainVertices[i].UV = new float2(TerrainVertices[i].Pos.X / texScale, TerrainVertices[i].Pos.Y / texScale);
 				TerrainVertices[i].MapUV = new float2((float)(i % VertexArrayWidth) / VertexArrayWidth, (float)(i / VertexArrayHeight) / VertexArrayHeight);
 			}
 
 			// clamp vert color
-			for (int i = 0; i < TerrainVertices.Length; i++)
+			for (var i = 0; i < TerrainVertices.Length; i++)
 			{
 				TerrainVertices[i].Color = float3.Clamp(TerrainVertices[i].Color, 0, 1);
 			}
@@ -1014,6 +1014,7 @@ namespace OpenRA
 					terrTypeName = "Clear";
 					break;
 			}
+
 			return terrTypeName;
 		}
 

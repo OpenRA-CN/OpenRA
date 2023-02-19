@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using OpenRA.GameRules;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
-using OpenRA.GameRules;
 
 namespace OpenRA.Meow.RPG.Mechanics
 {
@@ -14,7 +14,6 @@ namespace OpenRA.Meow.RPG.Mechanics
 		public readonly bool UseSlotDefaultWeapon = false;
 
 		public override object Create(ActorInitializer init) { return new SlotArmament(init.Self, this); }
-
 	}
 
 	public class SlotArmament : Armament, INotifyEquip
