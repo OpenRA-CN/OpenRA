@@ -217,9 +217,9 @@ namespace OpenRA.Mods.Common.Traits
 
 			// All tiles are visible in the editor
 			if (w.Type == WorldType.Editor)
-				cellVisibility = uv => (map.Contains(uv) ? Shroud.CellVisibility.Visible | Shroud.CellVisibility.Explored : Shroud.CellVisibility.Explored);
+				cellVisibility = uv => map.Contains(uv) ? Shroud.CellVisibility.Visible | Shroud.CellVisibility.Explored : Shroud.CellVisibility.Explored;
 			else
-				cellVisibility = uv => (map.Contains(uv) ? Shroud.CellVisibility.Visible | Shroud.CellVisibility.Explored : Shroud.CellVisibility.Hidden);
+				cellVisibility = uv => map.Contains(uv) ? Shroud.CellVisibility.Visible | Shroud.CellVisibility.Explored : Shroud.CellVisibility.Hidden;
 
 			var shroudBlend = shroudSprites[0].Sprite.BlendMode;
 			if (shroudSprites.Any(s => s.Sprite.BlendMode != shroudBlend))

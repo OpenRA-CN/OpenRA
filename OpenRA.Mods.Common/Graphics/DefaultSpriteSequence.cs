@@ -384,7 +384,7 @@ namespace OpenRA.Mods.Common.Graphics
 				{
 					for (var frame = 0; frame < length; frame++)
 					{
-						var i = transpose ? (frame % length) * facings + facing :
+						var i = transpose ? frame % length * facings + facing :
 							(facing * stride) + (frame % length);
 
 						usedFrames.Add(frames != null ? frames[i] : start + i);
@@ -538,7 +538,7 @@ namespace OpenRA.Mods.Common.Graphics
 			{
 				for (var frame = 0; frame < length; frame++)
 				{
-					var i = transpose ? (frame % length) * facings + facing :
+					var i = transpose ? frame % length * facings + facing :
 								(facing * stride) + (frame % length);
 					var s = frames != null ? sprites[frames[i]] : sprites[start + i];
 					if (!s.Bounds.IsEmpty)
@@ -582,7 +582,7 @@ namespace OpenRA.Mods.Common.Graphics
 			if (reverseFacings)
 				f = (facings - f) % facings;
 
-			var i = transpose ? (frame % length) * facings + f :
+			var i = transpose ? frame % length * facings + f :
 				(f * stride) + (frame % length);
 
 			var j = frames != null ? frames[i] : start + i;
