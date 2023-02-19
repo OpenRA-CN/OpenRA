@@ -21,7 +21,7 @@ DOGGIE:
 	Armor:
 		Type: Light
 	RevealsShroud:
-		Range: 4c0
+		Range: 6c512
 	Mobile:
 		Speed: 113
 	Voiced:
@@ -30,7 +30,7 @@ DOGGIE:
 		TargetTypes: Ground, Creep
 	Armament:
 		Weapon: FiendShard
-		LocalOffset: 0,0,313
+		LocalOffset: 0,0,533
 		# FiringAngle: 512
 		RequiresCondition: !WebDisable && !inside-tunnel
 	AttackFrontal:
@@ -66,7 +66,12 @@ DOGGIE:
 		StartSequence: laydown
 		Sequence: hide
 	WithInfantryBody:
-		RequiresCondition: !hidingplace
+		DefaultAttackSequence: attack
+		IdleSequences: idle1
+		RequiresCondition: !hidingplace || moving || attacking && !WebDisable && !inside-tunnel
+	DamageMultiplier@hidingplace:
+		RequiresCondition: hidingplace
+		Modifier: 70
 	UnitDisplayInfo:
 		IconSequence: testdisplay
 		IconPalette: player
@@ -76,6 +81,19 @@ DOGGIE:
 		CrushClasses: bigguy
 	Targetable@Crushable:
 		TargetTypes: Crushable
+	HitShape:
+		TargetableOffsets: 0,0,245
+		RequiresCondition: !hidingplace || moving || attacking && !WebDisable
+		Type: Circle
+			Radius: 145
+			VerticalTopOffset: 500
+			VerticalBottomOffset: 0
+	HitShape@prone:
+		TargetableOffsets: 0,0,32
+		RequiresCondition: hidingplace && !moving && !attacking || WebDisable
+		Type: Circle
+			Radius: 188
+			VerticalTopOffset: 64
 
 VISC_SML:
 	Inherits: ^Visceroid

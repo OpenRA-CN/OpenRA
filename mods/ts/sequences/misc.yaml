@@ -302,6 +302,11 @@ explosion:
 		IgnoreWorldTint: True
 		BlendMode: Additive
 		Tick: 55
+	piff-big:
+		Filename: piff.shp
+		IgnoreWorldTint: True
+		Tick: 55
+		Scale: 1.5
 	small_explosion:
 		Filename: explosml.shp
 	medium_explosion:
@@ -570,6 +575,8 @@ crystal4:
 			SNOW: crystal4.sno
 		Length: 15
 		ShadowStart: 15
+		UseTilesetExtension: true
+		IgnoreWorldTint: True
 		ZOffset: 1023
 		Offset: 0, 0, 6
 
@@ -579,6 +586,7 @@ crystal4:
 		ZOffset: 1023
 		Offset: 0, 0, 4
 		MeshType: Plane
+		IgnoreWorldTint: True
 		BlendMode: ScreenAdditive
 
 torpedo:

@@ -115,7 +115,7 @@ floater:
 	Defaults:
 		Filename: floater.shp
 		ZOffset: 400
-		MeshType: TileOverlay
+		# MeshType: TileOverlay
 	idle:
 		Length: 16
 		ShadowStart: 32
