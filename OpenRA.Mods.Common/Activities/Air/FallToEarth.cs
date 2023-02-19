@@ -51,11 +51,8 @@ namespace OpenRA.Mods.Common.Activities
 			{
 				aircraft.SetPosition(self, new WPos(self.CenterPosition.X, self.CenterPosition.Y, h));
 
-				if (info.ExplosionWeapon != null)
-				{
-					// Use .FromPos since this actor is killed. Cannot use Target.FromActor
-					info.ExplosionWeapon.Impact(Target.FromPos(self.CenterPosition), self);
-				}
+				// Use .FromPos since this actor is killed. Cannot use Target.FromActor
+				info.ExplosionWeapon?.Impact(Target.FromPos(self.CenterPosition), self);
 
 				self.Kill(self);
 				Cancel(self);

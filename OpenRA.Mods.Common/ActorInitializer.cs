@@ -66,9 +66,9 @@ namespace OpenRA.Mods.Common
 
 		public void Initialize(int value)
 		{
-			var field = GetType().GetField(nameof(value), BindingFlags.NonPublic | BindingFlags.Instance);
-			if (field != null)
-				field.SetValue(this, value);
+			GetType()
+				.GetField(nameof(value), BindingFlags.NonPublic | BindingFlags.Instance)
+				?.SetValue(this, value);
 		}
 
 		public override MiniYaml Save()
