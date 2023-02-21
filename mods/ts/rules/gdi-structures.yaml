@@ -884,8 +884,13 @@ GDIREF:
 	IsometricSelectable:
 		Class: GDIREF
 
+^GDIREFINFO:
+	UnitDisplayInfo:
+		Description: Processes raw Tiberium into useable resources.\n\nSpecial:\n- Stores 2000$\n- Can be rotated
+
 GDIREF2:
 	Inherits: ^FlippedRefinery
+	Inherits@actorinfo: ^GDIREFINFO
 	Tooltip:
 		Name: GDI Refinery
 	FreeActor:
@@ -896,6 +901,7 @@ GDIREF2:
 
 GDIREF3:
 	Inherits: ^FlippedXRefinery
+	Inherits@actorinfo: ^GDIREFINFO
 	Tooltip:
 		Name: GDI Refinery
 	FreeActor:
@@ -903,9 +909,11 @@ GDIREF3:
 	-WithIdleOverlay@REDLIGHTS:
 	IsometricSelectable:
 		Class: GDIREF
+	UnitDisplayInfo:
 
 GDIREF4:
 	Inherits: ^FlippedYRefinery
+	Inherits@actorinfo: ^GDIREFINFO
 	Tooltip:
 		Name: GDI Refinery
 	FreeActor:
@@ -913,3 +921,4 @@ GDIREF4:
 	-WithIdleOverlay@REDLIGHTS:
 	IsometricSelectable:
 		Class: GDIREF
+	UnitDisplayInfo:

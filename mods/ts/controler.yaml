@@ -28,7 +28,7 @@ ToggleUnitControl: BACKSLASH
 	Types: Unit
 	Contexts: Actor
 
-ToggleActorCamera: V
+ToggleActorCamera: L
 	Description: Toggle Actor Camera
 	Types: Unit
 	Contexts: Actor

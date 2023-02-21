@@ -699,8 +699,14 @@ NODREF:
 	IsometricSelectable:
 		Class: NODREF
 
+^NODREFINFO:
+	UnitDisplayInfo:
+		Description: Processes raw Tiberium into useable resources.\n\nSpecial:\n- Stores 2000$\n- Can be rotated
+
+
 NODREF2:
 	Inherits: ^FlippedRefinery
+	Inherits@actorinfo: ^NODREFINFO
 	Tooltip:
 		Name: Nod Refinery
 	-WithIdleOverlay@REDLIGHTS:
@@ -708,9 +714,11 @@ NODREF2:
 		Actor: harv
 	IsometricSelectable:
 		Class: NODREF
+	UnitDisplayInfo:
 
 NODREF3:
 	Inherits: ^FlippedXRefinery
+	Inherits@actorinfo: ^NODREFINFO
 	Tooltip:
 		Name: Nod Refinery
 	-WithIdleOverlay@REDLIGHTS:
@@ -718,9 +726,11 @@ NODREF3:
 		Actor: harv
 	IsometricSelectable:
 		Class: NODREF
+	UnitDisplayInfo:
 
 NODREF4:
 	Inherits: ^FlippedYRefinery
+	Inherits@actorinfo: ^NODREFINFO
 	Tooltip:
 		Name: Nod Refinery
 	-WithIdleOverlay@REDLIGHTS:
@@ -728,3 +738,4 @@ NODREF4:
 		Actor: harv
 	IsometricSelectable:
 		Class: NODREF
+	UnitDisplayInfo:
