@@ -856,11 +856,60 @@ GAPLUG4:
 	Tooltip:
 		Name: Tech Plugin: Airstrike Node
 	Buildable:
-	 	Queue: Building
-	 	BuildPaletteOrder: 180
-	 	Prerequisites: ~!gaplug.socket.drop, gatech, gaplug, ~structures.gdi, ~techlevel.superweapons
-	 	Description: Enables use of the Orca Airstrike. \nMakes GDI Upgrade Center consume 100 more power.
+		Queue: Building
+		BuildPaletteOrder: 180
+		Prerequisites: ~!gaplug.socket.drop, gatech, gaplug, ~structures.gdi, ~techlevel.superweapons
+		Description: Enables use of the Orca Airstrike. \nMakes GDI Upgrade Center consume 100 more power.
 	Plug:
 		Type: plug.droppod
 	Power:
 		Amount: -100
+
+
+GDIREF:
+	Inherits: ^Refinery
+	Tooltip:
+		Name: GDI Refinery
+	Buildable:
+		Queue: Building
+		BuildPaletteOrder: 30
+		Prerequisites: ~structures.gdi, anypower, ~techlevel.low
+		Description: Processes raw Tiberium into useable resources.\n\nSpecial:\n- Stores 2000$\n- Can be rotated
+	FreeActor:
+		Actor: harv
+	-WithIdleOverlay@REDLIGHTS:
+	PlaceBuildingVariants:
+		Actors: gdiref3, gdiref2, gdiref4
+		Facings: 384, 640, 896, 128
+	IsometricSelectable:
+		Class: GDIREF
+
+GDIREF2:
+	Inherits: ^FlippedRefinery
+	Tooltip:
+		Name: GDI Refinery
+	FreeActor:
+		Actor: harv
+	-WithIdleOverlay@REDLIGHTS:
+	IsometricSelectable:
+		Class: GDIREF
+
+GDIREF3:
+	Inherits: ^FlippedXRefinery
+	Tooltip:
+		Name: GDI Refinery
+	FreeActor:
+		Actor: harv
+	-WithIdleOverlay@REDLIGHTS:
+	IsometricSelectable:
+		Class: GDIREF
+
+GDIREF4:
+	Inherits: ^FlippedYRefinery
+	Tooltip:
+		Name: GDI Refinery
+	FreeActor:
+		Actor: harv
+	-WithIdleOverlay@REDLIGHTS:
+	IsometricSelectable:
+		Class: GDIREF

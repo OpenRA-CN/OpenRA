@@ -1555,7 +1555,6 @@
 		Image: fire1
 		Palette: effect
 		RequiresCondition: large-fire
-
 	WithIdleOverlay@SmallFireTwist:
 		Image: fire2
 		Palette: twist
@@ -1566,7 +1565,6 @@
 		Palette: twist
 		Sequence: twist
 		RequiresCondition: large-fire
-
 	SpreadsCondition@Fire:
 		RequiresCondition: small-fire || large-fire
 		SpreadCondition: burning
@@ -1579,6 +1577,8 @@
 	Targetable@Crushable:
 		TargetTypes: Crushable
 	KilledWhenPlaceBuilding:
+
+
 
 ^Rock:
 	Inherits@1: ^SpriteActor

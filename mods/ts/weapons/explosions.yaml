@@ -149,7 +149,7 @@ BlueTiberiumChainReaction:
 		ResourceTypes: Tiberium, BlueTiberium
 		ImpactActors: false
 	-Warhead@4Smu:
-	Warhead@ShockWave:	CreateEffect #ShockWave
+	Warhead@ShockWave: CreateEffect #ShockWave
 		Image: twist
 		Explosions: shockgroundarti
 		ExplosionPalette: twist

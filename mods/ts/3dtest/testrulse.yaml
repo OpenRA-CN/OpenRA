@@ -56,16 +56,12 @@
 		Backward: backwardAnim
 		BackwardLeft: backwardLeftAnim
 		BackwardRight: backwardRightAnim
-
 		Carrying: catidle
-
 		Guard: guard
 		GuardBlendTick: 10
 		UpperMask: upper
 		LowerMask: lower
-
 		WalkWeapon: WalkImpact
-
 		BellyBones: s-Adj_Belly
 		ChurnSounds: churna.wav, churnb.wav, churnc.wav, churnd.wav, churne.wav, churnf.wav
 		EmptySounds: groooooorwp.wav
@@ -81,6 +77,10 @@
 	# 	BoneAttach: a-s-Rig_Hand.R
 	Targetable@Rutest:
 		TargetTypes: Rutest
+
+
+
+
 
 ^InfantryBody:
 	WithMeshBody@body:
@@ -331,11 +331,11 @@
 		Skeleton: body
 		BoneAttach: a-s-Rig_Head
 		# BoneAttach: a-Position
-
 	AttachManager:
 		MainSkeleton: body
 	DetectCloaked:
 		Range: 1c0
+
 
 PFIND:
 	Inherits: ^CommonInfantry
@@ -565,7 +565,6 @@ RUTEST2:
 		PauseOnCondition: empdisable || carring
 		Turrets: primary, turret2
 		# FacingToTarget: true
-
 	# WithSkeleton@turret2:
 	# 	SkeletonDefine: turret-test2
 	# 	Name: turret_skeleton2
@@ -652,6 +651,7 @@ RUTEST2:
 		TargetCursor: undeploy
 		Voice: Move
 
+
 RUTEST3:
 	Inherits: RUTEST
 # 	RenderMeshes:
@@ -733,4 +733,3 @@ RUTEST3:
 # 		FromBonePose: firepose
 # 		FacingTolerance: 40
 # 		Turret: turret2
-

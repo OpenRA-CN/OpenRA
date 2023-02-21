@@ -302,15 +302,15 @@ ART2:
 		DeployOnAttack: true
 		DeployArmament: todeploy
 	AttackFrontal@todeploy:
-	 	Voice: Attack
-	 	FacingTolerance: 512
-	 	RequiresCondition: undeployed
+		Voice: Attack
+		FacingTolerance: 512
+		RequiresCondition: undeployed
 		Armaments: todeploy
 		PauseOnCondition: empdisable || carring
 	Armament@todeploy:
-	 	Name: todeploy
-	 	Weapon: 155mmDeployCheck
-	 	RequiresCondition: undeployed
+		Name: todeploy
+		Weapon: 155mmDeployCheck
+		RequiresCondition: undeployed
 	EntersTunnels:
 		RequireForceMoveCondition: !undeployed
 	Repairable:
@@ -874,4 +874,3 @@ ICBM:
 		PauseOnCondition: empdisable
 		ReloadingCondition: reload
 	AttackOmni:
-

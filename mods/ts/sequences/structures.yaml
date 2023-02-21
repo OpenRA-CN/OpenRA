@@ -3222,3 +3222,513 @@ gaplug4:
 		Tick: 120
 	icon:
 		Filename: rad1icon.shp
+
+gdiref:
+	Defaults:
+		Filename: gdiref.shp
+		Offset: -12, -42, 20
+		DepthSpriteOffset: 22, 0
+		DepthSprite: isodepth.shp
+		ZOffset: 100
+	idle:
+		Start: 33
+		ShadowStart: 70
+	damaged-idle:
+		Start: 35
+		ShadowStart: 72
+	dead:
+		Start: 35
+		ShadowStart: 72
+		Tick: 400
+	make:
+		Length: 32
+		ShadowStart: 37
+		DepthSpriteOffset: -12, 0
+	unload-overlay:
+		Filename: narefn_a.shp
+		Length: *
+		ZOffset: 1024
+	flame:
+		Filename: ntrefn_b.shp
+		Length: *
+	bib:
+		Start: 34
+		ShadowStart: 71
+		Length: 1
+		MeshType: Plane
+		ZRamp: 1
+		-DepthSprite:
+		Offset: -12, -42, 1
+		ZOffset: 0
+	damaged-bib:
+		Start: 36
+		ShadowStart: 73
+		MeshType: Plane
+		ZRamp: 1
+		-DepthSprite:
+		Offset: -12, -42, 1
+		ZOffset: 0
+	dead-bib:
+		Start: 36
+		ShadowStart: 73
+		MeshType: Plane
+		ZRamp: 1
+		-DepthSprite:
+		Offset: -12, -42, 1
+		ZOffset: 0
+	emp-overlay:
+		Filename: emp_fx01.shp
+		Length: *
+		Offset: 0, 0, 21
+		ZOffset: 512
+		IgnoreWorldTint: True
+		-DepthSprite:
+	icon:
+		Filename: gdireficon.shp
+		Offset: 0, 0
+
+gdiref2:
+	Defaults:
+		Filename: gdiref2.shp
+		Offset: 3, 32, 20
+		DepthSpriteOffset: 22, 0
+		DepthSprite: isodepth.shp
+		ZOffset: 100
+	idle:
+		Start: 33
+		ShadowStart: 70
+	damaged-idle:
+		Start: 35
+		ShadowStart: 72
+	dead:
+		Start: 35
+		ShadowStart: 72
+		Tick: 400
+	make:
+		Length: 32
+		ShadowStart: 37
+		DepthSpriteOffset: -12, 0
+	unload-overlay:
+		Filename: narefn_a.shp
+		Length: *
+		ZOffset: 1024
+	flame:
+		Filename: ntrefn_b.shp
+		Length: *
+	bib:
+		Start: 34
+		ShadowStart: 71
+		Length: 1
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 3, 32, 1
+		ZOffset: 0
+		-DepthSprite:
+	damaged-bib:
+		Start: 36
+		ShadowStart: 73
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 3, 32, 1
+		ZOffset: 0
+		-DepthSprite:
+	dead-bib:
+		Start: 36
+		ShadowStart: 73
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 3, 32, 1
+		ZOffset: 0
+		-DepthSprite:
+	emp-overlay:
+		Filename: emp_fx01.shp
+		Length: *
+		Offset: 0, 0, 21
+		ZOffset: 512
+		IgnoreWorldTint: True
+	icon:
+		Filename: gdireficon.shp
+		Offset: 0, 0
+
+gdiref3:
+	Defaults:
+		Filename: gdiref3.shp
+		Offset: 12, -42, 20
+		DepthSpriteOffset: 22, 0
+		DepthSprite: isodepth.shp
+		ZOffset: 100
+	idle:
+		Start: 33
+		ShadowStart: 70
+	damaged-idle:
+		Start: 35
+		ShadowStart: 72
+	dead:
+		Start: 35
+		ShadowStart: 72
+		Tick: 400
+	make:
+		Length: 32
+		ShadowStart: 37
+		DepthSpriteOffset: -12, 0
+	unload-overlay:
+		Filename: narefn_a.shp
+		Length: *
+		ZOffset: 1024
+	flame:
+		Filename: ntrefn_b.shp
+		Length: *
+	bib:
+		Start: 34
+		ShadowStart: 71
+		Length: 1
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 12, -42, 1
+		ZOffset: 0
+		-DepthSprite:
+	damaged-bib:
+		Start: 36
+		ShadowStart: 73
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 12, -42, 1
+		ZOffset: 0
+		-DepthSprite:
+	dead-bib:
+		Start: 36
+		ShadowStart: 73
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 12, -42, 1
+		ZOffset: 0
+		-DepthSprite:
+	emp-overlay:
+		Filename: emp_fx01.shp
+		Length: *
+		Offset: 0, 0, 21
+		ZOffset: 512
+		IgnoreWorldTint: True
+		-DepthSprite:
+	icon:
+		Filename: gdireficon.shp
+		Offset: 0, 0
+
+gdiref4:
+	Defaults:
+		Filename: gdiref4.shp
+		Offset: -62, -5, 20
+		DepthSpriteOffset: 22, 0
+		DepthSprite: isodepth.shp
+		ZOffset: 100
+	idle:
+		Start: 33
+		ShadowStart: 70
+	damaged-idle:
+		Start: 35
+		ShadowStart: 72
+	dead:
+		Start: 35
+		ShadowStart: 72
+		Tick: 400
+	make:
+		Length: 32
+		ShadowStart: 37
+		DepthSpriteOffset: -12, 0
+	unload-overlay:
+		Filename: narefn_a.shp
+		Length: *
+		ZOffset: 1024
+	flame:
+		Filename: ntrefn_b.shp
+		Length: *
+	bib:
+		Start: 34
+		ShadowStart: 71
+		Length: 1
+		MeshType: Plane
+		ZRamp: 1
+		Offset: -62, -5, 1
+		ZOffset: 0
+		-DepthSprite:
+	damaged-bib:
+		Start: 36
+		ShadowStart: 73
+		MeshType: Plane
+		ZRamp: 1
+		Offset: -62, -5, 1
+		ZOffset: 0
+		-DepthSprite:
+	dead-bib:
+		Start: 36
+		ShadowStart: 73
+		MeshType: Plane
+		ZRamp: 1
+		Offset: -62, -5, 1
+		ZOffset: 0
+		-DepthSprite:
+	emp-overlay:
+		Filename: emp_fx01.shp
+		Length: *
+		Offset: 0, 0, 21
+		ZOffset: 512
+		IgnoreWorldTint: True
+		-DepthSprite:
+	icon:
+		Filename: gdireficon.shp
+		Offset: 0, 0
+
+nodref:
+	Defaults:
+		Filename: nodref.shp
+		Offset: -12, -38, 20
+		DepthSpriteOffset: 22, 0
+		DepthSprite: isodepth.shp
+		ZOffset: 100
+	idle:
+		Start: 31
+		ShadowStart: 66
+	damaged-idle:
+		Start: 33
+		ShadowStart: 69
+	dead:
+		Start: 33
+		ShadowStart: 69
+		Tick: 400
+	make:
+		Length: 29
+		ShadowStart: 35
+		DepthSpriteOffset: -12, 0
+	unload-overlay:
+		Filename: narefn_a.shp
+		Length: *
+		ZOffset: 1024
+	flame:
+		Filename: ntrefn_b.shp
+		Length: *
+	bib:
+		Start: 32
+		ShadowStart: 67
+		MeshType: Plane
+		ZRamp: 1
+		Offset: -12, -38, 1
+		ZOffset: 0
+		-DepthSprite:
+	damaged-bib:
+		Start: 34
+		ShadowStart: 69
+		MeshType: Plane
+		ZRamp: 1
+		Offset: -12, -38, 1
+		ZOffset: 0
+		-DepthSprite:
+	dead-bib:
+		Start: 34
+		ShadowStart: 69
+		MeshType: Plane
+		ZRamp: 1
+		Offset: -12, -38, 1
+		ZOffset: 0
+		-DepthSprite:
+	emp-overlay:
+		Filename: emp_fx01.shp
+		Length: *
+		Offset: 0, 0, 21
+		ZOffset: 512
+		IgnoreWorldTint: True
+		-DepthSprite:
+	icon:
+		Filename: nodreficon.shp
+		Offset: 0, 0
+
+nodref2:
+	Defaults:
+		Filename: nodref2.shp
+		Offset: 6, 36, 20
+		DepthSpriteOffset: 22, 0
+		DepthSprite: isodepth.shp
+		ZOffset: 100
+	idle:
+		Start: 31
+		ShadowStart: 66
+	damaged-idle:
+		Start: 33
+		ShadowStart: 69
+	dead:
+		Start: 33
+		ShadowStart: 69
+		Tick: 400
+	make:
+		Length: 29
+		ShadowStart: 35
+		DepthSpriteOffset: -12, 0
+	unload-overlay:
+		Filename: narefn_a.shp
+		Length: *
+		ZOffset: 1024
+	flame:
+		Filename: ntrefn_b.shp
+		Length: *
+	bib:
+		Start: 32
+		ShadowStart: 67
+		Length: 1
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 6, 36, 1
+		ZOffset: 0
+		-DepthSprite:
+	damaged-bib:
+		Start: 34
+		ShadowStart: 69
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 6, 36, 1
+		ZOffset: 0
+		-DepthSprite:
+	dead-bib:
+		Start: 34
+		ShadowStart: 69
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 6, 36, 1
+		ZOffset: 0
+		-DepthSprite:
+	emp-overlay:
+		Filename: emp_fx01.shp
+		Length: *
+		Offset: 0, 0, 21
+		ZOffset: 512
+		IgnoreWorldTint: True
+		-DepthSprite:
+	icon:
+		Filename: nodreficon.shp
+		Offset: 0, 0
+
+nodref3:
+	Defaults:
+		Filename: nodref3.shp
+		Offset: 3, -36, 20
+		DepthSpriteOffset: 22, 0
+		DepthSprite: isodepth.shp
+		ZOffset: 100
+	idle:
+		Start: 31
+		ShadowStart: 66
+	damaged-idle:
+		Start: 33
+		ShadowStart: 69
+	dead:
+		Start: 33
+		ShadowStart: 69
+		Tick: 400
+	make:
+		Length: 29
+		ShadowStart: 35
+		DepthSpriteOffset: -12, 0
+	unload-overlay:
+		Filename: narefn_a.shp
+		Length: *
+		ZOffset: 1024
+	flame:
+		Filename: ntrefn_b.shp
+		Length: *
+	bib:
+		Start: 32
+		ShadowStart: 67
+		Length: 1
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 3, -36, 1
+		ZOffset: 0
+		-DepthSprite:
+	damaged-bib:
+		Start: 34
+		ShadowStart: 69
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 3, -36, 1
+		ZOffset: 0
+		-DepthSprite:
+	dead-bib:
+		Start: 34
+		ShadowStart: 69
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 3, -36, 1
+		ZOffset: 0
+		-DepthSprite:
+	emp-overlay:
+		Filename: emp_fx01.shp
+		Length: *
+		Offset: 0, 0, 21
+		ZOffset: 512
+		IgnoreWorldTint: True
+		-DepthSprite:
+	icon:
+		Filename: nodreficon.shp
+		Offset: 0, 0
+
+nodref4:
+	Defaults:
+		Filename: nodref4.shp
+		Offset: -60, -3, 20
+		DepthSpriteOffset: 22, 0
+		DepthSprite: isodepth.shp
+		ZOffset: 100
+	idle:
+		Start: 31
+		ShadowStart: 66
+	damaged-idle:
+		Start: 33
+		ShadowStart: 69
+	dead:
+		Start: 33
+		ShadowStart: 69
+		Tick: 400
+	make:
+		Length: 29
+		ShadowStart: 35
+		DepthSpriteOffset: -12, 0
+	unload-overlay:
+		Filename: narefn_a.shp
+		Length: *
+		ZOffset: 1024
+	flame:
+		Filename: ntrefn_b.shp
+		Length: *
+	bib:
+		Start: 32
+		ShadowStart: 67
+		Length: 1
+		MeshType: Plane
+		ZRamp: 1
+		Offset: -60, -3, 1
+		ZOffset: 0
+		-DepthSprite:
+	damaged-bib:
+		Start: 34
+		ShadowStart: 69
+		MeshType: Plane
+		ZRamp: 1
+		Offset: -60, -3, 1
+		ZOffset: 0
+		-DepthSprite:
+	dead-bib:
+		Start: 34
+		ShadowStart: 69
+		MeshType: Plane
+		ZRamp: 1
+		Offset: -60, -3, 1
+		ZOffset: 0
+		-DepthSprite:
+	emp-overlay:
+		Filename: emp_fx01.shp
+		Length: *
+		Offset: 0, 0, 21
+		ZOffset: 512
+		IgnoreWorldTint: True
+		-DepthSprite:
+	icon:
+		Filename: nodreficon.shp
+		Offset: 0, 0

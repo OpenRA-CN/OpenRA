@@ -339,4 +339,3 @@ GHOST:
 		CloakEffectSequence: smokebomb
 		EffectOffset: 0, 0, 280
 		EffectTracksActor: false
-

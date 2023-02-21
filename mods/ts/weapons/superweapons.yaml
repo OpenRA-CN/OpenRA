@@ -352,7 +352,7 @@ IonCannon:
 		Delay: 7
 		Weapon: BlueTiberiumChainReaction
 		ValidTargets: BlueTiberium
-	Warhead@ShockWave:	CreateEffect #ShockWave
+	Warhead@ShockWave: CreateEffect #ShockWave
 		Image: twist
 		Explosions: shockground
 		ExplosionPalette: twist

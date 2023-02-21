@@ -23,6 +23,11 @@ ProductionTypeAircraft: U
 	Types: Production
 	Contexts: Player
 
+ToggleVariant: V
+	Description: Rotate Building
+	Types: Production
+	Contexts: Player
+
 PowerDown: X
 	Description: Power-down mode
 	Types: OrderGenerator

@@ -31,7 +31,7 @@
 		Turret: primary
 		TurnSpeed: 28
 	WithModelTurret@primary:
-  		Turret: primary
+		Turret: primary
 	WithModelBarrel@1:
 		Armament: primary1
 		LocalOffset: 235,133,300

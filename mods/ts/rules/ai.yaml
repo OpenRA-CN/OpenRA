@@ -10,24 +10,21 @@ Player:
 		HarvesterTypes: harv
 		RefineryTypes: proc
 		ScanForIdleHarvestersInterval: 1069 ## This module is pref-questionable, set it long enough
-
 	## Help AI on better plug
 	ProvidesPrerequisite@pluggablevulcan:
 		RequiresCondition: !enable-test-ai
 		Prerequisite: plug.vulcan
 	ProvidesPrerequisite@pluggablemissile:
-		RequiresCondition:  !enable-test-ai
+		RequiresCondition: !enable-test-ai
 		Prerequisite: plug.missile
 	ProvidesPrerequisite@pluggableRPG:
-		RequiresCondition:  !enable-test-ai
+		RequiresCondition: !enable-test-ai
 		Prerequisite: plug.rpg
 	ProvidesPrerequisite@powertube:
-		RequiresCondition:  !enable-test-ai
+		RequiresCondition: !enable-test-ai
 		Prerequisite: plug.power
-
 	PowerDownBotModule:
-		RequiresCondition:  enable-test-ai
-
+		RequiresCondition: enable-test-ai
 	CashTrickler@CashCheat: ## enough cash for test AI
 		Interval: 300
 		Amount: 750
@@ -42,7 +39,7 @@ Player:
 		ExcessPowerIncrement: 30
 		ExcessPowerIncreaseThreshold: 4
 		ConstructionYardTypes: gacnst
-		RefineryTypes: proc
+		RefineryTypes: gdiref, gdiref2, gdiref3, gdiref4, nodref, nodref2, nodref3, nodref4 #proc
 		AdditionalMinimumRefineryCount: 0 ## We don't need this
 		InititalMinimumRefineryCount: 0 ## We don't need this
 		PowerTypes: gapowr, gapowrup, napowr, naapwr
@@ -52,7 +49,9 @@ Player:
 		SiloTypes: gasilo
 		DefenseTypes: gavulc,garock,gacsam,gactwr,naobel,nalasr,nasam, titanugvulcan,titanugmissile
 		BuildingLimits:
-			proc: 2
+			#proc: 2
+			gdiref: 2
+			nodref: 2
 			gasilo: 2
 			gapowr: 10
 			napowr: 10
@@ -81,7 +80,9 @@ Player:
 			namisl: 1
 			nawast: 1
 		BuildingFractions:
-			proc: 100
+			#proc: 100
+			gdiref: 100
+			nodref: 100
 			gapile: 100
 			nahand: 100
 			gaweap: 50
@@ -339,7 +340,7 @@ Player:
 		Passengers: e1,e2,e3,cyborg,pfind,weedguy,ghost,cyc2,medic,limped,engineer,smech
 	SendUnitToAttackBotModule:
 		RequiresCondition: enable-test-ai
-		ActorsAndAttackDesire: 
+		ActorsAndAttackDesire:
 			subtank: 10
 			sapc: 10
 		ValidTargets: Building

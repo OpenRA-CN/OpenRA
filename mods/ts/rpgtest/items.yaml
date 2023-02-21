@@ -5,7 +5,6 @@ clothitem:
 		ThumbnailImage: itemicon
 		ThumbnailSequence: c_gear01
 		Condition: hascloth
-
 		GearType: Replacement
 		GearOrder: 20
 		Image: rumya
@@ -14,6 +13,7 @@ clothitem:
 		HipMesh: gear01_body-hip
 		ThighMesh: gear01_body-thigh
 		CanExistInWorld: false
+
 
 testunderwear:
 	GearItem:
@@ -48,7 +48,6 @@ gunitem:
 		Weapon: KittenRailGun
 		LocalOffset: 433,0,155
 		CanExistInWorld: false
-
 	RenderMeshes:
 		Image: rumya
 	ItemMesh@test:
@@ -57,6 +56,7 @@ gunitem:
 	# 	Image: mmr-test
 	# ItemMesh@test:
 	# 	Mesh: axis
+
 
 testitem:
 	Item:
@@ -114,13 +114,13 @@ stealth-suit:
 		ThumbnailImage: itemicon
 		ThumbnailSequence: c_stealth-b
 		# Condition: cloakgenerator
-
 		GearType: Replacement
 		GearOrder: 20
 		Image: rumya
 		AddonMeshPart: stealth03
 		Masks: Torso,Hip,Thigh,Leg,Foot,UpperArm,LowerArm,Hand
 		CanExistInWorld: false
+
 
 
 ^guns_item:

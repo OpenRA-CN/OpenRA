@@ -8,13 +8,10 @@
 	Projectile: Bullet
 		DetectTargetFromLengthPercentage: 70
 		DetectTargetBeforeDist: 2c0
-
 		ContrailZOffset: 22
 		ContrailLength: 3
 		ContrailWidth: 25
-
 		ContrailUseInnerOuterColor: false
-
 		ContrailStartColor: FFFF88
 		ContrailStartColorOuter: FFFF88
 		ContrailEndColor: BBBBBB
@@ -23,7 +20,6 @@
 		ContrailStartColorAlphaOuter: 64
 		ContrailEndColorAlpha: 15
 		ContrailEndColorAlphaOuter: 0
-
 		ContrailWidthFadeRate: 0.75
 		ContrailDelay: 0
 		#ContrailBlendMode: ScreenAdditive
@@ -59,6 +55,10 @@
 		ExplosionPalette: ra
 		ValidTargets: Water
 		InvalidTargets: Vehicle
+
+
+
+
 
 
 ^MG:
@@ -282,7 +282,7 @@ HarpyClaw:
 			Light: 25
 			Heavy: 8
 			Concrete: 8
-		DamageTypes:  Prone100Percent, TriggerProne, SmallExplosionDeath
+		DamageTypes: Prone100Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Eff: CreateEffect
 		ExplosionPalette: effectgreen
 
@@ -444,7 +444,7 @@ SlavickGun:
 			Light: 25
 			Heavy: 15
 			Concrete: 15
-		DamageTypes:  Prone100Percent, TriggerProne, FireDeath
+		DamageTypes: Prone100Percent, TriggerProne, FireDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: piff-bright
 		ExplosionPalette: effectred
@@ -479,7 +479,7 @@ OxannaGun:
 			Light: 30
 			Heavy: 20
 			Concrete: 15
-		DamageTypes:  Prone100Percent, TriggerProne, SmallExplosionDeath
+		DamageTypes: Prone100Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: piff-bright
 
@@ -535,7 +535,7 @@ TinyShard:
 			Light: 55
 			Heavy: 33
 			Concrete: 10
-		DamageTypes:  Prone100Percent, TriggerProne, SmallExplosionDeath
+		DamageTypes: Prone100Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Eff: CreateEffect
 		ExplosionPalette: effectdarkgreen
 

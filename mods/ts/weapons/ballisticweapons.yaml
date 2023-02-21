@@ -9,20 +9,15 @@
 		# Palette: ra
 		DetectTargetFromLengthPercentage: 80
 		DetectTargetBeforeDist: 2c512
-
 		ContrailZOffset: 22
 		ContrailLength: 10
 		ContrailWidth: 125
-
 		ContrailImage: lineidle_loop
 		ContrailSequences: trail
-
 		ContrailStartColor: DBDB50
 		ContrailStartColorAlpha: 233
-
 		ContrailEndColor: BB6525
 		ContrailEndColorAlpha: 0 #64
-
 		ContrailWidthFadeRate: 0.5
 		ContrailDelay: 0
 		ContrailBlendMode: Additive
@@ -61,6 +56,11 @@
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: MediumCrater
 		InvalidTargets: Vehicle, Building, Wall
+
+
+
+
+
 
 90mm:
 	Inherits: ^Cannon
@@ -147,7 +147,7 @@ RPGTower:
 	# 	Radius: 2c0
 	# 	LifeTime: 12
 	# 	Width: 0.11
-	Warhead@ShockWave:	CreateEffect #ShockWave
+	Warhead@ShockWave: CreateEffect #ShockWave
 		Image: twist
 		Explosions: shockgroundarti
 		ExplosionPalette: twist
@@ -210,7 +210,7 @@ TitanRPG:
 	# 	Radius: 2c0
 	# 	LifeTime: 13
 	# 	Width: 0.11
-	Warhead@ShockWave:	CreateEffect #ShockWave
+	Warhead@ShockWave: CreateEffect #ShockWave
 		Image: twist
 		Explosions: shockgroundarti
 		ExplosionPalette: twist
@@ -248,7 +248,7 @@ Jugg90mm:
 	# 	Radius: 1c256
 	# 	LifeTime: 11
 	# 	Width: 0.11
-	Warhead@ShockWave:	CreateEffect #ShockWave
+	Warhead@ShockWave: CreateEffect #ShockWave
 		Image: twist
 		Explosions: shockgroundcannon
 		ExplosionPalette: twist

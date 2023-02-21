@@ -84,6 +84,7 @@ Player:
 		CancelledAudio: Cancelled
 		SpeedUp: True
 	PlaceBuilding:
+		ToggleVariantKey: ToggleVariant
 		NewOptionsNotification: NewOptions
 		CannotPlaceNotification: BuildingCannotPlaceAudio
 		NewOptionsTextNotification: New construction options.

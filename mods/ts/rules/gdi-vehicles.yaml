@@ -561,16 +561,16 @@ JUGG:
 		DeployOnAttack: true
 		DeployArmament: todeploy
 	AttackFrontal@todeploy:
-	 	Voice: Attack
-	 	Armaments: todeploy
-	 	FacingTolerance: 512
-	 	RequiresCondition: undeployed
+		Voice: Attack
+		Armaments: todeploy
+		FacingTolerance: 512
+		RequiresCondition: undeployed
 		PauseOnCondition: empdisable || carring
 	Armament@todeploy:
-	 	Name: todeploy
-	 	Weapon: Jugg90mmDeployCheck
-	 	RequiresCondition: undeployed
-	 	FacingTolerance: 512
+		Name: todeploy
+		Weapon: Jugg90mmDeployCheck
+		RequiresCondition: undeployed
+		FacingTolerance: 512
 	AutoTarget:
 		ScanRadius: 14 #PREF: save trait looks up and scan armaments
 	EntersTunnels:

@@ -211,8 +211,6 @@
 		Alpha: 0.55
 	MenuPaletteEffect:
 		FadeLength: 20
-
-
 	PaletteFromFile@Gray:
 		Name: gray
 		Filename: gray.pal
@@ -259,12 +257,10 @@
 		BasePalette: gray
 		AllowModifiers: false
 		# Premultiply: true
-
 	FixedColorPalette@lightgreen:
 		Base: gray
 		Name: lightgreen
 		Color: 00FF00
-
 	PaletteFromFile@Red:
 		Name: red
 		Filename: red.pal
@@ -311,7 +307,6 @@
 		BasePalette: red
 		AllowModifiers: false
 		# Premultiply: true
-
 	PaletteFromFile@TAPal_blast-additive:
 		Name: blast-additive
 		Filename: blast-additive.pal
@@ -320,7 +315,6 @@
 		Base: blast-additive
 		Name: blast-green
 		Color: 00BB00
-
 	PaletteFromGimpOrJascFile@Twist:
 		Name: twist
 		Filename: jascgrey.pal

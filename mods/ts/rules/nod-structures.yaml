@@ -679,3 +679,52 @@ NAWAST:
 		DirectionArrowAnimation: airstrikedirection
 		DirectionArrowPalette: mouse
 		SupportPowerPaletteOrder: 40
+
+
+NODREF:
+	Inherits: ^Refinery
+	Tooltip:
+		Name: Nod Refinery
+	Buildable:
+		Queue: Building
+		BuildPaletteOrder: 30
+		Prerequisites: ~structures.nod, anypower, ~techlevel.low
+		Description: Processes raw Tiberium into useable resources.\n\nSpecial:\n- Stores 2000$\n- Can be rotated
+	FreeActor:
+		Actor: harv
+	-WithIdleOverlay@REDLIGHTS:
+	PlaceBuildingVariants:
+		Actors: nodref3, nodref2, nodref4
+		Facings: 384, 640, 896, 128
+	IsometricSelectable:
+		Class: NODREF
+
+NODREF2:
+	Inherits: ^FlippedRefinery
+	Tooltip:
+		Name: Nod Refinery
+	-WithIdleOverlay@REDLIGHTS:
+	FreeActor:
+		Actor: harv
+	IsometricSelectable:
+		Class: NODREF
+
+NODREF3:
+	Inherits: ^FlippedXRefinery
+	Tooltip:
+		Name: Nod Refinery
+	-WithIdleOverlay@REDLIGHTS:
+	FreeActor:
+		Actor: harv
+	IsometricSelectable:
+		Class: NODREF
+
+NODREF4:
+	Inherits: ^FlippedYRefinery
+	Tooltip:
+		Name: Nod Refinery
+	-WithIdleOverlay@REDLIGHTS:
+	FreeActor:
+		Actor: harv
+	IsometricSelectable:
+		Class: NODREF

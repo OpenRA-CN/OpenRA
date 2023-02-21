@@ -30,20 +30,15 @@
 		TrailInterval: 1
 		TrailCount: 0 #2
 		TrailDelay: 0
-
 		ContrailZOffset: 22
 		ContrailLength: 12
 		ContrailWidth: 254
-
 		ContrailImage: lineidle_loop
 		ContrailSequences: trail
-
 		ContrailStartColor: DFA877
 		ContrailStartColorAlpha: 233
-
 		ContrailEndColor: A8A8A8
 		ContrailEndColorAlpha: 0 #64
-
 		ContrailWidthFadeRate: 0
 		ContrailDelay: 0
 		ContrailBlendMode: Additive
@@ -51,7 +46,6 @@
 		JetImage: mislflash
 		JetSequence: mislflash1
 		JetPalette: gray
-
 	Warhead@1Dam: Spread3DDamage
 		Spread: 108
 		Falloff: 100, 50, 25, 12, 6, 3, 0
@@ -78,6 +72,12 @@
 		SmudgeType: SmallCrater
 		InvalidTargets: Vehicle, Building, Wall
 
+
+
+
+
+
+
 ^VectorBooster:
 	Inherits@BlueTibReactionInit: ^BlueTibReactionInit
 	Range: 7c0
@@ -99,7 +99,6 @@
 		Width: 76
 		ProximityRange: 256
 		ProximitySnapping: true
-
 		LaunchAngle: 27
 		ZOffset: 10
 		Inaccuracy: 1c0
@@ -119,20 +118,15 @@
 		ContrailZOffset: 22
 		ContrailLength: 12
 		ContrailWidth: 254
-
 		ContrailImage: lineidle_loop
 		ContrailSequences: trail
-
 		ContrailStartColor: DFA877
 		ContrailStartColorAlpha: 233
-
 		ContrailEndColor: A8A8A8
 		ContrailEndColorAlpha: 0 #64
-
 		ContrailWidthFadeRate: 0
 		ContrailDelay: 0
 		ContrailBlendMode: Additive
-
 		ExplodeUnderThisAltitude: -128
 		UsingScat: false
 		ScatWeapon: Grenade
@@ -169,6 +163,12 @@
 	Warhead@Smu: LeaveSmudge
 		SmudgeType: SmallCrater
 		InvalidTargets: Vehicle, Building, Wall
+
+
+
+
+
+
 
 VectorBoosterMul:
 	Inherits: ^VectorBooster
@@ -265,7 +265,7 @@ LimpetMissile:
 			Light: 100
 			Heavy: 85
 			Concrete: 60
-	Warhead@ShockWave:	CreateEffect
+	Warhead@ShockWave: CreateEffect
 		Image: twist
 		Explosions: roundshock
 		ExplosionPalette: twist
@@ -348,7 +348,7 @@ MammothTusk:
 		Explosions: medium_twlt
 		ImpactSounds: expnew07.aud
 	-Warhead@3EffWater:
-	Warhead@ShockWave:	CreateEffect
+	Warhead@ShockWave: CreateEffect
 		Image: twist
 		Explosions: roundshock
 		ExplosionPalette: twist
@@ -397,7 +397,7 @@ Dragon:
 	Report: misl1.aud
 	Warhead@1Dam: Spread3DDamage
 		Damage: 4500
-	Warhead@ShockWave:	CreateEffect
+	Warhead@ShockWave: CreateEffect
 		Image: twist
 		Explosions: roundshock
 		ExplosionPalette: twist
@@ -527,7 +527,7 @@ SkyFire:
 		Explosions: large_grey_explosion
 		ImpactSounds: expnew13.aud
 		ImpactActors: false
-	Warhead@ShockWave:	CreateEffect
+	Warhead@ShockWave: CreateEffect
 		Image: twist
 		Explosions: roundshock
 		ExplosionPalette: twist
@@ -572,7 +572,7 @@ RedEye2:
 		Explosions: large_grey_explosion
 		ImpactSounds: expnew13.aud
 		ImpactActors: false
-	Warhead@ShockWave:	CreateEffect
+	Warhead@ShockWave: CreateEffect
 		Image: twist
 		Explosions: roundshock
 		ExplosionPalette: twist

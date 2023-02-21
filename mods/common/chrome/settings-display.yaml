@@ -359,7 +359,6 @@ Container@DISPLAY_PANEL:
 									Height: 25
 									Font: Regular
 									Text: ---
-
 				Container@ROW:
 					Width: PARENT_RIGHT - 24
 					Height: 50

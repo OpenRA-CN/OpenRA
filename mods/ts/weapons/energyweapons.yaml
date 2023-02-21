@@ -33,7 +33,6 @@
 		SpreadStep: 32
 		ContrailCopyCount: 2
 		FadePosSpread: false
-
 		TrailImage: fxring
 		TrailSequences: sonicburst
 		TrailDelay: 0
@@ -41,8 +40,6 @@
 		TrailLikeSmokeRing: true
 		TrailScaleAnimStart: 0.2
 		TrailScaleAnimEnd: 2
-
-
 		Speed: 1550
 		Inaccuracy: 0
 		UseVerticalInaccuracy: true
@@ -80,6 +77,9 @@
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: SmallScorch
 		InvalidTargets: Vehicle, Building, Wall
+
+
+
 
 ^RailgunLineDamage:
 	ValidTargets: Ground, Water, Air
