@@ -539,6 +539,19 @@ dialog:
 		corner-bl: 437, 481, 21, 21
 		corner-br: 459, 481, 21, 21
 
+unitinfo:
+	Inherits: ^Dialog
+	Regions:
+		background: 1, 1, 478, 478
+		border-r: 483, 1, 9, 151
+		border-l: 481, 1, 9, 151
+		border-b: 1, 483, 151, 9
+		border-t: 1, 481, 151, 9
+		corner-tl: 393, 481, 21, 21
+		corner-tr: 415, 481, 21, 21
+		corner-bl: 437, 481, 21, 21
+		corner-br: 459, 481, 21, 21
+
 unitinfo-gdi:
 	Inherits: ^Dialog
 	Regions:

@@ -602,6 +602,9 @@ namespace OpenRA.Meow.RPG.Widgets
 
 		WPos mPos = WPos.Zero;
 		bool mi1Down = false;
+		bool mi2Down = false;
+		bool mi3Down = false;
+
 		public override bool HandleMouseInput(MouseInput mi)
 		{
 			return TooltipUnit != null && EventBounds.Contains(mi.Location);
@@ -696,19 +699,21 @@ namespace OpenRA.Meow.RPG.Widgets
 						var actor = world.ScreenMap.ActorsAtMouse(currentMouseInput)
 							.Where(a => !a.Actor.IsDead && a.Actor.Info.HasTraitInfo<ITargetableInfo>() && !world.FogObscures(a.Actor))
 							.WithHighestSelectionPriority(worldPixel, Modifiers.None);
-
+						Target target;
 						if (actor != null)
 						{
 							mPos = Target.FromActor(actor).Positions.PositionClosestTo(TooltipUnit.Actor.CenterPosition);
+							target = Target.FromActor(actor);
 						}
 						else
 						{
 							var cell = worldRenderer.Viewport.ViewToWorld(currentMouseInput.Location);
 							mPos = worldRenderer.Viewport.ViewToWorldPos(currentMouseInput.Location, cell);
 							mPos = new WPos(mPos, world.Map.HeightOfTerrain(mPos));
+							target = Target.FromPos(mPos);
 						}
 
-						var order = new Order("Controler:Mi1Down", TooltipUnit.Actor, Target.FromPos(mPos), false);
+						var order = new Order("Controler:Mi1Down", TooltipUnit.Actor, target, false);
 						TooltipUnit.Actor.World.IssueOrder(order);
 					}
 
@@ -765,6 +770,7 @@ namespace OpenRA.Meow.RPG.Widgets
 		MouseInput currentMouseInput;
 
 		MouseButton Mouse1 => MouseButton.Left;
+		MouseButton Mouse2 => MouseButton.Right;
 
 		public override void ListenMouseInput(MouseInput mi)
 		{
@@ -789,6 +795,24 @@ namespace OpenRA.Meow.RPG.Widgets
 				}
 			}
 
+			if (mi.Event == MouseInputEvent.Down && mi.Button == Mouse2)
+			{
+				mi2Down = true;
+			}
+			else if (mi.Event == MouseInputEvent.Up && mi.Button == Mouse2)
+			{
+				mi2Down = false;
+
+				if (controlMode)
+				{
+					var worldPixel = worldRenderer.Viewport.ViewToWorldPx(Viewport.LastMousePos);
+					var actor = world.ScreenMap.ActorsAtMouse(currentMouseInput)
+						.Where(a => !a.Actor.IsDead && a.Actor.Info.HasTraitInfo<ITargetableInfo>() && !world.FogObscures(a.Actor))
+						.WithHighestSelectionPriority(worldPixel, Modifiers.None);
+
+					TooltipUnit.Actor.World.IssueOrder(new Order("Contorler:Mi2Up", TooltipUnit.Actor, Target.FromActor(actor), false));
+				}
+			}
 		}
 
 		public override bool HandleKeyPress(KeyInput e)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenRA.Graphics;
 using OpenRA.Meow.RPG.Mechanics;
 using OpenRA.Meow.RPG.Mechanics.Display;
 using OpenRA.Mods.Common;
@@ -24,12 +25,29 @@ namespace OpenRA.Meow.RPG
 		[Desc("Condition to grant when under control.")]
 		public readonly string Condition = "under-control";
 
+		// lock on animation
+
+		[Desc("Image used for this decoration. Defaults to the actor's type.")]
+		public readonly string LockOnAnimImage = null;
+
+		[FieldLoader.Require]
+		[SequenceReference(nameof(LockOnAnimImage), allowNullImage: true)]
+		[Desc("Sequence used for this decoration (can be animated).")]
+		public readonly string LockOnAnimSequence = null;
+
+		[PaletteReference(nameof(LockOnAnimIsPlayerPalette))]
+		[Desc("Palette to render the sprite in. Reference the world actor's PaletteFrom* traits.")]
+		public readonly string LockOnAnimPalette = "chrome";
+
+		[Desc("Custom palette is a player palette BaseName")]
+		public readonly bool LockOnAnimIsPlayerPalette = false;
+
 		public override object Create(ActorInitializer init) { return new ActorControler(init.Self, this); }
 
 	}
 
 	public class ActorControler : PausableConditionalTrait<ActorControlerInfo>,
-		INotifyCreated, IResolveOrder, ITick
+		INotifyCreated, IResolveOrder, ITick, IRenderAboveShroud
 	{
 		readonly ActorControlerInfo info;
 		readonly Actor self;
@@ -39,13 +57,19 @@ namespace OpenRA.Meow.RPG
 		Turreted[] turreteds;
 		IMover mover;
 
+		Animation lockAnim;
+		readonly string lockAnimimage;
+
 		// state
 		Target attackTarget = Target.Invalid;
+		Actor lockedOnActor = null;
 		WVec moverDir = WVec.Zero;
 		int controlingConditionToken = Actor.InvalidConditionToken;
 		public bool UnderControl;
 
 		public string TargetCursor => info.TargetCursor;
+
+		bool IRenderAboveShroud.SpatiallyPartitionable => false;
 
 		ControlerType controlerType;
 
@@ -61,6 +85,10 @@ namespace OpenRA.Meow.RPG
 		{
 			this.self = self;
 			this.info = info;
+
+			lockAnimimage = info.LockOnAnimImage ?? self.Info.Name;
+			lockAnim = new Animation(self.World, lockAnimimage, () => self.World.Paused);
+			lockAnim.PlayRepeating(info.LockOnAnimSequence);
 		}
 
 		protected override void TraitEnabled(Actor self)
@@ -80,6 +108,12 @@ namespace OpenRA.Meow.RPG
 
 		public void Tick(Actor self)
 		{
+			if ((lockedOnActor != null && (lockedOnActor.IsDead || !lockedOnActor.IsInWorld)) ||
+				!UnderControl)
+			{
+				lockedOnActor = null;
+			}
+
 			if (UnderControl)
 			{
 				if (controlingConditionToken == Actor.InvalidConditionToken)
@@ -115,12 +149,17 @@ namespace OpenRA.Meow.RPG
 
 						foreach (var arm in a.Armaments)
 						{
-							arm.IgnoreAirborne = false;
+							arm.IgnoreWeaponTargetCheck = false;
 						}
 					}
 				}
 
 				return;
+			}
+
+			if (lockedOnActor != null)
+			{
+				attackTarget = Target.FromActor(lockedOnActor);
 			}
 
 			bool turnFacing = false;
@@ -139,7 +178,7 @@ namespace OpenRA.Meow.RPG
 					var thisZoffset = 0;
 					foreach (var arm in a.Armaments)
 					{
-						arm.IgnoreAirborne = true;
+						arm.IgnoreWeaponTargetCheck = true;
 						thisZoffset += arm.AdditionalLocalOffset().Z + arm.Barrels[0].Offset.Z;
 					}
 
@@ -160,7 +199,8 @@ namespace OpenRA.Meow.RPG
 				var firecenter = (self.CenterPosition + new WVec(0, 0, hoffset));
 				var dir = attackTarget.CenterPosition - firecenter;
 				var dist = dir.Length;
-				if (range < dist && range > 1)
+				var horizonDist = dir.HorizontalLength;
+				if (range < horizonDist && range > 1)
 				{
 					var tPos = firecenter + ((range - 1) * dir / dist);
 
@@ -178,7 +218,7 @@ namespace OpenRA.Meow.RPG
 					{
 						var desiredFacing = (attackTarget.CenterPosition - self.CenterPosition).Yaw;
 						if (desiredFacing + attackFace != facing.Facing)
-							facing.Facing = Util.TickFacing(facing.Facing, desiredFacing + attackFace, facing.TurnSpeed);
+							facing.Facing = Mods.Common.Util.TickFacing(facing.Facing, desiredFacing + attackFace, facing.TurnSpeed);
 					}
 
 				}
@@ -262,6 +302,14 @@ namespace OpenRA.Meow.RPG
 					ClearTarget();
 			}
 
+			if (order.OrderString == "Contorler:Mi2Up")
+			{
+				if (UnderControl)
+				{
+					lockedOnActor = order.Target.Actor;
+				}
+			}
+
 			if (order.OrderString == "Mover:Move" && UnderControl)
 			{
 				self.CancelActivity();
@@ -271,6 +319,18 @@ namespace OpenRA.Meow.RPG
 			{
 				moverDir = WVec.Zero;
 			}
+		}
+
+		IEnumerable<Graphics.IRenderable> IRenderAboveShroud.RenderAboveShroud(Actor self, Graphics.WorldRenderer wr)
+		{
+			if (lockAnim == null || lockedOnActor == null)
+				return Enumerable.Empty<IRenderable>();
+			var screenPos = wr.ScreenPxPosition(lockedOnActor.CenterPosition);
+			return new IRenderable[]
+			{
+				new SpriteRenderable(lockAnim.Image, lockedOnActor.CenterPosition, WVec.Zero, 1024,
+					wr.Palette(Info.LockOnAnimPalette + (Info.LockOnAnimIsPlayerPalette ? self.Owner.InternalName : "")), 1f, 1f, float3.Ones, TintModifiers.IgnoreWorldTint, true)
+			};
 		}
 	}
 }

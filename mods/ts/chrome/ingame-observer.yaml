@@ -1,6 +1,19 @@
 Container@OBSERVER_WIDGETS:
 	Logic: MenuButtonsChromeLogic, LoadIngameChatLogic
 	Children:
+		ActorInfo@UNIT_INFO:
+			# Logic: AddFactionSuffixLogic
+			Background: unitinfo
+			X: WINDOW_RIGHT - WIDTH - 5
+			Y: WINDOW_BOTTOM - HEIGHT - 5
+			Width: 250
+			Height: 130
+			ToggleControlKey: ToggleUnitControl
+			ToggleActorCameraKey: ToggleActorCamera
+			MoveUpKey: MoveUp
+			MoveDownKey: MoveDown
+			MoveLeftKey: MoveLeft
+			MoveRightKey: MoveRight
 		Container@CHAT_ROOT:
 		LogicKeyListener@OBSERVER_KEY_LISTENER:
 		Container@MUTE_INDICATOR:

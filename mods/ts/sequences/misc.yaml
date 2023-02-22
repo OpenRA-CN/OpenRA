@@ -62,6 +62,13 @@ beacon:
 		Tick: 200
 		ZOffset: 2047
 
+lockon:
+	common: 
+		Filename: lockon.shp
+		Length: 1
+		Start: 1
+		ZOffset: 2047
+
 crate:
 	idle:
 		TilesetFilenames:

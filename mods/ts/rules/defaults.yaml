@@ -7,6 +7,9 @@
 	RenderDebugState:
 	ActorControler:
 		TargetCursor: nuke
+		LockOnAnimImage: lockon
+		LockOnAnimSequence: common
+		LockOnAnimPalette: ra
 	InaccuracyMultiplier@under-control:
 		Modifier: 75
 		RequiresCondition: under-control
@@ -1446,6 +1449,7 @@
 		Speed: 113
 		TurnSpeed: 64
 		Locomotor: visceroid
+		MovementMode: Universal
 	Selectable:
 		Bounds: 784, 1568, 0, -181
 	Targetable:

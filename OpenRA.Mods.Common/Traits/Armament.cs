@@ -180,7 +180,7 @@ namespace OpenRA.Mods.Common.Traits
 		public int FireDelay { get; protected set; }
 		public int Burst { get; protected set; }
 
-		public bool IgnoreAirborne = false;
+		public bool IgnoreWeaponTargetCheck = false;
 
 		public Func<int> OverrideFireDelay = () => -1;
 
@@ -226,7 +226,7 @@ namespace OpenRA.Mods.Common.Traits
 
 		public virtual bool WeaponIsValidAgainst(in Target target, World world, Actor firedBy)
 		{
-			return Weapon.IsValidAgainst(target, world, firedBy, IgnoreAirborne);
+			return Weapon.IsValidAgainst(target, world, firedBy, IgnoreWeaponTargetCheck);
 		}
 
 		public virtual WDist MaxRange()
