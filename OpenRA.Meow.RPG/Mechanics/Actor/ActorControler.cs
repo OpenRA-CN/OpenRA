@@ -57,7 +57,7 @@ namespace OpenRA.Meow.RPG
 		Turreted[] turreteds;
 		IMover mover;
 
-		Animation lockAnim;
+		readonly Animation lockAnim;
 		readonly string lockAnimimage;
 
 		// state
@@ -136,6 +136,14 @@ namespace OpenRA.Meow.RPG
 				{
 					mover.MoveToward(moverDir);
 					moving = true;
+				}
+			}
+
+			if (attacks != null)
+			{
+				foreach (var a in attacks)
+				{
+					a.CanResolveAttackOrder = !UnderControl;
 				}
 			}
 
@@ -281,6 +289,7 @@ namespace OpenRA.Meow.RPG
 			if (order.OrderString == "Controler:Enable")
 			{
 				UnderControl = true;
+				self.CancelActivity();
 			}
 			else if (order.OrderString == "Controler:Disable")
 			{

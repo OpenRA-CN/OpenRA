@@ -80,6 +80,8 @@ namespace OpenRA.Mods.Common.Traits
 		[Sync]
 		public bool IsAiming { get; set; }
 
+		public bool CanResolveAttackOrder { get; set; }
+
 		public IEnumerable<Armament> Armaments => getArmaments();
 
 		protected IFacing facing;
@@ -96,6 +98,7 @@ namespace OpenRA.Mods.Common.Traits
 			: base(info)
 		{
 			this.self = self;
+			CanResolveAttackOrder = true;
 		}
 
 		protected override void Created(Actor self)
@@ -229,7 +232,7 @@ namespace OpenRA.Mods.Common.Traits
 		void IResolveOrder.ResolveOrder(Actor self, Order order)
 		{
 			var forceAttack = order.OrderString == forceAttackOrderName;
-			if (forceAttack || order.OrderString == attackOrderName)
+			if ((forceAttack || order.OrderString == attackOrderName) && CanResolveAttackOrder)
 			{
 				if (!order.Target.IsValidFor(self))
 					return;

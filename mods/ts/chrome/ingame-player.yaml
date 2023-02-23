@@ -32,6 +32,7 @@ Container@PLAYER_WIDGETS:
 			MoveDownKey: MoveDown
 			MoveLeftKey: MoveLeft
 			MoveRightKey: MoveRight
+			DeployKey: Deploy
 		Container@SUPPORT_POWERS:
 			Logic: SupportPowerBinLogic
 			X: 10

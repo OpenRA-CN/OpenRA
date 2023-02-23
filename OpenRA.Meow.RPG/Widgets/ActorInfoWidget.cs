@@ -144,7 +144,8 @@ namespace OpenRA.Meow.RPG.Widgets
 		readonly ModData modData;
 
 		InfoDisplaying displayState;
-		public InfoDisplaying DisplayState {
+		public InfoDisplaying DisplayState
+		{
 			get
 			{
 				return displayState;
@@ -212,9 +213,10 @@ namespace OpenRA.Meow.RPG.Widgets
 			toggleEquipment = new ToggleButtonWidget(worldRenderer, Skin)
 			{
 				IsVisible = () => TooltipUnit != null,
-				Bounds = new Rectangle(x , Bounds.Height - size, size, size),
+				Bounds = new Rectangle(x, Bounds.Height - size, size, size),
 				IsEnabled = () => toggleEquipment.IsVisible() && TooltipUnit.HasEquipmentSlot,
-				OnClick = () => {
+				OnClick = () =>
+				{
 					if (toggleEquipment.SetActive)
 						DisplayState = InfoDisplaying.Equipment;
 					else if (DisplayState == InfoDisplaying.Equipment)
@@ -239,7 +241,8 @@ namespace OpenRA.Meow.RPG.Widgets
 				IsVisible = () => TooltipUnit != null,
 				Bounds = new Rectangle(x, Bounds.Height - size, size, size),
 				IsEnabled = () => toggleInventory.IsVisible() && TooltipUnit.HasInventory,
-				OnClick = () => {
+				OnClick = () =>
+				{
 					if (toggleInventory.SetActive)
 						DisplayState = InfoDisplaying.Inventory;
 					else if (DisplayState == InfoDisplaying.Inventory)
@@ -345,7 +348,7 @@ namespace OpenRA.Meow.RPG.Widgets
 						string click = controlMode ? "[" : "";
 						click += moveUp ? " U" : "";
 						click += moveDown ? " D" : "";
-						click += moveLeft ? " L": "";
+						click += moveLeft ? " L" : "";
 						click += moveRight ? " R" : "";
 						click += mi1Down ? " Mi1" : "";
 						click += controlMode ? " ]" : "";
@@ -591,6 +594,9 @@ namespace OpenRA.Meow.RPG.Widgets
 					iconA = a;
 			}
 
+			if (iconA != null && TooltipUnit != null && TooltipUnit.Actor == iconA && iconA.IsInWorld && !iconA.IsDead)
+				return;
+
 			if (iconA == null || !iconA.IsInWorld || iconA.IsDead || iconA.Disposed)
 			{
 				UpdateTooltipActor(null);
@@ -656,8 +662,6 @@ namespace OpenRA.Meow.RPG.Widgets
 
 				if (controlMode)
 				{
-					TooltipUnit.Actor.World.IssueOrder(new Order("Controler:Enable", TooltipUnit.Actor, false));
-
 					WVec mVec = WVec.Zero;
 
 					if (moveUp)
@@ -728,11 +732,6 @@ namespace OpenRA.Meow.RPG.Widgets
 			}
 			else
 			{
-				if (TooltipUnit != null && TooltipUnit.Actor != null && !TooltipUnit.Actor.IsDead && TooltipUnit.Actor.IsInWorld)
-				{
-					TooltipUnit.Actor.World.IssueOrder(new Order("Controler:Disable", TooltipUnit.Actor, false));
-				}
-
 				if (Ui.KeyboardFocusWidget == this)
 					Ui.KeyboardFocusWidget = null;
 				lastMove = false;
@@ -747,6 +746,7 @@ namespace OpenRA.Meow.RPG.Widgets
 				return;
 
 			RefreshActorSelecting();
+
 			selectionHash = world.Selection.Hash;
 		}
 
@@ -761,6 +761,8 @@ namespace OpenRA.Meow.RPG.Widgets
 		public HotkeyReference MoveDownKey = new HotkeyReference();
 		public HotkeyReference MoveLeftKey = new HotkeyReference();
 		public HotkeyReference MoveRightKey = new HotkeyReference();
+		public HotkeyReference DeployKey = new HotkeyReference();
+
 		public float ViewportLerpSpeed = 0.5f;
 		bool moveUp;
 		bool moveDown;
@@ -829,6 +831,13 @@ namespace OpenRA.Meow.RPG.Widgets
 					world.Selection.Clear();
 					toggleOn = true;
 				}
+				else
+				{
+					if (TooltipUnit != null && TooltipUnit.Actor != null && !TooltipUnit.Actor.IsDead && TooltipUnit.Actor.IsInWorld)
+					{
+						TooltipUnit.Actor.World.IssueOrder(new Order("Controler:Disable", TooltipUnit.Actor, false));
+					}
+				}
 			}
 
 			if (ToggleActorCameraKey.IsActivatedBy(e) && e.Event == KeyInputEvent.Down && !e.IsRepeat)
@@ -841,6 +850,7 @@ namespace OpenRA.Meow.RPG.Widgets
 			else if (controlMode && toggleOn)
 			{
 				world.Selection.Add(TooltipUnit.Actor);
+				TooltipUnit.Actor.World.IssueOrder(new Order("Controler:Enable", TooltipUnit.Actor, false));
 			}
 
 			OnKeyPress(e);
@@ -886,6 +896,22 @@ namespace OpenRA.Meow.RPG.Widgets
 			{
 
 				moveRight = false;
+			}
+
+			if (controlMode && DeployKey.IsActivatedBy(e) && e.Event == KeyInputEvent.Up)
+			{
+				var ideploy = TooltipUnit.Actor.TraitsImplementing<IIssueDeployOrder>().ToArray();
+				var orders = ideploy
+					.Where(t => t.CanIssueDeployOrder(TooltipUnit.Actor, false))
+					.Select(t => t.IssueDeployOrder(TooltipUnit.Actor, false))
+					.Where(d => d != null)
+					.ToArray();
+
+				foreach (var o in orders)
+					world.IssueOrder(o);
+
+				orders.PlayVoiceForOrders();
+				input = true;
 			}
 
 			if (controlMode && input)
