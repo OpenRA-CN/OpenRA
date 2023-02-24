@@ -4,7 +4,7 @@
 		ShadowZOffset: 5
 		ZOffset: 5
 	icon:
-		Filename: xxicon.shp
+		Filename: emptyicon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
@@ -81,7 +81,7 @@ hvr:
 		IgnoreWorldTint: True
 		# MeshType: FloatBoard
 	icon:
-		Filename: xxicon.shp
+		Filename: emptyicon.shp
 
 lpst.gdi:
 	Inherits@defaults: ^VehicleBase
@@ -586,7 +586,7 @@ icbm:
 		Scale: 1.1
 		ShadowStart: 30
 	icon:
-		Filename: mltiicon.shp
+		Filename: icbmicon.shp
 
 bus:
 	Inherits@defaults: ^VehicleBase

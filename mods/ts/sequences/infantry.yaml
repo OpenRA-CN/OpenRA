@@ -4,7 +4,7 @@
 		ShadowZOffset: 10
 		ZOffset: 14
 	icon:
-		Filename: xxicon.shp
+		Filename: emptyicon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
@@ -21,7 +21,7 @@
 		ShadowStart: 6
 		Facings: 1
 	icon:
-		Filename: xxicon.shp
+		Filename: emptyicon.shp
 		Facings: 1
 		Length: 1
 		Start: 0

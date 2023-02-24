@@ -1149,7 +1149,7 @@ icon:
 	testcystalicon:
 		Filename: testcystalicon.shp
 	none:
-		Filename: xxicon.shp
+		Filename: emptyicon.shp
 
 clustermissile:
 	up: # TODO: use voxel
