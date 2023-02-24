@@ -60,7 +60,7 @@ doggie:
 		Length: 10
 		ShadowStart: 228
 	icon:
-		Filename: emptyicon.shp
+		Filename: empty2icon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
@@ -76,7 +76,7 @@ vissml:
 		Tick: 80
 		Offset: 0, 0, 16
 	icon:
-		Filename: emptyicon.shp
+		Filename: empty2icon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
@@ -105,7 +105,7 @@ vislrg:
 		Offset: 0, 0, 16
 		# ShadowStart: 40 # TODO: enable shadow frames
 	icon:
-		Filename: emptyicon.shp
+		Filename: empty2icon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
@@ -134,7 +134,7 @@ floater:
 		Offset: 0, 0, 16
 		IgnoreWorldTint: True
 	icon:
-		Filename: emptyicon.shp
+		Filename: empty2icon.shp
 		Facings: 1
 		Length: 1
 		Start: 0
