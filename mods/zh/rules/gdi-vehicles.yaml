@@ -1,0 +1,795 @@
+APC:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@CARGOPIPS: ^CargoPips
+	Inherits@bounty: ^GlobalBounty
+	Inherits@AImicroManagable: ^AImicroManagable
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Amphibious APC
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 80
+		Prerequisites: ~gaweap, gapile, ~techlevel.medium
+		Description: Armored infantry transport.\nCan move on water.\nHas a recon drone.\nCan use Force Attack to use drone to recon, has a very long range
+	Mobile:
+		MaxSpeed: 120
+		Speed: 60
+		SpeedAccleration: 2
+		PauseOnCondition: empdisable || loading || being-captured || carried
+		Locomotor: amphibious
+		CanMoveBackward: true
+		MaxBackwardCells: 6
+		TurnSpeed: 40
+	Health:
+		HP: 20000
+	Armor:
+		Type: Heavy
+	Cargo:
+		Types: Infantry
+		MaxWeight: 5
+		UnloadVoice: Unload
+		LoadingCondition: loading
+		EjectOnDeath: true
+		LoadedCondition: loaded
+	GrantConditionOnTerrain:
+		Condition: inwater
+		TerrainTypes: Water
+	WithModelBody:
+		RequiresCondition: !inwater
+	WithModelBody@water:
+		Sequence: water
+		RequiresCondition: inwater
+	LeavesTrails:
+		RequiresCondition: !inside-tunnel && inwater
+		Image: wake
+		Palette: effect
+		TerrainTypes: Water
+		StationaryInterval: 18
+		MovingInterval: 6
+	DroneSpawnerMaster:
+		Actors: QDRONE
+		SpawnOffset: 0,0,512
+		RespawnTicks: 256
+		FollowAfterAttackDelay: 21 ## bigger than reload time
+		PauseOnCondition: inside-tunnel || carried || empdisable
+	Armament:
+		Weapon: ApcReconDummyWeapon
+		PauseOnCondition: empdisable
+		TargetRelationships: None
+		Cursor: ability
+		OutsideRangeCursor: move
+		ShowInActorInfo: false
+	Armament@AI:
+		Weapon: ApcReconDummyWeapon
+		RequiresCondition: AImicroManage
+		PauseOnCondition: empdisable
+		Cursor: ability
+		OutsideRangeCursor: move
+		ShowInActorInfo: false
+	AttackFollow:
+		PauseOnCondition: empdisable || carring
+		Voice: Move
+		TargetLineColor: FFFF00
+	AutoDeployer@AI:
+		RequiresCondition: AImicroManage && loaded
+		DeployChance: 100
+		DeployTicks: 200
+		UndeployTicks: 0
+	-RevealOnFire:
+
+HVR:
+	Inherits: ^Vehicle
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@WithRA2VoxRender: ^WithRA2VoxRender
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Hover MLRS
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 80
+		Prerequisites: ~gaweap, garadr, ~techlevel.high
+		Description: Hovering vehicle armed with\nmid-long range missiles.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+	Mobile:
+		MaxSpeed: 99
+		Speed: 50
+		SpeedAccleration: 2
+		Locomotor: hover
+		TerrainOrientationAdjustmentMargin: -1
+		MovementMode: Universal
+		TurnSpeed: 16
+		CanMoveBackward: true
+		BackwardDuration: 5
+	Selectable:
+		Bounds: 1206, 1600, 0, -900
+	Health:
+		HP: 23000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 8c0
+	Armament:
+		Weapon: HoverMissileQuad
+		Turret: primary
+		#LocalOffset: 122,172,666, 122,-172,666, 122,211,666, 122,-211,666
+		LocalOffset: 122,172,666, 122,-172,666, 122,211,606, 122,-211,606
+		LocalYaw: -82, 82, -100, 100
+	Turreted:
+		TurnSpeed: 28
+		Turret: primary
+		Offset: -154,0,0
+	AttackTurreted:
+		Voice: Attack
+		PauseOnCondition: empdisable || carring
+	WithModelTurret:
+	Hovers:
+		RequiresCondition: !empdisable
+		BobDistance: -54
+		InitialHeight: 192
+	AttachCarryable:
+		CarriedCondition: carried
+	LeavesTrails:
+		RequiresCondition: !inside-tunnel && !carried
+		Image: wake
+		Palette: effect
+		TerrainTypes: Water
+		TrailWhileStationary: True
+		StationaryInterval: 18
+		MovingInterval: 6
+	-DamagedByTerrain@VEINS:
+	-LeavesTrails@VEINS:
+
+SMECH:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Wolverine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 20
+		Prerequisites: ~gaweap, ~techlevel.low
+		Description: Anti-personnel assualt walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		TurnSpeed: 64
+		MaxSpeed: 130
+		Speed: 80
+		MovementMode: Universal
+		SpeedAccleration: 8
+		Locomotor: walker
+		TerrainOrientationAdjustmentMargin: -1
+	Crushable:
+		CrushClasses: bigguy
+	Targetable@Crushable:
+		TargetTypes: Crushable
+	Health:
+		HP: 17500
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c0
+	AttackFrontal:
+		Voice: Attack
+		PauseOnCondition: empdisable || carring
+		FacingTolerance: 16
+	Armament:
+		LocalOffset: 111,200,255, 111,-220,255
+		BurstsPerFire: 2
+		UseBlindage: true
+		Weapon: AssaultVulcan
+	Voiced:
+		VoiceSet: Mech
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: stand
+		Palette: player-nomuzzle
+		IsPlayerPalette: True
+	WithAttackAnimation:
+		Sequence: shoot
+	WithAttackOverlay@muzzle:
+		Sequence: shoot-muzzle
+		Palette: muzzle
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+		RequiresCondition: !empdisable && !carring
+	Selectable:
+		Bounds: 603, 1930, 0, -482
+	Passenger:
+		CargoType: Infantry
+		Voice: Move
+		Weight: 2
+		# CargoCondition: ascargo
+	-DamagedByTerrain@VEINS:
+	-LeavesTrails@VEINS:
+
+MMCH:
+	Inherits: ^Tank
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@renderVoxel: ^RenderVoxel
+	Inherits@bounty: ^GlobalBounty
+	Inherits@AImicroManagable: ^AImicroManagable
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Titan
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 50
+		Prerequisites: ~gaweap, ~techlevel.medium
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft\n Can recieve Weapon Plugin\n-can recieve all 3 kinds of plugin at the same time
+	Mobile:
+		TurnSpeed: 24
+		MaxSpeed: 65
+		Speed: 8
+		MovementMode: Universal
+		SpeedAccleration: 15
+		Locomotor: heavywalker
+		TerrainOrientationAdjustmentMargin: -1
+	Health:
+		HP: 40000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 9c0
+	BodyOrientation:
+		QuantizedFacings: 32
+		UseClassicPerspectiveFudge: False
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+		RequiresCondition: !empdisable && !carring
+	Turreted:
+		TurnSpeed: 20
+	Turreted@droneCheck:
+		Turret: check
+		TurnSpeed: 512
+		RealignDelay: -1
+		Floating: true
+	Armament:
+		Weapon: 120mm
+		MuzzleSequence: muzzle-cannon
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 998,272,610
+	AttackTurreted:
+		Armaments: primary, secondary, rpg, check
+		Voice: Attack
+		PauseOnCondition: empdisable || carring
+		Turrets: primary, check
+	AutoTarget:
+		ScanRadius: 9 #PREF: save trait looks up and scan armaments
+	WithSpriteTurret:
+		Recoils: false
+	Armament:
+		Weapon: 120mm
+		MuzzleSequence: muzzle-cannon
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 998,272,610
+	Armament@mg:
+		LocalOffset: 415,272,700
+		Weapon: TitanVulcan
+		RequiresCondition: vulcan
+		MuzzleSequence: muzzle-vulcan
+	Armament@missile:
+		LocalOffset: 280,-445,545, 280,-445,735
+		LocalYaw: 82
+		Weapon: TitanRPG
+		RequiresCondition: rpg
+		Name: rpg
+		MuzzleSequence: muzzle-cannon
+	Armament@droneCheck:
+		Weapon: TitianDroneCheck
+		Turret: check
+		Name: check
+		ShowInActorInfo: false
+	DroneSpawnerMaster:
+		Actors: RPGDRONE
+		Armament: check
+		SpawnOffset: 0,0,512
+		RespawnTicks: 256
+		FollowAfterAttackDelay: 25
+		PauseOnCondition: inside-tunnel || carried || empdisable || !missile
+		ShouldSpawnInitialLoad: false
+	Pluggable@vulcan:
+		Conditions:
+			plug.vulcan: vulcan
+		Requirements:
+			plug.vulcan: !vulcan
+		EditorOptions:
+			plug.vulcan: Vulcan Upgrade
+	Pluggable@missile:
+		Conditions:
+			plug.missile: missile
+		Requirements:
+			plug.missile: !missile
+		EditorOptions:
+			plug.missile: SAM Upgrade
+	Pluggable@RPG:
+		Conditions:
+			plug.rpg: rpg
+		Requirements:
+			plug.rpg: !rpg
+		EditorOptions:
+			plug.rpg: RPG Upgrade
+	DetectCloaked:
+		Range: 1c768
+		RequiresCondition: rank-elite
+	RenderDetectionCircle:
+	WithMuzzleOverlay:
+	WithModelBarrel:
+		LocalOffset: 345,272,515
+		RequiresCondition: !vulcan
+	WithModelBarrel@vulcan:
+		Sequence: barrel-vulcan
+		LocalOffset: 345,272,515
+		RequiresCondition: vulcan
+	WithModelBarrel@missile:
+		Sequence: barrel-rpg
+		LocalOffset: 0,-230,640
+		RequiresCondition: rpg
+		Armament: rpg
+	Selectable:
+		Bounds: 905, 2534, 0, -482
+	AttachCarryable:
+		LocalOffset: 0,0,577
+	### Help AI to manage
+	ProvidesPrerequisite@pluggablevulcan:
+		RequiresCondition: AImicroManage && !vulcan
+		Prerequisite: plug.vulcan
+	ProvidesPrerequisite@pluggablemissile:
+		RequiresCondition: AImicroManage && !missile
+		Prerequisite: plug.missile
+	ProvidesPrerequisite@pluggableRPG:
+		RequiresCondition: AImicroManage && !rpg
+		Prerequisite: plug.rpg
+
+HMEC:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Mammoth Mk. II
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 140
+		BuildAtProductionType: DropZone
+		Prerequisites: ~gaweap, gtdrop, ~techlevel.high
+		BuildLimit: 1
+		Description: Slow heavy walker.\nArmed with dual railguns, rocket launchers and chain gun.\n  Strong vs All\n  Weak vs Nothing\nMaximum 1 can be built.
+	Mobile:
+		TurnSpeed: 12
+		MaxSpeed: 42
+		Speed: 5
+		SpeedAccleration: 5
+		MovementMode: Universal
+		Locomotor: heavywalker
+	Health:
+		HP: 100000
+	ChangesHealth:
+		Step: 500
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 10c0
+		MaxHeightDelta: 1665
+	AttackFrontal:
+		Voice: Attack
+		PauseOnCondition: empdisable || carring
+		FacingTolerance: 256
+		FacingFullOnTarget: true
+	WithMuzzleOverlay:
+	Armament@PulseChainGun:
+		Weapon: MechPulseGun
+		LocalOffset: 1300,0,490
+		FacingTolerance: 256
+		MuzzleSequence: muzzle
+		MuzzlePalette: effectcyan
+	Armament@MISSILES:
+		Weapon: MammothTuskMk2
+		LocalOffset: -440,-580,1100, -440,580,1100
+		LocalYaw: 120, -120
+		FacingTolerance: 256
+	Armament@RAILGUN:
+		Weapon: MechRailgun
+		BurstsPerFire: 2
+		LocalOffset: 698,-580,1000, 698,580,1000
+		FacingTolerance: 15
+	-WithModelBody:
+	WithModelWalkerBody:
+		TickRate: 1
+		PauseOnCondition: empdisable || carring
+	RenderModels:
+		Scale: 2
+	Selectable:
+		Bounds: 2000, 3400, 0, -768
+	AttachCarryable:
+		LocalOffset: 0,0,768
+	BodyOrientation:
+		QuantizedFacings: 1024
+
+SONIC:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Disruptor
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 120
+		Prerequisites: ~gaweap, gatech, ~techlevel.high
+		Description: Armored high-tech vehicle with\npowerful sonic armament.\n  Strong vs Ground\n  Weak vs Aircraft
+	Targetable:
+		TargetTypes: Ground, Vehicle, Disruptor
+	Mobile:
+		TurnSpeed: 16
+		MaxSpeed: 56
+		Speed: 35
+		SpeedAccleration: 2
+	Health:
+		HP: 50000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	Armament:
+		Weapon: SonicWave
+		LocalOffset: 171,0,535 #-71,0,535
+		ExhaustAllBurst: true
+		NotCheckRangeToExhaustAllBurst: true
+	AttackTurreted:
+		Voice: Attack
+		PauseOnCondition: empdisable || carring
+		OpportunityFire: False
+	Turreted:
+		TurnSpeed: 20
+		Offset: -388,0,0 #-208,0,0
+	WithModelTurret:
+	Explodes:
+		RequiresCondition: !rank-elite
+	Explodes@ELITE:
+		RequiresCondition: rank-elite
+		Weapon: UnitExplode
+	RenderModels:
+		Scale: 1.2
+
+JUGG:
+	Inherits: ^Tank
+	Inherits@SPRITES: ^SpriteActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@renderVoxel: ^RenderVoxel
+	Inherits@bounty: ^GlobalBounty
+	Inherits@AImicroManagable: ^AImicroManagable
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Juggernaut
+		RequiresCondition: !deployed
+	Tooltip@DEPLOYED:
+		Name: Juggernaut (deployed)
+		RequiresCondition: deployed
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 100
+		Prerequisites: ~gaweap, garadr, ~techlevel.high
+		Description: Mobile Artillery Mech.\nNeeds to deploy in order to shoot. \n-cannot deploy on ramp.\n  Strong vs Ground units\n  Weak vs Aircraft
+	Health:
+		HP: 35000
+	Armor:
+		Type: Light
+	Mobile:
+		MaxSpeed: 71
+		Speed: 10
+		SpeedAccleration: 4
+		MovementMode: Universal
+		TurnSpeed: 32
+		Locomotor: heavywalker
+		ImmovableCondition: !undeployed
+		TerrainOrientationAdjustmentMargin: -1
+	RevealsShroud@deploy:
+		RequiresCondition: !inside-tunnel && deployed
+		Range: 9c0
+		MaxHeightDelta: 1100
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel && !deployed
+		Range: 6c512
+		MaxHeightDelta: 1100
+	RenderSprites:
+		Image: jugg
+	WithMakeAnimation:
+		BodyNames: body, deployedbody
+	WithFacingSpriteBody:
+		Sequence: stand
+		RequiresCondition: !deployed && !preparing-undeploy
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+		RequiresCondition: !empdisable && !carring
+	GrantConditionOnDeploy:
+		PauseOnCondition: empdisable || being-captured
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		UndeployOnMove: true
+		UndeployOnPickup: true
+		Facing: 384
+		AllowedTerrainTypes: Clear, Road, DirtRoad, Rough, Tiberium, BlueTiberium
+		DeploySounds: place2.aud
+		UndeploySounds: clicky1.aud
+		Voice: Move
+		DeployOnAttack: true
+		DeployArmament: todeploy
+	AttackFrontal@todeploy:
+		Voice: Attack
+		Armaments: todeploy
+		FacingTolerance: 512
+		RequiresCondition: undeployed
+		PauseOnCondition: empdisable || carring
+	Armament@todeploy:
+		Name: todeploy
+		Weapon: Jugg90mmDeployCheck
+		RequiresCondition: undeployed
+		FacingTolerance: 512
+	AutoTarget:
+		ScanRadius: 14 #PREF: save trait looks up and scan armaments
+	EntersTunnels:
+		RequireForceMoveCondition: !undeployed
+	Repairable:
+		RequireForceMoveCondition: !undeployed
+	Passenger:
+		RequireForceMoveCondition: !undeployed
+	GrantCondition@PREVIEWWORKAROUND:
+		Condition: real-actor
+	QuantizeFacingsFromSequence:
+		Sequence: turret
+	WithSpriteBody@deployed:
+		RequiresCondition: deployed || preparing-undeploy && real-actor
+		Name: deployedbody
+	Turreted:
+		Turret: deployed
+		TurnSpeed: 20
+		InitialFacing: 0
+		Offset: -64,0,410
+		RealignDelay: -1
+		RealignWhenDisable: true
+		RequiresCondition: deployed || preparing-undeploy
+		RealignBeforeDeploy: true
+	WithModelTurret@deployed:
+		Turret: deployed
+		RequiresCondition: deployed || preparing-undeploy
+		# Recoils: false
+	WithModelBarrel@1:
+		Armament: deployed1
+		LocalOffset: 350,0,100
+		LocalOrientation: 0, 128, 0
+		RequiresCondition: deployed || preparing-undeploy
+		RotationSpeed: 12
+		PackBarrelBeforeUndeploy: true
+		PackBarrelBeforeDeploy: false
+	WithModelBarrel@2:
+		Armament: deployed2
+		LocalOffset: 350,203,100
+		LocalOrientation: 0, 128, 0
+		RequiresCondition: deployed || preparing-undeploy
+		RotationSpeed: 12
+		PackBarrelBeforeDeploy: true
+	WithModelBarrel@3:
+		Armament: deployed3
+		LocalOffset: 350,-203,100
+		LocalOrientation: 0, 128, 0
+		RequiresCondition: deployed || preparing-undeploy
+		RotationSpeed: 12
+		PackBarrelBeforeDeploy: true
+	# WithSpriteTurret@deployed:
+	# 	Turret: deployed
+	# 	RequiresCondition: deployed
+	# 	Recoils: false
+	AttackTurreted@deployed:
+		Voice: Attack
+		Armaments: deployed1, deployed2, deployed3
+		Turrets: deployed
+		RequiresCondition: deployed && !init-barrel
+		PauseOnCondition: empdisable || carring
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+		OutsideRangeRequiresForceFire: True
+	Armament@deployed1:
+		Name: deployed1
+		Turret: deployed
+		Weapon: Jugg90mm
+		LocalOffset: 925,0,800
+		FireDelay: 3
+		# RequiresCondition: deployed && !init-barrel
+		MuzzleSequence: muzzle
+		Recoil: 148
+		RecoilRecovery: 12
+	Armament@deployed2:
+		Name: deployed2
+		Turret: deployed
+		Weapon: Jugg90mm
+		LocalOffset: 925,203,800
+		# RequiresCondition: deployed && !init-barrel
+		MuzzleSequence: muzzle
+		Recoil: 148
+		RecoilRecovery: 12
+	Armament@deployed3:
+		Name: deployed3
+		Turret: deployed
+		Weapon: Jugg90mm
+		FireDelay: 7
+		LocalOffset: 925,-203,800
+		# RequiresCondition: deployed && !init-barrel
+		MuzzleSequence: muzzle
+		Recoil: 148
+		RecoilRecovery: 12
+	WithMuzzleOverlay:
+	RevealOnFire:
+		ArmamentNames: deployed
+	Selectable:
+		DecorationBounds: 1448, 2413, 0, -482
+	RenderModels:
+		Scale: 1
+		LightScale: 0.22
+		SpecularScale: 0.33
+		AmbientScale: 0.88
+	AutoDeployer@AI:
+		RequiresCondition: AImicroManage && undeployed
+		DeployChance: 100
+		DeployTrigger: Attack
+		DeployTicks: 5
+		UndeployTicks: 50
+
+LIMPED:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Limpet Drone
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 21
+		Description: Small drone armed with explosives.\n\nGood vs: Vehicles, Aircraft\n\nSpecial:\n- Needs to be deployed to be armed\n- Invisible and get a lot of extra protection when deployed\n- Launches explosives towards a target after small delay
+		Prerequisites: ~gaweap, ~techlevel.low
+	Health:
+		HP: 10000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 120
+		TurnSpeed: 1023
+		MovementMode: Universal
+		Locomotor: hover
+		ImmovableCondition: !undeployed
+	Passenger:
+		CargoType: Infantry
+		RequireForceMoveCondition: !undeployed
+		Voice: Move
+		Weight: 2
+		# CargoCondition: ascargo
+	AttachCarryable:
+		RequiresCondition: undeployed
+	Voiced:
+		VoiceSet: Limpet
+	Selectable:
+		Bounds: 483, 2111, 0, -448
+	QuantizeFacingsFromSequence:
+	Hovers:
+		RequiresCondition: undeployed
+	GrantConditionOnDeploy:
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		Facing: 640
+		AllowedTerrainTypes: Clear, Road, DirtRoad, Rough, Tiberium, BlueTiberium
+		DeploySounds: clicky1.aud
+		UndeploySounds: clicky1.aud
+		SmartDeploy: true
+		UndeployOnMove: true
+		CanDeployOnRamps: true
+		RequiresCondition: !inside-tunnel && !empdisable
+		DeployOnAttack: true
+		DeployArmament: todeploy
+	AttackFrontal:
+		Armaments: deployed, todeploy
+		FacingTolerance: 512
+		PauseOnCondition: empdisable || carring
+	AutoTarget:
+		ScanRadius: 7 #PREF: save trait looks up and scan armaments
+	Armament@1:
+		Name: deployed
+		Weapon: LimpetMissile
+		RequiresCondition: deployed
+		PauseOnCondition: empdisable
+	Armament@todeploy:
+		Name: todeploy
+		Weapon: LurkerAimDummyWeapon
+		RequiresCondition: undeployed
+		PauseOnCondition: empdisable
+		ShowInActorInfo: false
+	RevealOnFire:
+		ArmamentNames: deployed
+	WithRangeCircle:
+		Range: 6c512
+		Color: FFFF00CC
+		BorderColor: 000000CC
+		BorderWidth: 0
+		Width: 2
+		RequiresCondition: deployed
+	DamageMultiplier@bury-self:
+		RequiresCondition: cloaking-self
+		Modifier: 25
+	Cloak@bury-self:
+		RequiresCondition: deployed && !empdisable
+		InitialDelay: 0
+		CloakDelay: 20
+		Palette: cloak
+		IsPlayerPalette: true
+		UncloakOn: Attack, Unload, Infiltrate, Demolish
+		CloakedCondition: cloaking-self
+		EffectOffset: 0, 0, 0
+		EffectImage: dig
+		EffectPalette: effect
+		CloakEffectSequence: idle2
+		EffectTracksActor: false
+	WithSpriteBody@UndeloyedBody:
+		Sequence: idle
+		RequiresCondition: undeployed && !inside-tunnel
+	WithMakeAnimation:
+		BodyNames: deployed
+	WithSpriteBody@DeloyedBody:
+		Name: deployed
+		Sequence: deployed
+		RequiresCondition: !undeployed
+	-WithIdleOverlay@DAMAGED3:
+	WithIdleOverlay@DAMAGED1:
+		RequiresCondition: !inside-tunnel && undeployed && (damaged-state || critical-state)
+	WithIdleOverlay@DAMAGED2:
+		Offset: 0, 0, 0
+		RequiresCondition: !inside-tunnel && deployed && (damaged-state || critical-state)
+	-SpawnActorOnDeath@ctech:
+	-DamagedByTerrain@VEINS:
+	-LeavesTrails@VEINS:

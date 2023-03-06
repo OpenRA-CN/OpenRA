@@ -1,0 +1,249 @@
+TIBTRE01:
+	Inherits: ^BlossomTree
+
+TIBTRE02:
+	Inherits: ^BlossomTree
+
+TIBTRE03:
+	Inherits: ^BlossomTree
+
+BIGBLUE:
+	Inherits: ^BlossomTree
+	Tooltip:
+		Name: Large Blue Tiberium Crystal
+	RenderSprites:
+		Palette: bluetiberium
+	RadarColorFromTerrain:
+		Terrain: BlueTiberium
+	AppearsOnMapPreview:
+		Terrain: BlueTiberium
+	SeedsResource:
+		ResourceType: BlueTiberium
+		Interval: 110
+	TerrainLightSource:
+		Range: 7c640
+		Intensity: 0.36
+		RedTint: 0.01
+		GreenTint: 0.01
+		BlueTint: 0.9
+
+BIGBLUE3:
+	Inherits: BIGBLUE
+
+TREE01:
+	Inherits: ^Tree
+
+TREE02:
+	Inherits: ^Tree
+
+TREE03:
+	Inherits: ^Tree
+
+TREE04:
+	Inherits: ^Tree
+
+TREE05:
+	Inherits: ^Tree
+
+TREE06:
+	Inherits: ^Tree
+
+TREE07:
+	Inherits: ^Tree
+
+TREE08:
+	Inherits: ^Tree
+
+TREE09:
+	Inherits: ^Tree
+
+TREE10:
+	Inherits: ^Tree
+
+TREE11:
+	Inherits: ^Tree
+
+TREE12:
+	Inherits: ^Tree
+
+TREE13:
+	Inherits: ^Tree
+
+TREE14:
+	Inherits: ^Tree
+
+TREE15:
+	Inherits: ^Tree
+
+TREE16:
+	Inherits: ^Tree
+
+TREE17:
+	Inherits: ^Tree
+
+TREE18:
+	Inherits: ^Tree
+
+TREE19:
+	Inherits: ^Tree
+
+TREE20:
+	Inherits: ^Tree
+
+TREE21:
+	Inherits: ^Tree
+
+TREE22:
+	Inherits: ^Tree
+
+TREE23:
+	Inherits: ^Tree
+
+TREE24:
+	Inherits: ^Tree
+
+TREE25:
+	Inherits: ^Tree
+
+
+VEINHOLE:
+	Inherits: ^ExistsInWorld
+	Inherits@1: ^BlossomTree
+	Inherits@heal: ^HealsOnTiberium
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Tooltip:
+		Name: Veinhole
+	Building:
+		Footprint: === === ===
+		Dimensions: 3, 3
+	RadarColorFromTerrain:
+		Terrain: Veins
+	AppearsOnMapPreview:
+		Terrain: Veins
+	FrozenUnderFog:
+	-WithIdleAnimation:
+	WithSpriteBody:
+		Name: body
+		StartSequence: reverse
+		RequiresCondition: !damage-cool
+	WithSpriteBody@damage-cool:
+		Name: diebody
+		StartSequence: todie
+		Sequence: die
+		RequiresCondition: damage-cool
+	RevealOnFire:
+	AutoTarget:
+		InitialStance: AttackAnything
+	AttackOmni:
+		FacingTolerance: 512
+		RequiresCondition: !damage-cool
+	RevealsShroud:
+		RequiresCondition: !damage-cool
+		Range: 1c0
+		Type: CenterPosition
+		ValidRelationships: Neutral, Ally
+		MaxHeightDelta: 3000
+	Armament:
+		RequiresCondition: !damage-cool
+		Weapon: VeinholeSpray
+		LocalOffset: 0,0,0
+		FireDelay: 19
+	WithAttackAnimation:
+		Sequence: attack
+	Health:
+		HP: 110000
+	GrantConditionOnDamageState@untargetable:
+		Condition: untargetable
+		ValidDamageStates: Critical
+	GrantConditionOnTime:
+		RequiresCondition: untargetable
+		Condition: damage-cool
+		Tick: 500
+	Armor:
+		Type: Heavy
+	HitShape:
+		TargetableOffsets: 0,0,0
+		Type: Circle
+			Radius: 512
+			VerticalTopOffset: 1
+	Targetable:
+		RequiresCondition: !damage-cool
+		TargetTypes: Ground, Veinhole, NoAutoTarget, AIgnored
+	-BlocksProjectiles:
+	SeedsResource:
+		ResourceType: Veins
+		Interval: 80
+		RequiresCondition: !damage-cool
+	TerrainLightSource:
+		Range: 7c128
+		Intensity: 0.36
+		RedTint: 0.65
+		GreenTint: 0.01
+		BlueTint: 0.01
+	ChangesHealth@critical:
+		Step: 20000
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 0
+		RequiresCondition: damage-cool
+	ChangesHealth@selfheal:
+		Step: 200
+		Delay: 100
+		StartIfBelow: 100
+		DamageCooldown: 0
+	Explodes:
+		Weapon: ChemicalCluster
+		EmptyWeapon: ChemicalCluster
+		Type: CenterPosition
+
+^TibFlora:
+	Inherits: ^Tree
+	MapEditorData:
+		RequireTilesets: TEMPERATE
+	Tooltip:
+		Name: Tiberian Flora
+
+FONA01:
+	Inherits: ^TibFlora
+
+FONA02:
+	Inherits: ^TibFlora
+
+FONA03:
+	Inherits: ^TibFlora
+
+FONA04:
+	Inherits: ^TibFlora
+
+FONA05:
+	Inherits: ^TibFlora
+
+FONA06:
+	Inherits: ^TibFlora
+
+FONA07:
+	Inherits: ^TibFlora
+
+FONA08:
+	Inherits: ^TibFlora
+
+FONA09:
+	Inherits: ^TibFlora
+
+FONA10:
+	Inherits: ^TibFlora
+
+FONA11:
+	Inherits: ^TibFlora
+
+FONA12:
+	Inherits: ^TibFlora
+
+FONA13:
+	Inherits: ^TibFlora
+
+FONA14:
+	Inherits: ^TibFlora
+
+FONA15:
+	Inherits: ^TibFlora

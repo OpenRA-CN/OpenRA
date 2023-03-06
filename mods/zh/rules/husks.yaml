@@ -1,0 +1,138 @@
+DSHP.Husk:
+	Inherits: ^AircraftHusk
+	Tooltip:
+		Name: Dropship
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 168
+	RenderSprites:
+		Image: dshp
+	RenderModels:
+		Image: dshp
+
+A10.Husk:
+	Inherits: ^AircraftHusk
+	Tooltip:
+		Name: A10 "Thunder" Armoured Attacker
+	Aircraft:
+		TurnSpeed: 12
+		Speed: 168
+	FallsToEarth:
+		MaximumSpinSpeed: 2
+		Moves: true
+	RenderSprites:
+		Image: a10
+	-WithModelBody:
+	WithModelWalkerBody:
+		TickRate: 2
+	RenderModels:
+		Image: a10husk
+		Scale: 1
+
+A10.Husk.EMP:
+	Inherits: A10.Husk
+	Inherits@EMP: ^EmpVisualEffects
+
+ORCA.Husk:
+	Inherits: ^AircraftHusk
+	Tooltip:
+		Name: Orca Fighter
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 186
+	RenderSprites:
+		Image: orca
+	RenderModels:
+		Image: orca
+
+ORCA.Husk.EMP:
+	Inherits: ORCA.Husk
+	Inherits@EMP: ^EmpVisualEffects
+
+ORCAB.Husk:
+	Inherits: ^AircraftHusk
+	Tooltip:
+		Name: Orca Bomber
+	Aircraft:
+		TurnSpeed: 12
+		Speed: 96
+	FallsToEarth:
+		MaximumSpinSpeed: 24
+	RenderSprites:
+		Image: orcab
+	RenderModels:
+		Image: orcab
+
+ORCAB.Husk.EMP:
+	Inherits: ORCAB.Husk
+	Inherits@EMP: ^EmpVisualEffects
+
+ORCATRAN.Husk:
+	Inherits: ^AircraftHusk
+	Tooltip:
+		Name: Orca Transport
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 84
+	RenderSprites:
+		Image: orcatran
+	RenderModels:
+		Image: orcatran
+
+ORCATRAN.Husk.EMP:
+	Inherits: ORCATRAN.Husk
+	Inherits@EMP: ^EmpVisualEffects
+
+TRNSPORT.Husk:
+	Inherits: ^AircraftHusk
+	Tooltip:
+		Name: AttachCarryall
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 149
+	RenderSprites:
+		Image: trnsport
+	RenderModels:
+		Image: trnsport
+
+TRNSPORT.Husk.EMP:
+	Inherits: TRNSPORT.Husk
+	Inherits@EMP: ^EmpVisualEffects
+
+SCRIN.Husk:
+	Inherits: ^AircraftHusk
+	Tooltip:
+		Name: Banshee Fighter
+	Aircraft:
+		TurnSpeed: 12
+		Speed: 168
+	FallsToEarth:
+		MaximumSpinSpeed: 24
+	RenderSprites:
+		Image: scrin
+	RenderModels:
+		Image: scrin
+
+SCRIN.Husk.EMP:
+	Inherits: SCRIN.Husk
+	Inherits@EMP: ^EmpVisualEffects
+
+APACHE.Husk:
+	Inherits: ^AircraftHusk
+	Tooltip:
+		Name: Harpy
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 130
+	WithIdleOverlay:
+		Offset: 85,0,346
+		Sequence: rotor
+	RenderSprites:
+		Image: apache
+	RenderModels:
+		Image: apache
+		Scale: 1.2
+
+APACHE.Husk.EMP:
+	Inherits: APACHE.Husk
+	Inherits@EMP: ^EmpVisualEffects

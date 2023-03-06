@@ -1,0 +1,1981 @@
+^ExistsInWorld:
+	UpdatesPlayerStatistics:
+	CombatDebugOverlay:
+	GivesExperience:
+		PlayerExperienceModifier: 1
+	ScriptTriggers:
+	RenderDebugState:
+	ActorControler:
+		TargetCursor: nuke
+		LockOnAnimImage: lockon
+		LockOnAnimSequence: common
+		LockOnAnimPalette: ra
+	InaccuracyMultiplier@under-control:
+		Modifier: 75
+		RequiresCondition: under-control
+	RangeMultiplier@under-control:
+		RequiresCondition: under-control
+		Modifier: 115
+	RevealsShroudMultiplier@under-control:
+		Modifier: 115
+		RequiresCondition: under-control
+	DamageMultiplier@avoidtarget:
+		RequiresCondition: avoidtarget
+		Modifier: 0
+	Targetable@avoidtarget:
+		RequiresCondition: avoidtarget
+		TargetTypes: Ignored
+	AttachManager:
+		Condition: attaching
+
+^SpriteActor:
+	BodyOrientation:
+		UseClassicPerspectiveFudge: False
+		CameraPitch: 85
+	QuantizeFacingsFromSequence:
+	RenderSprites:
+
+^GainsExperience:
+	GainsExperience:
+		LevelUpNotification: LevelUp
+		LevelUpTextNotification: Unit promoted.
+		Conditions:
+			500: rank
+			1000: rank
+		LevelUpImage: crate-effects
+	GrantCondition@RANK-VETERAN:
+		RequiresCondition: rank == 1
+		Condition: rank-veteran
+	GrantCondition@RANK-ELITE:
+		RequiresCondition: rank >= 2
+		Condition: rank-elite
+	FirepowerMultiplier@VETERAN:
+		RequiresCondition: rank-veteran
+		Modifier: 110
+	FirepowerMultiplier@ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 130
+	DamageMultiplier@VETERAN:
+		RequiresCondition: rank-veteran
+		Modifier: 90
+	DamageMultiplier@ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 75
+	SpeedMultiplier@VETERAN:
+		RequiresCondition: rank-veteran
+		Modifier: 120
+	SpeedMultiplier@ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 140
+	ReloadDelayMultiplier@VETERAN:
+		RequiresCondition: rank-veteran
+		Modifier: 90
+	ReloadDelayMultiplier@ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 75
+	RangeMultiplier@ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 120
+	ChangesHealth@ELITE:
+		Step: 200
+		Delay: 100
+		StartIfBelow: 100
+		DamageCooldown: 125
+		RequiresCondition: rank-elite
+	WithDecoration@VETERAN:
+		RequiresCondition: rank-veteran
+		Position: BottomRight
+		Margin: 3, 4
+		Image: rank
+		Sequence: veteran
+		Palette: ra
+	WithDecoration@ELITE:
+		RequiresCondition: rank-elite
+		Position: BottomRight
+		Margin: 3, 4
+		Image: rank
+		Sequence: elite
+		Palette: ra
+
+^InfantryExperienceHospitalOverrides:
+	WithDecoration@VETERAN:
+		BlinkInterval: 32
+		BlinkPatterns:
+			hospitalheal: On, Off
+	WithDecoration@ELITE:
+		BlinkInterval: 32
+		BlinkPatterns:
+			hospitalheal: On, Off
+
+^CrateStatModifiers:
+	FirepowerMultiplier@CRATES:
+		RequiresCondition: crate-firepower
+		Modifier: 200
+	DamageMultiplier@CRATES:
+		RequiresCondition: crate-damage
+		Modifier: 50
+	SpeedMultiplier@CRATES:
+		RequiresCondition: crate-speed
+		Modifier: 170
+	ExternalCondition@CRATE-FIREPOWER:
+		Condition: crate-firepower
+	ExternalCondition@CRATE-DAMAGE:
+		Condition: crate-damage
+	ExternalCondition@CRATE-SPEED:
+		Condition: crate-speed
+
+^EmpVisualEffects:
+	WithColoredOverlay@EMPDISABLE:
+		Color: 000000B4
+	WithIdleOverlay@EMPDISABLE:
+		Sequence: emp-overlay
+		Palette: effect
+
+^EmpDisable:
+	Inherits: ^EmpVisualEffects
+	WithColoredOverlay@EMPDISABLE:
+		RequiresCondition: empdisable
+	TimedConditionBar@EMPDISABLE:
+		Condition: empdisable
+		Color: FFFFFF
+	WithIdleOverlay@EMPDISABLE:
+		RequiresCondition: empdisable
+	PowerMultiplier@EMPDISABLE:
+		RequiresCondition: empdisable
+		Modifier: 0
+	ExternalCondition@EMPDISABLE:
+		Condition: empdisable
+
+^WebDisable:
+	TimedConditionBar@WebDisable:
+		Condition: WebDisable
+		Color: FFFFFF
+	Mobile:
+		PauseOnCondition: WebDisable
+	SpeedMultiplier@InstantStop:
+		RequiresCondition: WebDisable
+		Modifier: 0
+	WithIdleOverlay@web:
+		Sequence: webguy
+		Palette: player
+		IsPlayerPalette: true
+		RequiresCondition: WebDisable
+	ExternalCondition@WebDisable:
+		Condition: WebDisable
+
+^HospitalHealable:
+	ChangesHealth@HOSPITAL:
+		Step: 500
+		Delay: 100
+		StartIfBelow: 100
+		DamageCooldown: 125
+		RequiresCondition: hospitalheal
+	GrantConditionOnPrerequisite@HOSPITAL:
+		Condition: hospital
+		Prerequisites: cahosp
+	GrantConditionOnDamageState@HOSPITAL:
+		Condition: damaged
+		ValidDamageStates: Light, Medium, Heavy, Critical
+	GrantCondition@HOSPITAL:
+		RequiresCondition: hospital && damaged
+		Condition: hospitalheal
+	WithDecoration@REDCROSS:
+		RequiresCondition: hospitalheal
+		Position: BottomRight
+		Margin: 3, 4
+		Image: pips
+		Sequence: medic
+		Palette: pips
+		BlinkInterval: 32
+		BlinkPattern: Off, On
+
+
+^Cloakable:
+	Cloak@EXTERNALCLOAK:
+		RequiresCondition: cloakgenerator || crate-cloak && !WebDisable
+		InitialDelay: 0
+		CloakDelay: 90
+		IsPlayerPalette: true
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+		UncloakOn: Attack, Unload, Infiltrate, Demolish, Damage, Heal
+		CloakType: nod-stealth
+	ExternalCondition@CLOAKGENERATOR:
+		Condition: cloakgenerator
+	ExternalCondition@CRATE-CLOAK:
+		Condition: crate-cloak
+
+^AutoTargetGround:
+	AutoTarget:
+		MinimumScanTimeInterval: 23
+		MaximumScanTimeInterval: 23
+		AttackAnythingCondition: stance-attackanything
+	AutoTargetPriority@DEFAULT:
+		RequiresCondition: !stance-attackanything
+		ValidTargets: Infantry, Vehicle, Creep, Water, Defense
+		InvalidTargets: NoAutoTarget
+		ValidRelationships: Enemy
+	AutoTargetPriority@ATTACKANYTHING:
+		RequiresCondition: stance-attackanything
+		ValidTargets: Infantry, Vehicle, Creep, Water, Building, Defense
+		InvalidTargets: NoAutoTarget
+		ValidRelationships: Enemy
+
+^AutoTargetGroundAssaultMove:
+	Inherits: ^AutoTargetGround
+	AutoTargetPriority@DEFAULT:
+		RequiresCondition: !stance-attackanything && !assault-move
+	AutoTargetPriority@ATTACKANYTHING:
+		RequiresCondition: stance-attackanything || assault-move
+	AttackMove:
+		AssaultMoveCondition: assault-move
+
+^AutoTargetAir:
+	AutoTarget:
+		MinimumScanTimeInterval: 23
+		MaximumScanTimeInterval: 23
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Air
+		InvalidTargets: NoAutoTarget
+		ValidRelationships: Enemy
+
+^AutoTargetAll:
+	AutoTarget:
+		MinimumScanTimeInterval: 23
+		MaximumScanTimeInterval: 23
+		AttackAnythingCondition: stance-attackanything
+	AutoTargetPriority@DEFAULT:
+		RequiresCondition: !stance-attackanything
+		ValidTargets: Infantry, Vehicle, Creep, Water, Air, Defense
+		InvalidTargets: NoAutoTarget
+		ValidRelationships: Enemy
+	AutoTargetPriority@ATTACKANYTHING:
+		RequiresCondition: stance-attackanything
+		ValidTargets: Infantry, Vehicle, Creep, Water, Air, Building, Defense
+		InvalidTargets: NoAutoTarget
+		ValidRelationships: Enemy
+
+^AutoTargetAllAssaultMove:
+	Inherits: ^AutoTargetAll
+	AutoTargetPriority@DEFAULT:
+		RequiresCondition: !stance-attackanything && !assault-move
+	AutoTargetPriority@ATTACKANYTHING:
+		RequiresCondition: stance-attackanything || assault-move
+	AttackMove:
+		AssaultMoveCondition: assault-move
+
+^AutoTargetRepair:
+	AutoTarget:
+		MinimumScanTimeInterval: 23
+		MaximumScanTimeInterval: 23
+		ScanRadius: 4
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Repair
+		InvalidTargets: NoRepair
+		ValidRelationships: Ally
+
+^AutoTargetHeal:
+	AutoTarget:
+		MinimumScanTimeInterval: 23
+		MaximumScanTimeInterval: 23
+		ScanRadius: 4
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Heal
+		ValidRelationships: Ally
+
+^PlayerHandicaps:
+	HandicapFirepowerMultiplier:
+	HandicapDamageMultiplier:
+	HandicapProductionTimeMultiplier:
+
+^GlobalBounty:
+	GrantConditionOnPrerequisite@GLOBALBOUNTY:
+		Condition: global-bounty
+		Prerequisites: global-bounty
+	GivesBounty:
+		RequiresCondition: global-bounty
+
+^2x1Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -1024, -512
+			BottomRight: 1024, 512
+
+^1x2Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -512, -1024
+			BottomRight: 512, 1024
+
+^2x2Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 1024
+
+^1x3Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -512, -1536
+			BottomRight: 512, 1536
+
+^3x1Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -1536, -512
+			BottomRight: 1536, 512
+
+^3x2Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -1536, -1024
+			BottomRight: 1536, 1024
+
+^2x3Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -1024, -1536
+			BottomRight: 1024, 1536
+
+^3x3Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -1536, -1536
+			BottomRight: 1536, 1536
+
+^2x4Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -1024, -2048
+			BottomRight: 1024, 2048
+
+^4x2Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -2048, -1024
+			BottomRight: 2048, 1024
+
+^3x4Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -1536, -2048
+			BottomRight: 1536, 2048
+
+^4x3FactoryWithBibShape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -2048, -1536
+			BottomRight: 1024, 1536
+
+^4x3Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -2048, -1536
+			BottomRight: 2048, 1536
+
+^4x4Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -2048, -2048
+			BottomRight: 2048, 2048
+
+^3x5Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -1536, -2560
+			BottomRight: 1536, 2560
+
+^5x3Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -2560, -1536
+			BottomRight: 2560, 1536
+
+^2x5Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -1024, -2560
+			BottomRight: 1024, 2560
+
+^2x6Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -1024, -3072
+			BottomRight: 1024, 3072
+
+^6x4Shape:
+	HitShape:
+		TargetableOffsets: 0,0,418
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			VerticalTopOffset: 762
+			TopLeft: -3072, -2048
+			BottomRight: 3072, 2048
+
+^BasicBuilding:
+	Inherits@1: ^ExistsInWorld
+	Inherits@2: ^SpriteActor
+	Inherits@3: ^Cloakable
+	Inherits@selection: ^SelectableBuilding
+	Inherits@handicaps: ^PlayerHandicaps
+	AppearsOnRadar:
+	Huntable:
+	Targetable:
+		TargetTypes: Ground, Building, C4
+	HitShape:
+		UseTargetableCellsOffsets: true
+		TargetableCellAdditionalOffset: 0,0,418
+		Type: Rectangle
+			LocalYaw: -128
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+			VerticalTopOffset: 762
+	Building:
+		Dimensions: 1,1
+		Footprint: x
+		BuildSounds: place2.aud
+		TerrainTypes: Clear, Rough, Road, DirtRoad, Green, Sand, Pavement
+		UndeploySounds: cashturn.aud
+	ActorPreviewPlaceBuildingPreview:
+		Palette: ra
+		FootprintAlpha: 0.7
+		LineBuildFootprintAlpha: 0.5
+		PreviewAlpha: 0.55
+		FootprintUnderPreview: Valid, LineBuild, Invalid
+		FootprintOverPreview: None
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 4
+	FrozenUnderFog:
+	SoundOnDamageTransition:
+		DamagedSounds: expnew01.aud
+		DestroyedSounds: crmble2.aud
+	WithSpriteBody:
+	Explodes:
+		Weapon: BuildingExplosions
+		EmptyWeapon: BuildingExplosions
+		Type: Footprint
+	InstantlyRepairable:
+	ShakeOnDeath:
+	Guardable:
+		Range: 3c0
+	Demolishable:
+	ThrowsShrapnel@SMALL:
+		Weapons: SmallDebris
+		Pieces: 2, 4
+		Range: 2c0, 5c0
+	ThrowsShrapnel@LARGE:
+		Weapons: LargeDebris, LargeDebrisWithTrail
+		Pieces: 1, 2
+		Range: 2c0, 5c0
+	MapEditorData:
+		Categories: Building
+	CommandBarBlacklist:
+
+^Building:
+	Inherits@1: ^BasicBuilding
+	Inherits@2: ^EmpDisable
+	Building:
+		AllowPlaceOnRamp: true
+	Armor:
+		Type: Wood
+	GivesBuildableArea:
+		AreaTypes: building
+	CaptureManager:
+	Capturable:
+		RequiresCondition: !build-incomplete
+		Types: building
+	RepairableBuilding:
+		RepairStep: 700
+		PlayerExperience: 5
+		RepairingNotification: Repairing
+	WithDeathAnimation:
+		DeathSequence: dead
+		UseDeathTypeSuffix: false
+	SpawnActorsOnSell@gdi:
+		ActorTypes: e1, e1, e2, medic, ctech
+		GuaranteedActorTypes: e1
+		MinHpPercent: 0
+		ValuePercent: 40
+		Factions: gdi
+	SpawnActorsOnSell@nod:
+		ActorTypes: e1, e1, e1, e3, e3, ctech
+		GuaranteedActorTypes: e1
+		MinHpPercent: 0
+		ValuePercent: 40
+		Factions: nod
+	SpawnActorsOnDeath@building:
+		ActorTypes: ctech, e1, e1, ctech, civ1, civ1
+		UseCell: true
+		SpawnAfterDefeat: false
+		SpawnCountCalculateAsValue: True
+		ValuePercent: 40
+		Probability: 100
+	MustBeDestroyed:
+		RequiredForShortGame: true
+	OwnerLostAction:
+		Action: Kill
+	CaptureNotification:
+		TextNotification: Building captured.
+	Demolishable:
+		Condition: being-demolished
+	Sellable:
+		RequiresCondition: !build-incomplete && !being-demolished
+		SellSounds: cashturn.aud
+		Notification: StructureSold
+	WithMakeAnimation:
+		Condition: build-incomplete
+	ThrowsShrapnel@SMALL:
+		Pieces: 3, 5
+	ThrowsShrapnel@LARGE:
+		Pieces: 2, 3
+	WithBuildingRepairDecoration:
+		Image: allyrepair
+		Sequence: repair
+		Position: Center
+		Palette: mouse
+
+^CivBuilding:
+	Inherits: ^BasicBuilding
+	-UpdatesPlayerStatistics:
+	Health:
+		HP: 90000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+		MaxHeightDelta: 1100
+	RenderSprites:
+		Palette: terraindecoration
+	MapEditorData:
+		Categories: Civilian building
+	SpawnActorsOnDeath@building:
+		ActorTypes: civ1, civ2, civ3, civ2, civ1, civ3, ctech
+		SpawnCountCalculateAsValue: false
+		UseCell: true
+		SpawnAfterDefeat: false
+		Probability: 35
+
+^OldBase:
+	Inherits: ^CivBuilding
+	Inherits@SHAPE: ^2x2Shape
+	Building:
+		Footprint: xx xx
+		Dimensions: 2, 2
+	Armor:
+		Type: heavy
+	Health:
+		HP: 40000
+	RenderSprites:
+		-Palette:
+	-Cloak@EXTERNALCLOAK:
+	-ExternalCondition@CLOAKGENERATOR:
+	-ExternalCondition@CRATE-CLOAK:
+	SpawnActorsOnDeath@building:
+		ActorTypes: mutant, mutant, mwmn, mutant, civ1, ctech
+		SpawnCountCalculateAsValue: false
+		Probability: 20
+
+^CivBillboard:
+	Inherits: ^CivBuilding
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
+		FlattenTheGround: false
+	Armor:
+		Type: heavy
+	Health:
+		HP: 40000
+	MapEditorData:
+		RequireTilesets: TEMPERATE
+	ThrowsShrapnel@SMALL:
+		Pieces: 1, 3
+	ThrowsShrapnel@LARGE:
+		Pieces: 1, 1
+	MapEditorData:
+		Categories: Billboard
+	-SpawnActorsOnDeath@building:
+
+^Crate:
+	HiddenUnderFog:
+	Tooltip:
+		Name: Crate
+	Crate:
+		Duration: 4500
+		TerrainTypes: Clear, Rough, Sand, Road, DirtRoad, Tiberium, BlueTiberium, Veins, Green, Pavement
+	RenderSprites:
+		Palette: terraindecoration
+	WithCrateBody:
+	MapEditorData:
+		Categories: System
+	Interactable:
+		Bounds: 724, 1448
+
+^Wall:
+	Inherits@1: ^SpriteActor
+	Inherits@2: ^Cloakable
+	CombatDebugOverlay:
+	FrozenUnderFog:
+	Interactable:
+	OwnerLostAction:
+		Action: ChangeOwner
+	Building:
+		Dimensions: 1,1
+		Footprint: x
+		BuildSounds: place2.aud
+		TerrainTypes: Clear, Rough, Road, DirtRoad, Green, Sand, Pavement
+		UndeploySounds: cashturn.aud
+		AllowPlaceOnRamp: true
+		FlattenTheGround: true
+	FootprintPlaceBuildingPreview:
+		Palette: ra
+		FootprintAlpha: 0.7
+		LineBuildFootprintAlpha: 0.5
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 7
+	SoundOnDamageTransition:
+		DamagedSounds: expnew01.aud
+		DestroyedSounds: crmble2.aud
+	Crushable:
+		CrushClasses: wall
+	LineBuild:
+		Range: 8
+		NodeTypes: wall
+	LineBuildNode:
+		Types: wall
+	Targetable:
+		TargetTypes: Ground, Wall, C4
+	WithWallSpriteBody:
+		Type: wall
+	Demolishable:
+		Condition: being-demolished
+	Sellable:
+		RequiresCondition: !being-demolished
+		SellSounds: cashturn.aud
+	ScriptTriggers:
+	Health:
+	HitShape:
+		TargetableOffsets: 0,0,315
+		Type: Rectangle
+			LocalYaw: 128
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+			VerticalTopOffset: 512
+			VerticalBottomOffset: -1024
+	AppearsOnMapPreview:
+	MapEditorData:
+		Categories: Wall
+	Valued:
+		Cost: 50
+	CustomSellValue:
+		Value: 0
+	BlocksProjectiles:
+		Height: 512
+
+^BuildingPlug:
+	Interactable:
+	AlwaysVisible:
+	Building:
+		BuildSounds: place2.aud
+		UndeploySounds: cashturn.aud
+	SequencePlaceBuildingPreview:
+		Sequence: place
+		Palette: ra
+		FootprintAlpha: 0.7
+		SequenceAlpha: 0.55
+	KillsSelf:
+		RemoveInstead: true
+	RenderSprites:
+
+^LeaveTiberiumWhenDeath:
+	Explodes@LeaveTib:
+		Weapon: TiberiumDeath
+		EmptyWeapon: TiberiumDeath
+
+^Infantry:
+	Inherits@2: ^ExistsInWorld
+	Inherits@3: ^SpriteActor
+	Inherits@4: ^Cloakable
+	Inherits@5: ^WebDisable
+	Inherits@hospital: ^HospitalHealable
+	Inherits@CRATESTATS: ^CrateStatModifiers
+	Inherits@selection: ^SelectableCombatUnit
+	Inherits@handicaps: ^PlayerHandicaps
+	AppearsOnRadar:
+	Huntable:
+	OwnerLostAction:
+		Action: Kill
+		DeathTypes: BulletDeath
+	Health:
+		HP: 5000
+	Armor:
+		Type: None
+	Valued:
+		Cost: 10
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel
+		Range: 5c512
+		MaxHeightDelta: 1100
+	Mobile:
+		Voice: Move
+		TurnSpeed: 150
+		Speed: 71
+		Locomotor: foot
+		MovementMode: Universal
+		# RequiresCondition: !under-control
+	TurnOnIdle:
+	Selectable:
+		DecorationBounds: 452, 1387, 0, -543
+		Bounds: 724, 1448, 0, -543
+	Voiced:
+		VoiceSet: Infantry
+	Targetable:
+		RequiresCondition: !inside-tunnel
+		TargetTypes: Ground, Infantry
+	Targetable@HEAL:
+		RequiresCondition: !inside-tunnel && damaged
+		TargetTypes: Heal
+	GrantConditionOnDamageState@DAMAGED:
+		Condition: damaged
+		ValidDamageStates: Light, Medium, Heavy, Critical
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithSplitAttackPaletteInfantryBody:
+		RequiresCondition: !WebDisable && !inside-tunnel
+	AttackMove:
+		Voice: Move
+	Passenger:
+		CargoType: Infantry
+		Voice: Move
+	HiddenUnderFog:
+	ActorLostNotification:
+		TextNotification: Unit lost.
+	DamagedByTerrain@Tiberium:
+		Terrain: Tiberium, BlueTiberium
+		Damage: 200
+		DamageInterval: 16
+		DamageTypes: TiberiumDeath
+		RequiresCondition: !inside-tunnel
+	Guard:
+		Voice: Move
+	Guardable:
+	RevealOnFire:
+	EntersTunnels:
+		Voice: Move
+	HitShape@prone:
+		TargetableOffsets: 0,0,32
+		RequiresCondition: takecover || critical || WebDisable
+		Type: Circle
+			Radius: 168
+			VerticalTopOffset: 64
+	HitShape:
+		TargetableOffsets: 0,0,300
+		RequiresCondition: !takecover && !critical
+		Type: Circle
+			Radius: 128
+			VerticalTopOffset: 575
+			VerticalBottomOffset: 0
+	MapEditorData:
+		Categories: Infantry
+	GrantConditionOnTunnelLayer:
+		Condition: inside-tunnel
+	WithDecoration@UNDERGROUND:
+		RequiresCondition: inside-tunnel
+		Position: Center
+		Image: typeglyphs
+		Sequence: infantry
+		Palette: player
+		IsPlayerPalette: true
+	BodyOrientation:
+		UseClassicPerspectiveFudge: False
+		CameraPitch: 85
+		QuantizedFacings: 8
+	DetectCloaked:
+		Range: 1c0
+
+^RegularInfantryDeath:
+	WithDeathAnimation@normal:
+		DeathSequence: die-
+		DeathTypes:
+			BulletDeath: twirling
+			SmallExplosionDeath: flying
+	WithDeathAnimation@tiberium:
+		DeathSequence: die-
+		DeathTypes:
+			TiberiumDeath: twirling
+		DeathSequencePalette: blast-green
+		DeathPaletteIsPlayerPalette: false
+	WithDeathAnimation@explosion:
+		DeathSequence: die-
+		DeathSequencePalette: effect
+		DeathPaletteIsPlayerPalette: False
+		DeathTypes:
+			ExplosionDeath: exploding
+	WithDeathAnimation@energy:
+		DeathSequence: die-
+		DeathSequencePalette: ra
+		DeathPaletteIsPlayerPalette: False
+		DeathTypes:
+			EnergyDeath: melting
+	WithDeathAnimation@CrushedDeath:
+		DeathSequence: die-
+		DeathSequencePalette: player
+		DeathPaletteIsPlayerPalette: true
+		DeathTypes:
+			CrushedDeath: crushed
+	WithDeathAnimation:
+		CrushedSequence: die-crushed
+		CrushedSequencePalette: player
+		CrushedPaletteIsPlayerPalette: true
+	DeathSounds@NORMAL:
+		DeathTypes: BulletDeath, SmallExplosionDeath, ExplosionDeath, TiberiumDeath
+	DeathSounds@EXPLOSION:
+		Voice: Explode
+		DeathTypes: ExplosionDeath
+	DeathSounds@BURNED:
+		Voice: Burned
+		DeathTypes: FireDeath
+	DeathSounds@ZAPPED:
+		Voice: Zapped
+		DeathTypes: EnergyDeath
+	DeathSounds@CRUSHED:
+		Voice: Crushed
+		DeathTypes: CrushedDeath
+	Crushable:
+		CrushSound: squish6.aud
+	SpawnActorOnDeath:
+		Actor: visc_sml
+		Probability: 42
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		DeathType: TiberiumDeath
+		RequiresLobbyCreeps: true
+	SpawnActorOnDeath@FLAMEGUY:
+		Actor: FLAMEGUY
+		DeathType: FireDeath
+	Targetable@Crushable:
+		TargetTypes: Crushable
+	# Food:
+	# 	Size: 100
+	# 	Value: 10000
+	# 	DigestResistance: 10
+	# 	HealthResistance: 5
+	# ItemSkeletonHandler:
+	# ConsumableItem:
+	# 	ThumbnailSequence: none
+	# 	ThumbnailImage: items
+	# 	UseAnim: act_putaway
+	# 	UseFrame: 24
+	# 	Type: Food
+
+^Soldier:
+	Inherits@1: ^Infantry
+	Inherits@2: ^RegularInfantryDeath
+	RevealsShroud:
+		Range: 6c512
+	MustBeDestroyed:
+	TakeCover:
+		PauseOnCondition: WebDisable
+		DamageModifiers:
+			Prone50Percent: 50
+			Prone60Percent: 60
+			Prone70Percent: 70
+			Prone80Percent: 80
+			Prone100Percent: 100
+			Prone350Percent: 350
+		DamageTriggers: TriggerProne
+		ProneOffset: 300,0,0
+		Condition: takecover
+	WithSplitAttackPaletteInfantryBody:
+		IdleSequences: idle1, idle2
+		Palette: player-nomuzzle
+		IsPlayerPalette: true
+		SplitAttackPalette: muzzle
+
+^Cyborg:
+	Inherits@1: ^Infantry
+	Inherits@2: ^EmpDisable
+	Inherits@3: ^HealsOnTiberium
+	Inherits@LeaveTib: ^LeaveTiberiumWhenDeath
+	ExplosionOnDamageTransition:
+		Weapon: CyborgExplode
+		DamageState: Critical
+		TriggerOnlyOnce: true
+	Crushable:
+		CrushClasses: bigguy
+	Targetable@Crushable:
+		TargetTypes: Crushable
+	Explodes:
+		Weapon: CyborgExplode
+		EmptyWeapon: CyborgExplode
+	DeathSounds:
+	RevealsShroud:
+		Range: 7c0
+	RevealsShroudMultiplier@emp:
+		Modifier: 30
+		RequiresCondition: empdisable
+	MustBeDestroyed:
+	TakeCover:
+		RequiresCondition: critical
+		PauseOnCondition: WebDisable
+		Duration: -1
+		DamageModifiers:
+			Prone50Percent: 50
+			Prone60Percent: 60
+			Prone70Percent: 70
+			Prone80Percent: 80
+			Prone100Percent: 100
+			Prone350Percent: 350
+		ProneOffset: 300,0,0
+		ProneSequencePrefix: crippled-
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: attack
+		IdleSequences: idle1, idle2
+		Palette: player-nomuzzle
+		IsPlayerPalette: true
+		SplitAttackPalette: muzzle
+	GrantConditionOnDamageState@CRITICAL:
+		Condition: critical
+		ValidDamageStates: Critical
+		GrantPermanently: true
+	Mobile:
+		PauseOnCondition: empdisable || WebDisable
+	Targetable@cyborg:
+		TargetTypes: Cyborg
+	ChangesHealth@CrippleHeal: # Gain a one-time 25% health regeneration when severely damaged to crippled
+		PercentageStep: 25
+		Delay: 100
+		StartIfBelow: 50
+		DamageCooldown: 0
+		RequiresCondition: critical
+		OneTimeTrigger: true
+
+^CivilianInfantry:
+	Inherits@1: ^Infantry
+	Inherits@2: ^RegularInfantryDeath
+	Voiced:
+		VoiceSet: Civilian
+	Tooltip:
+		Name: Civilian
+	ScaredyCat:
+	Wanders:
+		MinMoveDelay: 150
+		MaxMoveDelay: 750
+	MapEditorData:
+		Categories: Civilian infantry
+	UnitDisplayInfo:
+		IconSequence: testdisplay
+		IconPalette: player
+		IconPaletteIsPlayerPalette: true
+		IconScale: 0.85
+
+^Vehicle:
+	Inherits@2: ^ExistsInWorld
+	Inherits@3: ^EmpDisable
+	Inherits@4: ^Cloakable
+	Inherits@5: ^DamagedByVeins
+	Inherits@CRATESTATS: ^CrateStatModifiers
+	Inherits@selection: ^SelectableCombatUnit
+	Inherits@handicaps: ^PlayerHandicaps
+	AppearsOnRadar:
+	Huntable:
+	OwnerLostAction:
+		Action: Kill
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel
+		Range: 6c512
+		MaxHeightDelta: 1100
+	RevealsShroudMultiplier@emp:
+		Modifier: 50
+		RequiresCondition: empdisable
+	Mobile:
+		PauseOnCondition: empdisable || being-captured || carried || carring || Jumping
+		Locomotor: wheeled
+		TurnSpeed: 20
+		Voice: Move
+		TerrainOrientationAdjustmentMargin: 256
+		AirborneCondition: airborne
+		MovementMode: Wheel
+		# RequiresCondition: !under-control
+	Selectable:
+		Bounds: 1206, 1448
+		RequiresCondition: !carring
+	Voiced:
+		VoiceSet: Vehicle
+	Targetable:
+		RequiresCondition: !inside-tunnel && !airborne
+		TargetTypes: Ground, Vehicle
+	Targetable@AIRBORNE:
+		TargetTypes: Air
+		RequiresCondition: airborne
+	Targetable@REPAIR:
+		RequiresCondition: !inside-tunnel && damaged
+		TargetTypes: Repair
+	GrantConditionOnDamageState@DAMAGED:
+		Condition: damaged
+		ValidDamageStates: Light, Medium, Heavy, Critical
+	Repairable:
+		RepairActors: gadept
+		Voice: Move
+	Passenger:
+		CargoType: Vehicle
+		Voice: Move
+	AttackMove:
+		Voice: Move
+	HiddenUnderFog:
+	ActorLostNotification:
+		TextNotification: Unit lost.
+	CaptureManager:
+		BeingCapturedCondition: being-captured
+	Capturable:
+		Types: Vehicle
+		CancelActivity: True
+	Guard:
+		Voice: Move
+	Guardable:
+	BodyOrientation:
+		UseClassicPerspectiveFudge: False
+		CameraPitch: 85
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	MustBeDestroyed:
+	RenderSprites:
+	ThrowsShrapnel:
+		Weapons: SmallDebris
+		Pieces: 3, 7
+		Range: 2c0, 5c0
+	GrantConditionOnDamageState@damaged-state:
+		Condition: damaged-state
+		ValidDamageStates: Heavy
+	GrantConditionOnDamageState@critical-state:
+		Condition: critical-state
+		ValidDamageStates: Critical
+	WithIdleOverlay@DAMAGED1:
+		RequiresCondition: !inside-tunnel && (damaged-state || critical-state)
+		Image: damagespark
+		Sequence: idle1
+		Palette: effect
+		IsDecoration: true
+		Offset: 0, 0, 512
+	WithIdleOverlay@DAMAGED2:
+		RequiresCondition: !inside-tunnel && (damaged-state || critical-state)
+		Image: damagespark
+		Sequence: idle2
+		Palette: effect
+		IsDecoration: true
+		Offset: 280, -120, 386
+	WithIdleOverlay@DAMAGED3:
+		RequiresCondition: !inside-tunnel && (damaged-state || critical-state)
+		Image: damagespark
+		Sequence: idle3
+		Palette: effect
+		IsDecoration: true
+		Offset: -220, 140, 320
+	SpeedMultiplier@DAMAGED:
+		RequiresCondition: damaged-state
+		Modifier: 90
+	SpeedMultiplier@CRITICAL:
+		RequiresCondition: critical-state
+		Modifier: 80
+	AttachCarryable:
+		RequiresCondition: !inside-tunnel
+		LockedCondition: carried
+		CarriedCondition: carring
+	RevealOnFire:
+	EntersTunnels:
+		Voice: Move
+	HitShape:
+		TargetableOffsets: 0,0,310
+		Type: Circle
+			Radius: 368
+			VerticalTopOffset: 620
+	MapEditorData:
+		Categories: Vehicle
+	GrantConditionOnTunnelLayer:
+		Condition: inside-tunnel
+	WithDecoration@UNDERGROUND:
+		RequiresCondition: inside-tunnel
+		Position: Center
+		Image: typeglyphs
+		Sequence: vehicle
+		Palette: player
+		IsPlayerPalette: true
+	SpawnActorOnDeath@ctech:
+		Actor: ctech
+		SpawnAfterDefeat: false
+		Probability: 20
+
+^Tank:
+	Inherits: ^Vehicle
+	Mobile:
+		Locomotor: tracked
+		MovementMode: Track
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel
+		Range: 6c512
+		MaxHeightDelta: 1100
+
+^RenderVoxel:
+	RenderModels:
+		NormalsPalette: normals
+		ShadowPalette: shadow
+		Scale: 1.35
+		LightScale: 0.37
+		SpecularScale: 0.44
+		AmbientScale: 0.8
+	BodyOrientation:
+		QuantizedFacings: -1
+		UseClassicPerspectiveFudge: False
+		CameraPitch: 85
+
+^VoxelActor:
+	Inherits@RenderVoxel: ^RenderVoxel
+	BodyOrientation:
+		QuantizedFacings: 0
+	WithModelBody:
+
+^WithRA2VoxRender:
+	RenderModels:
+		Scale: 1.11
+		# LightScale: 0.22
+		# SpecularScale: 0.33
+		# AmbientScale: 0.88
+
+
+^CivilianVoxelVehicle:
+	Inherits: ^Vehicle
+	Inherits: ^VoxelActor
+	Mobile:
+		MovementMode: Wheel
+	-MustBeDestroyed:
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel
+		Range: 6c0
+		MaxHeightDelta: 1100
+	Armor:
+		Type: Light
+	Crushable:
+		CrushClasses: bigguy
+	Targetable@Crushable:
+		TargetTypes: Crushable
+
+^CivilianVoxelCrusher:
+	Inherits: ^CivilianVoxelVehicle
+	Mobile:
+		Locomotor: heavywheeled
+	-Crushable:
+	-Targetable@Crushable:
+
+^Aircraft:
+	Inherits@2: ^ExistsInWorld
+	Inherits@3: ^Cloakable
+	Inherits@selection: ^SelectableCombatUnit
+	Inherits@handicaps: ^PlayerHandicaps
+	Inherits@renderVoxel: ^VoxelActor
+	Huntable:
+	OwnerLostAction:
+		Action: Kill
+	AppearsOnRadar:
+		UseLocation: true
+	Targetable@GROUND:
+		TargetTypes: Ground, Vehicle
+		RequiresCondition: !airborne
+	Targetable@AIRBORNE:
+		TargetTypes: Air
+		RequiresCondition: airborne
+	GrantConditionOnDamageState@DAMAGED:
+		Condition: damaged
+		ValidDamageStates: Light, Medium, Heavy, Critical
+	Targetable@REPAIR:
+		RequiresCondition: !airborne && damaged
+		TargetTypes: Repair
+	Repairable:
+		RepairActors: gadept
+		Voice: Move
+	RevealsShroudMultiplier@emp:
+		Modifier: 50
+		RequiresCondition: empdisable
+	RevealsShroud:
+		Range: 6c0
+		RequiresCondition: !airborne
+		Type: CenterPosition
+		MaxHeightDelta: 1100
+	RevealsShroud@airborne:
+		Range: 10c0
+		RequiresCondition: airborne
+		Type: CenterPosition
+		MaxHeightDelta: 1100
+	Aircraft:
+		AirborneCondition: airborne
+		CruisingCondition: cruising
+		CruiseAltitude: 4c255
+		AltitudeVelocity: 96
+		Voice: Move
+		IdealSeparation: 853
+		MaximumPitch: 120
+		LandableTerrainTypes: Clear, Road, Rail, DirtRoad, Rough, Tiberium, BlueTiberium, Veins
+		Crushes: crate, infantry
+		MoveIntoShroud: true
+		CanHover: true
+		CanSlide: true
+		VTOL: true
+		Pitch: -64
+		PitchSpeed: 16
+		Roll: 56
+		IdleRoll: 32
+		RollSpeed: 14
+	Voiced:
+		VoiceSet: Heli
+	HiddenUnderFog:
+		Type: GroundPosition
+	AttackMove:
+		Voice: Move
+		MoveIntoShroud: false
+	ActorLostNotification:
+		TextNotification: Unit lost.
+	BodyOrientation:
+		QuantizedFacings: 0
+		CameraPitch: 85
+	Guard:
+		Voice: Move
+	Guardable:
+	MustBeDestroyed:
+	RevealOnFire:
+	HitShape:
+		TargetableOffsets: 0,0,250
+		Type: Circle
+			Radius: 368
+			VerticalTopOffset: 612
+	MapEditorData:
+		Categories: Aircraft
+	SpawnActorOnDeath:
+		RequiresCondition: airborne
+	Hovers@CRUISING:
+		RequiresCondition: cruising
+		BobDistance: -64
+		InitialHeight: 64
+	GrantConditionOnDamageState@damaged-state:
+		Condition: damaged-state
+		ValidDamageStates: Heavy
+	GrantConditionOnDamageState@critical-state:
+		Condition: critical-state
+		ValidDamageStates: Critical
+	WithIdleOverlay@DAMAGED1:
+		RequiresCondition: !inside-tunnel && (damaged-state || critical-state)
+		Image: damagespark
+		Sequence: idle1
+		Palette: effect
+		IsDecoration: true
+		Offset: 0, 0, 512
+	WithIdleOverlay@DAMAGED2:
+		RequiresCondition: !inside-tunnel && (damaged-state || critical-state)
+		Image: damagespark
+		Sequence: idle2
+		Palette: effect
+		IsDecoration: true
+		Offset: 280, -120, 386
+	WithIdleOverlay@DAMAGED3:
+		RequiresCondition: !inside-tunnel && (damaged-state || critical-state)
+		Image: damagespark
+		Sequence: idle3
+		Palette: effect
+		IsDecoration: true
+		Offset: -220, 140, 320
+	Explodes@ground:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+		RequiresCondition: !airborne
+	ThrowsShrapnel@ground:
+		Weapons: SmallDebris
+		Pieces: 3, 7
+		Range: 2c0, 5c0
+		RequiresCondition: !airborne
+	Explodes@airborne:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+		RequiresCondition: !empdisable && airborne
+	ThrowsShrapnel@airborne:
+		Weapons: SmallDebris
+		Pieces: 1, 3
+		Range: 2c0, 5c0
+		RequiresCondition: !empdisable && airborne
+
+
+^EMPableAircraft:
+	Inherits: ^Aircraft
+	Inherits@EMP: ^EmpDisable
+	Aircraft:
+		PauseOnCondition: empdisable
+	KillsSelf:
+		RequiresCondition: airborne && empdisable
+
+^AircraftHusk:
+	Inherits@renderVoxel: ^VoxelActor
+	RevealsShroudMultiplier@emp:
+		Modifier: 50
+		RequiresCondition: empdisable
+	RevealsShroud:
+		Range: 6c0
+		Type: CenterPosition
+		MaxHeightDelta: 1100
+	RenderSprites:
+	BodyOrientation:
+		QuantizedFacings: 0
+		CameraPitch: 85
+	Aircraft:
+	Health:
+		HP: 28000
+	Armor:
+		Type: Heavy
+	HiddenUnderFog:
+		Type: GroundPosition
+		AlwaysVisibleRelationships: None
+	ScriptTriggers:
+	Interactable:
+	Tooltip:
+		GenericName: Destroyed Aircraft
+	FallsToEarth:
+		Moves: true
+		SpinSpeed: 0
+		SpinChangeInterval: 6
+		SpinAcceleration: 1
+		MaximumSpinSpeed: 18
+		Gravity: 1
+		GravityAcceleration: 1
+		GravityChangeInterval: 5
+		MaxGravity: 14
+		Velocity: 0
+		MaxVelocity: 445
+	HitShape:
+	LeavesTrails:
+		Image: largesmoke
+		MovingInterval: 3
+		SpawnAtLastPosition: False
+		Type: CenterPosition
+	WithIdleOverlay@DAMAGED1:
+		Image: damagespark
+		Sequence: idle1
+		Palette: effect
+		IsDecoration: true
+		Offset: 0, 0, 512
+	WithIdleOverlay@DAMAGED2:
+		Image: damagespark
+		Sequence: idle2
+		Palette: effect
+		IsDecoration: true
+		Offset: 280, -120, 386
+	WithIdleOverlay@DAMAGED3:
+		Image: damagespark
+		Sequence: idle3
+		Palette: effect
+		IsDecoration: true
+		Offset: -220, 140, 320
+	ThrowsShrapnel:
+		Weapons: SmallDebris
+		Pieces: 3, 7
+		Range: 2c0, 5c0
+
+^Visceroid:
+	Inherits@1: ^ExistsInWorld
+	Inherits@2: ^SpriteActor
+	Inherits@3: ^HealsOnTiberium
+	Inherits@selection: ^SelectableCombatUnit
+	Inherits@handicaps: ^PlayerHandicaps
+	Inherits@LeaveTib: ^LeaveTiberiumWhenDeath
+	AppearsOnRadar:
+	Huntable:
+	Health:
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 113
+		TurnSpeed: 64
+		Locomotor: visceroid
+		MovementMode: Universal
+	Selectable:
+		Bounds: 784, 1568, 0, -181
+	Targetable:
+		TargetTypes: Ground, Creep
+	AttackMove:
+	HiddenUnderFog:
+	Guardable:
+	WithFacingSpriteBody:
+	RevealOnFire:
+	EntersTunnels:
+		Voice: Move
+	HitShape:
+		TargetableOffsets: 0,0,300
+		Type: Circle
+			Radius: 256
+			VerticalTopOffset: 512
+	MapEditorData:
+		Categories: Critter
+	GrantConditionOnTunnelLayer:
+		Condition: inside-tunnel
+	Explodes:
+		Weapon: VisceroidExplode
+		EmptyWeapon: VisceroidExplode
+	Crushable:
+		CrushClasses: bigguy
+
+^BlossomTree:
+	Inherits@1: ^SpriteActor
+	Interactable:
+	Tooltip:
+		Name: Blossom Tree
+	RenderSprites:
+		Palette: player
+	WithSpriteBody:
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	AppearsOnRadar:
+	RadarColorFromTerrain:
+		Terrain: Tiberium
+	AppearsOnMapPreview:
+		Terrain: Tiberium
+	FrozenUnderFog:
+	SeedsResource:
+		ResourceType: Tiberium
+		Interval: 55
+	WithIdleAnimation:
+		Interval: 500, 1000
+	MapEditorData:
+		Categories: Resource spawn
+	TerrainLightSource:
+		Range: 4c128
+		Intensity: 0.36
+		RedTint: 0.01
+		GreenTint: 0.8
+		BlueTint: 0.01
+	HitShape:
+		TargetableOffsets: 0,0,300
+		Type: Circle
+			Radius: 134
+			VerticalTopOffset: 612
+	BlocksProjectiles:
+		IsBindage: true
+		Height: 612
+
+^Tree:
+	Inherits@1: ^SpriteActor
+	Inherits@2: ^ExistsInWorld
+	Interactable:
+	FrozenUnderFog:
+	RenderSprites:
+		Palette: terraindecoration
+	WithSpriteBody:
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
+	Tooltip:
+		Name: Tree
+	MapEditorData:
+		Categories: Tree
+	RequiresSpecificOwners:
+		ValidOwnerNames: Neutral
+	HitShape:
+		TargetableOffsets: 0,0,310
+		Type: Circle
+			Radius: 134
+			VerticalTopOffset: 612
+	Health:
+		HP: 20000
+	Armor:
+		Type: Wood
+	Targetable:
+		TargetTypes: Ground, Trees, NoAutoTarget
+	ExternalCondition@burning:
+		Condition: burning
+	GrantConditionOnDamageState@Small:
+		Condition: small-fire
+		ValidDamageStates: Medium
+	GrantConditionOnDamageState@Large:
+		Condition: large-fire
+		ValidDamageStates: Heavy, Critical
+	WithIdleOverlay@SmallFire:
+		Image: fire2
+		Palette: effect
+		RequiresCondition: small-fire
+	WithIdleOverlay@LargeFire:
+		Image: fire1
+		Palette: effect
+		RequiresCondition: large-fire
+	WithIdleOverlay@SmallFireTwist:
+		Image: fire2
+		Palette: twist
+		Sequence: twist
+		RequiresCondition: small-fire
+	WithIdleOverlay@LargeFireTwist:
+		Image: fire1
+		Palette: twist
+		Sequence: twist
+		RequiresCondition: large-fire
+	SpreadsCondition@Fire:
+		RequiresCondition: small-fire || large-fire
+		SpreadCondition: burning
+	ChangesHealth:
+		StartIfBelow: 101
+		Step: -50
+		RequiresCondition: small-fire || large-fire || burning
+	Crushable:
+		CrushClasses: bigguy
+	Targetable@Crushable:
+		TargetTypes: Crushable
+	KilledWhenPlaceBuilding:
+
+
+
+^Rock:
+	Inherits@1: ^SpriteActor
+	Interactable:
+	CombatDebugOverlay:
+	HiddenUnderShroud:
+	RenderSprites:
+		Palette: terraindecoration
+	WithSpriteBody:
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
+	BlocksProjectiles:
+		IsBindage: true
+		Height: 666
+	HitShape:
+		TargetableOffsets: 0,0,120
+		Type: Circle
+			Radius: 255
+			VerticalTopOffset: 666
+	Tooltip:
+		Name: Rock
+	MapEditorData:
+		Categories: Decoration
+	RequiresSpecificOwners:
+		ValidOwnerNames: Neutral
+	Targetable:
+		TargetTypes: Ground, Rock, NoAutoTarget
+
+^Decoration:
+	Inherits@1: ^SpriteActor
+	Interactable:
+	HiddenUnderShroud:
+	RenderSprites:
+		Palette: terraindecoration
+	WithSpriteBody:
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
+	MapEditorData:
+		Categories: Decoration
+	RequiresSpecificOwners:
+		ValidOwnerNames: Neutral
+
+^Box:
+	Inherits: ^Decoration
+	Tooltip:
+		Name: Box
+
+^Drum:
+	Inherits: ^Decoration
+	Tooltip:
+		Name: Drum
+
+^Palette:
+	Inherits: ^Decoration
+	Tooltip:
+		Name: Palette
+
+^Defense:
+	Inherits: ^Building
+	Inherits@selection: ^SelectableCombatBuilding
+	Building:
+		AllowPlaceOnRamp: true
+		FlattenTheGround: true
+	-GivesBuildableArea:
+	RenderRangeCircle:
+	RenderDetectionCircle:
+	RevealsShroud:
+		Range: 7c0
+		MaxHeightDelta: 1100
+	DetectCloaked:
+		Range: 5c0
+	Targetable:
+		TargetTypes: Ground, Building, C4, Defense
+	-Capturable:
+	RevealOnFire:
+	MapEditorData:
+		Categories: Defense
+	-CommandBarBlacklist:
+	-SpawnActorsOnDeath@building:
+
+
+^Train:
+	Inherits@1: ^EmpDisable
+	Inherits@2: ^ExistsInWorld
+	Inherits@3: ^Cloakable
+	Inherits@selection: ^SelectableCombatUnit
+	Inherits@handicaps: ^PlayerHandicaps
+	Inherits@renderVoxel: ^VoxelActor
+	AppearsOnRadar:
+	Huntable:
+	RenderSprites:
+	Mobile:
+		TurnSpeed: 20
+		Voice: Move
+		Speed: 113
+		PauseOnCondition: empdisable
+		Locomotor: train
+	Cargo:
+		Types: Infantry
+		UnloadVoice: Unload
+	Health:
+		HP: 10000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 5c0
+		MaxHeightDelta: 1100
+		RequiresCondition: !inside-tunnel
+	Selectable:
+		Bounds: 1206, 1448
+	Voiced:
+		VoiceSet: Vehicle
+	Targetable:
+		TargetTypes: Ground, Vehicle
+	Passenger:
+		CargoType: Infantry
+		Voice: Move
+	HiddenUnderFog:
+	BodyOrientation:
+		CameraPitch: 85
+		QuantizedFacings: 0
+	Explodes:
+		Weapon: UnitExplodeSmall
+		EmptyWeapon: UnitExplodeSmall
+	ThrowsShrapnel:
+		Weapons: SmallDebris
+		Pieces: 3, 7
+		Range: 2c0, 5c0
+	HitShape:
+	MapEditorData:
+		Categories: Railway
+	GrantConditionOnTunnelLayer:
+		Condition: inside-tunnel
+
+^TerrainOverlay:
+	AlwaysVisible:
+	Immobile:
+		OccupiesSpace: False
+	RenderSprites:
+		Palette: terraindecoration
+	WithSpriteBody:
+	BodyOrientation:
+		UseClassicPerspectiveFudge: False
+		QuantizedFacings: 1
+
+^Railway:
+	Inherits: ^TerrainOverlay
+	EditorOnlyTooltip:
+		Name: Railway
+	ChangesTerrain:
+		TerrainType: Rail
+	MapEditorData:
+		Categories: Railway
+	Interactable:
+
+^Tunnel:
+	RenderSprites:
+		Palette: terraindecoration
+	WithSpriteBody:
+	BodyOrientation:
+		UseClassicPerspectiveFudge: False
+		QuantizedFacings: 1
+	Building:
+		Dimensions: 3, 3
+		Footprint: ___ ___ ___
+	Targetable:
+	AlwaysVisible:
+	TunnelEntrance:
+	MapEditorData:
+		Categories: Tunnel
+	Interactable:
+		Bounds: 4344, 8688
+
+^Gate:
+	Inherits: ^Building
+	Inherits@EMPDISABLE: ^EmpDisable
+	Huntable:
+	Valued:
+		Cost: 250
+	Health:
+		HP: 35000
+	Armor:
+		Type: Heavy
+	LineBuildNode:
+		Types: wall, gate
+	Building:
+		AllowPlaceOnRamp: true
+		FlattenTheGround: true
+	-Capturable:
+	-GivesBuildableArea:
+	-MustBeDestroyed:
+	-WithMakeAnimation:
+	-WithSpriteBody:
+	WithGateSpriteBody:
+		OpenSequence: open
+	Tooltip:
+	Buildable:
+		Description: Automated barrier that opens for allied units.
+	HitShape:
+		Type: Rectangle
+			LocalYaw: -128
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+			VerticalTopOffset: 768
+	MapEditorData:
+		Categories: Wall
+	Gate:
+		PauseOnCondition: empdisable
+		OpeningSound: gateup1.aud
+		ClosingSound: gatedwn1.aud
+		BlocksProjectilesHeight: 768
+	Sellable:
+		RequiresCondition: !being-demolished
+
+^Gate_A:
+	Inherits: ^Gate
+	Inherits@shape: ^3x1Shape
+	Health:
+	Building:
+		Dimensions: 3,1
+		Footprint: xxx
+	WithGateSpriteBody:
+		WallConnections: -1,0, 3,0
+	LineBuildNode:
+		Connections: -1,0, 1,0
+
+^Gate_B:
+	Inherits: ^Gate
+	Inherits@shape: ^1x3Shape
+	Health:
+	Building:
+		Dimensions: 1,3
+		Footprint: x x x
+	WithGateSpriteBody:
+		WallConnections: 0,-1, 0,3
+	LineBuildNode:
+		Connections: 0,-1, 0,1
+
+^HealsOnTiberium:
+	DamagedByTerrain@Tiberium:
+		Damage: -200
+		DamageInterval: 16
+		Terrain: Tiberium, BlueTiberium
+		RequiresCondition: !inside-tunnel
+	Targetable@TiberiumCreature:
+		TargetTypes: TiberiumCreature
+
+^DamagedByVeins:
+	DamagedByTerrain@VEINS:
+		Damage: 500
+		DamageInterval: 16
+		DamageTypes: BulletDeath
+		Terrain: Veins
+		RequiresCondition: !inside-tunnel
+	LeavesTrails@VEINS:
+		Image: veins
+		Palette: player
+		TerrainTypes: Veins
+		TrailWhileStationary: true
+		StationaryInterval: 16
+		MovingInterval: 16
+		StartDelay: -1
+		SpawnAtLastPosition: false
+		RequiresCondition: !inside-tunnel
+
+^DisableOnLowPower:
+	WithColoredOverlay@IDISABLE:
+		RequiresCondition: disabled
+		Color: 000000B4
+	GrantConditionOnPowerState@LOWPOWER:
+		Condition: lowpower
+		ValidPowerStates: Low, Critical
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower
+		Condition: disabled
+
+^DisableOnPowerDown:
+	WithColoredOverlay@IDISABLE:
+		RequiresCondition: disabled
+		Color: 000000B4
+	GrantCondition@IDISABLE:
+		RequiresCondition: powerdown
+		Condition: disabled
+	ToggleConditionOnOrder:
+		DisabledSpeech: EnablePower
+		EnabledSpeech: DisablePower
+		Condition: powerdown
+		OrderName: PowerDown
+	WithDecoration@POWERDOWN:
+		Image: poweroff
+		Sequence: offline
+		Palette: mouse
+		RequiresCondition: powerdown
+		Position: Center
+		Offsets:
+			repairing: 12, 0
+	PowerMultiplier@POWERDOWN:
+		RequiresCondition: powerdown
+		Modifier: 0
+	RepairableBuilding:
+		RepairCondition: repairing
+	WithBuildingRepairDecoration:
+		Offsets:
+			powerdown: -12, 0
+
+^DisableOnLowPowerOrPowerDown:
+	Inherits@LOWPOWER: ^DisableOnLowPower
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown
+		Condition: disabled
+
+^Selectable:
+	Selectable:
+	SelectionDecorations:
+	WithTextControlGroupDecoration:
+		Margin: 2, 0
+	DrawLineToTarget:
+		QueuedLineWidth: 2
+		QueuedMarkerWidth: 3
+
+^SelectableCombatUnit:
+	Inherits@selectiondecorations: ^Selectable
+	Selectable:
+		Priority: 10
+		PriorityModifiers: Ctrl
+
+^SelectableSupportUnit:
+	Inherits@selectiondecorations: ^Selectable
+	Selectable:
+		Priority: 8
+		PriorityModifiers: Ctrl, Alt
+
+^SelectableEconomicUnit:
+	Inherits@selectiondecorations: ^Selectable
+	Selectable:
+		Priority: 6
+		PriorityModifiers: Ctrl, Alt
+
+^CargoPips:
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		Palette: pips
+		Margin: 5, 2
+		CustomPipSequences:
+			red: pip-red
+			green: pip-green
+			yellow: pip-yellow
+
+^SelectableBuilding:
+	IsometricSelectable:
+		Priority: 2
+	IsometricSelectionDecorations:
+	WithTextControlGroupDecoration:
+		Margin: 1, 1
+	DrawLineToTarget:
+		QueuedLineWidth: 2
+		QueuedMarkerWidth: 3
+
+^SelectableCombatBuilding:
+	Inherits@selectiondecorations: ^SelectableBuilding
+	IsometricSelectable:
+		Priority: 4
+
+^PrimaryBuilding:
+	PrimaryBuilding:
+		PrimaryCondition: primary
+		SelectionNotification: PrimaryBuildingSelected
+		SelectionTextNotification: Primary building selected.
+	WithTextDecoration@primary:
+		RequiresCondition: primary
+		Position: Top
+		RequiresSelection: true
+		Text: PRIMARY
+		Color: E0D048
+
+^AImicroManagable:
+	GrantConditionOnBotOwner@AImicroManage:
+		Condition: AImicroManage
+		Bots: test
+
+^NonBuildingStaticActor:
+	Inherits@2: ^ExistsInWorld
+	AppearsOnRadar:
+	Immobile:
+		OccupiesSpace: true
+	BodyOrientation:
+		QuantizedFacings: 1
+	Interactable:
+	HiddenUnderFog:
+	OwnerLostAction:
+		Action: Kill
+	WithSpriteBody:

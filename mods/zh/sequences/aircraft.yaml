@@ -1,0 +1,130 @@
+a10:
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: a10_icon.png
+		Offset: 0, 0, 0
+
+orca:
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: orcaicon.shp
+
+orcab:
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: obmbicon.shp
+
+trnsport:
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: otrnicon.shp
+
+scrin:
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: proicon.shp
+
+apache:
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: apchicon.shp
+	rotor:
+		Filename: harpyrotor.shp
+		Start: 32
+		Length: 31
+		Offset: 0, 0, 0
+		ZOffset: 1500
+		ZRamp: 1
+		Tick: 25
+		MeshType: Plane
+	slow-rotor:
+		Filename: harpyrotor.shp
+		Length: 31
+		Offset: 0, 0, 0
+		ZOffset: 1500
+		ZRamp: 1
+		Tick: 50
+		MeshType: Plane
+
+
+orcatran:
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: crryicon.shp
+
+pod:
+	Inherits: ^VehicleOverlays
+	idle:
+		Filename: pod.shp
+		Facings: 1
+		Length: 1
+
+
+quaddrone-mini:
+	Defaults:
+		Filename: quaddrone-mini.shp
+	Inherits: ^VehicleOverlays
+	idle:
+		Facings: 1
+		Length: *
+		Scale: 0.95
+	stand:
+		Facings: 1
+		Length: *
+		Scale: 0.95
+	run:
+		Facings: 1
+		Length: *
+		Scale: 0.95
+	die:
+		Filename: explosml.shp
+		ZOffset: 511
+		Offset: 0, 0, 24
+		AlphaFade: True
+		Length: *
+		IgnoreWorldTint: True
+		BlendMode: Additive #Additive
+
+rpgdrone:
+	Defaults:
+		Filename: rpgdrone.shp
+	Inherits: ^VehicleOverlays
+	idle:
+		Facings: -32
+		Length: 1
+	stand:
+		Facings: -32
+		Length: 1
+	run:
+		Facings: -32
+		Length: 1
+	die:
+		Filename: explosml.shp
+		ZOffset: 511
+		Offset: 0, 0, 24
+		AlphaFade: True
+		Length: *
+		IgnoreWorldTint: True
+		BlendMode: Additive #Additive
+
+repairdrone-mini:
+	Defaults:
+		Filename: repairdrone-mini.shp
+	Inherits: ^VehicleOverlays
+	idle:
+		Facings: -32
+		Length: 1
+	stand:
+		Facings: -32
+		Length: 1
+	run:
+		Facings: -32
+		Length: 1
+	die:
+		Filename: explosml.shp
+		ZOffset: 511
+		Offset: 0, 0, 24
+		AlphaFade: True
+		Length: *
+		IgnoreWorldTint: True
+		BlendMode: Additive #Additive

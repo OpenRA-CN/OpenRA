@@ -1,0 +1,232 @@
+GAWALL:
+	Inherits: ^Wall
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 10
+		Prerequisites: ~structures.gdi, ~techlevel.low
+		Description: Stops infantry and blocks enemy fire.\nCan NOT be crushed by tanks.
+	-SoundOnDamageTransition:
+	Tooltip:
+		Name: Concrete Wall
+	Health:
+		HP: 22500
+	Armor:
+		Type: Concrete
+	Crushable:
+		CrushClasses: heavywall
+	LineBuild:
+		NodeTypes: wall, turret
+	Replaceable:
+		Types: GDIGate, GDITower
+
+GAGATE_A:
+	Inherits: ^Gate_A
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 30
+		Prerequisites: gapile, ~structures.gdi, ~techlevel.low
+	Tooltip:
+		Name: GDI Gate
+	Replacement:
+		ReplaceableTypes: GDIGate
+
+GAGATE_B:
+	Inherits: ^Gate_B
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 50
+		Prerequisites: gapile, ~structures.gdi, ~techlevel.low
+	Tooltip:
+		Name: GDI Gate
+	Replacement:
+		ReplaceableTypes: GDIGate
+
+GACTWR:
+	Inherits: ^Defense
+	Inherits@IDISABLE: ^DisableOnPowerDown
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@bounty: ^GlobalBounty
+	Inherits@AImicroManagable: ^AImicroManagable
+	IsometricSelectable:
+		Height: 30
+	WithMakeAnimation:
+		BodyNames: make
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithWallSpriteBody:
+		RequiresCondition: !build-incomplete
+		Type: wall
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Component Tower
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 70
+		Prerequisites: gapile, ~structures.gdi, ~techlevel.low
+		Description: Modular tower for base defenses. \n Can recieve Weapon Plugin \n-max to 1 kind of plugin at the same time.\nStill working when low power.\n-can be turned off to save power.
+	Health:
+		HP: 50000
+	Armor:
+		Type: Light
+	LineBuild:
+		Range: 8
+		NodeTypes: wall
+		SegmentType: gawall
+	LineBuildNode:
+		Types: wall, turret
+	BlocksProjectiles:
+		Height: 768
+		ValidRelationships: Neutral, Enemy
+	BodyOrientation:
+		QuantizedFacings: 32
+	DetectCloaked:
+		RequiresCondition: !empdisable && !disabled && (plug.vulcan || plug.rpg || plug.missile)
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		RealignDelay: -1
+	AttackTurreted:
+		RequiresCondition: !build-incomplete && (plug.vulcan || plug.rpg || plug.missile)
+		PauseOnCondition: empdisable || disabled
+	WithSpriteTurret@VULC:
+		RequiresCondition: !build-incomplete && plug.vulcan
+		Recoils: false
+		Sequence: turret-vulcan
+		UseBlindage: true
+	WithSpriteTurret@ROCKET:
+		RequiresCondition: !build-incomplete && plug.rpg
+		Recoils: false
+		Sequence: turret-rocket
+		UseBlindage: true
+	WithSpriteTurret@SAM:
+		RequiresCondition: !build-incomplete && plug.missile
+		Recoils: false
+		Sequence: turret-sam
+	Armament@VULCPRIMARY:
+		RequiresCondition: plug.vulcan
+		Weapon: VulcanTower
+		BurstsPerFire: 2
+		LocalOffset: 588,120,784, 588,-120,784
+		MuzzleSequence: muzzle
+		PauseOnCondition: empdisable || disabled
+	Armament@ROCKET:
+		RequiresCondition: plug.rpg
+		Weapon: RPGTower
+		LocalOffset: 272,-92,862
+		PauseOnCondition: empdisable || disabled
+	Armament@SAM:
+		RequiresCondition: plug.missile
+		Weapon: RedEye2
+		LocalOffset: 543,60,976, 543,-60,976
+		PauseOnCondition: empdisable || disabled
+	WithMuzzleOverlay:
+		RequiresCondition: !build-incomplete && plug.vulcan
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+		Palette: player-nobright
+		IsPlayerPalette: True
+	WithIdleOverlay@LIGHTS-BRIGHT:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights-bright
+		Palette: bright
+	WithMakeOverlay@MAKE-BRIGHT:
+		Sequence: make-bright
+		Palette: bright
+	Power@vulcan:
+		RequiresCondition: !disabled && plug.vulcan
+		Amount: -30
+	Power@samextra:
+		RequiresCondition: !disabled && (plug.missile || plug.rpg)
+		Amount: -50
+	Pluggable:
+		Conditions:
+			plug.vulcan: plug.vulcan
+			plug.rpg: plug.rpg
+			plug.missile: plug.missile
+		Requirements:
+			plug.vulcan: !build-incomplete && !plug.vulcan && !plug.rpg && !plug.missile
+			plug.rpg: !build-incomplete && !plug.rpg && !plug.vulcan && !plug.missile
+			plug.missile: !build-incomplete && !plug.vulcan && !plug.rpg && !plug.missile
+		EditorOptions:
+			plug.vulcan: Vulcan Tower
+			plug.rpg: RPG Upgrade
+			plug.missile: SAM Upgrade
+	Replacement:
+		ReplaceableTypes: GDITower
+	ProvidesPrerequisite@pluggablevulcan:
+		RequiresCondition: AImicroManage && !build-incomplete && !plug.vulcan && !plug.rpg && !plug.missile
+		Prerequisite: plug.vulcan
+	ProvidesPrerequisite@pluggablemissile:
+		RequiresCondition: AImicroManage && !build-incomplete && !plug.vulcan && !plug.rpg && !plug.missile
+		Prerequisite: plug.missile
+	ProvidesPrerequisite@pluggableRPG:
+		RequiresCondition: AImicroManage && !build-incomplete && !plug.vulcan && !plug.rpg && !plug.missile
+		Prerequisite: plug.rpg
+
+GACTWR.SOCKET:
+	AlwaysVisible:
+	Interactable:
+	Tooltip:
+		Name: Component Tower (unupgraded)
+
+GAVULC:
+	Inherits: ^BuildingPlug
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Weapon Plugin: Vulcan
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 80
+		Prerequisites: ~plug.vulcan, gapile, ~structures.gdi, ~techlevel.low
+		Description: Need to apply this plugin on Titian or Component Tower. \n Provide additional weapon that:\n-Strong vs Infantry, Light armored units.\n-Weak vs Heavy armored units. \nMakes Component Tower consume 30 power.
+	Plug:
+		Type: plug.vulcan
+
+GAROCK:
+	Inherits: ^BuildingPlug
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Weapon Plugin: RPG
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 90
+		Prerequisites: ~plug.rpg, gaweap, ~structures.gdi, ~techlevel.high
+		Description: Need to apply this plugin on Titian or Component Tower. \n Provide additional weapon that:\n-Strong vs Armored ground units\n-Weak vs Aircraft. \nMakes Component Tower consume 50 power.
+	Plug:
+		Type: plug.rpg
+
+GACSAM:
+	Inherits: ^BuildingPlug
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Weapon Plugin: Missile
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 100
+		Prerequisites: ~plug.missile, ~structures.gdi, garadr,~techlevel.medium
+		Description: Need to apply this plugin on Titian or Component Tower. \n Provide additional weapon that:\n-Strong vs Aircraft.\n-Weak vs Ground. \nMakes Component Tower consume 50 power.
+	Plug:
+		Type: plug.missile
+
+
+GAPOWRUP:
+	Inherits: ^BuildingPlug
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Power Plugin: Power Turbine
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 100
+		Prerequisites: ~plug.power, ~structures.gdi, ~techlevel.medium
+		Description: Provides extra 50 power generation.
+	Plug:
+		Type: powrup
+	Power:
+		Amount: 50

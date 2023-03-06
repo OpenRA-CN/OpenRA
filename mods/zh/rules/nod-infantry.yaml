@@ -1,0 +1,161 @@
+E3:
+	Inherits: ^Soldier
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 30
+		Prerequisites: ~nahand, ~techlevel.low
+		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft, Buildings\n  Weak vs Infantry
+	Valued:
+		Cost: 250
+	Tooltip:
+		Name: Rocket Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Voiced:
+		VoiceSet: Rocket
+	Health:
+		HP: 10000
+	Mobile:
+		Speed: 56
+	Armament@PRIMARY:
+		Weapon: VectorBazooka #Bazooka
+		LocalOffset: 356,0,558
+		UseBlindage: true
+		RequiresCondition: !WebDisable && !inside-tunnel
+	TakeCover:
+		ProneOffset: 52,64,0
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		RequiresCondition: !WebDisable && !inside-tunnel
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: attack
+	RevealsShroud:
+		Range: 7c0
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+
+CYBORG:
+	Inherits: ^Cyborg
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Armor:
+		Type: Light
+	Valued:
+		Cost: 650
+	Tooltip:
+		Name: Cyborg Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 60
+		Prerequisites: ~nahand, ~techlevel.medium
+		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Selectable:
+		Bounds: 482, 1870, 0, -603
+		DecorationBounds: 482, 1870, 0, -603
+	Voiced:
+		VoiceSet: Cyborg
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 30000
+	Passenger:
+	RevealsShroud:
+		Range: 6c512
+	# Armament:
+	# 	Weapon: CyborgVulcan
+	# 	LocalOffset: 290,120, 610
+	# 	UseBlindage: true
+	Armament@PRIMARY:
+		LocalOffset: 290,120, 610
+		Weapon: CyborgVulcan
+		RequiresCondition: !WebDisable && !inside-tunnel && !empdisable
+		UseBlindage: true
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		RequiresCondition: !WebDisable && !inside-tunnel && !empdisable
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+
+CYC2:
+	Inherits: ^Cyborg
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Armor:
+		Type: Heavy
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Cyborg Commando
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 100
+		Prerequisites: ~nahand, natmpl, ~techlevel.high
+		BuildLimit: 1
+		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft\nMaximum 1 can be trained.
+	Selectable:
+		Bounds: 482, 1930, -30, -724
+		DecorationBounds: 482, 1930, -30, -724
+	Voiced:
+		VoiceSet: CyborgCommando
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 50000
+	Passenger:
+	RevealsShroud:
+		Range: 8c0
+	Armament:
+		Weapon: CyCannon
+		LocalOffset: 240,120,558
+		UseBlindage: true
+		RequiresCondition: !WebDisable && !inside-tunnel && !empdisable
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		RequiresCondition: !WebDisable && !inside-tunnel && !empdisable
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+
+MHIJACK:
+	Inherits: ^Soldier
+	Inherits@2: ^HealsOnTiberium
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 80
+		Prerequisites: ~nahand, natmpl, ~techlevel.high
+		BuildLimit: 1
+		Description: Hijacks enemy vehicles.\n  Unarmed
+	Valued:
+		Cost: 1850
+	Tooltip:
+		Name: Mutant Hijacker
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Voiced:
+		VoiceSet: Hijacker
+	Health:
+		HP: 30000
+	Mobile:
+		Speed: 99
+	-Crushable:
+	CaptureManager:
+	Captures:
+		CaptureTypes: Vehicle
+		PlayerExperience: 10
+	RevealsShroud:
+		Range: 6c512

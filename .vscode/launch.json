@@ -46,6 +46,17 @@
 			"preLaunchTask": "build",
 		},
 		{
+			"name": "Launch (ZH)",
+			"type": "coreclr",
+			"request": "launch",
+			"program": "${workspaceRoot}/bin/OpenRA.dll",
+			"windows": {
+				"program": "${workspaceRoot}/bin/OpenRA.exe",
+			},
+			"args": ["Game.Mod=zh", "Engine.EngineDir=.."],
+			"preLaunchTask": "build",
+		},
+		{
 			"name": "Launch Utility",
 			"type": "coreclr",
 			"request": "launch",

@@ -18,7 +18,7 @@ for /F "delims==\ " %%x in ("%*") do (
 
 :launchmod
 cd %~dp0%
-bin\OpenRA.exe Engine.EngineDir=".." Engine.LaunchPath="%~dpf0" Game.Mod="ts" %*
+bin\OpenRA.exe Engine.EngineDir=".." Engine.LaunchPath="%~dpf0" Game.Mod="zh" %*
 goto end
 :launch
 cd %~dp0%

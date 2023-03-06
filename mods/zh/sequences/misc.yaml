@@ -1,0 +1,1832 @@
+overlay:
+	Defaults:
+		Filename: place2.shp
+		Offset: 0, -12, 0
+		ZOffset: -2
+		MeshType: Cell
+	build-valid-snow:
+	build-valid-temperate:
+	build-invalid:
+		Start: 1
+	target-select:
+	vplug-valid:
+		Start: 3
+	vplug-invalid:
+		Start: 2
+
+
+editor-overlay:
+	Defaults:
+		ZOffset: -2
+		ZRamp: 1
+		MeshType: Cell
+		Offset: 0, 0, 0
+	cell:
+		Filename: cell.png
+	cellsparse:
+		Filename: cellsparse.png
+	cellgrid:
+		Filename: cellgrid.png
+	copy:
+		Filename: cellgridgreen.png
+	paste:
+		Filename: cellgridred.png
+
+poweroff:
+	offline:
+		Filename: poweroff.shp
+		Length: *
+		Tick: 160
+		ZOffset: 2047
+
+allyrepair:
+	repair:
+		Filename: wrench.shp
+		Length: *
+		Tick: 160
+		ZOffset: 2047
+
+rallypoint:
+	flag:
+		Filename: mouse.shp
+		Start: 221
+		Length: 8
+		ZOffset: 3072
+	circles:
+		Filename: null.shp
+
+beacon:
+	idle:
+		Filename: beacon.shp
+		Length: 5
+		Tick: 200
+		ZOffset: 2047
+
+lockon:
+	common: 
+		Filename: lockon.shp
+		Length: 1
+		Start: 1
+		ZOffset: 2047
+
+crate:
+	idle:
+		TilesetFilenames:
+			TEMPERATE: crate.tem
+			SNOW: crate.sno
+		ShadowStart: 1
+		Offset: 0, -10, 10
+
+crate-effects:
+	Defaults:
+		Length: *
+		Offset: 0, 0, 96
+	dollar:
+		Filename: money.shp
+	reveal-map:
+		Filename: reveal.shp
+	hide-map:
+		Filename: shroudx.shp
+	firepower:
+		Filename: firepowr.shp
+	armor:
+		Filename: armor.shp
+	stealth:
+		Filename: cloak.shp
+	heal:
+		Filename: healall.shp
+	nuke:
+		Filename: mltimisl.shp
+	levelup:
+		Filename: veteran.shp
+
+rank:
+	veteran:
+		Filename: pips.shp
+		Start: 7
+	elite:
+		Filename: pips.shp
+		Start: 8
+		Offset: 3, 3
+
+mpspawn:
+	idle:
+		Filename: mpspawn.shp
+		Length: *
+		ZRamp: 1
+		Offset: 0, 0, 1
+
+waypoint:
+	idle:
+		Filename: waypoint.shp
+		Length: *
+		ZRamp: 1
+		Offset: 0, 0, 1
+
+camera:
+	idle:
+		Filename: camera.shp
+		Length: *
+		ZRamp: 1
+		Offset: 0, 0, 1
+
+clock:
+	idle:
+		Filename: gclock2.shp
+		Length: *
+
+darken:
+	idle:
+		Filename: gclock2.shp
+		Length: 1
+
+pips:
+	Defaults:
+		Filename: pips.shp
+	medic:
+		Start: 6
+	pip-empty:
+		Filename: pips2.shp
+	pip-green:
+		Filename: pips2.shp
+		Start: 1
+	pip-yellow:
+		Filename: pips2.shp
+		Start: 2
+	pip-gray:
+		Filename: pips2.shp
+		Start: 3
+	pip-red:
+		Filename: pips2.shp
+		Start: 4
+	pip-blue:
+		Filename: pips2.shp
+		Start: 5
+	pip-ammo:
+		Filename: ammopips.shp
+	pip-ammoempty:
+		Filename: ammopips.shp
+		Start: 1
+	pip-disguise:
+		Filename: pip-disguise.shp
+		Length: *
+		Tick: 300
+		Offset: 0, -6
+	# TODO:
+	pip-empty-building:
+	pip-green-building:
+		Start: 1
+	pip-yellow-building:
+		Start: 2
+	pip-gray-building:
+		Start: 3
+	pip-red-building:
+		Start: 4
+	pip-blue-building:
+		Start: 5
+	pip-mislammo: ammopips-misl
+		Scale: 1.2
+	pip-mislammoempty: ammopips-misl
+		Start: 1
+		Scale: 1.2
+	pip-misl2ammo: ammopips-mislb
+		Scale: 1.2
+	pip-misl2ammoempty: ammopips-mislb
+		Start: 1
+		Scale: 1.2
+
+explosion:
+	Defaults:
+		Length: *
+		ZOffset: 511
+		Offset: 0, 0, 24
+		AlphaFade: True
+		IgnoreWorldTint: True
+		BlendMode: ScreenAdditive #Additive
+		# MeshType: FloatBoard
+	building:
+		Filename: twlt070.shp
+		Offset: 0, 0, 36
+	ionring:
+		Filename: ring1.shp
+		ZRamp: 1
+		Tick: 100
+		BlendMode: Additive
+	ionbeam:
+		Filename: ionbeam.shp
+		Offset: 0, -60, 60
+		Tick: 100
+		ZOffset: 898
+		BlendMode: Additive
+	ionbeam2:
+		Filename: ionbeam.shp
+		Offset: 0, -180, 60
+		Tick: 100
+		ZOffset: 898
+		BlendMode: Additive
+	ionbeam3:
+		Filename: ionbeam.shp
+		Offset: 0, -300, 60
+		Tick: 100
+		ZOffset: 898
+		BlendMode: Additive
+	ionbeam4:
+		Filename: ionbeam.shp
+		Offset: 0, -420, 60
+		Tick: 100
+		ZOffset: 898
+		BlendMode: Additive
+	ionbeam5:
+		Filename: ionbeam.shp
+		Offset: 0, -540, 60
+		Tick: 100
+		ZOffset: 898
+		BlendMode: Additive
+	ionbeam6:
+		Filename: ionbeam.shp
+		Offset: 0, -660, 60
+		Tick: 100
+		ZOffset: 898
+		BlendMode: Additive
+	pulse_explosion:
+		Filename: pulsefx2.shp
+		BlendMode: Additive
+		ZRamp: 1
+		Tick: 80
+		MeshType: Plane
+		ZOffset: 2048
+	smallpulse_explosion:
+		Filename: pulsefx2.shp
+		BlendMode: Additive
+		Tick: 35
+		MeshType: Plane
+		ZOffset: 2048
+		Scale: 0.25
+	smallpulse_explosion2:
+		Filename: pulsefx2.shp
+		BlendMode: Additive
+		Tick: 35
+		MeshType: Plane
+		ZOffset: 2048
+		Scale: 0.33
+	small_watersplash:
+		Filename: h2o_exp2.shp
+		IgnoreWorldTint: False
+		AlphaFade: False
+		Alpha: 0.75
+		Tick: 55
+		BlendMode: Alpha
+	large_watersplash:
+		Filename: h2o_exp1.shp
+		Offset: 0, 0, 39
+		IgnoreWorldTint: False
+		AlphaFade: False
+		Alpha: 0.75
+		Tick: 55
+		BlendMode: Alpha
+	water_piff:
+		Filename: w_piff.shp
+		IgnoreWorldTint: False
+		AlphaFade: False
+		Alpha: 0.75
+		BlendMode: Alpha
+		Tick: 75
+	water_piffs:
+		Filename: w_piffs.shp
+		IgnoreWorldTint: False
+		BlendMode: Alpha
+		Tick: 75
+	piff:
+		Filename: piff.shp
+		IgnoreWorldTint: False
+		Tick: 55
+	piffs:
+		Filename: piffpiff.shp
+		IgnoreWorldTint: False
+		Tick: 55
+	piff-bright:
+		Filename: piff.shp
+		IgnoreWorldTint: True
+		BlendMode: Additive
+		Tick: 55
+	piff-big:
+		Filename: piff.shp
+		IgnoreWorldTint: True
+		Tick: 55
+		Scale: 1.5
+	small_explosion:
+		Filename: explosml.shp
+	medium_explosion:
+		Filename: explomed.shp
+		Offset: 0, 0, 27
+	large_explosion:
+		Filename: explolrg.shp
+		Offset: 0, 0, 31
+	tiny_bang:
+		Filename: s_bang16.shp
+	small_bang:
+		Filename: s_bang24.shp
+	medium_bang:
+		Filename: s_bang34.shp
+	large_bang:
+		Filename: s_bang48.shp
+	tiny_brnl:
+		Filename: s_brnl20.shp
+	small_brnl:
+		Filename: s_brnl30.shp
+	medium_brnl:
+		Filename: s_brnl40.shp
+	large_brnl:
+		Filename: s_brnl58.shp
+		Offset: 0, 0, 30
+	tiny_tumu:
+		Filename: s_tumu22.shp
+	small_tumu:
+		Filename: s_tumu30.shp
+	medium_tumu:
+		Filename: s_tumu42.shp
+	large_tumu:
+		Filename: s_tumu60.shp
+		Offset: 0, 0, 31
+	tiny_clsn:
+		Filename: s_clsn16.shp
+	small_clsn:
+		Filename: s_clsn22.shp
+	medium_clsn:
+		Filename: s_clsn30.shp
+	large_clsn:
+		Filename: s_clsn42.shp
+	verylarge_clsn:
+		Filename: s_clsn58.shp
+		Offset: 0, 0, 30
+	tiny_twlt:
+		Filename: twlt026.shp
+	small_twlt:
+		Filename: twlt036.shp
+	medium_twlt:
+		Filename: twlt050.shp
+		Offset: 0, 0, 26
+	large_twlt:
+		Filename: twlt070.shp
+		Offset: 0, 0, 36
+	verylarge_twlt:
+		Filename: twlt100.shp
+		Offset: 0, 0, 51
+	tiny_grey_explosion:
+		Filename: xgrysml1.shp
+		IgnoreWorldTint: False
+	small_grey_explosion:
+		Filename: xgrysml2.shp
+		IgnoreWorldTint: False
+	medium_grey_explosion:
+		Filename: xgrymed1.shp
+		IgnoreWorldTint: False
+	large_grey_explosion:
+		Filename: xgrymed2.shp
+		IgnoreWorldTint: False
+	droppod_explosion:
+		Filename: droppod.shp
+		Length: 8
+		Tick: 360
+		IgnoreWorldTint: False
+		BlendMode: Alpha
+		MeshType: Plane
+	droppod2_explosion:
+		Filename: droppod2.shp
+		Length: 8
+		Tick: 360
+		IgnoreWorldTint: False
+		BlendMode: Alpha
+		MeshType: Plane
+	droppody_explosion:
+		Filename: droppody.shp
+		Length: 8
+		Tick: 360
+		IgnoreWorldTint: False
+		BlendMode: Alpha
+		MeshType: Plane
+	droppody2_explosion:
+		Filename: droppody2.shp
+		Length: 8
+		Tick: 360
+		IgnoreWorldTint: False
+		BlendMode: Alpha
+		MeshType: Plane
+	proton_explo:
+		Filename: proton_explo.shp
+		BlendMode: Alpha
+		AlphaFade: False
+		MeshType: Plane
+	laserburning:
+		Filename: laserburn.shp
+		ZOffset: 32
+		Tick: 80
+		BlendMode: Additive
+		MeshType: TileOverlay
+		Scale: 1.23
+	laserburningsmall:
+		Filename: laserburn.shp
+		ZOffset: 32
+		Tick: 80
+		Scale: 0.85
+		BlendMode: Additive
+		MeshType: TileOverlay
+	laserburningbig:
+		Filename: laserburn.shp
+		ZOffset: 32
+		Tick: 80
+		BlendMode: Additive
+		MeshType: TileOverlay
+		Scale: 2
+	laserburningmini:
+		Filename: laserburn.shp
+		ZOffset: 32
+		Tick: 60
+		Scale: 0.6
+		BlendMode: Additive
+		MeshType: TileOverlay
+	repairsparks:
+		Filename: repairsparks.shp
+		AlphaFade: false
+	heal:
+		Filename: heal.shp
+		AlphaFade: false
+	smokebomb:
+		Filename: smokebomb.shp
+		BlendMode: Alpha
+	plasmaclsnlarge:
+		Filename: plasmaclsnlarge.shp
+		AlphaFade: False
+		Tick: 35
+		MeshType: Plane
+		BlendMode: Additive
+		Offset: 0, -12, 12
+	emp_fx01:
+		Filename: emp_fx01.shp
+		Length: *
+		Offset: 0, 0, 37
+		AlphaFade: False
+	ioncannonsparks:
+		Filename: ioncannonsparks.shp
+		Offset: 0,-15,0
+		BlendMode: Additive
+		AlphaFade: False
+
+mislflash:
+	Defaults:
+		ZOffset: 768
+		IgnoreWorldTint: True
+		# MeshType: FloatBoard
+		BlendMode: Additive
+		Tick: 50
+		Length: *
+		Scale: 0.75
+		Frames: 0,0,0,0,0, 0,0,0,0,0
+		Alpha: 0.5,0.6,0.7,0.8,0.9, 1,0.9,0.8,0.7,0.6
+	mislflash1:
+		Filename: mislflash.shp
+	mislflash2:
+		Filename: mislflash2.shp
+	mislflash3:
+		Filename: mislflash3.shp
+	mislflash1big:
+		Filename: mislflash.shp
+		Scale: 1.5
+	mislflash2big:
+		Filename: mislflash2.shp
+		Scale: 1.5
+	mislflash3big:
+		Filename: mislflash3.shp
+		Scale: 1.5
+	mislflash1small:
+		Filename: mislflash.shp
+		Scale: 0.5
+	mislflash2small:
+		Filename: mislflash2.shp
+		Scale: 0.5
+	mislflash3small:
+		Filename: mislflash3.shp
+		Scale: 0.5
+
+
+flash:
+	Defaults:
+		ZOffset: 3333
+		IgnoreWorldTint: True
+		MeshType: Board
+		BlendMode: Additive
+		Tick: 50
+		Length: *
+		Frames: 0,0,0,0,0, 0,0,0,0,0
+		Alpha: 1,1,0.95,0.9,0.83, 0.75,0.63,0.43,0.2,0.05
+	laserstart:
+		Filename: mislflash.shp
+		Scale: 0.65
+	laserend:
+		Filename: mislflash.shp
+		Scale: 1
+	lasersmall:
+		Filename: mislflash.shp
+		Scale: 0.8
+		Tick: 40
+	oblaserstart:
+		Filename: mislflash.shp
+		Scale: 0.85
+		Tick: 80
+	oblaserend:
+		Filename: mislflash.shp
+		Scale: 1.3
+		Tick: 80
+
+
+discus:
+	idle:
+		Filename: discus.shp
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 12
+		MeshType: Plane
+
+canister:
+	idle:
+		Filename: canister.shp
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 12
+
+pulsball:
+	idle:
+		Filename: pulsball.shp
+		Length: *
+		BlendMode: Additive
+		ZOffset: 1023
+		Offset: 0, 0, 24
+
+zbomb:
+	idle:
+		Filename: zbomb.shp
+		Facings: 32
+		Scale: 0.55
+
+dragon:
+	idle:
+		Filename: dragon.shp
+		Facings: 32
+		ZOffset: 1023
+		Offset: 0, 0, 6
+
+crystal4:
+	idle:
+		TilesetFilenames:
+			TEMPERATE: crystal4.tem
+			SNOW: crystal4.sno
+		Length: 15
+		ShadowStart: 15
+		UseTilesetExtension: true
+		IgnoreWorldTint: True
+		ZOffset: 1023
+		Offset: 0, 0, 6
+
+120mm:
+	idle:
+		Filename: 120mm.shp
+		ZOffset: 1023
+		Offset: 0, 0, 4
+		MeshType: Plane
+		IgnoreWorldTint: True
+		BlendMode: ScreenAdditive
+
+torpedo:
+	idle:
+		Filename: torpedo.shp
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 8
+		Scale: 1
+		IgnoreWorldTint: True
+		MeshType: Plane
+		BlendMode: ScreenAdditive
+
+proton_projectile:
+	idle:
+		Filename: proton_projectile.shp
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 8
+		Scale: 1
+		IgnoreWorldTint: True
+		MeshType: Plane
+		BlendMode: Additive
+
+proton_projectile_small:
+	idle:
+		Filename: proton_projectile_small.shp
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 8
+		Scale: 0.8
+		IgnoreWorldTint: True
+		MeshType: Plane
+		BlendMode: Additive
+
+plasma_ball:
+	Defaults:
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 8
+		Scale: 0.8
+		IgnoreWorldTint: True
+		MeshType: Plane
+		BlendMode: Additive
+	plasmaball_blue:
+		Filename: plasmaball_blue.shp
+	plasmaball_red:
+		Filename: plasmaball_red.shp
+	plasmaball_green:
+		Filename: plasmaball_green.shp
+
+plasma_ball_small:
+	Inherits: plasma_ball
+	Defaults:
+		Scale: 0.5
+
+plasma_ball_large:
+	Inherits: plasma_ball
+	Defaults:
+		Scale: 1
+
+flameall:
+	idle:
+		Filename: flameall.shp
+		Length: 19
+		Facings: -8
+		Tick: 80
+		ZOffset: 1023
+		Offset: 0, 0, 24
+		IgnoreWorldTint: True
+		Alpha: 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1
+		BlendMode: ScreenAdditive
+
+flameball:
+	Defaults:
+		Length: *
+		ZOffset: 1024
+		Scale: 0.45
+		BlendMode: Additive
+		MeshType: Board
+	idle1:
+		Filename: flameball1.shp
+	idle2:
+		Filename: flameball2.shp
+	idle3:
+		Filename: flameball3.shp
+
+greenflameball:
+	Inherits: flameball
+	Defaults:
+		BlendMode: ScreenAdditive
+		Scale: 1
+
+
+cloud:
+	Defaults:
+		Length: *
+		ZOffset: 1024
+		# Scale: 0.45
+		BlendMode: EffectAlpha #Screen #LowAdditive #Alpha
+		AlphaFade: True
+		MeshType: Plane
+	cloud1:
+		Filename: cloud1.shp
+	cloud1d:
+		Filename: cloud1d.shp
+	cloud2:
+		Filename: cloud2.shp
+	cloud2d:
+		Filename: cloud2d.shp
+
+chemmissilesmoke:
+	Defaults:
+		Length: *
+		ZOffset: 1024
+		Tick: 38
+		BlendMode: EffectAlpha #Screen #LowAdditive #Alpha
+		AlphaFade: True
+		MeshType: Plane
+	idle:
+		Filename: chemmissilesmoke.shp
+	idlefx:
+		Filename: chemmissilesmoke.shp
+		FlipX: true
+	idlefy:
+		Filename: chemmissilesmoke.shp
+		FlipY: true
+	idlefxy:
+		Filename: chemmissilesmoke.shp
+		FlipY: true
+		FlipX: true
+
+cloudadditive:
+	Inherits: cloud
+	Defaults:
+		BlendMode: Additive
+
+largesmoke:
+	idle:
+		Filename: lgrysmk1.shp
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 24
+		AlphaFade: True
+
+smallsmoke:
+	idle:
+		Filename: sgrysmk1.shp
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 24
+		AlphaFade: True
+
+large_smoke_trail:
+	idle:
+		Filename: smokey.shp
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 0
+		AlphaFade: True
+		BlendMode: ScreenAdditive
+
+
+small_smoke_trail:
+	idle:
+		Filename: smokey2.shp
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 0
+		AlphaFade: True
+		BlendMode: ScreenAdditive
+
+
+largefire:
+	idle:
+		Filename: fire1.shp
+		Length: *
+		Offset: 0, 0, 0
+		Tick: 80
+		IgnoreWorldTint: True
+		ZOffset: 35
+		BlendMode: Additive
+		AlphaFade: True
+
+mediumfire:
+	idle:
+		Filename: fire2.shp
+		Length: *
+		Offset: 0, 0, 0
+		Tick: 80
+		IgnoreWorldTint: True
+		BlendMode: Additive
+		AlphaFade: True
+
+smallfire:
+	idle:
+		Filename: fire3.shp
+		Length: *
+		Offset: 0, 0, 0
+		Tick: 80
+		IgnoreWorldTint: True
+		ZOffset: 35
+		BlendMode: Additive
+		AlphaFade: True
+
+tinyfire:
+	idle:
+		Filename: fire4.shp
+		Length: *
+		Offset: 0, 0, 24
+		IgnoreWorldTint: True
+		ZOffset: 35
+		Tick: 80
+		BlendMode: Additive
+		AlphaFade: True
+
+moveflsh:
+	idle:
+		Filename: ring.shp
+		Length: *
+		Tick: 30
+		ZOffset: 2047
+		MeshType: Plane
+		ZRamp: 1
+		AlphaFade: True
+
+wake:
+	idle:
+		Filename: wake2.shp
+		Length: *
+		Tick: 180
+		ZOffset: 1
+		MeshType: Plane
+		ZRamp: 1
+		Offset: 0, 0, 1
+		AlphaFade: True
+
+waketest:
+	idle:
+		Filename: wake2.shp
+		Length: 5
+		Tick: 80
+		ZOffset: 1
+		MeshType: Plane
+		BlendMode: Additive
+		ZRamp: 1
+		Scale: 0.85
+		Offset: 0, 0, 1
+		AlphaFade: True
+
+resources:
+	Defaults:
+		BlendMode: Alpha
+		Length: 12
+		# ShadowStart: 12
+		Offset: 0, -12, 0
+		IgnoreWorldTint: true
+		ZOffset: 1024
+		MeshType: Plane
+	tib01:
+		TilesetFilenames:
+			TEMPERATE: tib01.tem
+			SNOW: tib01.sno
+	tib02:
+		TilesetFilenames:
+			TEMPERATE: tib02.tem
+			SNOW: tib02.sno
+	tib03:
+		TilesetFilenames:
+			TEMPERATE: tib03.tem
+			SNOW: tib03.sno
+	tib04:
+		TilesetFilenames:
+			TEMPERATE: tib04.tem
+			SNOW: tib04.sno
+	tib05:
+		TilesetFilenames:
+			TEMPERATE: tib05.tem
+			SNOW: tib05.sno
+	tib06:
+		TilesetFilenames:
+			TEMPERATE: tib06.tem
+			SNOW: tib06.sno
+	tib07:
+		TilesetFilenames:
+			TEMPERATE: tib07.tem
+			SNOW: tib07.sno
+	tib08:
+		TilesetFilenames:
+			TEMPERATE: tib08.tem
+			SNOW: tib08.sno
+	tib09:
+		TilesetFilenames:
+			TEMPERATE: tib09.tem
+			SNOW: tib09.sno
+	tib10:
+		TilesetFilenames:
+			TEMPERATE: tib10.tem
+			SNOW: tib10.sno
+	tib11:
+		TilesetFilenames:
+			TEMPERATE: tib11.tem
+			SNOW: tib11.sno
+	tib12:
+		TilesetFilenames:
+			TEMPERATE: tib12.tem
+			SNOW: tib12.sno
+	tib13:
+		TilesetFilenames:
+			TEMPERATE: tib13.tem
+			SNOW: tib13.sno
+	tib14:
+		TilesetFilenames:
+			TEMPERATE: tib14.tem
+			SNOW: tib14.sno
+	tib15:
+		TilesetFilenames:
+			TEMPERATE: tib15.tem
+			SNOW: tib15.sno
+	tib16:
+		TilesetFilenames:
+			TEMPERATE: tib16.tem
+			SNOW: tib16.sno
+	tib17:
+		TilesetFilenames:
+			TEMPERATE: tib17.tem
+			SNOW: tib17.sno
+	tib18:
+		TilesetFilenames:
+			TEMPERATE: tib18.tem
+			SNOW: tib18.sno
+	tib19:
+		TilesetFilenames:
+			TEMPERATE: tib19.tem
+			SNOW: tib19.sno
+	tib20:
+		TilesetFilenames:
+			TEMPERATE: tib20.tem
+			SNOW: tib20.sno
+	veins:
+		Filename: veins.shp
+		Length: *
+		ShadowStart: -1
+		Offset: 0, -13, 0
+		IgnoreWorldTint: false
+
+
+veins:
+	idle:
+		TilesetFilenames:
+			TEMPERATE: veinatac.tem
+			SNOW: veinatac.sno
+		Length: 12
+		ZOffset: 1023
+		Offset: 0, -12, 24
+		MeshType: TileOverlay
+
+# shroud:
+# 	Defaults:
+# 		Offset: 0, -1
+# 		ZRamp: 1
+# 		MeshType: Plane
+# 		BlendMode: Alpha
+# 	shroud:
+# 		Length: *
+# 	fog: fog
+# 		Length: *
+
+shroud:
+	Defaults:
+		Length: 12
+		Offset: 0, -1
+		MeshType: Plane
+		BlendMode: Alpha
+	typea:
+		Filename: shadow.shp
+	typeb:
+		Filename: shadow.shp
+		Start: 12
+	typec:
+		Filename: shadow.shp
+		Start: 24
+	typed:
+		Filename: shadow.shp
+		Start: 36
+	full:
+		Filename: fullshroud.shp
+		Length: 1
+
+testtile:
+	Defaults:
+		Offset: 0, 0, 0
+		MeshType: Plane
+		BlendMode: None
+	dirt:
+		Filename: dirt.png
+
+smallscorches:
+	Defaults:
+		Offset: 0, -12, 1
+		ZRamp: 1
+		MeshType: Plane
+		ZOffset: 10
+	sc1:
+		TilesetFilenames:
+			TEMPERATE: burnt01.tem
+			SNOW: burnt01.sno
+	sc2:
+		TilesetFilenames:
+			TEMPERATE: burnt02.tem
+			SNOW: burnt02.sno
+	sc3:
+		TilesetFilenames:
+			TEMPERATE: burnt03.tem
+			SNOW: burnt03.sno
+	sc4:
+		TilesetFilenames:
+			TEMPERATE: burnt04.tem
+			SNOW: burnt04.sno
+	sc5:
+		TilesetFilenames:
+			TEMPERATE: burnt05.tem
+			SNOW: burnt05.sno
+	sc6:
+		TilesetFilenames:
+			TEMPERATE: burnt06.tem
+			SNOW: burnt06.sno
+
+mediumscorches:
+	Defaults:
+		Offset: 0, -18, 1
+		ZRamp: 1
+		MeshType: Plane
+		ZOffset: 10
+	sc7:
+		TilesetFilenames:
+			TEMPERATE: burnt07.tem
+			SNOW: burnt07.sno
+	sc8:
+		TilesetFilenames:
+			TEMPERATE: burnt08.tem
+			SNOW: burnt08.sno
+	sc9:
+		TilesetFilenames:
+			TEMPERATE: burnt09.tem
+			SNOW: burnt09.sno
+	sc10:
+		TilesetFilenames:
+			TEMPERATE: burnt10.tem
+			SNOW: burnt10.sno
+
+largescorches:
+	Defaults:
+		Offset: 0, -24, 1
+		ZRamp: 1
+		MeshType: Plane
+		ZOffset: 10
+	sc11:
+		TilesetFilenames:
+			TEMPERATE: burnt11.tem
+			SNOW: burnt11.sno
+	sc12:
+		TilesetFilenames:
+			TEMPERATE: burnt12.tem
+			SNOW: burnt12.sno
+
+smallcraters:
+	Defaults:
+		Offset: 0, -12, 1
+		ZRamp: 1
+		MeshType: Plane
+		ZOffset: 10
+	cr1:
+		TilesetFilenames:
+			TEMPERATE: crater01.tem
+			SNOW: crater01.sno
+	cr2:
+		TilesetFilenames:
+			TEMPERATE: crater02.tem
+			SNOW: crater02.sno
+	cr3:
+		TilesetFilenames:
+			TEMPERATE: crater03.tem
+			SNOW: crater03.sno
+	cr4:
+		TilesetFilenames:
+			TEMPERATE: crater04.tem
+			SNOW: crater04.sno
+	cr5:
+		TilesetFilenames:
+			TEMPERATE: crater05.tem
+			SNOW: crater05.sno
+	cr6:
+		TilesetFilenames:
+			TEMPERATE: crater06.tem
+			SNOW: crater06.sno
+
+mediumcraters:
+	Defaults:
+		Offset: 0, -12, 1
+		ZRamp: 1
+		MeshType: Plane
+		ZOffset: 10
+	cr7:
+		TilesetFilenames:
+			TEMPERATE: crater07.tem
+			SNOW: crater07.sno
+	cr8:
+		TilesetFilenames:
+			TEMPERATE: crater08.tem
+			SNOW: crater08.sno
+	cr9:
+		TilesetFilenames:
+			TEMPERATE: crater09.tem
+			SNOW: crater09.sno
+	cr10:
+		TilesetFilenames:
+			TEMPERATE: crater10.tem
+			SNOW: crater10.sno
+
+largecraters:
+	Defaults:
+		Offset: 0, -24, 1
+		ZRamp: 1
+		MeshType: Plane
+		ZOffset: 10
+	cr11:
+		TilesetFilenames:
+			TEMPERATE: crater11.tem
+			SNOW: crater11.sno
+	cr12:
+		TilesetFilenames:
+			TEMPERATE: crater12.tem
+			SNOW: crater12.sno
+
+icon:
+	clustermissile:
+		Filename: mltiicon.shp
+	chemicalmissile:
+		Filename: chemicon.shp
+	ioncannon:
+		Filename: ioncicon.shp
+	hunterseeker:
+		Filename: detnicon.shp
+	emp:
+		Filename: pulsicon.shp
+	droppods:
+		Filename: podsicon.shp
+	miniveinsw:
+		Filename: miniveinswicon.shp
+	orcaicon:
+		Filename: orcaicon.shp
+	testcystalicon:
+		Filename: testcystalicon.shp
+	none:
+		Filename: emptyicon.shp
+
+clustermissile:
+	up: # TODO: use voxel
+		Filename: mltimisl-placeholder.shp
+		Frames: 0
+		Length: 1
+	down: # TODO: use voxel
+		Filename: mltimisl-placeholder.shp
+		Frames: 1
+		Length: 1
+
+^rock:
+	idle:
+		ShadowStart: 1
+
+trock01:
+	Inherits: ^rock
+	idle:
+		TilesetFilenames:
+			TEMPERATE: trock01.tem
+			SNOW: trock01.sno
+
+trock02:
+	Inherits: ^rock
+	idle:
+		TilesetFilenames:
+			TEMPERATE: trock02.tem
+			SNOW: trock02.sno
+
+trock03:
+	Inherits: ^rock
+	idle:
+		TilesetFilenames:
+			TEMPERATE: trock03.tem
+			SNOW: trock03.sno
+
+trock04:
+	Inherits: ^rock
+	idle:
+		TilesetFilenames:
+			TEMPERATE: trock04.tem
+			SNOW: trock04.sno
+
+trock05:
+	Inherits: ^rock
+	idle:
+		TilesetFilenames:
+			TEMPERATE: trock05.tem
+			SNOW: trock05.sno
+
+srock01:
+	Inherits: ^rock
+	idle:
+		TilesetFilenames:
+			TEMPERATE: srock01.tem
+			SNOW: srock01.sno
+
+srock02:
+	Inherits: ^rock
+	idle:
+		TilesetFilenames:
+			TEMPERATE: srock02.tem
+			SNOW: srock02.sno
+
+srock03:
+	Inherits: ^rock
+	idle:
+		TilesetFilenames:
+			TEMPERATE: srock03.tem
+			SNOW: srock03.sno
+
+srock04:
+	Inherits: ^rock
+	idle:
+		TilesetFilenames:
+			TEMPERATE: srock04.tem
+			SNOW: srock04.sno
+
+srock05:
+	Inherits: ^rock
+	idle:
+		TilesetFilenames:
+			TEMPERATE: srock05.tem
+			SNOW: srock05.sno
+
+dbrissm:
+	Defaults:
+		ZOffset: 1023
+		Length: *
+	1:
+		Filename: dbris1sm.shp
+	2:
+		Filename: dbris2sm.shp
+	3:
+		Filename: dbris3sm.shp
+	4:
+		Filename: dbris4sm.shp
+	5:
+		Filename: dbris5sm.shp
+	6:
+		Filename: dbris6sm.shp
+	7:
+		Filename: dbris7sm.shp
+	8:
+		Filename: dbris8sm.shp
+	9:
+		Filename: dbris9sm.shp
+	10:
+		Filename: dbrs10sm.shp
+
+dbrislg:
+	Defaults:
+		ZOffset: 1023
+		Length: *
+	1:
+		Filename: dbris1lg.shp
+	2:
+		Filename: dbris2lg.shp
+	3:
+		Filename: dbris3lg.shp
+	4:
+		Filename: dbris4lg.shp
+	5:
+		Filename: dbris5lg.shp
+	6:
+		Filename: dbris6lg.shp
+	7:
+		Filename: dbris7lg.shp
+	8:
+		Filename: dbris8lg.shp
+	9:
+		Filename: dbris9lg.shp
+	10:
+		Filename: dbrs10lg.shp
+
+^crate:
+	idle:
+		Offset: 0, 0, 12
+		DepthSprite: isodepth.shp
+
+crat01:
+	Inherits: ^crate
+	idle:
+		Filename: crat01.shp
+
+crat02:
+	Inherits: ^crate
+	idle:
+		Filename: crat02.shp
+
+crat03:
+	Inherits: ^crate
+	idle:
+		Filename: crat03.shp
+
+crat04:
+	Inherits: ^crate
+	idle:
+		Filename: crat04.shp
+
+crat0a:
+	Inherits: ^crate
+	idle:
+		Filename: crat0a.shp
+
+crat0b:
+	Inherits: ^crate
+	idle:
+		Filename: crat0b.shp
+
+crat0c:
+	Inherits: ^crate
+	idle:
+		Filename: crat0c.shp
+
+drum01:
+	Inherits: ^crate
+	idle:
+		Filename: drum01.shp
+
+drum02:
+	Inherits: ^crate
+	idle:
+		Filename: drum02.shp
+
+palet01:
+	Inherits: ^crate
+	idle:
+		Filename: palet01.shp
+
+palet02:
+	Inherits: ^crate
+	idle:
+		Filename: palet02.shp
+
+palet03:
+	Inherits: ^crate
+	idle:
+		Filename: palet03.shp
+
+palet04:
+	Inherits: ^crate
+	idle:
+		Filename: palet04.shp
+
+^tracks:
+	idle:
+		ZOffset: 1
+		Offset: 0, 0, 1
+		ZRamp: 1
+		MeshType: Plane
+
+tracks01:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks01.tem
+			SNOW: tracks01.sno
+
+tracks02:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks02.tem
+			SNOW: tracks02.sno
+
+tracks03:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks03.tem
+			SNOW: tracks03.sno
+
+tracks04:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks04.tem
+			SNOW: tracks04.sno
+
+tracks05:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks05.tem
+			SNOW: tracks05.sno
+
+tracks06:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks06.tem
+			SNOW: tracks06.sno
+
+tracks07:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks07.tem
+			SNOW: tracks07.sno
+
+tracks08:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks08.tem
+			SNOW: tracks08.sno
+
+tracks09:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks09.tem
+			SNOW: tracks09.sno
+
+tracks10:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks10.tem
+			SNOW: tracks10.sno
+
+tracks11:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks11.tem
+			SNOW: tracks11.sno
+
+tracks12:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks12.tem
+			SNOW: tracks12.sno
+
+tracks13:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks13.tem
+			SNOW: tracks13.sno
+
+tracks14:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks14.tem
+			SNOW: tracks14.sno
+
+tracks15:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks15.tem
+			SNOW: tracks15.sno
+
+tracks16:
+	Inherits: ^tracks
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tracks16.tem
+			SNOW: tracks16.sno
+
+^tuntop:
+	idle:
+		MeshType: Board
+		ZRamp: 1
+
+tuntop01:
+	Inherits: ^tuntop
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tuntop01.tem
+			SNOW: tuntop01.sno
+		Offset: 24, -49, 48
+		ZOffset: 30
+
+tuntop02:
+	Inherits: ^tuntop
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tuntop02.tem
+			SNOW: tuntop02.sno
+		Offset: -24, -49, 48
+		ZOffset: 30
+
+
+tuntop03:
+	Inherits: ^tuntop
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tuntop03.tem
+			SNOW: tuntop03.sno
+		Offset: 24, -49, 0
+		MeshType: Plane
+		ZOffset: 4096
+
+tuntop04:
+	Inherits: ^tuntop
+	idle:
+		TilesetFilenames:
+			TEMPERATE: tuntop04.tem
+			SNOW: tuntop04.sno
+		Offset: -24, -49, 0
+		MeshType: Plane
+		ZOffset: 4096
+
+dig:
+	Defaults:
+		Filename: dig.shp
+		Length: *
+		ZOffset: 1
+		Offset: 0, 0, 24
+		MeshType: Plane
+	idle:
+	idle2:
+		Scale: 0.4
+
+typeglyphs:
+	Defaults:
+		Filename: typeglyphs.shp
+	infantry:
+	vehicle:
+		Start: 1
+	helicopter:
+		Start: 2
+	harvester:
+		Start: 3
+	structure:
+		Start: 4
+
+podring:
+	idle:
+		Filename: podring.shp
+		Frames: 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19
+		Length: *
+		AlphaFade: True
+
+jumpring:
+	idle:
+		Filename: podring.shp
+		Length: *
+		AlphaFade: True
+		Tick: 20
+
+fire1:
+	idle-overlay:
+		Filename: fire1.shp
+		Length: 17
+		BlendMode: Additive #Translucent
+		Offset: 0, -24, 24
+		ZOffset: 15
+		Alpha: 0.75
+		IgnoreWorldTint: true
+		MeshType: Board
+	twist:
+		Filename: noise.shp
+		Length: *
+		Offset: 0, -75, 24
+		Scale: 0.5
+		Alpha: 0.007
+		IgnoreWorldTint: True
+		BlendMode: Twist
+		MeshType: Board
+		Tick: 50
+
+fire2:
+	idle-overlay:
+		Filename: fire2.shp
+		Length: 17
+		BlendMode: Additive #Translucent
+		Offset: 0, -18, 18
+		ZOffset: 15
+		Alpha: 0.75
+		IgnoreWorldTint: true
+		MeshType: Board
+	twist:
+		Filename: noise.shp
+		Length: *
+		Offset: 0, -54, 18
+		Scale: 0.4
+		Alpha: 0.005
+		IgnoreWorldTint: True
+		BlendMode: Twist
+		MeshType: Board
+		Tick: 50
+
+
+cannonsmokecircle:
+	Defaults:
+		Filename: cannonsmokecircle.shp
+	idle:
+		Length: *
+		ZOffset: 512
+		IgnoreWorldTint: true
+		BlendMode: Additive
+		AlphaFade: True
+	idle2:
+		Length: *
+		ZOffset: 512
+		Scale: 0.75
+		IgnoreWorldTint: true
+		BlendMode: Additive
+		AlphaFade: True
+
+caryland:
+	idle:
+		Filename: podring.shp
+		Length: *
+		Tick: 50
+		ZOffset: -512
+		ZRamp: 1
+		Offset: 0, 0, 1
+		BlendMode: Translucent
+		MeshType: Plane
+
+dropland:
+	idle:
+		Filename: podring.shp
+		Length: *
+		Tick: 90
+		ZOffset: -512
+		ZRamp: 1
+		Offset: 0, 0, 1
+		BlendMode: Translucent
+		MeshType: Plane
+
+web2:
+	idle:
+		Filename: web2.shp
+		Length: *
+		ZOffset: 1023
+		IgnoreWorldTint: true
+		MeshType: Plane
+
+damagespark:
+	Defaults:
+		Filename: smallspark.shp
+		Length: *
+		ZOffset: 2048
+		IgnoreWorldTint: true
+		MeshType: Plane
+	idle1:
+		Frames: 1, 2, 3, 4, 5, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	idle2:
+		Frames: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	idle3:
+		Frames: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0,
+		
+auto-tag:
+	idle:
+		Filename: auto-tag.shp
+		Length: *
+		ZOffset: 100000
+		IgnoreWorldTint: true
+		MeshType: Plane
+
+airstrikedirection:
+	arrow-t:
+		Filename: mouse.shp
+		Start: 2
+		Offset: 0, -19, 0
+	arrow-tr:
+		Filename: mouse.shp
+		Start: 3
+		Offset: 15, -15, 0
+	arrow-r:
+		Filename: mouse.shp
+		Start: 4
+		Offset: 19, 0, 0
+	arrow-br:
+		Filename: mouse.shp
+		Start: 5
+		Offset: 15, 15, 0
+	arrow-b:
+		Filename: mouse.shp
+		Start: 6
+		Offset: 0, 19, 0
+	arrow-bl:
+		Filename: mouse.shp
+		Start: 7
+		Offset: -15, 15, 0
+	arrow-l:
+		Filename: mouse.shp
+		Start: 8
+		Offset: -19, 0, 0
+	arrow-tl:
+		Filename: mouse.shp
+		Start: 9
+		Offset: -15, -15, 0
+
+
+laser:
+	Defaults:
+		ZOffset: 512
+		Length: *
+		Frames: 0,0,0,0,0,  0,0,0,0,0,  0,0,0,0,0,  0,0,0,0,0,
+		MeshType: Board
+		IgnoreWorldTint: true
+		BlendMode: Additive
+		AlphaFade: True
+	obelisk:
+		Filename: ObeliskLaser.png
+	laser:
+		Filename: Laser.png
+
+fsidle_bg:
+	idle:
+		Filename: fsidle_bg.shp
+		Length: *
+		BlendMode: Additive #Translucent
+		ZOffset: 15
+		IgnoreWorldTint: true
+		AlphaFade: True
+		MeshType: Board
+
+fxring:
+	Defaults:
+		Length: *
+		BlendMode: Additive
+		ZOffset: 1525
+		Tick: 30
+		IgnoreWorldTint: true
+		MeshType: Board
+	sonicburst:
+		Filename: FX_Ring.png
+		Frames: 0,0,0,0,0,  0,0,0,0,0,  0,0,0,0,0
+		AlphaFade: True
+		Scale: 0.1
+
+lineidle_loop:
+	Defaults:
+		Length: *
+		BlendMode: Additive #Translucent
+		ZOffset: 15
+		Tick: 90
+		IgnoreWorldTint: true
+		MeshType: Board
+	idle:
+		Filename: fsidle_bg.shp
+		Frames: 4,5,6,7,8,9,8,7,6,5
+	litning1:
+		Filename: litning1.shp
+	litning2:
+		Filename: litning2.shp
+	litning3:
+		Filename: litning3.shp
+	lasertest:
+		Filename: LaserTest.png
+	obelisk:
+		Filename: ObeliskLaser.png
+	laser:
+		Filename: Laser.png
+	trail:
+		Filename: MissileTrail.png
+	railgun:
+		Filename: RailGun.png
+
+fsgrnd_bg:
+	idle:
+		Filename: fsgrnd_bg.shp
+		Length: *
+		BlendMode: Additive #Translucent
+		ZOffset: 15
+		IgnoreWorldTint: true
+		AlphaFade: True
+		MeshType: Board
+
+
+litning:
+	Defaults:
+		ZOffset: 512
+		IgnoreWorldTint: True
+		BlendMode: Additive
+		Length: *
+		MeshType: Board
+		AlphaFade: True
+	litning1:
+		Filename: litning1.shp
+		Frames: 0,1,2, 0,1,2, 0,1,2, 0,1,2
+	litning2:
+		Filename: litning2.shp
+		Frames: 0,1,2, 0,1,2, 0,1,2, 0,1,2
+	litning3:
+		Filename: litning3.shp
+		Frames: 0,1,2, 0,1,2, 0,1,2, 0,1,2
+
+twist:
+	Defaults:
+		Length: *
+		BlendMode: Twist
+		ZOffset: 2048
+		Tick: 80
+		IgnoreWorldTint: true
+		MeshType: Plane
+	shockground:
+		Filename: shockground.shp
+		Alpha: 0.05
+	shockgroundcannon:
+		Filename: shockground.shp
+		Scale: 0.25
+		Tick: 35
+		Alpha: 0.02
+	shockgroundarti:
+		Filename: shockground.shp
+		Scale: 0.4
+		Tick: 45
+		Alpha: 0.03
+	cloakshock:
+		Filename: shockground.shp
+		Scale: 0.3
+		Tick: 33
+		Alpha: 0.02
+	roundshock:
+		Filename: shock.shp
+		Scale: 0.2
+		Tick: 33
+		Alpha: 0.02
+		MeshType: Card

@@ -1,0 +1,617 @@
+^VehicleBase:
+	Defaults:
+		Offset: 0, 0, 10
+		ShadowZOffset: 5
+		ZOffset: 5
+	icon:
+		Filename: emptyicon.shp
+		Facings: 1
+		Length: 1
+		Start: 0
+		ShadowStart: 0
+
+
+^VehicleOverlays:
+	emp-overlay:
+		Filename: emp_fx01.shp
+		Offset: 0, 0, 24
+		Length: *
+		BlendMode: Additive
+		IgnoreWorldTint: True
+		ZOffset: 512
+
+vehicle:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+
+mcv.gdi:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: sidebar-gdi|mcvicon.shp
+
+mcv.nod:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: sidebar-nod|mcvicon.shp
+
+apc:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: apcicon.shp
+
+harv.gdi:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	harvest:
+		Filename: harvestr.shp
+		Length: *
+		ZOffset: 10
+		Facings: 1
+		MeshType: Plane
+	icon:
+		Filename: sidebar-gdi|harvicon.shp
+
+harv.nod:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	harvest:
+		Filename: harvestr.shp
+		Length: *
+		ZOffset: 10
+		Facings: 1
+		MeshType: Plane
+	icon:
+		Filename: sidebar-nod|harvicon.shp
+
+hvr:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: hovricon.shp
+
+4tnk:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	muzzle:
+		Filename: gunfire.shp
+		Length: *
+		IgnoreWorldTint: True
+		# MeshType: FloatBoard
+	icon:
+		Filename: emptyicon.shp
+
+lpst.gdi:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	idle:
+		TilesetFilenames:
+			TEMPERATE: gtdpsa.shp
+			SNOW: gadpsa.shp
+		DepthSprite: isodepth.shp
+		DepthSpriteOffset: -6, -6
+		Offset: 0, -13, 12
+		ShadowStart: 3
+	make:
+		TilesetFilenames:
+			TEMPERATE: gtdpsamk.shp
+			SNOW: gadpsamk.shp
+		DepthSprite: isodepth.shp
+		DepthSpriteOffset: -6, -6
+		Offset: 0, -13, 12
+		Length: 36
+		ShadowStart: 36
+	idle-lights:
+		TilesetFilenames:
+			TEMPERATE: gtdpsa_a.shp
+			SNOW: gadpsa_a.shp
+		DepthSprite: isodepth.shp
+		DepthSpriteOffset: -6, -6
+		Offset: 0, -13, 12
+		Length: 10
+		Tick: 200
+	idle-lights-bright:
+		TilesetFilenames:
+			TEMPERATE: gtdpsa_a.shp
+			SNOW: gadpsa_a.shp
+		DepthSprite: isodepth.shp
+		DepthSpriteOffset: -6, -6
+		Offset: 0, -13, 12
+		Length: 10
+		Tick: 200
+		IgnoreWorldTint: True
+	icon:
+		Filename: sidebar-gdi|lpsticon.shp
+
+lpst.nod:
+	Inherits: lpst.gdi
+	icon:
+		Filename: sidebar-nod|lpsticon.shp
+
+repair:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	muzzle:
+		Filename: repairsparks.shp
+		IgnoreWorldTint: True
+		ZOffset: 511
+		Offset: 0, 0, 24
+		Length: *
+	icon:
+		Filename: rboticon.shp
+
+art2:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: artyicon.shp
+	idle:
+		TilesetFilenames:
+			TEMPERATE: gtarty.shp
+			SNOW: gaarty.shp
+		ShadowStart: 3
+		Offset: 0, -12, 12
+		DepthSprite: isodepth.shp
+	damaged-idle:
+		TilesetFilenames:
+			TEMPERATE: gtarty.shp
+			SNOW: gaarty.shp
+		Start: 1
+		ShadowStart: 4
+		Offset: 0, -12, 12
+		DepthSprite: isodepth.shp
+	make:
+		TilesetFilenames:
+			TEMPERATE: gtartymk.shp
+			SNOW: gaartymk.shp
+		Length: 16
+		ShadowStart: 16
+		Offset: 0, -12, 12
+		DepthSprite: isodepth.shp
+	muzzle:
+		Filename: gunfire.shp
+		Length: *
+		Offset: 0, 0, 24
+		IgnoreWorldTint: True
+		Scale: 2
+		# MeshType: FloatBoard
+
+weed:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: weedicon.shp
+
+hmec:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: hmecicon.shp
+	muzzle:
+		Combine:
+			0:
+				Filename: mgun-n.shp
+				Length: 6
+			1:
+				Filename: mgun-nw.shp
+				Length: 6
+			2:
+				Filename: mgun-w.shp
+				Length: 6
+			3:
+				Filename: mgun-sw.shp
+				Length: 6
+			4:
+				Filename: mgun-s.shp
+				Length: 6
+			5:
+				Filename: mgun-se.shp
+				Length: 6
+			6:
+				Filename: mgun-e.shp
+				Length: 6
+			7:
+				Filename: mgun-ne.shp
+				Length: 6
+		Facings: 8
+		Length: 6
+		# MeshType: FloatBoard
+		IgnoreWorldTint: True
+
+bike:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: cyclicon.shp
+
+bggy:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	Defaults:
+		Filename: bggy.shp
+		Offset: 0, 0, 24
+	muzzle:
+		Filename:
+		Combine:
+			0:
+				Filename: mgun-n.shp
+				Length: 6
+			1:
+				Filename: mgun-nw.shp
+				Length: 6
+			2:
+				Filename: mgun-w.shp
+				Length: 6
+			3:
+				Filename: mgun-sw.shp
+				Length: 6
+			4:
+				Filename: mgun-s.shp
+				Length: 6
+			5:
+				Filename: mgun-se.shp
+				Length: 6
+			6:
+				Filename: mgun-e.shp
+				Length: 6
+			7:
+				Filename: mgun-ne.shp
+				Length: 6
+		Facings: 8
+		Length: 6
+		IgnoreWorldTint: True
+		# MeshType: FloatBoard
+	icon:
+		Filename: bggyicon.shp
+		Offset: 0, 0
+
+sapc:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: sapcicon.shp
+
+subtank:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: subticon.shp
+
+sonic:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: soniicon.shp
+
+ttnk:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	idle:
+		Filename: gatick.shp
+		ShadowStart: 3
+		Offset: 0, -14, 14
+	damaged-idle:
+		Filename: gatick.shp
+		Start: 1
+		ShadowStart: 4
+		Offset: 0, -14, 14
+	make:
+		Filename: gatickmk.shp
+		Length: 23
+		Start: 1
+		ShadowStart: 25
+		Offset: 0, -14, 14
+	muzzle:
+		Filename: gunfire.shp
+		Length: *
+		Offset: 0, 0, 24
+		IgnoreWorldTint: True
+		# MeshType: FloatBoard
+	icon:
+		Filename: tickicon.shp
+
+stnk:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: stnkicon.shp
+
+mmch:
+	Defaults:
+		Filename: mmch.shp
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	stand:
+		Facings: -8
+		Stride: 15
+		ShadowStart: 152
+		Offset: 0, 0, 12
+	walk:
+		Length: 15
+		Facings: -8
+		ShadowStart: 152
+		Offset: 0, 0, 12
+		Tick: 60
+	turret:
+		Start: 120
+		Facings: -32
+		Offset: 0, 0, 12
+	muzzle-cannon:
+		Filename: gunfire.shp
+		Length: *
+		Offset: 0, 0, 12
+		ZOffset: 25
+		IgnoreWorldTint: True
+		# MeshType: FloatBoard
+	muzzle-vulcan:
+		Filename:
+		Combine:
+			0:
+				Filename: mgun-n.shp
+				Length: 6
+			1:
+				Filename: mgun-nw.shp
+				Length: 6
+			2:
+				Filename: mgun-w.shp
+				Length: 6
+			3:
+				Filename: mgun-sw.shp
+				Length: 6
+			4:
+				Filename: mgun-s.shp
+				Length: 6
+			5:
+				Filename: mgun-se.shp
+				Length: 6
+			6:
+				Filename: mgun-e.shp
+				Length: 6
+			7:
+				Filename: mgun-ne.shp
+				Length: 6
+		Facings: 8
+		Length: 6
+		ZOffset: 25
+		IgnoreWorldTint: True
+	icon:
+		Filename: mmchicon.shp
+
+titanup.vulcan:
+	place:
+		Filename: mmch-vulcanplace.shp
+	icon:
+		Filename: mmch-vulcanicon.shp
+
+titanup.missile:
+	place:
+		Filename: mmch-samplace.shp
+	icon:
+		Filename: mmch-samicon.shp
+
+jugg:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	icon:
+		Filename: juggicon.shp
+	stand:
+		Filename: jugger.shp
+		Facings: -8
+		Stride: 15
+		ShadowStart: 120
+		Offset: 0, 0, 12
+	walk:
+		Filename: jugger.shp
+		Length: 15
+		Facings: -8
+		ShadowStart: 120
+		Offset: 0, 0, 12
+		Tick: 60
+	turret:
+		Filename: djugg_a.shp
+		Facings: 32
+		Offset: -4, 0, 12
+	idle:
+		Filename: djugg.shp
+		ShadowStart: 3
+		Offset: 0, 0, 12
+	damaged-idle:
+		Filename: djugg.shp
+		Start: 1
+		ShadowStart: 4
+		Offset: 0, 0, 12
+	make:
+		Filename: djuggmk.shp
+		Length: 17
+		ShadowStart: 18
+		Offset: 0, 0, 12
+	muzzle:
+		Filename: gunfire.shp
+		Length: *
+		Offset: 0, 0, 24
+		IgnoreWorldTint: True
+		Scale: 1.6
+		# MeshType: FloatBoard
+
+gghunt:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	idle:
+		Filename: gghunt.shp
+		Facings: 1
+		Length: 8
+		ShadowStart: 8
+	icon:
+		Filename: detnicon.shp
+
+smech:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	Defaults:
+		Filename: smech.shp
+		Offset: 0,0,8
+	stand:
+		Start: 96
+		Facings: -8
+		ShadowStart: 232
+	walk:
+		Facings: -8
+		Length: 12
+		ShadowStart: 136
+		Tick: 48
+	shoot:
+		Start: 104
+		Length: 4
+		Facings: -8
+		ShadowStart: 240
+		Tick: 80
+	shoot-muzzle:
+		Start: 104
+		Length: 4
+		Facings: -8
+		Tick: 80
+		IgnoreWorldTint: True
+	icon:
+		Filename: smchicon.shp
+
+limped:
+	Defaults:
+		Filename: limped.shp
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	stand:
+		Facings: 1
+		ShadowStart: 10
+	run:
+		Length: 10
+		Facings: 1
+		ShadowStart: 10
+	idle:
+		Facings: 1
+		ShadowStart: 10
+	make:
+		Filename: dlimpmk.shp
+		Length: 41
+		ShadowStart: 42
+		Tick: 20
+		Offset: 0, -12
+	deployed:
+		Filename: dlimpet.shp
+		Facings: 1
+		ShadowStart: 3
+		Offset: 0, -12
+	icon:
+		Filename: sidebar-gdif|limpicon.shp
+
+reaper:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	Defaults:
+		Filename: reaper.shp
+		Tick: 80
+	stand:
+		Facings: -8
+		ShadowStart: 117
+	run:
+		Start: 8
+		Tick: 60
+		Length: 12
+		Facings: -8
+		ShadowStart: 125
+	die1:
+		Start: 104
+		Length: 13
+		ShadowStart: 221
+	icon:
+		Filename: reapicon.shp
+
+trucka:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+
+truckb:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+
+icbm:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+	idle:
+		TilesetFilenames:
+			TEMPERATE: gticbmmk.shp
+			SNOW: gaicbmmk.shp
+		Offset: 0, -8, 9
+		DepthSprite: isodepth.shp
+		DepthSpriteOffset: -12, 6
+		Start: 28
+		ShadowStart: 58
+		Scale: 1.1
+	damaged-idle:
+		TilesetFilenames:
+			TEMPERATE: gticbmmk.shp
+			SNOW: gaicbmmk.shp
+		Offset: 0, -8, 9
+		DepthSprite: isodepth.shp
+		DepthSpriteOffset: -12, 6
+		Start: 28
+		ShadowStart: 58
+		Scale: 1.1
+	launched-idle:
+		TilesetFilenames:
+			TEMPERATE: gticbmmk.shp
+			SNOW: gaicbmmk.shp
+		Offset: 0, -8, 9
+		DepthSprite: isodepth.shp
+		DepthSpriteOffset: -12, 6
+		Start: 29
+		ShadowStart: 59
+		Scale: 1.1
+	emp-overlay:
+		Filename: emp_fx01.shp
+		Length: *
+		Offset: 0, 0, 13
+		ZOffset: 512
+		BlendMode: Additive
+		IgnoreWorldTint: True
+	make:
+		TilesetFilenames:
+			TEMPERATE: gticbmmk.shp
+			SNOW: gaicbmmk.shp
+		Offset: 0, -8, 9
+		DepthSprite: isodepth.shp
+		DepthSpriteOffset: -12, 6
+		Length: 28
+		Scale: 1.1
+		ShadowStart: 30
+	icon:
+		Filename: icbmicon.shp
+
+bus:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+
+pick:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+
+car:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+
+wini:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+
+locomotive:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+
+traincar:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays
+
+cargocar:
+	Inherits@defaults: ^VehicleBase
+	Inherits: ^VehicleOverlays

@@ -1,0 +1,255 @@
+clothitem:
+	GearItem:
+		Name: gear
+		Type: Cloth
+		ThumbnailImage: itemicon
+		ThumbnailSequence: c_gear01
+		Condition: hascloth
+		GearType: Replacement
+		GearOrder: 20
+		Image: rumya
+		AddonMeshPart: gear01
+		Masks: Torso,Hip,Thigh,Leg,Foot,UpperArm,LowerArm,Hand
+		HipMesh: gear01_body-hip
+		ThighMesh: gear01_body-thigh
+		CanExistInWorld: false
+
+
+testunderwear:
+	GearItem:
+		Name: underwaer
+		Type: UnderWear
+		ThumbnailImage: items
+		ThumbnailSequence: clustermissile
+		Condition: usetestunderwear
+		GearType: CloseFitting
+		GearOrder: 2
+		CoveringMaterail: mdx_underwear
+		Masks: Torso,Hip,Thigh,Leg
+		CanExistInWorld: false
+
+chemicalitem:
+	WeaponItem:
+		Name: chemical
+		Type: MainWeapon
+		ThumbnailImage: items
+		ThumbnailSequence: chemicalmissile
+		Condition: usechemicalitem
+		Weapon: LaserChainGun
+		LocalOffset: 0,0,0
+		CanExistInWorld: false
+
+gunitem:
+	WeaponItem:
+		Name: gun
+		Type: MainWeapon
+		ThumbnailImage: items
+		ThumbnailSequence: ioncannon
+		Weapon: KittenRailGun
+		LocalOffset: 433,0,155
+		CanExistInWorld: false
+	RenderMeshes:
+		Image: rumya
+	ItemMesh@test:
+		Mesh: w_rail
+	# RenderMeshes:
+	# 	Image: mmr-test
+	# ItemMesh@test:
+	# 	Mesh: axis
+
+
+testitem:
+	Item:
+		Name: visl
+		ThumbnailImage: items
+		ThumbnailSequence: vislrg
+		ThumbnailPalette: player
+		ThumbnailPaletteIsPlayerPalette: true
+		Condition: visl
+		CanExistInWorld: false
+
+
+
+railgun_item:
+	WeaponItem:
+		Name: RailGun
+		Type: MainWeapon
+		ThumbnailImage: itemicon
+		ThumbnailSequence: rail_icon
+		Weapon: LtRail
+		LocalOffset: 0,0,0
+		CanExistInWorld: false
+	RenderMeshes:
+		Image: rumya
+	ItemMesh@test:
+		Mesh: w_rail
+	WithEquipmentAnimation:
+		TakeOutAnim: act_takeout
+		PutAwayAnim: act_putaway
+		TakeOutFrame: 30
+		AnimsReplace:
+			Stand: sniper_stand
+			Walk: sniper_walk
+			Guard: sniper_guard
+			GuardMove: sniper_guardmove
+			StandToGuard: sniper_s2g
+			GuardToStand: sniper_g2s
+			Prone: sniper_prone
+			Crawl: sniper_crawl
+			Attack: sniper_attack
+			ProneAttack: sniper_prone-attack
+			StandToProne: sniper_s2p
+			ProneToStand: sniper_p2s
+			DieStand: sniper_die-front
+			DieProne: sniper_die-prone
+		IdleActions: sniper_idle1
+		ActionFrameReplace:
+			AttackFrame: 3
+			ProneAttackFrame: 17
+
+stealth-suit:
+	GearItem:
+		Name: stealth suit
+		Type: Cloth
+		ThumbnailImage: itemicon
+		ThumbnailSequence: c_stealth-b
+		# Condition: cloakgenerator
+		GearType: Replacement
+		GearOrder: 20
+		Image: rumya
+		AddonMeshPart: stealth03
+		Masks: Torso,Hip,Thigh,Leg,Foot,UpperArm,LowerArm,Hand
+		CanExistInWorld: false
+
+
+
+^guns_item:
+	WeaponItem:
+		Name: GD-1
+		Type: MainWeapon
+		ThumbnailImage: itemicon
+		ThumbnailSequence: gd1_icon
+		Weapon: Basic_GD-1
+		LocalOffset: 510,0,11
+		CanExistInWorld: false
+	WithEquipmentAnimation:
+		TakeOutAnim: act_takeout
+		PutAwayAnim: act_putaway
+		TakeOutFrame: 30
+		AnimsReplace:
+			Stand: rifle_stand
+			Walk: rifle_walk
+			Guard: rifle_guard
+			GuardMove: rifle_guardmove
+			# StandToGuard: sniper_s2g
+			# GuardToStand: sniper_g2s
+			Prone: rifle_prone
+			Crawl: rifle_crawl
+			Attack: rifle_attack
+			ProneAttack: rifle_prone-attack
+			StandToProne: rifle_s2p
+			ProneToStand: rifle_p2s
+			DieStand: sniper_die-front
+			DieProne: sniper_die-prone
+		IdleActions: rifle_idle1, rifle_idle2
+		ActionFrameReplace:
+			AttackFrame: 0
+			ProneAttackFrame: 0
+	WeaponItemMuzzle:
+		MuzzleDuration: 5
+		AlphaStartToEnd: 1,0
+		ScaleStartToEnd: 1.4, 2
+		MuzzleFlashMesh: muzzle
+		Image: w_common
+		MuzzleSkeleton: item
+		MuzzleBone: Muzzle
+	WithSkeleton:
+		Name: item
+		# OnlyUpdateForDraw: true
+	ItemSkeletonHandler:
+		Skeleton: item
+	ItemMesh@test:
+		Mesh: weapon
+		SkeletonBinded: item
+	RenderMeshes:
+		Image: w_gd1
+		Scale: 2
+
+gd1_item:
+	Inherits: ^guns_item
+
+type38_item:
+	Inherits: ^guns_item
+	WeaponItem:
+		Name: Type38
+		ThumbnailSequence: type38_icon
+		Weapon: OldRifle
+		LocalOffset: 768,0,0
+	WeaponItemMuzzle:
+		ScaleStartToEnd: 1.2, 3
+	RenderMeshes:
+		Image: w_type38
+
+sr1_item:
+	Inherits: ^guns_item
+	WeaponItem:
+		Name: SR-1
+		ThumbnailSequence: sr1_icon
+		Weapon: Sniper
+		LocalOffset: 710,0,0
+		Condition: item-telescope
+	WithEquipmentAnimation:
+		AnimsReplace:
+			Stand: sniper_stand
+			Walk: sniper_walk
+			Guard: sniper_guard
+			GuardMove: sniper_guardmove
+			StandToGuard: sniper_s2g
+			GuardToStand: sniper_g2s
+			Prone: sniper_prone
+			Crawl: sniper_crawl
+			Attack: sniper_attack
+			ProneAttack: sniper_prone-attack
+			StandToProne: sniper_s2p
+			ProneToStand: sniper_p2s
+			DieStand: sniper_die-front
+			DieProne: sniper_die-prone
+		IdleActions: sniper_idle1
+		ActionFrameReplace:
+			AttackFrame: 3
+			ProneAttackFrame: 17
+	WeaponItemMuzzle:
+		ScaleStartToEnd: 1.35, 3
+	RenderMeshes:
+		Image: w_sr1
+
+laser-rifle_item:
+	Inherits: ^guns_item
+	WeaponItem:
+		Name: Laser Rifle
+		ThumbnailSequence: lr_icon
+		Weapon: LaserRifleFire
+		LocalOffset: 538,0,0
+	WeaponItemMuzzle:
+		MuzzleFlashMesh:
+		
+	WithEquipmentAnimation:
+		AnimsReplace:
+			Stand: cmmdo_stand
+			Walk: cmmdo_run
+			Guard: cmmdo_guard
+			GuardMove: cmmdo_guardmove
+			Prone: cmmdo_crouch-g
+			Crawl: cmmdo_run-p
+			Attack: cmmdo_atk
+			ProneAttack: cmmdo_atk-c
+			StandToProne: cmmdo_cvt-stc
+			ProneToStand: cmmdo_cvt-cts
+			DieStand: cmmdo_die-02
+			DieProne: cmmdo_die-c02
+		IdleActions: cmmdo_idle-g01, cmmdo_idle-g02
+		ActionFrameReplace:
+			AttackFrame: 0
+			ProneAttackFrame: 0
+	RenderMeshes:
+		Image: w_laser

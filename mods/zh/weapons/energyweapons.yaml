@@ -1,0 +1,675 @@
+^Railgun:
+	ReloadDelay: 60
+	Range: 8c0
+	Report: bigggun1.aud
+	# Projectile: Railgun
+	# 	Duration: 15
+	# 	Speed: 668
+	# 	Width: 256
+	# 	StartDamageLineTick: 0
+	# 	Blockable: true
+	# 	DamageActorsInLine: true
+	# 	LineWeapon: ^RailgunLineDamage
+	# 	BeamColor: 0080FFC8
+	# 	HelixColor: 0080FFC8
+	# 	BeamBlendMode: Additive #ScreenAdditive
+	# 	ZOffset: 522
+	# 	HelixRadiusDeltaPerTick: 2
+	Projectile: Bullet
+		DetectTargetFromLengthPercentage: 10
+		ContrailZOffset: 1444
+		ContrailLength: 25
+		ContrailWidth: 128
+		ContrailImage: lineidle_loop
+		ContrailSequences: railgun
+		ContrailStartColor: 33FFFF
+		ContrailStartColorAlpha: 255
+		ContrailEndColor: 25ADEE
+		ContrailEndColorAlpha: 200
+		ContrailWidthFadeRate: 0.5
+		ContrailDelay: 0
+		ContrailBlendMode: Additive
+		AngleStep: 128
+		SpreadStep: 32
+		ContrailCopyCount: 2
+		FadePosSpread: false
+		TrailImage: fxring
+		TrailSequences: sonicburst
+		TrailDelay: 0
+		TrailInterval: 99999
+		TrailLikeSmokeRing: true
+		TrailScaleAnimStart: 0.2
+		TrailScaleAnimEnd: 2
+		Speed: 1550
+		Inaccuracy: 0
+		UseVerticalInaccuracy: true
+		OnlyHitToExplode: true
+		ExplodeUnderThisAltitude: -418
+		Blockable: false
+		Width: 256
+		LifeTime: 7
+		LineWeapon: EmpLineDamage
+		PenetrationUnder: 20000
+	Warhead@1Dam: Spread3DDamage
+		Speed: 0c128
+		Falloff: 100, 100, 20, 2, 1
+		Damage: 15000
+		AffectsParent: false
+		Versus:
+			None: 100
+			Wood: 130
+			Light: 150
+			Heavy: 110
+			Concrete: 5
+		DamageTypes: Prone100Percent, TriggerProne, SmallExplosionDeath
+		ValidTargets: Ground, Water, Air
+	Warhead@2Eff: CreateEffect
+		Explosions: smallpulse_explosion
+		ExplosionPalette: effectcyan
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Air
+	Warhead@3EffWater: CreateEffect
+		Explosions: small_watersplash
+		ExplosionPalette: player
+		ImpactSounds: ssplash3.aud
+		ValidTargets: Water
+		InvalidTargets: Vehicle
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: SmallScorch
+		InvalidTargets: Vehicle, Building, Wall
+
+
+
+
+^RailgunLineDamage:
+	ValidTargets: Ground, Water, Air
+	Warhead@1Dam: Spread3DDamage
+		Range: 0, 32
+		Falloff: 100, 100
+		ValidRelationships: Neutral, Enemy
+		Damage: 7500
+		AffectsParent: false
+		ValidTargets: Ground, Air, Water
+		Versus:
+			None: 175
+			Wood: 100
+			Light: 150
+			Heavy: 110
+			Concrete: 5
+		DamageTypes: Prone100Percent, TriggerProne, SmallExplosionDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: emp_fx01
+		Image: explosion
+		ValidTargets: Ground, Air, Water
+
+EmpLineDamage:
+	Inherits: ^RailgunLineDamage
+	Warhead@1Dam: Spread3DDamage
+		Condition: empdisable
+		Duration: 30
+
+MechEmpLineDamage:
+	Inherits: EmpLineDamage
+	Warhead@1Dam: Spread3DDamage
+		Range: 0, 32
+		Falloff: 100, 100
+		ValidRelationships: Neutral, Enemy
+		Damage: 10000
+
+LtRail:
+	Inherits: ^Railgun
+	# InvalidTargets: Infantry
+	Warhead@1Dam: Spread3DDamage
+		Condition: empdisable
+		Duration: 30
+
+MechRailgun:
+	Inherits: ^Railgun
+	Range: 9c512
+	Report: railuse5.aud
+	Projectile: Bullet
+		ContrailLength: 18
+		ContrailWidth: 128 #335
+		TrailScaleAnimStart: 0.2
+		TrailScaleAnimEnd: 2.3
+		LineWeapon: MechEmpLineDamage
+	Warhead@1Dam: Spread3DDamage
+		Damage: 20000
+		Condition: empdisable
+		Duration: 30
+		Versus:
+			None: 200
+			Wood: 175
+			Light: 160
+			Heavy: 100
+			Concrete: 25
+
+SonicZap:
+	ReloadDelay: 180
+	Range: 6c0
+	Report: sonic4.aud
+	ValidTargets: Ground, Trees
+	Projectile: AreaBeam
+		Speed: 0c128
+		Duration: 90
+		DamageInterval: 5 # Roughly 18 impacts.
+		Width: 384
+		Shape: Flat
+		ZOffset: 2047
+		BeyondTargetRange: 0c256
+		Blockable: true
+		TrackTarget: true
+		Color: 50F5FF45
+	Warhead@1Dam: Spread3DDamage
+		Range: 0, 32
+		Falloff: 100, 100
+		Damage: 800
+		AffectsParent: false
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Trees
+		Versus:
+			Heavy: 80
+			Concrete: 60
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+	Warhead@2Dam: Spread3DDamage
+		Range: 0, 32
+		Falloff: 50, 50
+		Damage: 800
+		InvalidTargets: Disruptor # Does not affect friendly disruptors at all
+		AffectsParent: false
+		ValidRelationships: Ally
+		ValidTargets: Ground, Trees
+		Versus:
+			Heavy: 80
+			Concrete: 60
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+
+SonicWave:
+	ValidTargets: Ground, Trees, Water
+	ReloadDelay: 75
+	Range: 6c512
+	StartBurstReport: sonic4.aud
+	Burst: 20
+	BurstDelays: 2
+	Projectile: BlastWave
+		Inaccuracy: 0c768
+		Image: waketest
+		Sequences: idle
+		Palette: effectcyan
+		Speed: 175
+		LaunchAngle: 10
+		Width: 324
+		ShockDist: 7c0
+		BlastInterval: 5
+		BlastDelay: 3
+		KeepSourceAltitude: false
+		Blockable: true
+		ExplodeUnderThisAltitude: -24
+		StartScale: 0.7
+		EndScale: 1.2
+	Warhead@fireDam: Spread3DDamage
+		Spread: 0c220
+		Damage: 1500
+		Falloff: 100, 80, 45, 15
+		ValidRelationships: Neutral, Enemy # no friendly damage
+		Versus:
+			Heavy: 80
+			Concrete: 60
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Wall, Bridge
+		Condition: burning
+		Duration: 50
+	Warhead@5Res: DestroyResource
+		Size: 1
+		ResourceAmount: 1
+		ResourceTypes: Tiberium, BlueTiberium
+
+^EnergyBlast:
+	ReloadDelay: 50
+	Range: 7c0
+	Report: scrin5b.aud
+	ValidTargets: Ground
+	Warhead@1Dam: Spread3DDamage
+		ValidTargets: Ground
+	Warhead@2Eff: CreateEffect
+		Explosions: large_explosion
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Air
+	Warhead@3EffWater: CreateEffect
+		Explosions: small_watersplash
+		ExplosionPalette: player
+		ImpactSounds: ssplash3.aud
+		ValidTargets: Water
+		InvalidTargets: Vehicle
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: SmallScorch
+		InvalidTargets: Vehicle, Building, Wall
+
+CyCannon:
+	Inherits: ^ShotGun
+	Range: 8c0
+	ReloadDelay: 50
+	ValidTargets: Ground, Water, Trees
+	Report: scrin5b.aud
+	Projectile: InstantScat
+		ScatWeapons: CyCannonProton, CyCannonProtonFlame, CyCannonProtonEmp
+		ScatCounts: 1,1,1
+		Inaccuracy: 0
+
+CyCannonProton:
+	Inherits: ^EnergyBlast
+	ValidTargets: Ground, Trees
+	Projectile: Missile
+		Inaccuracy: 300
+		MaximumLaunchSpeed: 150
+		Blockable: false
+		HorizontalRateOfTurn: 8
+		Shadow: false
+		Image: plasma_ball_small
+		Sequences: plasmaball_green
+		MinimumLaunchSpeed: 145
+		Speed: 384
+		RangeLimit: 8c0
+		TerrainHeightAware: true
+	Warhead@1Dam: Spread3DDamage
+		ValidTargets: Ground, Air, Water
+		Spread: 0c168
+		Damage: 12500
+		Versus:
+			None: 100
+			Wood: 150
+			Light: 205
+			Heavy: 150
+			Concrete: 50
+		DamageTypes: Prone350Percent, TriggerProne, EnergyDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: proton_explo
+		ValidTargets: Ground, Water, Air, Trees
+
+CyCannonProtonFlame:
+	Inherits: CyCannonProton
+	Projectile: Missile
+		MaximumLaunchSpeed: 125
+		MinimumLaunchSpeed: 120
+		LaunchAngle: 32
+		# Palette: effectred
+		# Image: plasma_ball
+		Sequences: plasmaball_red
+	Warhead@1Dam: Spread3DDamage
+		ValidTargets: Ground, Trees
+		Spread: 0c168
+		Damage: 8000
+		Versus:
+			None: 150
+			Wood: 250
+			Light: 100
+			Heavy: 100
+			Concrete: 80
+		DamageTypes: Prone100Percent, TriggerProne, FireDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: proton_explo
+		ExplosionPalette: effectred
+	Warhead@burn: CreateEffect
+		Explosions: laserburningbig
+		ValidTargets: Ground
+		InvalidTargets: Vehicle, Building, Wall
+
+CyCannonProtonEmp:
+	Inherits: CyCannonProton
+	Projectile: Missile
+		MaximumLaunchSpeed: 100
+		MinimumLaunchSpeed: 95
+		LaunchAngle: 64
+		# Palette: effectcyan
+		# Image: plasma_ball
+		Sequences: plasmaball_blue
+	Warhead@1Dam: Spread3DDamage
+		Damage: 4500
+		Condition: empdisable
+		Duration: 30
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 150
+			Heavy: 150
+			Concrete: 100
+		DamageTypes: Prone100Percent, TriggerProne, EnergyDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: proton_explo
+		ExplosionPalette: effectcyan
+
+
+Proton:
+	Inherits: ^EnergyBlast
+	Range: 5c0
+	Burst: 5
+	BurstDelays: 3
+	Projectile: Bullet
+		Speed: 341
+		Blockable: false
+		Shadow: true
+		Inaccuracy: 128
+		Image: proton_projectile
+	Warhead@1Dam: Spread3DDamage
+		Spread: 128
+		Damage: 2000
+		Versus:
+			None: 25
+			Wood: 65
+			Light: 75
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: proton_explo
+
+
+^SpriteLaser:
+	Projectile: LaserZap
+		TrackTarget: false
+		Width: 348
+		Duration: 15
+		ZOffset: 355
+		Color: FFFFFF
+		Image: laser
+		Sequences: obelisk
+		LaunchEffectImage: flash
+		LaunchEffectSequence: laserstart
+		LaunchEffectPalette: red
+	Warhead@1Dam: Spread3DDamage
+		Spread: 96
+		Falloff: 100, 45, 12, 3
+		ValidTargets: Ground, Water, Air
+		Damage: 25000
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 100
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: Prone80Percent, TriggerProne, EnergyDeath
+	Warhead@flash: CreateEffect
+		Image: flash
+		Explosions: laserend
+		ExplosionPalette: red
+		ValidTargets: Ground, Water, Air
+	Warhead@2Eff: CreateEffect
+		Explosions: laserburning
+		ValidTargets: Ground
+		InvalidTargets: Vehicle, Building, Wall
+	Warhead@3Smu: LeaveSmudge
+		SmudgeType: SmallScorch
+		ValidTargets: Ground
+		AirThreshold: 512
+		InvalidTargets: Vehicle, Building, Wall
+
+
+^Laser:
+	Projectile: LaserZap
+		TrackTarget: false
+		Width: 72
+		Duration: 15
+		ZOffset: 355
+		Color: FF000080
+		SecondaryBeam: true
+		SecondaryBeamWidth: 180
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FF000040
+		LaunchEffectImage: flash
+		LaunchEffectSequence: laserstart
+		LaunchEffectPalette: red
+	Warhead@1Dam: Spread3DDamage
+		Spread: 96
+		Falloff: 100, 45, 12, 3
+		Damage: 25000
+		ValidTargets: Ground, Water, Air
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 100
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: Prone80Percent, TriggerProne, EnergyDeath
+	Warhead@flash: CreateEffect
+		Image: flash
+		Explosions: laserend
+		ExplosionPalette: red
+		ValidTargets: Ground, Water, Air
+	Warhead@2Eff: CreateEffect
+		Explosions: laserburning
+		ValidTargets: Ground
+		InvalidTargets: Vehicle, Building, Wall
+	Warhead@3Smu: LeaveSmudge
+		SmudgeType: SmallScorch
+		ValidTargets: Ground
+		AirThreshold: 512
+		InvalidTargets: Vehicle, Building, Wall
+
+ObeliskLaserFire:
+	Inherits: ^SpriteLaser #^Laser
+	ReloadDelay: 100
+	Range: 11c512
+	Report: obelray1.aud
+	Projectile: LaserZap
+		LaunchEffectSequence: oblaserstart
+	Warhead@1Dam: Spread3DDamage
+		Damage: 40000
+	Warhead@flash: CreateEffect
+		Explosions: oblaserend
+	Warhead@3Smu: LeaveSmudge
+		SizePerSmudge: 968, 1024
+
+
+TurretLaserFire:
+	Inherits: ^SpriteLaser #^Laser
+	ReloadDelay: 30
+	Range: 7c512
+	Report: lastur1.aud
+	Projectile: LaserZap
+		# Width: 36
+		# Duration: 8
+		# SecondaryBeamWidth: 144
+		# SecondaryBeamColor: FF000050
+		Width: 252
+		Color: FF4444
+		Sequences: laser
+		Blockable: true
+	Warhead@1Dam: Spread3DDamage
+		Damage: 3000
+	Warhead@2Eff: CreateEffect
+		Explosions: laserburningsmall
+	Warhead@3Smu: LeaveSmudge
+		SizePerSmudge: 723, 822
+
+TurretLaserFireHyper:
+	Inherits: TurretLaserFire
+	ReloadDelay: 15
+
+LaserRifleFire:
+	Inherits: ^SpriteLaser
+	ReloadDelay: 3
+	Range: 8c512
+	Report: lastur1.aud
+	Projectile: LaserZap
+		Inaccuracy: 200
+		Width: 176
+		Color: FF4444
+		Sequences: laser
+		Blockable: true
+	Warhead@1Dam: Spread3DDamage
+		Damage: 2800
+		Versus:
+			None: 155
+			Wood: 40
+			Light: 100
+			Heavy: 40
+			Concrete: 20
+	Warhead@2Eff: CreateEffect
+		Explosions: laserburningsmall
+	Warhead@3Smu: LeaveSmudge
+		SizePerSmudge: 567, 774
+
+LaserFence:
+	TargetActorCenter: true
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		DebugOverlayColor: FF0000
+		Damage: 10000000
+		DamageTypes: FireDeath
+
+LaserChainGun:
+	Inherits: ^Laser
+	ReloadDelay: 3
+	Range: 8c768
+	Report: lastur1.aud
+	ValidTargets: Ground, Water, Air, Trees
+	Projectile: LaserZap
+		Inaccuracy: 555
+		Width: 24
+		Duration: 5
+		Blockable: true
+		SecondaryBeamWidth: 100
+		Color: 55FF5599
+		SecondaryBeamColor: 33FF3350
+		SecondaryBeam: true
+		LaunchEffectImage: flash
+		LaunchEffectSequence: laserstart
+		LaunchEffectPalette: lightgreen
+	Warhead@1Dam: Spread3DDamage
+		Damage: 1900
+	Warhead@2Eff: CreateEffect
+		Explosions: laserburningmini
+	Warhead@3Smu: LeaveSmudge
+		SizePerSmudge: 723, 822
+	Warhead@flash: CreateEffect
+		ExplosionPalette: lightgreen
+
+KittenRailGun:
+	Inherits: MechRailgun
+	Range: 11c0
+	ReloadDelay: 80
+	Burst: 1
+	BurstDelays: 1
+	ValidTargets: Ground, Water, Air, Trees
+
+
+# banshee proton pulse cannon
+ProtonPulse:
+	ReloadDelay: 50
+	Range: 8c512
+	Burst: 12
+	BurstDelays: 3
+	Report: scrin5b.aud
+	ValidTargets: Ground, Water, Air, Trees
+	Projectile: Bullet
+		Speed: 700
+		Blockable: false
+		Inaccuracy: 128
+		UseVerticalInaccuracy: true
+		OnlyHitToExplode: true
+		ExplodeUnderThisAltitude: -418
+		# Image: TORPEDO
+		Width: 256
+		DetectTargetFromLengthPercentage: 75
+		DetectTargetBeforeDist: 2c0
+		ContrailLength: 2
+		ContrailWidth: 68
+		ContrailStartColor: 66FF66E0
+		ContrailDelay: 0
+		ContrailBlendMode: Additive
+		LaunchAngle: 0
+		ZOffset: 1024
+	Warhead@1Dam: Spread3DDamage
+		Spread: 0c172
+		Damage: 2000
+		Versus:
+			None: 25
+			Wood: 65
+			Light: 100
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: Prone50Percent, TriggerProne, EnergyDeath
+		ValidTargets: Ground, Water, Air, Trees
+	Warhead@2Eff: CreateEffect
+		Explosions: proton_explo
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Air, Water
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: SmallScorch
+		InvalidTargets: Vehicle, Building, Wall
+
+ProtonBounce:
+	Warhead@1Dam: Spread3DDamage
+		Spread: 0c268
+		Damage: 4000
+		Versus:
+			None: 25
+			Wood: 65
+			Light: 75
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: Prone50Percent, TriggerProne, EnergyDeath
+		ValidTargets: Ground, Water, Air, Trees
+	Warhead@2Eff: CreateEffect
+		Explosions: proton_explo
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Air, Water
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: SmallScorch
+		InvalidTargets: Vehicle, Building, Wall
+
+ProtonBomb:
+	ReloadDelay: 50
+	Burst: 3
+	BurstDelays: 2
+	Range: 3c686
+	TargetActorCenter: true
+	ValidTargets: Ground, Trees
+	FirstBurstTargetOffset: -1c0,0,0
+	FollowingBurstTargetOffset: 1c0,0,0
+	# Projectile: GravityBomb
+	# 	Velocity: 72, 0, -90
+	# 	Acceleration: 0, 0, -8
+	# 	Shadow: false
+	# 	Image: proton_projectile
+	# 	Palette: effect
+	Projectile: Bullet
+		# InstantDropToGround: true
+		Speed: 226
+		Blockable: false
+		#Image: proton_projectile
+		Palette: effect
+		Image: plasma_ball
+		Sequences: plasmaball_green
+		Shadow: false
+		LaunchAngle: 60
+		Inaccuracy: 200
+		DetectTargetFromLengthPercentage: 50
+		DetectTargetBeforeDist: 2c0
+		BounceCount: 1
+		BounceRangeModifier: 20
+		Width: 388
+		BounceWeapon: ProtonBounce
+		OnlyHitToExplode: true
+		ExplodeUnderThisAltitude: 0
+	Warhead@1Dam: Spread3DDamage
+		Spread: 0c488
+		Falloff: 100, 80, 65, 35, 6, 3
+		Damage: 16000
+		Versus:
+			None: 200
+			Wood: 90
+			Light: 75
+			Heavy: 32
+			Concrete: 100
+		DamageTypes: Prone100Percent, TriggerProne,  EnergyDeath
+		ValidTargets: Ground, Water, Air, Trees
+	Warhead@2Eff: CreateEffect
+		Explosions: plasmaclsnlarge
+		ExplosionPalette: blast-green
+		ImpactSounds: expnew09.aud
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: LargeScorch
+		InvalidTargets: Vehicle, Building, Wall

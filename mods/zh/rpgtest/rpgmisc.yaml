@@ -1,0 +1,43 @@
+inventroy:
+	none:
+		Filename: xxicon.shp
+
+items:
+	none:
+		Filename: xxicon.shp
+	clustermissile:
+		Filename: mltiicon.shp
+	chemicalmissile:
+		Filename: chemicon.shp
+	ioncannon:
+		Filename: ioncicon.shp
+	hunterseeker:
+		Filename: detnicon.shp
+	emp:
+		Filename: pulsicon.shp
+	droppods:
+		Filename: podsicon.shp
+	vislrg:
+		Filename: vislrg.shp
+		Length: 90
+		ShadowStart: 90
+		Tick: 80
+		Offset: 0, 0, 16
+
+itemicon:
+	Defaults:
+		Offset: 0, 0, 0
+	rail_icon:
+		Filename: w_rail_icon.png
+	type38_icon:
+		Filename: w_type38_icon.png
+	gd1_icon:
+		Filename: w_gd1_icon.png
+	sr1_icon:
+		Filename: w_sniper_icon.png
+	lr_icon:
+		Filename: w_laser_icon.png
+	c_stealth-b:
+		Filename: c_stealth_icon.png
+	c_gear01:
+		Filename: c_gear01_icon.png

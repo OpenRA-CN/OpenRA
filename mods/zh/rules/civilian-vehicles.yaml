@@ -1,0 +1,230 @@
+4TNK:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Buildable:
+		Queue: Vehicle
+		BuildPaletteOrder: 1
+		Prerequisites: ~civilian.armory
+		Description: Mammoth Tank
+	Valued:
+		Cost: 1750
+	Tooltip:
+		Name: Mammoth Tank
+	Mobile:
+		Speed: 20
+		MaxSpeed: 56
+		SpeedAccleration: 2
+		TurnSpeed: 20
+		CanMoveBackward: true
+		MaxBackwardCells: 6
+	Health:
+		HP: 60000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c512
+		MaxHeightDelta: 1100
+		RequiresCondition: !inside-tunnel
+	Turreted:
+		Turret: primary
+		TurnSpeed: 28
+	WithModelTurret@primary:
+		Turret: primary
+	WithModelBarrel@1:
+		Armament: primary1
+		LocalOffset: 235,133,300
+		LocalOrientation: 0, 0, 0
+	WithModelBarrel@2:
+		Armament: primary2
+		LocalOffset: 235,-133,300
+		LocalOrientation: 0, 0, 0
+	Armament@primary1:
+		Name: primary1
+		Turret: primary
+		Weapon: 120mmx
+		LocalOffset: 907,133,330
+		FireDelay: 3
+		MuzzleSequence: muzzle
+		Recoil: 148
+		RecoilRecovery: 12
+	Armament@primary2:
+		Name: primary2
+		Turret: primary
+		Weapon: 120mmx
+		LocalOffset: 907,-133,330
+		MuzzleSequence: muzzle
+		Recoil: 148
+		RecoilRecovery: 12
+	Armament@SECONDARY:
+		Name: SECONDARY
+		Turret: primary
+		Weapon: MammothTusk
+		LocalOffset: -60,233,355, -60,-233,355
+		#LocalOffset: 0,283,335, 0,-283,335
+	AttackTurreted@primary:
+		Voice: Attack
+		Armaments: primary1,primary2,SECONDARY
+		Turrets: primary
+		PauseOnCondition: empdisable || carring
+		FacingToTarget: true
+	ChangesHealth:
+		Step: 500
+		Delay: 10
+		StartIfBelow: 50
+		DamageCooldown: 200
+	WithModelTurret:
+	# WithModelBarrel:
+	WithMuzzleOverlay:
+
+^TRUCK:
+	Inherits: ^CivilianVoxelVehicle
+	Inherits@selection: ^SelectableSupportUnit
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Truck
+	Health:
+		HP: 20000
+	Mobile:
+		Speed: 56
+		CanMoveBackward: true
+		MaxBackwardCells: 6
+		MaxSpeed: 85
+		SpeedAccleration: 2
+
+TRUCKA:
+	Inherits: ^TRUCK
+
+TRUCKB:
+	Inherits: ^TRUCK
+
+BUS:
+	Inherits: ^CivilianVoxelCrusher
+	Inherits@CARGOPIPS: ^CargoPips
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: School Bus
+	Mobile:
+		TurnSpeed: 20
+		MaxSpeed: 113
+		Speed: 55
+		SpeedAccleration: 2
+		PauseOnCondition: empdisable || loading || being-captured || carried
+		CanMoveBackward: true
+		MaxBackwardCells: 6
+	Health:
+		HP: 10000
+	Cargo:
+		Types: Infantry
+		MaxWeight: 20
+		UnloadVoice: Unload
+		LoadingCondition: loading
+		EjectOnDeath: true
+
+PICK:
+	Inherits: ^CivilianVoxelVehicle
+	Inherits@CARGOPIPS: ^CargoPips
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Pickup
+	Mobile:
+		TurnSpeed: 20
+		MaxSpeed: 113
+		PauseOnCondition: empdisable || loading || being-captured || carried
+		CanMoveBackward: true
+		MaxBackwardCells: 6
+		Speed: 60
+		SpeedAccleration: 2
+	Health:
+		HP: 10000
+	Cargo:
+		Types: Infantry
+		MaxWeight: 2
+		UnloadVoice: Unload
+		LoadingCondition: loading
+		EjectOnDeath: true
+
+CAR:
+	Inherits: ^CivilianVoxelVehicle
+	Inherits@CARGOPIPS: ^CargoPips
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Automobile
+	Mobile:
+		TurnSpeed: 20
+		MaxSpeed: 113
+		PauseOnCondition: empdisable || loading || being-captured || carried
+		CanMoveBackward: true
+		MaxBackwardCells: 6
+		Speed: 55
+		SpeedAccleration: 2
+	Health:
+		HP: 10000
+	Cargo:
+		Types: Infantry
+		MaxWeight: 4
+		UnloadVoice: Unload
+		LoadingCondition: loading
+		EjectOnDeath: true
+
+WINI:
+	Inherits: ^CivilianVoxelVehicle
+	Inherits@CARGOPIPS: ^CargoPips
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Recreational Vehicle
+	Mobile:
+		TurnSpeed: 20
+		MaxSpeed: 113
+		PauseOnCondition: empdisable || loading || being-captured || carried
+		CanMoveBackward: true
+		MaxBackwardCells: 6
+		Speed: 55
+		SpeedAccleration: 2
+	Health:
+		HP: 20000
+	Cargo:
+		Types: Infantry
+		MaxWeight: 5
+		UnloadVoice: Unload
+		LoadingCondition: loading
+		EjectOnDeath: true
+
+LOCOMOTIVE:
+	Inherits: ^Train
+	Inherits@CARGOPIPS: ^CargoPips
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Train Locomotive
+	Cargo:
+		MaxWeight: 2
+		EjectOnDeath: true
+
+TRAINCAR:
+	Inherits: ^Train
+	Inherits@CARGOPIPS: ^CargoPips
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Passenger Car
+	Cargo:
+		MaxWeight: 10
+		EjectOnDeath: true
+
+CARGOCAR:
+	Inherits: ^Train
+	Inherits@CARGOPIPS: ^CargoPips
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Cargo Car
+	Cargo:
+		MaxWeight: 10
+		EjectOnDeath: true

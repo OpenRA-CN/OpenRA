@@ -1,0 +1,164 @@
+^VehiclePlug:
+	Interactable:
+	AlwaysVisible:
+	Building:
+		BuildSounds: place2.aud
+		UndeploySounds: cashturn.aud
+	SequencePlaceBuildingPreview:
+		ValidPlaceSequence: vplug-valid
+		InvalidPlaceSequence: vplug-invalid
+		Sequence: place
+		Palette: ra
+		FootprintAlpha: 0.75
+		SequenceAlpha: 0.85
+	KillsSelf:
+		RemoveInstead: true
+	RenderSprites:
+
+
+TITANUGVULCAN:
+	Inherits: ^VehiclePlug
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Vulcan Upgrade
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 80
+		Prerequisites: titan.vulcan, ~gaweap, ~techlevel.medium
+		Description: Give Titan an additional vulcan.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
+	Plug:
+		Type: titan.vulcan
+	RenderSprites:
+		Image: titanup.vulcan
+
+TITANUGMISSILE:
+	Inherits: ^VehiclePlug
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Missile Upgrade
+	Buildable:
+		Queue: Defense
+		BuildPaletteOrder: 80
+		Prerequisites: titan.missile, ~gaweap, ~techlevel.medium
+		Description: Give Titan an additional missile.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+	Plug:
+		Type: titan.missile
+	RenderSprites:
+		Image: titanup.missile
+
+
+JUMPJET:
+	Inherits: ^Soldier
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Jumpjet Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 70
+		Prerequisites: ~gapile, garadr, ~techlevel.medium
+		Description: Airborne soldier.\n  Strong vs Infantry, Aircraft\n  Weak vs Vehicles
+	Voiced:
+		VoiceSet: JumpJet
+	Mobile:
+		Speed: 71
+		Locomotor: jumpjet
+	Health:
+		HP: 12000
+	Armor:
+		Type: Light
+	Passenger:
+		CustomPipType: green
+	RevealsShroud:
+		RequiresCondition: !airborne && !inside-tunnel
+	RevealsShroud@airborne:
+		RequiresCondition: airborne
+		Range: 9c0
+		MaxHeightDelta: 1100
+	Armament:
+		LocalOffset: 360,0,433
+		Weapon: JumpVulcan
+		UseBlindage: true
+	-Crushable:
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+	WithSplitAttackPaletteInfantryBody:
+		RequiresCondition: !airborne
+		DefaultAttackSequence: attack
+	WithInfantryBody@flying:
+		RequiresCondition: airborne
+		DefaultAttackSequence: flying-attack
+		StandSequences: flying
+		MoveSequence: flying
+		Palette: player-nomuzzle
+		IsPlayerPalette: true
+	WithInfantryBody@flying-muzzle:
+		RequiresCondition: airborne
+		DefaultAttackSequence: flying-attack-muzzle
+		StandSequences: flying-muzzle
+		MoveSequence: flying-muzzle
+		Palette: muzzle
+	-TakeCover:
+	Hovers:
+		RequiresCondition: airborne
+	DamagedByTerrain@Tiberium:
+		RequiresCondition: !inside-tunnel && !airborne
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	Targetable:
+		RequiresCondition: !airborne && !inside-tunnel
+	Targetable@AIRBORNE:
+		TargetTypes: Air
+		RequiresCondition: airborne
+	SpawnActorOnDeath@airborne:
+		Actor: JUMPJET.Husk
+		RequiresCondition: airborne
+	DeathSounds@airborne:
+		RequiresCondition: airborne
+	WithDeathAnimation@normal:
+		RequiresCondition: !airborne
+	WithDeathAnimation@explosion:
+		RequiresCondition: !airborne
+	WithDeathAnimation@energy:
+		RequiresCondition: !airborne
+	WithDeathAnimation:
+		RequiresCondition: !airborne
+	DeathSounds@NORMAL:
+		RequiresCondition: !airborne
+	DeathSounds@EXPLOSION:
+		RequiresCondition: !airborne
+	DeathSounds@BURNED:
+		RequiresCondition: !airborne
+	DeathSounds@ZAPPED:
+		RequiresCondition: !airborne
+	SpawnActorOnDeath:
+		RequiresCondition: airborne
+	SpawnActorOnDeath@FLAMEGUY:
+		RequiresCondition: !airborne
+	WithShadow@airborne:
+		RequiresCondition: airborne
+	GrantConditionOnJumpjetLayer:
+		Condition: airborne
+
+	Targetable@avoidByAi:
+		TargetTypes: AIgnored, Traped
+		RequiresCondition: traped
+	ExternalCondition@avoidtarget:
+		Condition: avoidtarget
+	ExternalCondition@traped:
+		Condition: traped
+	Targetable@avoidBySpecialActor:
+		TargetTypes: Ignored, AIgnored
+		RequiresCondition: avoidtarget
+	DamageMultiplier@avoidtarget:
+		RequiresCondition: avoidtarget
+		Modifier: 0

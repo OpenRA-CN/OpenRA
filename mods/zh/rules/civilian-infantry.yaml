@@ -1,0 +1,400 @@
+WEEDGUY:
+	Inherits: ^Soldier
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 75
+		Prerequisites: ~nahand, natech, ~techlevel.high
+		Description: Heavy infantry armed with a Toxin Sprayer.\n  Strong vs Infantry\n  Weak vs Armored units, Aircraft
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Toxin Trooper
+	Voiced:
+		VoiceSet: Weed
+	Mobile:
+		Speed: 67
+	Health:
+		HP: 20000
+	Crushable:
+		CrushSound: squishy2.aud
+	Armament:
+		Weapon: ChemicalSprayer #FireballLauncher
+		LocalOffset: 317,0,262
+		RequiresCondition: !WebDisable && !inside-tunnel
+	TakeCover:
+		ProneOffset: 128,0,0 #-320
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		RequiresCondition: !WebDisable && !inside-tunnel
+	-SpawnActorOnDeath@FLAMEGUY:
+	WithDeathAnimation@fire:
+		DeathSequence: die-
+		DeathTypes:
+			FireDeath: burning
+
+UMAGON:
+	Inherits: ^Soldier
+	Inherits@2: ^HealsOnTiberium
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@LeaveTib: ^LeaveTiberiumWhenDeath
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 0
+		Prerequisites: ~none
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Umagon
+	Voiced:
+		VoiceSet: Umagon
+	Mobile:
+		Speed: 71
+	Health:
+		HP: 15000
+	Passenger:
+	GrantConditionOnMovement@sniperSightDisable:
+		Condition: moving.sniper
+	RevealsShroud@sniper:
+		Range: 9c512
+		MaxHeightDelta: 1100
+		RequiresCondition: !moving.sniper
+	RevealsShroud:
+		Range: 7c0
+		RequiresCondition: moving.sniper
+	Armament:
+		LocalOffset: 126,0,438
+		Weapon: SilencerSniper
+		UseBlindage: true
+		RequiresCondition: !WebDisable && !inside-tunnel
+	AttackFrontal:
+		Voice: Attack
+		RequiresCondition: !WebDisable && !inside-tunnel
+		FacingTolerance: 16
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: attack
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+
+CHAMSPY:
+	Inherits: ^Soldier
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 0
+		Prerequisites: ~none
+	Valued:
+		Cost: 700
+	DisguiseTooltip:
+		Name: Chameleon Spy
+	Voiced:
+		VoiceSet: Spy
+	Health:
+		HP: 12000
+	Mobile:
+		Speed: 85
+	RevealsShroud:
+		Range: 9c0
+	Passenger:
+	Disguise:
+		DisguisedCondition: disguise
+	WithDecoration@disguise:
+		RequiresCondition: disguise
+		Position: TopRight
+		Margin: 6, 10
+		Image: pips
+		Sequence: pip-disguise
+		Palette: pips
+	Infiltrates:
+		Types: SpyInfiltrate
+		Notification: BuildingInfiltrated
+		TextNotification: Building infiltrated.
+	-WithSplitAttackPaletteInfantryBody:
+	WithDisguisingInfantryBody:
+		IdleSequences: idle1, idle2
+
+MUTANT:
+	Inherits: ^Soldier
+	Inherits@2: ^HealsOnTiberium
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@LeaveTib: ^LeaveTiberiumWhenDeath
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 0
+		Prerequisites: ~civilian.armory
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Mutant
+	Voiced:
+		VoiceSet: Mutant
+	Health:
+		HP: 8500
+	Mobile:
+		Speed: 71
+	Armament:
+		LocalOffset: 311,83,490, 311,-83,490
+		BurstsPerFire: 2
+		Weapon: SMG
+		UseBlindage: true
+		RequiresCondition: !WebDisable && !inside-tunnel
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		RequiresCondition: !WebDisable && !inside-tunnel
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: attack
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	UnitDisplayInfo:
+		IconSequence: testdisplay
+		IconPalette: player
+		IconPaletteIsPlayerPalette: true
+		IconScale: 0.85
+
+MWMN:
+	Inherits: ^Soldier
+	Inherits@2: ^HealsOnTiberium
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@LeaveTib: ^LeaveTiberiumWhenDeath
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 0
+		Prerequisites: ~civilian.armory
+	Valued:
+		Cost: 125
+	Tooltip:
+		Name: Mutant Soldier
+	Voiced:
+		VoiceSet: CivilianFemale
+	Health:
+		HP: 8500
+	Mobile:
+		Speed: 77
+	Armament:
+		LocalOffset: 276,0,470
+		Weapon: ShardShotGun
+		UseBlindage: true
+		RequiresCondition: !WebDisable && !inside-tunnel
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		RequiresCondition: !WebDisable && !inside-tunnel
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: attack
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	UnitDisplayInfo:
+		IconSequence: testdisplay
+		IconPalette: player
+		IconPaletteIsPlayerPalette: true
+		IconScale: 0.85
+
+MUTANT3:
+	Inherits: ^Soldier
+	Inherits@2: ^HealsOnTiberium
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@LeaveTib: ^LeaveTiberiumWhenDeath
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 0
+		Prerequisites: ~civilian.armory
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Mutant Sergeant
+	Voiced:
+		VoiceSet: Mutant
+	Health:
+		HP: 15000
+	Mobile:
+		Speed: 71
+	RevealsShroud:
+		Range: 7c0
+	Armament:
+		LocalOffset: 311,83,490, 311,-83,490
+		BurstsPerFire: 2
+		Weapon: SergeantSMG
+		UseBlindage: true
+		RequiresCondition: !WebDisable && !inside-tunnel
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		RequiresCondition: !WebDisable && !inside-tunnel
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: attack
+		Palette: player-nobright
+		IsPlayerPalette: true
+		SplitAttackPalette: bright
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	UnitDisplayInfo:
+		IconSequence: testdisplay
+		IconPalette: player
+		IconPaletteIsPlayerPalette: true
+		IconScale: 0.85
+
+TRATOS:
+	Inherits: ^Soldier
+	Inherits@2: ^HealsOnTiberium
+	Inherits@LeaveTib: ^LeaveTiberiumWhenDeath
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Tratos
+	Voiced:
+		VoiceSet: Tratos
+	Health:
+		HP: 20000
+	Mobile:
+		Speed: 71
+	UnitDisplayInfo:
+		IconSequence: testdisplay
+		IconPalette: player
+		IconPaletteIsPlayerPalette: true
+		IconScale: 0.85
+
+OXANNA:
+	Inherits: ^Soldier
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 111
+		Prerequisites: ~civilian.armory
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Oxanna
+	Voiced:
+		VoiceSet: Oxanna
+	Health:
+		HP: 15000
+	Mobile:
+		Speed: 56
+	RevealsShroud:
+		Range: 7c0
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: attack
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		RequiresCondition: !WebDisable && !inside-tunnel
+	Armament:
+		LocalOffset: 312,0,502
+		Weapon: OxannaGun
+		UseBlindage: true
+		RequiresCondition: !WebDisable && !inside-tunnel
+	UnitDisplayInfo:
+		IconSequence: testdisplay
+		IconPalette: player
+		IconPaletteIsPlayerPalette: true
+		IconScale: 0.85
+
+SLAV:
+	Inherits: ^Soldier
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 111
+		Prerequisites: ~civilian.armory
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Slavick
+	Voiced:
+		VoiceSet: Slavick
+	Health:
+		HP: 30000
+	Mobile:
+		Speed: 56
+	RevealsShroud:
+		Range: 7c0
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: attack
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		RequiresCondition: !WebDisable && !inside-tunnel
+	Armament:
+		LocalOffset: 320,0,422
+		Weapon: SlavickGun
+		UseBlindage: true
+		RequiresCondition: !WebDisable && !inside-tunnel
+	UnitDisplayInfo:
+		IconSequence: testdisplay
+		IconPalette: player
+		IconPaletteIsPlayerPalette: true
+		IconScale: 0.85
+
+CIV1:
+	Inherits: ^CivilianInfantry
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 0
+		Prerequisites: ~civilian.armory
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: attack
+		Palette: player-nomuzzle
+		IsPlayerPalette: true
+		SplitAttackPalette: muzzle
+	Armament:
+		LocalOffset: 294,-10,468
+		Weapon: Pistol
+		UseBlindage: true
+		RequiresCondition: !WebDisable && !inside-tunnel
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		RequiresCondition: !WebDisable && !inside-tunnel
+	Voiced:
+		VoiceSet: Civilian1
+	Tooltip:
+		Name: Armed Civilian
+	ScaredyCat:
+		AttackPanicChance: 0
+
+CIV2:
+	Inherits: ^CivilianInfantry
+	Voiced:
+		VoiceSet: Civilian2
+
+CIV3:
+	Inherits: ^CivilianInfantry
+	Voiced:
+		VoiceSet: Civilian3
+
+CTECH:
+	Inherits: CIV1
+	RenderSprites:
+		Image: civ3
+	Armament:
+		LocalOffset: 294,0,468
+	Voiced:
+		VoiceSet: CivilianTechnician
+	Tooltip:
+		Name: Technican
+	-ScaredyCat:
+	-Wanders:

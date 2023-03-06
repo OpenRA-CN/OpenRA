@@ -1,0 +1,160 @@
+doggie:
+	Defaults:
+		Filename: doggie.shp
+		Tick: 80
+		Offset: 0, 0, 0
+	stand:
+		Facings: 8
+		ShadowStart: 119
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		ShadowStart: 127
+	attack:
+		Start: 56
+		Length: 4
+		Facings: 8
+		ShadowStart: 175
+	laydown:
+		Start: 88
+		Length: 2
+		ShadowStart: 207
+		MeshType: TileOverlay
+	hide:
+		Start: 90
+		ShadowStart: 209
+	idle1:
+		Start: 91
+		Length: 8
+		ShadowStart: 210
+	webguy:
+		Filename: webguySP.shp
+		Length: 6
+		ShadowStart: 6
+		Facings: 1
+	die-twirling:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die-flying:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die-exploding:
+		Filename: s_bang34.shp
+		Length: *
+	die-crushed:
+		Start: 105
+		Length: 4
+		ShadowStart: 224
+		Tick: 800
+		MeshType: TileOverlay
+	die-burning:
+		Start: 109
+		Length: 10
+		ShadowStart: 228
+		IgnoreWorldTint: True
+	die-melting:
+		Start: 109
+		Length: 10
+		ShadowStart: 228
+	icon:
+		Filename: empty2icon.shp
+		Facings: 1
+		Length: 1
+		Start: 0
+		ShadowStart: 0
+	testdisplay:
+		Start: 3
+
+vissml:
+	idle:
+		Filename: vissml.shp
+		Length: 90
+		ShadowStart: 90
+		Tick: 80
+		Offset: 0, 0, 16
+	icon:
+		Filename: empty2icon.shp
+		Facings: 1
+		Length: 1
+		Start: 0
+		ShadowStart: 0
+
+vislrg:
+	idle:
+		Filename: vislrg.shp
+		Length: 90
+		ShadowStart: 90
+		Tick: 80
+		Offset: 0, 0, 16
+	attack:
+		Combine:
+			0:
+				Filename: vislgatk.shp
+				Start: 5
+				Length: 35
+			1:
+				Filename: vislgatk.shp
+				Start: 0
+				Length: 5
+		Facings: -8
+		Length: 5
+		Tick: 80
+		Offset: 0, 0, 16
+		# ShadowStart: 40 # TODO: enable shadow frames
+	icon:
+		Filename: empty2icon.shp
+		Facings: 1
+		Length: 1
+		Start: 0
+		ShadowStart: 0
+
+floater:
+	Defaults:
+		Filename: floater.shp
+		ZOffset: 400
+		# MeshType: TileOverlay
+	idle:
+		Length: 16
+		ShadowStart: 32
+		Tick: 100
+		Offset: 0, 0, 16
+	attack:
+		Length: 16
+		Start: 16
+		ShadowStart: 48
+		Tick: 100
+		Offset: 0, 0, 16
+	attack-shock:
+		Length: 16
+		Start: 16
+		Tick: 100
+		Offset: 0, 0, 16
+		IgnoreWorldTint: True
+	icon:
+		Filename: empty2icon.shp
+		Facings: 1
+		Length: 1
+		Start: 0
+		ShadowStart: 0
+
+minivein:
+	Defaults:
+		Filename: minivein.shp
+		Offset: 0,0
+	idle:
+		Length: 39
+	dead:
+		Filename: minivein_dead.shp
+		Length: *
+		Tick: 35
+	stand:
+		Length: 39
+	make:
+		Filename: minivein_make.shp
+		Length: *
+		Tick: 35
+	shoot:
+		Length: 39

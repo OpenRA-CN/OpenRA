@@ -1,0 +1,784 @@
+^DefaultMissile:
+	Inherits@BlueTibReactionInit: ^BlueTibReactionInit
+	ReloadDelay: 60
+	Range: 7c512
+	MinRange: 0c512
+	ValidTargets: Ground, Water, Air, Trees
+	TargetActorCenter: true
+	Projectile: Missile
+		MaximumLaunchSpeed: 96
+		Blockable: false
+		Shadow: true
+		Inaccuracy: 128
+		Unit: missile
+		Meshes: idle
+		MeshScale: 1.75
+		# Image: DRAGON
+		# Palette: ra
+		HorizontalRateOfTurn: 100
+		RangeLimit: 15c0
+		MinimumLaunchSpeed: 75
+		Speed: 300
+		Acceleration: 96
+		MinimumLaunchAngle: 128
+		MaximumLaunchAngle: 192
+		VerticalRateOfTurn: 62
+		CruiseAltitude: 3c0
+		AllowSnapping: true
+		TerrainHeightAware: true
+		TrailImage: small_smoke_trail
+		TrailInterval: 1
+		TrailCount: 0 #2
+		TrailDelay: 0
+		ContrailZOffset: 22
+		ContrailLength: 12
+		ContrailWidth: 254
+		ContrailImage: lineidle_loop
+		ContrailSequences: trail
+		ContrailStartColor: DFA877
+		ContrailStartColorAlpha: 233
+		ContrailEndColor: A8A8A8
+		ContrailEndColorAlpha: 0 #64
+		ContrailWidthFadeRate: 0
+		ContrailDelay: 0
+		ContrailBlendMode: Additive
+		
+		JetImage: mislflash
+		JetSequence: mislflash1
+		JetPalette: gray
+	Warhead@1Dam: Spread3DDamage
+		Spread: 108
+		Falloff: 100, 50, 25, 12, 6, 3, 0
+		Damage: 5500
+		ValidTargets: Ground, Water, Air
+		Versus:
+			None: 25
+			Wood: 65
+			Light: 75
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: small_clsn
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Air, Trees
+	Warhead@3EffWater: CreateEffect
+		Explosions: small_watersplash
+		ExplosionPalette: player
+		ImpactSounds: ssplash3.aud
+		ValidTargets: Water
+		InvalidTargets: Vehicle
+	Warhead@Smu: LeaveSmudge
+		SmudgeType: SmallCrater
+		InvalidTargets: Vehicle, Building, Wall
+
+
+
+
+
+
+
+^VectorBooster:
+	Inherits@BlueTibReactionInit: ^BlueTibReactionInit
+	Range: 7c0
+	Report: hovrmis1.aud
+	ReloadDelay: 60
+	MinRange: 1c0
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
+	Projectile: VectorBooster
+		HorizonRotationRate: 15
+		VerticalRotationRate: 5
+		Acceleration: 18
+		Speed: 120
+		LockOnDelay: 3
+		IgnitionDelay: 2
+		MinSpeed: 64
+		MaxSpeed: 346
+		LifeTime: 50
+		Width: 76
+		ProximityRange: 256
+		ProximitySnapping: true
+		LaunchAngle: 27
+		ZOffset: 10
+		Inaccuracy: 1c0
+		UseVerticalInaccuracy: false
+		LockOnInaccuracy: 200
+		UseLockOnVerticalInaccuracy: true
+		LockOnTargetTypes: Vehicle, Air, Building, Defense, Cyborg
+		Unit: missile
+		Meshes: idle
+		MeshScale: 1.75
+		TrailImage: small_smoke_trail
+		TrailInterval: 1
+		TrailCount: 0 #2
+		TrailDelay: -1 # use IgnitionDelay
+		JetDelay: -1 # use IgnitionDelay
+		
+		ContrailZOffset: 22
+		ContrailLength: 12
+		ContrailWidth: 254
+		ContrailImage: lineidle_loop
+		ContrailSequences: trail
+		ContrailStartColor: DFA877
+		ContrailStartColorAlpha: 233
+		ContrailEndColor: A8A8A8
+		ContrailEndColorAlpha: 0 #64
+		ContrailWidthFadeRate: 0
+		ContrailDelay: 0
+		ContrailBlendMode: Additive
+		ExplodeUnderThisAltitude: -128
+		UsingScat: false
+		ScatWeapon: Grenade
+		ScatDist: 3c512
+		ScatCount: 3
+		DetectTargetOnCurve: true
+		DetectTargetFromLengthPercentage: 70
+		DetectTargetBeforeDist: 3c0
+		JetImage: mislflash
+		JetSequence: mislflash1
+		JetPalette: gray
+	Warhead@1Dam: Spread3DDamage
+		Spread: 0c108
+		Falloff: 100, 50, 25, 12, 6, 3, 0
+		Damage: 6000
+		ValidTargets: Ground, Water, Air
+		Versus:
+			None: 25
+			Wood: 65
+			Light: 75
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: small_clsn
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Air, Trees
+	Warhead@3EffWater: CreateEffect
+		Explosions: small_watersplash
+		ExplosionPalette: player
+		ImpactSounds: ssplash3.aud
+		ValidTargets: Water
+		InvalidTargets: Vehicle
+	Warhead@Smu: LeaveSmudge
+		SmudgeType: SmallCrater
+		InvalidTargets: Vehicle, Building, Wall
+
+
+
+
+
+
+
+VectorBoosterMul:
+	Inherits: ^VectorBooster
+	Range: 15c0
+	Projectile: VectorBooster
+		UsingScat: true
+		ScatWeapon: ^VectorBooster
+		ScatDist: 7c512
+		ScatCount: 3
+
+VectorBazooka:
+	Inherits: ^VectorBooster
+	ReloadDelay: 60
+	Range: 7c0
+	MinRange: 0c512
+	Report: rketinf1.aud
+	Projectile: VectorBooster
+		LaunchAngle: 128
+		LockOnDelay: 6
+		IgnitionDelay: 5
+		ContrailDelay: 5
+		RangeLimit: 30c0
+		Speed: 120
+		ContrailLength: 10
+
+Bazooka:
+	Inherits: ^DefaultMissile
+	Report: rketinf1.aud
+
+HoverMissile:
+	Inherits: ^DefaultMissile
+	ReloadDelay: 40
+	Range: 9c0
+	Report: hovrmis1.aud
+	Warhead@1Dam: Spread3DDamage
+		Damage: 4500
+		Versus:
+			None: 25
+			Wood: 65
+			Light: 100
+			Heavy: 70
+			Concrete: 60
+
+TitanMissile:
+	Inherits: ^VectorBooster
+	ReloadDelay: 30
+	ValidTargets: Air
+	Range: 6c0
+	Report: orcamis1.aud
+	Projectile: VectorBooster
+		HorizonRotationRate: 12
+		VerticalRotationRate: 9
+		Acceleration: 40
+		Speed: 200
+		Width: 42
+		ProximityRange: 200
+		LockOnDelay: 2
+		IgnitionDelay: 3
+		MinSpeed: 64
+		MaxSpeed: 400
+		LifeTime: 70
+		LaunchAngle: 128
+		ContrailLength: 6
+		ContrailWidth: 244
+		MeshScale: 1
+		JetSequence: mislflash1small
+	Warhead@1Dam: Spread3DDamage
+		Damage: 2250
+		Versus:
+			None: 25
+			Wood: 65
+			Light: 100
+			Heavy: 70
+			Concrete: 60
+
+LimpetMissile:
+	Inherits: BikeMissile
+	Range: 6c512
+	ReloadDelay: 90
+	ValidTargets: Ground, Water, Air
+	Projectile: VectorBooster
+		LaunchAngle: 253
+		LockOnDelay: 16
+		IgnitionDelay: 17
+		ContrailDelay: 17
+		RangeLimit: 30c0
+		Speed: 200
+		ContrailLength: 10
+	Warhead@1Dam: Spread3DDamage
+		Damage: 8000
+		Versus:
+			None: 65
+			Wood: 75
+			Light: 100
+			Heavy: 85
+			Concrete: 60
+	Warhead@ShockWave: CreateEffect
+		Image: twist
+		Explosions: roundshock
+		ExplosionPalette: twist
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+
+LurkerAimDummyWeapon:
+	Range: 6c512
+	ReloadDelay: 20
+	ValidTargets: Ground, Water, Air
+	Projectile: InstantHit
+
+HoverMissileQuad:
+	Inherits: HoverMissile
+	Burst: 4
+	ReloadDelay: 100
+
+ReaperScythe: ##todo
+	Inherits: ^VectorBooster
+	ValidTargets: Ground, Water, Air
+	Report: samshot1.aud
+	ReloadDelay: 180
+	Burst: 4
+	Range: 9c0
+	MinRange: 1c0
+	Projectile: VectorBooster
+		UsingScat: true
+		ScatCount: 2
+		ScatWeapon: ReaperScytheScat
+		LaunchAngle: 220
+		LifeTime: 13
+		ScatDist: 0c512
+
+ReaperScytheScat:
+	Inherits: ^VectorBooster
+	ReloadDelay: 90
+	Range: 3c0
+	Projectile: VectorBooster
+		Inaccuracy: 0c512
+		LockOnInaccuracy: 0c512
+		LockOnDelay: 3
+		IgnitionDelay: 10
+		ContrailDelay: 9
+		ContrailLength: 6
+		ContrailWidth: 244
+		MeshScale: 1
+		JetSequence: mislflash1small
+		InaccuracyType: Absolute
+		LaunchAngle: 220
+	Warhead@1Dam: Spread3DDamage
+		Spread: 108
+		Falloff: 100, 50, 25, 12, 6, 3, 0
+		Damage: 2250
+		ValidTargets: Ground, Water, Air
+		Versus:
+			None: 25
+			Wood: 65
+			Light: 75
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+
+MammothTusk:
+	Inherits: ^DefaultMissile
+	ReloadDelay: 80
+	Report: hovrmis1.aud
+	Burst: 2
+	Warhead@1Dam: Spread3DDamage
+		Spread: 144
+		Damage: 6400
+		Versus:
+			None: 100
+			Wood: 85
+			Light: 70
+			Heavy: 35
+			Concrete: 28
+		DamageTypes: Explosion
+	Warhead@2Eff: CreateEffect
+		ImpactActors: false
+		Explosions: medium_twlt
+		ImpactSounds: expnew07.aud
+	-Warhead@3EffWater:
+	Warhead@ShockWave: CreateEffect
+		Image: twist
+		Explosions: roundshock
+		ExplosionPalette: twist
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+
+MammothTuskMk2:
+	Inherits: MammothTusk
+	Range: 9c512
+	MinRange: 0c512
+
+BikeMissile:
+	Inherits: ^VectorBooster
+	Range: 7c512
+	MinRange: 0c512
+	Report: misl1.aud
+	# ValidTargets: Ground, Water # bike can anti-air now
+	ReloadDelay: 35
+	Projectile: VectorBooster
+		HorizonRotationRate: 11
+		VerticalRotationRate: 8
+		Acceleration: 18
+		Speed: 120
+		Width: 40
+		MeshScale: 1
+		ProximityRange: 200
+		LockOnDelay: 4
+		IgnitionDelay: 5
+		ContrailDelay: 5
+		MinSpeed: 55
+		MaxSpeed: 388
+		LifeTime: 66
+		LaunchAngle: 33
+	Warhead@1Dam: Spread3DDamage
+		Damage: 5000
+
+BikeMissileDual:
+	Inherits: BikeMissile
+	Burst: 2
+	ReloadDelay: 40
+
+Dragon:
+	Inherits: ^DefaultMissile
+	ReloadDelay: 33
+	Burst: 2
+	Report: misl1.aud
+	Warhead@1Dam: Spread3DDamage
+		Damage: 4500
+	Warhead@ShockWave: CreateEffect
+		Image: twist
+		Explosions: roundshock
+		ExplosionPalette: twist
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+
+# Hellfire:
+# 	Inherits: ^DefaultMissile
+# 	ReloadDelay: 30
+# 	Report: orcamis1.aud
+# 	ValidTargets: Ground, Water, Air
+# 	Warhead@1Dam: Spread3DDamage
+# 		Spread: 72
+# 		Damage: 3000
+# 		ValidTargets: Ground, Water, Air
+# 		Versus:
+# 			None: 30
+# 			Wood: 65
+# 			Light: 150
+# 			Heavy: 100
+# 			Concrete: 30
+
+PulseHellfire:
+	Inherits: Hellfire
+	ReloadDelay: 100
+	Burst: 6
+	BurstDelays: 5
+	Range: 9c512
+	Projectile: VectorBooster
+		ContrailStartColor: 33DDFF
+		HorizonRotationRate: 8
+		VerticalRotationRate: 8
+		Acceleration: 8
+		Speed: 210
+		LockOnDelay: 15
+		IgnitionDelay: 0
+		LaunchAngle: -16
+		LifeTime: 55
+		MeshScale: 1.4
+		ProximityRange: 222
+		Inaccuracy: 0c512
+		UseVerticalInaccuracy: true
+	Warhead@1Dam: Spread3DDamage
+		Spread: 220
+		Damage: 5000
+		Condition: empdisable
+		Duration: 100
+		ValidTargets: Ground, Water, Air
+		Versus:
+			None: 70
+			Wood: 65
+			Light: 150
+			Heavy: 100
+			Concrete: 30
+	Warhead@empEff: CreateEffect
+		Explosions: smallpulse_explosion2
+		ExplosionPalette: effectcyan
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Air
+
+Hellfire:
+	Inherits: ^VectorBooster
+	ReloadDelay: 10
+	ValidTargets: Ground, Water
+	Report: orcamis1.aud
+	Projectile: VectorBooster
+		HorizonRotationRate: 14
+		VerticalRotationRate: 12
+		Acceleration: 40
+		Speed: 150
+		LockOnDelay: 5
+		IgnitionDelay: 2
+		LaunchAngle: 2
+		LifeTime: 46
+		Width: 40
+		MeshScale: 1.2
+		ProximityRange: 200
+		UseVerticalInaccuracy: true
+		LockOnInaccuracy: 128
+		UseLockOnVerticalInaccuracy: false
+	Warhead@1Dam: Spread3DDamage
+		Spread: 128
+		Damage: 4000
+		ValidTargets: Ground, Water, Air, Trees
+		Versus:
+			None: 40
+			Wood: 65
+			Light: 150
+			Heavy: 100
+			Concrete: 30
+
+SkyFire:
+	Inherits: ^VectorBooster
+	ReloadDelay: 45
+	Range: 10c0
+	Report: samshot1.aud
+	ValidTargets: Air
+	Projectile: VectorBooster
+		HorizonRotationRate: 13
+		VerticalRotationRate: 9
+		Acceleration: 17
+		Speed: 165
+		LockOnDelay: 1
+		IgnitionDelay: 0
+		LaunchAngle: 64
+		MinSpeed: 88
+		MaxSpeed: 422
+		LifeTime: 75
+		Width: 40
+		MeshScale: 1.7
+		ProximityRange: 215
+		DetectTargetOnCurve: false
+		Blockable: false
+	Warhead@1Dam: Spread3DDamage
+		Spread: 0c128
+		Falloff: 100, 50, 25, 12, 6, 3, 0
+		Damage: 6400
+		ValidTargets: Ground, Water, Air, Trees
+		Versus:
+			None: 45
+			Wood: 45
+			Light: 100
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: SmallExplosionDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: large_grey_explosion
+		ImpactSounds: expnew13.aud
+		ImpactActors: false
+	Warhead@ShockWave: CreateEffect
+		Image: twist
+		Explosions: roundshock
+		ExplosionPalette: twist
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+
+RedEye2:
+	Inherits: ^VectorBooster
+	ReloadDelay: 55
+	Range: 15c0
+	Report: samshot1.aud
+	ValidTargets: Air
+	Projectile: VectorBooster
+		HorizonRotationRate: 13
+		VerticalRotationRate: 9
+		Acceleration: 17
+		Speed: 165
+		LockOnDelay: 3
+		IgnitionDelay: 0
+		LaunchAngle: 64
+		MinSpeed: 88
+		MaxSpeed: 422
+		LifeTime: 75
+		Width: 40
+		MeshScale: 3
+		ProximityRange: 289
+		DetectTargetOnCurve: false
+		Blockable: false
+	Warhead@1Dam: Spread3DDamage
+		Spread: 0c128
+		Falloff: 100, 50, 25, 12, 6, 3, 0
+		Damage: 8400
+		ValidTargets: Ground, Water, Air, Trees
+		Versus:
+			None: 45
+			Wood: 45
+			Light: 100
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: SmallExplosionDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: large_grey_explosion
+		ImpactSounds: expnew13.aud
+		ImpactActors: false
+	Warhead@ShockWave: CreateEffect
+		Image: twist
+		Explosions: roundshock
+		ExplosionPalette: twist
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+
+ProtonFlameMissile:
+	Inherits: ^VectorBooster
+	ReloadDelay: 50
+	Range: 9c0
+	Report: hovrmis1.aud
+	Projectile: VectorBooster
+		ContrailStartColor: 00FF00
+		ContrailStartColorOuter: AAAA00
+		AirburstAltitude: 5c0
+		UsingScat: true
+		ScatWeapon: ProtonFlameMissileCluster
+		ScatDist: 3c0
+		ScatCount: 3
+		ScatDimensions: 5,5
+		ScatFootprint: __x__ _xxx_ xx_xx _xxx_ __x__
+		JetPalette: lightgreen
+		LifeTime: 40
+	Warhead@1Dam: Spread3DDamage
+		Damage: 3000
+		Versus:
+			None: 25
+			Wood: 65
+			Light: 100
+			Heavy: 75
+			Concrete: 60
+
+ProtonFlameMissileCluster:
+	Inherits: ^VectorBooster
+	ReloadDelay: 50
+	Range: 9c0
+	Report: hovrmis1.aud
+	Projectile: VectorBooster
+		ContrailStartColor: 00FF00
+		ContrailStartColorOuter: AAAA00
+		AirburstAltitude: 1c0
+		ProximityRange: 128
+		ProximitySnapping: true
+		Inaccuracy: 0c700
+		UseLockOnVerticalInaccuracy: true
+		LockOnInaccuracy: 3c768
+		LockOnTargetTypes: Air
+		HorizonRotationRate: 13
+		VerticalRotationRate: 32
+	Warhead@1Dam: Spread3DDamage
+		Damage: 6000
+		Versus:
+			None: 25
+			Wood: 65
+			Light: 100
+			Heavy: 75
+			Concrete: 60
+	Warhead@Cluster: FireRadius
+		Weapon: GreenFireballLauncher
+		StartOffset: 0,-1024,0
+		FireCount: 15
+		ForceTargetGround: true
+
+ProtonFlameCluster:
+	Warhead@Cluster: FireRadius
+		Weapon: GreenFireballLauncher
+		StartOffset: 0,-1024,0
+		FireCount: 3
+		ForceTargetGround: true
+
+
+GreenScytheScat:
+	Inherits: ReaperScytheScat
+	Projectile: VectorBooster
+		LaunchAngle: -88
+		ContrailStartColor: 00FF00
+		ContrailStartColorOuter: AAAA00
+		JetPalette: lightgreen
+	Warhead@1Dam: Spread3DDamage
+		Damage: 6000
+		Versus:
+			None: 25
+			Wood: 85
+			Light: 100
+			Heavy: 85
+			Concrete: 60
+	Warhead@Cluster: FireRadius
+		Weapon: GreenFireballLauncher
+		StartOffset: 0,0,0
+		FireCount: 3
+		ForceTargetGround: true
+
+ProtonFlameMissileClusterSmall:
+	Inherits: ProtonFlameMissileCluster
+	-Report:
+	Projectile: VectorBooster
+		Speed: 100
+		MaxSpeed: 550
+		Acceleration: 10
+		IgnitionDelay: 15
+		ContrailDelay: 15
+		LockOnDelay: 10
+		LaunchAngle: -88
+		HorizonRotationRate: 5
+		VerticalRotationRate: 3
+		ContrailStartColor: 00FF00
+		ContrailStartColorOuter: AAAA00
+		AirburstAltitude: 1c512
+		JetPalette: lightgreen
+		UsingScat: true
+		ScatCount: 3
+		ScatWeapon: GreenScytheScat
+		ScatDist: 2c0
+	Warhead@Cluster: FireRadius
+		Weapon: GreenFireballLauncher
+		StartOffset: 0,-1024,0
+		FireCount: 3
+		ForceTargetGround: true
+
+LauncherMultiCluster:
+	Inherits: ^VectorBooster
+	ValidTargets: Ground, Water, Air, Trees
+	-Report:
+	Projectile: VectorBooster
+		Speed: 120
+		MinSpeed: 55
+		MaxSpeed: 388
+		Inaccuracy: 1c0
+		Acceleration: 10
+		# MaximumLaunchSpeed: 120
+		# MinimumLaunchAngle: -255
+		# MaximumLaunchAngle: 255
+		# RangeLimit: 10c0
+		# VerticalRateOfTurn: 64
+		LaunchAngle: 0
+		LifeTime: 66
+		AllowSnapping: false
+		HorizonRotationRate: 14
+		VerticalRotationRate: 11
+	Warhead@1Dam: Spread3DDamage
+		Spread: 458
+		Damage: 20000
+		ValidTargets: Ground, Water, Air, Trees
+		Versus:
+			None: 100
+			Wood: 85
+			Light: 100
+			Heavy: 75
+			Concrete: 30
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+	Warhead@2Eff: CreateEffect
+		ImpactActors: false
+		Explosions: large_twlt
+		ImpactSounds: expnew09.aud
+	Warhead@5Res: DestroyResource
+		Size: 2
+		ResourceAmount: 4
+		ResourceTypes: Tiberium, BlueTiberium
+
+LauncherClusterMissile:
+	ValidTargets: Ground, Water, Air, Trees
+	Inherits: ^DefaultMissile
+	Range: 9999c0
+	ReloadDelay: 50
+	Report: samshot1.aud
+	ValidTargets: Ground, Water, Air, Trees
+	Projectile: Missile
+		Unit: missile
+		Meshes: idle
+		MeshScale: 6
+		HomingActivationDelay: 80
+		RangeLimit: -1
+		LifeTime: -1
+		MaxSpeed: 800
+		HorizontalRateOfTurn: 128
+		MinimumLaunchSpeed: 512
+		MaximumLaunchSpeed: 512
+		Acceleration: 96
+		MinimumLaunchAngle: 253
+		MaximumLaunchAngle: 253
+		Gravity: 0
+		ContrailLength: 10
+		ContrailWidth: 356
+		CruiseAltitude: 90c0
+		AirburstAltitude: 6c0
+		TrailCount: 1
+		ContrailStartColor: DFA877
+		ContrailStartColorOuter: FFDD44
+		ContrailStartColorAlpha: 152
+		ContrailStartColorAlphaOuter: 0
+		Inaccuracy: 0
+	Warhead@SoundEffect: CreateEffect
+		Explosions: large_twlt
+		ImpactSounds: expnew19.aud
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+	Warhead@Cluster: FireCluster
+		Weapon: LauncherMultiCluster
+		RandomClusterCount: 5
+		Dimensions: 7,7
+		Footprint: __xxx__ _xxXxx_ xxXXXxx xXXXXXx xxXXXxx _xxXxx_ __xxx__
+	Warhead@Shake: ShakeScreen
+		Duration: 20
+		Intensity: 5
+		Multiplier: 1,1
+	Warhead@Spawn: SpawnActor
+		Actors: swvisiondummy6
+		Range: 3
+		AirThreshold: 111c0

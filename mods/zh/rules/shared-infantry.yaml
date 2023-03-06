@@ -1,0 +1,102 @@
+E1:
+	Inherits: ^Soldier
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPHOSPITAL: ^InfantryExperienceHospitalOverrides
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 10
+		Prerequisites: ~barracks, ~techlevel.low
+		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
+	Valued:
+		Cost: 120
+	Tooltip:
+		Name: Light Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 12500
+	Mobile:
+		Speed: 71
+	Armament@PRIMARY:
+		LocalOffset: 137,0,444
+		Weapon: AR
+		UseBlindage: true
+		RequiresCondition: !WebDisable && !inside-tunnel
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		RequiresCondition: !WebDisable && !inside-tunnel
+	WithSplitAttackPaletteInfantryBody:
+		DefaultAttackSequence: attack
+	ProducibleWithLevel:
+		Prerequisites: barracks.upgraded
+	RenderSprites:
+		Image: e1.gdi
+		FactionImages:
+			gdi: gdie1
+			nod: altnode1
+	RevealsShroud:
+		Range: 6c0
+
+ENGINEER:
+	Inherits: ^Soldier
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Engineer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 40
+		Prerequisites: ~barracks, ~techlevel.low
+		Description: Infiltrates and captures enemy structures.\n  Unarmed
+	Voiced:
+		VoiceSet: Engineer
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 10000
+	Passenger:
+		CustomPipType: yellow
+	InstantlyRepairs:
+	RepairsBridges:
+		RepairNotification: BridgeRepaired
+		RepairTextNotification: Bridge repaired.
+	CaptureManager:
+	Captures:
+		CaptureTypes: building
+		PlayerExperience: 50
+		CaptureDelay: 75
+	RenderSprites:
+		Image: engineer.gdi
+		FactionImages:
+			gdi: engineer.gdi
+			nod: engineer.nod
+
+FLAMEGUY:
+	Inherits@1: ^ExistsInWorld
+	Inherits@2: ^SpriteActor
+	Mobile:
+		Speed: 36
+		Locomotor: flameguy
+	HiddenUnderFog:
+	WithInfantryBody:
+		IdleSequences: run
+	Health:
+		HP: 16000
+	ChangesHealth:
+		Step: -1000
+		StartIfBelow: 101
+	ScaredyCat:
+		PanicSequencePrefix:
+	WithDeathAnimation:
+		FallbackSequence: die
+		UseDeathTypeSuffix: false
+	HitShape:
+	MapEditorData:
+		Categories: System

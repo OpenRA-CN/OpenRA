@@ -1,0 +1,15 @@
+pfind:
+	icon:
+		Filename: pathfinder_icon.png
+		Offset: 0, 0, 0
+	pic:
+		Filename: pathfinder_pic.png
+		Offset: 0, 0, 0
+
+bhcmmdo:
+	icon:
+		Filename: bhcmmdo_icon.png
+		Offset: 0, 0, 0
+	pic:
+		Filename: bhcmmdo_pic.png
+		Offset: 0, 0, 0

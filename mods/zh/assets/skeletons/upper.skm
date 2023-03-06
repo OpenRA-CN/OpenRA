@@ -1,0 +1,28 @@
+a-Rig_Spine:
+	Using: True
+a-Rig_Chest:
+	Using: True
+a-Rig_UpperChest:
+	Using: True
+a-Rig_Neck:
+	Using: True
+a-s-Rig_Head:
+	Using: True
+a-s-Rig_Shoulder.L:
+	Using: True
+a-Rig_UpperArm.L:
+	Using: True
+a-Rig_LowerArm.L:
+	Using: True
+a-s-Rig_Hand.L:
+	Using: True
+a-s-Rig_Shoulder.R:
+	Using: True
+a-Rig_UpperArm.R:
+	Using: True
+a-Rig_LowerArm.R:
+	Using: True
+a-s-Rig_Hand.R:
+	Using: True
+e_RightHand:
+	Using: True

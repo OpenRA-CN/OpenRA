@@ -1,0 +1,876 @@
+BGGY:
+	Inherits: ^Vehicle
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Attack Buggy
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 30
+		Prerequisites: ~naweap, ~techlevel.low
+		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		TurnSpeed: 40
+		MaxSpeed: 175
+		Speed: 60
+		SpeedAccleration: 4
+		CanMoveBackward: true
+		MaxBackwardCells: 6
+		MovementMode: Wheel
+	Crushable:
+		CrushClasses: bigguy
+	Targetable@Crushable:
+		TargetTypes: Crushable
+	Health:
+		HP: 22000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c512
+	Armament:
+		Weapon: RaiderMG
+		Turret: primary
+		LocalOffset: 240,-31,453, 240,31,453
+		MuzzleSequence: muzzle
+		UseBlindage: true
+	Turreted:
+		TurnSpeed: 42
+		Turret: primary
+		Offset: -215,0,0
+	AttackTurreted:
+		Voice: Attack
+		PauseOnCondition: empdisable || carring
+	WithModelTurret:
+	WithMuzzleOverlay:
+	-DamagedByTerrain@VEINS:
+	-LeavesTrails@VEINS:
+
+BGGYTEST:
+	Inherits: BGGY
+	Tooltip:
+		Name: Test Buggy
+	RenderSprites:
+		Image: bggy
+	RenderModels:
+		Image: bggy
+	AttachPoint@TEST:
+		Offset: -215,0,533
+		# Offset: 0,0,456
+		LockFacing: True
+		# Turret: primary
+
+BIKE:
+	Inherits: ^Vehicle
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Attack Cycle
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 40
+		Prerequisites: ~naweap, ~techlevel.low
+		Description: Fast scout vehicle, armed with\nrockets.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+	Mobile:
+		TurnSpeed: 32
+		MaxSpeed: 185
+		Speed: 60
+		SpeedAccleration: 4
+		MovementMode: Wheel
+	Crushable:
+		CrushClasses: bigguy
+	Targetable@Crushable:
+		TargetTypes: Crushable
+	Health:
+		HP: 15000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 7c0
+	Armament@PRIMARY:
+		Weapon: BikeMissile
+		RequiresCondition: !rank-elite
+		LocalOffset: -153,-204,334, -153,204,334
+		LocalYaw: 100, -100
+	Armament@ELITE:
+		Weapon: BikeMissileDual
+		RequiresCondition: rank-elite
+		LocalOffset: -153,-204,334, -153,204,334
+		LocalYaw: 128, -128
+	AttackFrontal:
+		Voice: Attack
+		PauseOnCondition: empdisable || carring
+		FacingTolerance: 16
+	-DamagedByTerrain@VEINS:
+	-LeavesTrails@VEINS:
+
+
+TTNK:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AImicroManagable: ^AImicroManagable
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Tick Tank
+		RequiresCondition: !deployed
+	Tooltip@DEPLOYED:
+		Name: Tick Tank (deployed)
+		RequiresCondition: deployed
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 60
+		Prerequisites: ~naweap, ~techlevel.medium
+		Description: Nod's main battle tank.\nCan deploy to gain extra protection and range.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		TurnSpeed: 32
+		MaxSpeed: 85
+		Speed: 40
+		SpeedAccleration: 4
+		ImmovableCondition: !undeployed
+	Health:
+		HP: 35000
+	Armor:
+		Type: Heavy
+		RequiresCondition: undeployed
+	Armament@PRIMARY:
+		Weapon: 90mm
+		LocalOffset: 892,-178,476
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	RenderSprites:
+		Image: ttnk
+	WithMakeAnimation:
+	GrantConditionOnDeploy:
+		PauseOnCondition: empdisable || being-captured
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		UndeployOnMove: true
+		UndeployOnPickup: true
+		Facing: 640
+		AllowedTerrainTypes: Clear, Road, DirtRoad, Rough, Tiberium, BlueTiberium
+		DeploySounds: place2.aud
+		UndeploySounds: clicky1.aud
+		Voice: Move
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel && !deployed
+	RevealsShroud@deploy:
+		RequiresCondition: !inside-tunnel && deployed
+		Range: 8c512
+		MaxHeightDelta: 1100
+	EntersTunnels:
+		RequireForceMoveCondition: !undeployed
+	Repairable:
+		RequireForceMoveCondition: !undeployed
+	Passenger:
+		RequireForceMoveCondition: !undeployed
+	GrantCondition@PREVIEWWORKAROUND:
+		Condition: real-actor
+	WithModelBody:
+		RequiresCondition: undeployed
+	WithSpriteBody@deployed:
+		RequiresCondition: !undeployed && real-actor
+	AttackFrontal:
+		Voice: Attack
+		RequiresCondition: undeployed
+		PauseOnCondition: empdisable || carring
+		FacingTolerance: 16
+	Turreted:
+		TurnSpeed: 24
+		Turret: deployed
+		InitialFacing: 0
+		Offset: -20, -130, 0
+		RealignDelay: -1
+		RequiresCondition: deployed || preparing-undeploy
+		RealignWhenDisable: true
+		RealignBeforeDeploy: true
+	WithModelBarrel:
+		Armament: deployed
+		LocalOffset: 181,0, 209
+		RequiresCondition: deployed || preparing-undeploy
+	WithModelTurret@deployed:
+		Turret: deployed
+		RequiresCondition: deployed || preparing-undeploy
+	AttackTurreted@deployed:
+		Voice: Attack
+		Armaments: deployed
+		Turrets: deployed
+		RequiresCondition: deployed
+		PauseOnCondition: empdisable || carring
+		OutsideRangeRequiresForceFire: True
+	Armament@deployed:
+		Name: deployed
+		Turret: deployed
+		Weapon: 90mmx
+		LocalOffset: 892,-178,476
+		MuzzleSequence: muzzle
+		Recoil: 76
+		RecoilRecovery: 32
+	Armor@deployed:
+		Type: Concrete
+		RequiresCondition: deployed
+	DetectCloaked:
+		Range: 1c768
+		RequiresCondition: rank-elite
+	RangeMultiplier@deployed:
+		Modifier: 120
+		RequiresCondition: deployed
+	RenderDetectionCircle:
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	AutoDeployer@AI:
+		RequiresCondition: AImicroManage && undeployed
+		DeployChance: 100
+		DeployTrigger: Attack
+		DeployTicks: 5
+		UndeployTicks: 50
+	
+
+ART2:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 975
+	Tooltip:
+		Name: Mobile Artillery
+		RequiresCondition: !deployed
+	Tooltip@DEPLOYED:
+		Name: Artillery (deployed)
+		RequiresCondition: deployed
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 100
+		Prerequisites: ~naweap, naradr, ~techlevel.high
+		Description: Heavy Long Range Mobile Artillery.\nNeeds to deploy in order to shoot. \n-cannot deploy on ramp.\n  Strong vs Ground units\n  Weak vs Aircraft
+	Health:
+		HP: 30000
+	Armor:
+		Type: Light
+	Mobile:
+		MaxSpeed: 72
+		Speed: 32
+		SpeedAccleration: 2
+		TurnSpeed: 8
+		ImmovableCondition: !undeployed
+	RevealsShroud@deploy:
+		RequiresCondition: !inside-tunnel && deployed
+		Range: 9c0
+		MaxHeightDelta: 1100
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel && !deployed
+		Range: 6c512
+		MaxHeightDelta: 1100
+	RenderSprites:
+		Image: art2
+	WithMakeAnimation:
+	GrantConditionOnDeploy:
+		PauseOnCondition: empdisable || being-captured
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		UndeployOnMove: true
+		UndeployOnPickup: true
+		Facing: -128
+		AllowedTerrainTypes: Clear, Road, DirtRoad, Rough, Tiberium, BlueTiberium
+		DeploySounds: place2.aud
+		UndeploySounds: clicky1.aud
+		Voice: Move
+		DeployOnAttack: true
+		DeployArmament: todeploy
+	AttackFrontal@todeploy:
+		Voice: Attack
+		FacingTolerance: 512
+		RequiresCondition: undeployed
+		Armaments: todeploy
+		PauseOnCondition: empdisable || carring
+	Armament@todeploy:
+		Name: todeploy
+		Weapon: 155mmDeployCheck
+		RequiresCondition: undeployed
+	EntersTunnels:
+		RequireForceMoveCondition: !undeployed
+	Repairable:
+		RequireForceMoveCondition: !undeployed
+	Passenger:
+		RequireForceMoveCondition: !undeployed
+	GrantCondition@PREVIEWWORKAROUND:
+		Condition: real-actor
+	WithModelBody:
+		RequiresCondition: undeployed
+	WithSpriteBody@deployed:
+		RequiresCondition: !undeployed && real-actor
+	Turreted:
+		Turret: deployed
+		TurnSpeed: 20
+		InitialFacing: 0
+		Offset: -385,0,36 #0,0,256
+		RealignDelay: -1
+		RealignWhenDisable: true
+		RequiresCondition: deployed || preparing-undeploy #!undeployed
+		RealignBeforeDeploy: true
+	WithModelBarrel:
+		Armament: deployed
+		LocalOffset: 0,0,0 #203,0,0
+		LocalOrientation: 0, 128, 0
+		RequiresCondition: !undeployed
+		RotationSpeed: 12
+		PackBarrelBeforeUndeploy: true
+		PackBarrelBeforeDeploy: false
+	WithModelTurret@deployed:
+		Turret: deployed
+		RequiresCondition: !undeployed
+	AttackTurreted@deployed:
+		Voice: Attack
+		Armaments: deployed
+		Turrets: deployed
+		RequiresCondition: deployed && !init-barrel
+		PauseOnCondition: empdisable || carring
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+		OutsideRangeRequiresForceFire: True
+	Armament@deployed:
+		Name: deployed
+		Turret: deployed
+		Weapon: 155mm
+		LocalOffset: 1009,0,1289 #820,0,8001148,0,1120
+		# RequiresCondition: deployed && !init-barrel
+		MuzzleSequence: muzzle
+		Recoil: 178
+		RecoilRecovery: 15
+	AutoTarget:
+		ScanRadius: 14 #PREF: save trait looks up and scan armaments
+	WithMuzzleOverlay:
+	RevealOnFire:
+		ArmamentNames: deployed
+
+REPAIR:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@WithRA2VoxRender: ^WithRA2VoxRender
+	Inherits@AUTOTARGET: ^AutoTargetRepair
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 70
+		Prerequisites: ~naweap, ~techlevel.medium
+		Description: Repairs nearby vehicles.\n  Unarmed
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Mobile Repair Vehicle
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 20000
+	Armor:
+		Type: Light
+	Mobile:
+		MaxSpeed: 85
+		SpeedAccleration: 35
+		Speed: 40
+		TurnSpeed: 20
+	RevealsShroud:
+		Range: 5c512
+	Armament:
+		Weapon: Repair
+		Cursor: repair
+		OutsideRangeCursor: repair
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		MuzzleSequence: muzzle
+		MuzzlePalette: player
+		LocalOffset: 600,0,350 #203,0,0
+	WithMuzzleOverlay:
+	AttackFrontal:
+		Voice: Attack
+		PauseOnCondition: empdisable || carring
+		FacingTolerance: 16
+	AutoTarget:
+		ScanRadius: 8
+	GuardsSelection:
+		ValidTargets: Vehicle
+		MaxTargets: 6
+
+WEED:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@WithRA2VoxRender: ^WithRA2VoxRender
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Weed Eater
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 170
+		Prerequisites: ~naweap, nawast, ~techlevel.superweapons
+		Description: Collects veins for processing.\n  Unarmed
+	Harvester:
+		DeliveryBuildings: nawast
+		Capacity: 7
+		Resources: Veins
+		BaleUnloadDelay: 20
+		BaleLoadDelay: 40
+		SearchFromProcRadius: 72
+		SearchFromHarvesterRadius: 36
+		HarvestVoice: Attack
+		DeliverVoice: Move
+	Mobile:
+		Speed: 40
+		MaxSpeed: 71
+		SpeedAccleration: 6
+		TurnSpeed: 20
+	Targetable@AIveinBomb:
+		TargetTypes: AIvein
+	Health:
+		HP: 60000
+	ChangesHealth:
+		Step: 500
+		Delay: 10
+		StartIfBelow: 50
+		DamageCooldown: 200
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	-WithModelBody:
+	WithModelUnloadBody:
+	-DamagedByTerrain@VEINS:
+	-LeavesTrails@VEINS:
+	WithHarvesterPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		Margin: 5, 2
+		FullSequence: pip-red
+		Palette: pips
+		PipCount: 7
+
+SAPC:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@CARGOPIPS: ^CargoPips
+	Inherits@bounty: ^GlobalBounty
+	Inherits@AImicroManagable: ^AImicroManagable
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Subterranean APC
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 110
+		Prerequisites: ~naweap, natech, ~techlevel.medium
+		Description: Troop transport that can move\nunderground to avoid detection.\n  Unarmed
+	Mobile:
+		TurnSpeed: 20
+		Speed: 40
+		MaxSpeed: 71
+		SpeedAccleration: 2
+		PauseOnCondition: empdisable || loading || being-captured || carried
+		Locomotor: subterranean
+	Health:
+		HP: 17500
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel && !submerged
+		Range: 6c0
+	Cargo:
+		Types: Infantry
+		MaxWeight: 5
+		UnloadVoice: Unload
+		LoadingCondition: loading
+		EjectOnDeath: true
+		LoadedCondition: loaded
+	WithModelWalkerBody:
+		TickRate: 1
+		RequiresCondition: !submerged
+		PauseOnCondition: empdisable || carring
+	Targetable:
+		RequiresCondition: !inside-tunnel && !submerged
+	Targetable@UNDERGROUND:
+		TargetTypes: Underground
+		RequiresCondition: submerged
+	GrantConditionOnSubterraneanLayer:
+		Condition: submerged
+		SubterraneanTransitionImage: dig
+		SubterraneanTransitionSequence: idle
+		SubterraneanTransitionSound: subdril1.aud
+	AttachCarryable:
+		RequiresCondition: !submerged
+	WithDecoration@UNDERGROUND:
+		RequiresCondition: inside-tunnel || submerged
+	Armament@AIunloadingDummyWeapon:
+		Weapon: AITransportAimingDummyWeapon
+		RequiresCondition: AImicroManage && loaded && !StopAndDeploy
+		ReloadingCondition: StopAndDeploy
+	AttackFrontal@AIAimOnly:
+		RequiresCondition: AImicroManage && loaded && !StopAndDeploy
+		FacingTolerance: 512
+	AutoTarget:
+		RequiresCondition: AImicroManage
+	AutoDeployer@AI:
+		RequiresCondition: AImicroManage && loaded
+		DeployChance: 100
+		DeployTicks: 200
+		UndeployTicks: 0
+		DeployTrigger: Damage
+	-RevealOnFire:
+	DamagedByTerrain@VEINS:
+		RequiresCondition: !inside-tunnel && !submerged
+	LeavesTrails@VEINS:
+		RequiresCondition: !inside-tunnel && !submerged
+
+SUBTANK:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@WithRA2VoxRender: ^WithRA2VoxRender
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Devil's Tongue
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 130
+		Prerequisites: ~naweap, natech, ~techlevel.high
+		Description: Subterranean Flame Tank.\nIs able to move underground.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks, Aircraft
+	Mobile:
+		TurnSpeed: 24
+		Speed: 40
+		MaxSpeed: 71
+		SpeedAccleration: 2
+		Locomotor: subterranean
+	Health:
+		HP: 30000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel && !submerged
+		Range: 6c512
+	Armament:
+		Weapon: DualFireballLauncher
+		BurstsPerFire: 2
+		LocalOffset: 392,-377,217, 392,377,217
+		RequiresCondition: !submerged
+	AttackFrontal:
+		Voice: Attack
+		PauseOnCondition: empdisable || carring
+		FacingTolerance: 23
+		FacingFullOnTarget: true
+		RequiresCondition: !submerged
+	WithModelBody:
+		RequiresCondition: !submerged
+	Targetable:
+		RequiresCondition: !inside-tunnel && !submerged
+	Targetable@UNDERGROUND:
+		TargetTypes: Underground
+		RequiresCondition: submerged
+	GrantConditionOnSubterraneanLayer:
+		Condition: submerged
+		SubterraneanTransitionImage: dig
+		SubterraneanTransitionSequence: idle
+		SubterraneanTransitionSound: subdril1.aud
+	AttachCarryable:
+		RequiresCondition: !submerged
+	WithDecoration@UNDERGROUND:
+		RequiresCondition: inside-tunnel || submerged
+	WithIdleOverlay@DAMAGED1:
+		RequiresCondition: !inside-tunnel && !submerged && (damaged-state || critical-state)
+	WithIdleOverlay@DAMAGED2:
+		RequiresCondition: !inside-tunnel && !submerged && (damaged-state || critical-state)
+	WithIdleOverlay@DAMAGED3:
+		RequiresCondition: !inside-tunnel && !submerged && (damaged-state || critical-state)
+	DamagedByTerrain@VEINS:
+		RequiresCondition: !inside-tunnel && !submerged
+	LeavesTrails@VEINS:
+		RequiresCondition: !inside-tunnel && !submerged
+
+STNK:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@WithRA2VoxRender: ^WithRA2VoxRender
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1100
+	Tooltip:
+		Name: Stealth Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 150
+		Prerequisites: ~naweap, natech, ~techlevel.high
+		Description: Lightly armoured tank equipped with a personal\nstealth generator. Armed with missiles.\nCan be spotted by infantry at close range.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+	Mobile:
+		TurnSpeed: 40
+		Speed: 60
+		MaxSpeed: 145
+		SpeedAccleration: 8
+		CanMoveBackward: true
+		MaxBackwardCells: 6
+		MovementMode: Universal
+	Health:
+		HP: 18000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 9c0
+	Cloak:
+		InitialDelay: 90
+		CloakDelay: 90
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+		IsPlayerPalette: true
+		UncloakOn: Attack, Unload, Infiltrate, Demolish, Damage, Heal
+		PauseOnCondition: cloak-force-disabled || empdisable
+		CloakType: nod-stealth
+		EffectImage: twist
+		CloakEffectSequence: cloakshock
+		UncloakEffectSequence: cloakshock
+		EffectPalette: twist
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Armament:
+		Weapon: Dragon
+		BurstsPerFire: 2
+		LocalOffset: 301,-61,243, 301,61,243
+		LocalYaw: 100, -100
+	AttackFrontal:
+		Voice: Attack
+		PauseOnCondition: empdisable || carring
+		FacingTolerance: 16
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: ReturnFire
+	-MustBeDestroyed:
+	Explodes:
+		RequiresCondition: !rank-elite
+	Explodes@ELITE:
+		RequiresCondition: rank-elite
+		Weapon: UnitExplode
+
+REAPER:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@bounty: ^GlobalBounty
+	Inherits@3: ^HealsOnTiberium
+	Inherits@LeaveTib: ^LeaveTiberiumWhenDeath
+	Valued:
+		Cost: 1100
+	Tooltip:
+		Name: Cyborg Reaper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 151
+		Description: Raiding walker armed with cluster missiles, and web launchers.\n\nGood vs: Ground\n\nSpecial:\n- Can attack enemies ahead while moving\n- Can target air\n- Can ensnare infantry with webs\n- Can shoot over walls
+		Prerequisites: ~naweap, natech, ~techlevel.high
+	Selectable:
+		Bounds: 1206,2412,0,-603
+	Mobile:
+		TurnSpeed: 32
+		MaxSpeed: 105
+		Speed: 16
+		MovementMode: Universal
+		SpeedAccleration: 8
+		Locomotor: walker
+	Health:
+		HP: 25000
+	Armor:
+		Type: Light
+	Voiced:
+		VoiceSet: CyborgReap
+	Armament@primary:
+		Weapon: ReaperScythe
+		LocalOffset: 300,-400,550, 300,400,550
+		LocalYaw: 168, -168
+		PauseOnCondition: empdisable
+	Armament@secondary:
+		Name: secondary
+		Weapon: ReaperWeb
+		LocalOffset: 0,0,200
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	ReloadArmamentsBar:
+		Armaments: secondary
+	WithDeathAnimation@die:
+		DeathSequence: die1
+		DeathSequencePalette: player
+		DeathPaletteIsPlayerPalette: true
+		UseDeathTypeSuffix: false
+	AttackFrontal:
+		Voice: Attack
+		PauseOnCondition: empdisable || carring
+		FacingTolerance: 2
+	#AttackFollowFrontal:
+	#	Voice: Attack
+	#	PauseOnCondition: empdisable
+	#	FacingTolerance: 64
+	#	MustFaceTarget: true
+	AutoTarget:
+		ScanRadius: 9 #PREF: save trait looks up and scan armaments
+	WithInfantryBody:
+		-DefaultAttackSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	DeathSounds:
+	-SpawnActorOnDeath@ctech:
+	-DamagedByTerrain@VEINS:
+	-LeavesTrails@VEINS:
+	LongJumpSkill:
+		ChargeDelay: 200
+		TargetCursor: ability
+		TakeOffWeapon: JumpTakeOffExplode
+		LandWeapon: JumpLandExplode
+		Speed: 180
+		JumpAngle: 128
+		Voice: Attack
+	-AttachCarryable:
+
+ICBM:
+	Inherits: ^Vehicle
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@bounty: ^GlobalBounty
+	Inherits@AImicroManagable: ^AImicroManagable
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Ballistic Missile Launcher
+		RequiresCondition: !deployed
+	Tooltip@DEPLOYED:
+		Name: Ballistic Missile Launcher (deployed)
+		RequiresCondition: deployed
+	Health:
+		HP: 50000
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 149
+		Prerequisites: ~naweap, naradr, ~techlevel.high
+		Description: Long Range Missle Launcher.\nNeeds to deploy in order to shoot. \n-cannot deploy on ramp.\n  Strong vs Ground units\n  Weak vs Aircraft \n Maximum 1 can be builded.
+		BuildLimit: 1
+	Armor:
+		Type: Light
+	Mobile:
+		MaxSpeed: 50
+		TurnSpeed: 20
+		Speed: 16
+		SpeedAccleration: 1
+		RequiresCondition: !reload
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel
+		Range: 7c0
+		MaxHeightDelta: 1100
+	GrantConditionOnDeploy:
+		PauseOnCondition: empdisable || being-captured
+		RequiresCondition: !reload
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		UndeployOnMove: true
+		UndeployOnPickup: true
+		Facing: 640
+		AllowedTerrainTypes: Clear, Road, DirtRoad, Rough, Tiberium, BlueTiberium
+		DeploySounds: place2.aud
+		UndeploySounds: clicky1.aud
+		Voice: Move
+	WithMakeAnimation:
+	EntersTunnels:
+		RequireForceMoveCondition: !undeployed
+	Repairable:
+		RequireForceMoveCondition: !undeployed
+	Passenger:
+		RequireForceMoveCondition: !undeployed
+	GrantCondition@PREVIEWWORKAROUND:
+		Condition: real-actor
+	WithModelBody:
+		RequiresCondition: undeployed
+	WithSpriteBody@deployedloaded:
+		RequiresCondition: !undeployed && real-actor && !reload
+	WithSpriteBody@deployedunloaded:
+		RequiresCondition: !undeployed && real-actor && reload
+		Sequence: launched-idle
+	AutoDeployer@AI:
+		RequiresCondition: AImicroManage && undeployed
+		DeployChance: 100
+		DeployTrigger: BecomingIdle
+		DeployTicks: 100
+		UndeployTicks: 100
+	Wanders@AI:
+		RequiresCondition: AImicroManage && !deployed
+		WanderMoveRadius: 4
+		MinMoveDelay: 300
+		MaxMoveDelay: 300
+	FireArmamentPower:
+		Cursor: nuke
+		Icon: clustermissile
+		ChargeInterval: 4000
+		ArmamentName: Superweapon
+		Name: Ballistic Missile
+		Description: Fires smaller cluster missile bombard target location.
+		Prerequisite: icbm
+		OrderName: icbmcluster
+		EndChargeSpeechNotification: ClusterMissileReady
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: MissileLaunchDetected
+		EndChargeTextNotification: Cluster missile ready.
+		SelectTargetTextNotification: Select target.
+		IncomingTextNotification: Missile launch detected.
+		DisplayTimerRelationships: Ally
+		PauseOnCondition: empdisable || !deployed
+		CameraRange: 7c0
+		CameraSpawnAdvance: 25
+		CameraRemoveDelay: 350
+	ProvidesPrerequisite@icbm:
+		Prerequisite: icbm
+		ResetOnOwnerChange: true
+	Armament@SuperWeapon1:
+		Weapon: LauncherClusterMissile
+		LocalOffset: -600,100,0
+		Name: Superweapon
+		PauseOnCondition: empdisable
+		ReloadingCondition: reload
+	AttackOmni:

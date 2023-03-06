@@ -1,0 +1,242 @@
+MCV:
+	Inherits: ^Tank
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@RenderVoxel: ^RenderVoxel
+	Inherits@bounty: ^GlobalBounty
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 160
+		Prerequisites: ~factory, tech, ~techlevel.medium
+		Description: Deploys into another Construction Yard.\n  Unarmed
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Mobile Construction Vehicle
+	Selectable:
+		DecorationBounds: 1267, 2534
+	Health:
+		HP: 100000
+	Armor:
+		Type: Heavy
+	Mobile:
+		MaxSpeed: 50
+		Speed: 20
+		SpeedAccleration: 4
+		CanMoveBackward: true
+		MaxBackwardCells: 6
+		TurnSpeed: 16
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel
+		Range: 7c0
+		MaxHeightDelta: 1100
+	MustBeDestroyed:
+		RequiredForShortGame: true
+	BaseBuilding:
+	Transforms:
+		PauseOnCondition: empdisable || being-captured
+		IntoActor: gacnst
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: place2.aud
+		NoTransformSounds:
+		Voice: Move
+		NoTransformNotification: BuildingCannotPlaceAudio
+		NoTransformTextNotification: Cannot deploy here.
+	RenderSprites:
+		Image: mcv.gdi
+		FactionImages:
+			gdi: mcv.gdi
+			nod: mcv.nod
+	RenderModels:
+		Image: gmcv
+		FactionImages:
+			gdi: gmcv
+			nod: nmcv
+		NormalsPalette: normals
+		ShadowPalette: shadow
+		Scale: 1
+		LightScale: 0.22
+		SpecularScale: 0.08
+		AmbientScale: 0.7
+	BodyOrientation:
+		QuantizedFacings: 0
+	WithModelBody:
+
+HARV:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@WithRA2VoxRender: ^WithRA2VoxRender
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Harvester
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 10
+		Prerequisites: ~factory, proc, ~techlevel.low
+		Description: Collects Tiberium for processing.\n  Unarmed
+	Selectable:
+		Bounds: 1086, 2172
+		DecorationBounds: 1086, 2172
+	Harvester:
+		DeliveryBuildings: proc, gdiref, gdiref2, gdiref3, gdiref4, nodref, nodref2, nodref3, nodref4
+		Capacity: 30
+		Resources: Tiberium, BlueTiberium
+		BaleLoadDelay: 15
+		BaleUnloadDelay: 15
+		BaleUnloadAmount: 2
+		FullyLoadedSpeed: 100
+		SearchFromProcRadius: 36
+		SearchFromHarvesterRadius: 18
+		HarvestVoice: Attack
+		DeliverVoice: Move
+		EmptyCondition: no-tiberium
+	Mobile:
+		MaxSpeed: 75
+		Speed: 45
+		SpeedAccleration: 3
+		CanMoveBackward: true
+		MaxBackwardCells: 6
+		TurnSpeed: 20
+	Health:
+		HP: 100000
+	ChangesHealth:
+		Step: 500
+		Delay: 10
+		StartIfBelow: 50
+		DamageCooldown: 200
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel
+		Range: 6c512
+		MaxHeightDelta: 1100
+	-WithModelBody:
+	WithModelUnloadBody:
+	Explodes@TiberiumExplosion:
+		RequiresCondition: !no-tiberium
+		Weapon: TiberiumExplosion
+	BodyOrientation:
+		UseClassicPerspectiveFudge: False
+		CameraPitch: 85
+	WithHarvestOverlay:
+		LocalOffset: 543,0,15
+		Palette: effect
+	RenderSprites:
+		Image: harv.gdi
+		FactionImages:
+			gdi: harv.gdi
+			nod: harv.nod
+	RenderModels:
+		Image: cmin
+		FactionImages:
+			gdi: cmin
+			nod: harv
+	-DamagedByTerrain@VEINS:
+	-LeavesTrails@VEINS:
+	WithHarvesterPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		Margin: 5, 2
+		PipCount: 7
+		Palette: pips
+		ResourceSequences:
+			Tiberium: pip-green
+			BlueTiberium: pip-blue
+	WithDecoration@UNDERGROUND:
+		Sequence: harvester
+	-AttachCarryable:
+	CarryableHarvester:
+	AutoAttachCarryable:
+		#MinDistance: 10240
+		RequiresCondition: !inside-tunnel
+		LockedCondition: carried
+		CarriedCondition: carring
+
+LPST:
+	Inherits: ^Tank
+	Inherits@VOXELS: ^VoxelActor
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@bounty: ^GlobalBounty
+	-AppearsOnRadar:
+	Buildable:
+		Queue: Vehicle
+		BuildAtProductionType: Factory
+		BuildPaletteOrder: 90
+		Prerequisites: ~factory, radar, ~techlevel.medium
+		Description: Can detect cloaked and subterranean\nunits when deployed.\n  Unarmed
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Mobile Sensor Array
+		RequiresCondition: !deployed
+	Tooltip@DEPLOYED:
+		Name: Mobile Sensor Array (deployed)
+		RequiresCondition: deployed
+	Health:
+		HP: 60000
+	Armor:
+		Type: Wood
+	Mobile:
+		MaxSpeed: 85
+		Speed: 40
+		SpeedAccleration: 2
+		TurnSpeed: 20
+		ImmovableCondition: !undeployed
+		RequireForceMoveCondition: !undeployed
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel && undeployed
+		Range: 8c0
+		MaxHeightDelta: 1100
+	RevealsShroud@DEPLOYED:
+		RequiresCondition: !undeployed
+		Range: 14c0
+		MaxHeightDelta: 3000
+	WithMakeAnimation:
+	GrantCondition@PREVIEWWORKAROUND:
+		Condition: real-actor
+	RenderSprites:
+		Image: lpst.gdi
+		PlayerPalette: playertem
+		FactionImages:
+			gdi: lpst.gdi
+			nod: lpst.nod
+	GrantConditionOnDeploy:
+		PauseOnCondition: empdisable || being-captured
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		UndeployOnMove: true
+		UndeployOnPickup: true
+		Facing: 640
+		AllowedTerrainTypes: Clear, Road, DirtRoad, Rough
+		DeploySounds: place2.aud
+		UndeploySounds: clicky1.aud
+		Voice: Move
+	EntersTunnels:
+		RequireForceMoveCondition: !undeployed
+	Repairable:
+		RequireForceMoveCondition: !undeployed
+	Passenger:
+		RequireForceMoveCondition: !undeployed
+	WithModelBody:
+		RequiresCondition: undeployed
+	WithSpriteBody@deployed:
+		RequiresCondition: !undeployed && real-actor
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: deployed && real-actor && !empdisable
+		Sequence: idle-lights
+		Palette: player-nobright
+		IsPlayerPalette: True
+	WithIdleOverlay@LIGHTS-BRIGHT:
+		RequiresCondition: deployed && real-actor && !empdisable
+		Sequence: idle-lights-bright
+		Palette: bright
+	DetectCloaked:
+		RequiresCondition: !empdisable && deployed
+		Range: 18c0
+	RenderDetectionCircle:
+		TrailCount: 3

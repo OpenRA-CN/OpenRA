@@ -1,0 +1,400 @@
+MultiCluster:
+	Inherits: ^VectorBooster
+	ValidTargets: Ground, Water, Air, Trees
+	-Report:
+	Projectile: VectorBooster
+		Speed: 100
+		MinSpeed: 55
+		MaxSpeed: 200
+		Inaccuracy: 0
+		Acceleration: 10
+		IgnitionDelay: 15
+		HorizonRotationRate: 5
+		VerticalRotationRate: 3
+		LockOnDelay: 10
+		ContrailDelay: 15
+		LaunchAngle: -128
+		LifeTime: 66
+		AirburstAltitude: 5c0
+		Width: 40
+		MeshScale: 3
+	Warhead@1Dam: Spread3DDamage
+		Spread: 458
+		Damage: 22000
+		ValidTargets: Ground, Water, Air, Trees
+		Versus:
+			None: 100
+			Wood: 85
+			Light: 100
+			Heavy: 75
+			Concrete: 55
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+	Warhead@2Eff: CreateEffect
+		ImpactActors: false
+		Explosions: large_twlt
+		ImpactSounds: expnew09.aud
+	Warhead@Cluster: FireCluster
+		Weapon: ProtonFlameMissileClusterSmall
+		RandomClusterCount: 10
+		Dimensions: 7,7
+		Footprint: __xxx__ _xxXxx_ xxxxxxx xXxXxXx xxxxxxx _xxXxx_ __xxx__
+
+ClusterMissile:
+	ValidTargets: Ground, Water, Air, Trees
+	Inherits: ^DefaultMissile
+	Range: 9999c0
+	ReloadDelay: 50
+	Report: icbm1.aud
+	Projectile: Missile
+		Unit: missile
+		Meshes: idle
+		MeshScale: 8
+		HomingActivationDelay: 80
+		RangeLimit: -1
+		LifeTime: -1
+		MaxSpeed: 800
+		HorizontalRateOfTurn: 128
+		MinimumLaunchSpeed: 512
+		MaximumLaunchSpeed: 512
+		Acceleration: 96
+		MinimumLaunchAngle: 253
+		MaximumLaunchAngle: 253
+		Gravity: 0
+		ContrailLength: 10
+		ContrailWidth: 320
+		CruiseAltitude: 90c0
+		AirburstAltitude: 9c0
+		TrailCount: 1
+		TrailInterval: 0
+		ContrailStartColor: DFA877
+		ContrailStartColorOuter: FFDD44
+		ContrailStartColorAlpha: 152
+		ContrailStartColorAlphaOuter: 0
+		Inaccuracy: 0
+	Warhead@1Dam: Spread3DDamage
+		Spread: 512
+		Falloff: 100, 100, 0
+		Damage: 26000
+		ValidTargets: Ground, Water, Air, Trees
+		Versus:
+			None: 100
+			Wood: 85
+			Light: 70
+			Heavy: 35
+			Concrete: 28
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+	Warhead@SoundEffect: CreateEffect
+		Explosions: large_twlt
+		ImpactSounds: expnew19.aud
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+	Warhead@Shake: ShakeScreen
+		Duration: 20
+		Intensity: 5
+		Multiplier: 1,1
+	Warhead@Cluster: FireRadius
+		Weapon: MultiCluster
+		StartOffset: 0,3333,0
+		FireCount: 3
+		ForceTargetGround: true
+	Warhead@Spawn: SpawnActor
+		Actors: swvisiondummy10
+		Range: 3
+		AirThreshold: 111c0
+	# Warhead@ClusterMid: FireRadius
+	# 	Weapon: MultiCluster
+	# 	StartOffset: 0,0,0
+	# 	FireCount: 1
+	# 	ForceTargetGround: true
+
+ChemicalMissile:
+	Inherits: ^DefaultMissile
+	Range: 9999c0
+	ReloadDelay: 50
+	Report: icbm1.aud
+	Projectile: Missile
+		Unit: missile
+		Meshes: idle
+		MeshScale: 6
+		HomingActivationDelay: 80
+		RangeLimit: -1
+		LifeTime: -1
+		MaxSpeed: 800
+		HorizontalRateOfTurn: 128
+		MinimumLaunchSpeed: 512
+		MaximumLaunchSpeed: 512
+		Acceleration: 96
+		MinimumLaunchAngle: 253
+		MaximumLaunchAngle: 253
+		Gravity: 0
+		ContrailLength: 10
+		ContrailWidth: 320
+		CruiseAltitude: 90c0
+		AirburstAltitude: 9c0
+		TrailCount: 1
+		TrailInterval: 0
+		TrailPalette: effectgreen
+		ContrailStartColor: 00FF00
+		ContrailStartColorOuter: AAAA00
+		ContrailStartColorAlpha: 152
+		ContrailStartColorAlphaOuter: 0
+		Inaccuracy: 0
+	Warhead@SoundEffect: CreateEffect
+		Explosions: large_twlt
+		ExplosionPalette: effectgreen
+		ImpactSounds: expnew19.aud
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+	Warhead@Cluster: FireRadius
+		Weapon: ChemicalCluster
+		StartOffset: 0,-2222,0
+		FireCount: 3
+		ForceTargetGround: true
+	Warhead@Spawn: SpawnActor
+		Actors: swvisiondummy8
+		Range: 3
+		AirThreshold: 111c0
+
+ChemicalCluster:
+	Inherits: ^VectorBooster
+	ValidTargets: Ground, Water, Air, Trees
+	-Report:
+	Projectile: VectorBooster
+		Speed: 120
+		MinSpeed: 55
+		MaxSpeed: 388
+		Inaccuracy: 0
+		Acceleration: 10
+		ContrailStartColor: 00FF00
+		ContrailStartColorOuter: AAAA00
+		AirburstAltitude: 1c256
+		LaunchAngle: 0
+		LifeTime: 66
+		AllowSnapping: false
+		HorizonRotationRate: 33
+		VerticalRotationRate: 22
+		JetPalette: lightgreen
+	Warhead@1Dam: Spread3DDamage
+		Spread: 458
+		Damage: 6000
+		ValidTargets: Ground, Water, Air, Trees
+		Versus:
+			None: 100
+			Wood: 85
+			Light: 100
+			Heavy: 75
+			Concrete: 55
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+	Warhead@SoundEffect: CreateEffect
+		Image: chemmissilesmoke
+		Explosions: idle,idlefx,idlefy,idlefxy
+		ImpactSounds: expnew19.aud
+		ImpactActors: false
+		ExplosionPalette: effect_alpha
+		ValidTargets: Ground, Water, Air
+	Warhead@Effect2: CreateEffect
+		Image: chemmissilesmoke
+		Explosions: idle,idlefx,idlefy,idlefxy
+		ImpactActors: false
+		ExplosionPalette: effect_alpha
+		ValidTargets: Ground, Water, Air
+		ForceDisplayAtGroundLevel: true
+		Delay: 20
+	Warhead@Cluster: FireRadius
+		Weapon: ChemicalCloudLauncher2
+		StartOffset: 0,-1024,0
+		FireCount: 33
+		ForceTargetGround: true
+
+
+SuicideDash:
+	Range: 7c0
+	TargetActorCenter: true
+	Report: hunter2.aud
+	Projectile: InstantScat
+		ScatWeapons: HunterDash
+		ScatCounts: 1
+		Inaccuracy: 0
+	ValidTargets: Vehicle, Building, Defense, Infantry
+	Warhead@1Dam: Spread3DDamage
+		Spread: 1
+
+HunterDash:
+	ReloadDelay: 1
+	Range: 10c0
+	ValidTargets: Ground, Water, Air, Trees
+	Projectile: Missile
+		MaximumLaunchSpeed: 355
+		MinimumLaunchSpeed: 355
+		MinimumLaunchAngle: 0
+		MaximumLaunchAngle: 0
+		MaxSpeed: 855
+		Acceleration: 22
+		VerticalRateOfTurn: 100
+		HorizontalRateOfTurn: 100
+		Blockable: false
+		Inaccuracy: 128
+		RangeLimit: 55c0
+		Image: gghunt
+		Palette: player
+		IsPlayerPalette: true
+		Shadow: true
+		CruiseAltitude: 3c128
+		AllowSnapping: true
+		TerrainHeightAware: true
+		ContrailZOffset: 44
+		ContrailLength: 8
+		ContrailWidth: 228
+		ContrailUseInnerOuterColor: true
+		ContrailStartColor: FFDD44
+		ContrailStartColorOuter: FFDD44
+		ContrailStartColorAlpha: 233
+		ContrailStartColorAlphaOuter: 0
+		ContrailEndColor: A8A8A8
+		ContrailEndColorOuter: A8A8A8
+		ContrailEndColorAlpha: 64
+		ContrailEndColorAlphaOuter: 0
+		ContrailWidthFadeRate: 1
+		ContrailDelay: 0
+		ContrailBlendMode: Additive
+	Warhead@1Dam: Spread3DDamage
+		Spread: 340
+		Falloff: 100, 70, 55, 32, 26, 14, 5
+		Damage: 999999
+		ValidTargets: Ground, Water, Air, Trees
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 100
+			Heavy: 100
+			Concrete: 50
+		DamageTypes: Prone100Percent, TriggerProne, FireDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: verylarge_twlt
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Air, Water
+	Warhead@Smu: LeaveSmudge
+		SmudgeType: LargeScorch
+		InvalidTargets: Building, Wall
+		AirThreshold: 512
+	Warhead@Shake: ShakeScreen
+		Duration: 7
+		Intensity: 3
+		Multiplier: 1,1
+	Warhead@LargeDebris: FireCluster
+		Weapon: LargeDebris
+		RandomClusterCount: 2
+		Dimensions: 5,5
+		Footprint: __x__ _xxx_ xx_xx _xxx_ __x__
+	Warhead@SmallDebris: FireCluster
+		Weapon: SmallDebris
+		RandomClusterCount: 4
+		Dimensions: 7,7
+		Footprint: __xxx__ _xxxxx_ xxx_xxx xx___xx xxx_xxx _xxxxx_ __xxx__
+
+
+IonCannon:
+	ValidTargets: Ground, Water, Air, Trees
+	Warhead@1Dam_impact: Spread3DDamage
+		Spread: 1c0
+		Damage: 10000
+		Falloff: 1000, 368, 135, 50, 18, 7, 0
+		ValidTargets: Ground, Water, Air
+		DamageTypes: Prone100Percent, TriggerProne, EnergyDeath
+	Warhead@2Dam_area: Spread3DDamage
+		Spread: 1c0
+		Damage: 30000
+		Falloff: 100, 50, 25, 10
+		Delay: 3
+		ValidTargets: Ground, Water, Air, Trees
+		DamageTypes: Prone50Percent, TriggerProne, EnergyDeath
+	Warhead@3Smu_area: LeaveSmudge
+		SmudgeType: SmallScorch
+		InvalidTargets: Vehicle, Building, Wall
+		Size: 2
+		Delay: 3
+	Warhead@MiddleSmu: LeaveSmudge
+		SmudgeType: LargeScorch
+		InvalidTargets: Building, Wall
+		Delay: 3
+		# Dig: 418
+	Warhead@4Effect: CreateEffect
+		Explosions: ionbeam
+		ImpactSounds: ion1.aud
+		ImpactActors: false
+	Warhead@5Effect: CreateEffect
+		Explosions: ionbeam2
+		ImpactActors: false
+	Warhead@6Effect: CreateEffect
+		Explosions: ionbeam3
+		ImpactActors: false
+	Warhead@7Effect: CreateEffect
+		Explosions: ionbeam4
+		ImpactActors: false
+	Warhead@8Effect: CreateEffect
+		Explosions: ionbeam5
+		ImpactActors: false
+	Warhead@9Effect: CreateEffect
+		Explosions: ionbeam6
+		ImpactActors: false
+	Warhead@10Effect: CreateEffect
+		Explosions: ioncannonsparks
+		ImpactActors: false
+	Warhead@Shake: ShakeScreen
+		Duration: 18
+		Intensity: 5
+		Multiplier: 1,1
+	Warhead@burn: CreateEffect
+		Explosions: laserburningbig
+		ValidTargets: Ground
+		InvalidTargets: Vehicle, Building, Wall
+	Warhead@BlueTibChainReact: TerrainReactionInit
+		Delay: 7
+		Weapon: BlueTiberiumChainReaction
+		ValidTargets: BlueTiberium
+	Warhead@ShockWave: CreateEffect #ShockWave
+		Image: twist
+		Explosions: shockground
+		ExplosionPalette: twist
+		ForceDisplayAtGroundLevel: true
+		ImpactActors: false
+		Delay: 3
+		# Radius: 4c0
+		# LifeTime: 30
+		# Width: 0.14
+
+
+EMPulseCannon:
+	ReloadDelay: 100
+	Range: 40c0
+	Report: plsecan2.aud
+	Projectile: Bullet
+		Speed: 300
+		Blockable: false
+		Shadow: false
+		LaunchAngle: 96
+		Image: plasma_ball_large
+		Sequences: plasmaball_blue
+		TrailImage: explosion
+		TrailSequences: emp_fx01
+	Warhead@1Eff: CreateEffect
+		Explosions: pulse_explosion
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air, Underground
+	Warhead@emp: GrantExternalCondition
+		Range: 6c0
+		Duration: 250
+		Condition: empdisable
+		ValidTargets: Ground, Water, Air, Underground
+	# Warhead@ShockWave:	ShockWave
+	# 	Radius: 8c0
+	# 	LifeTime: 40
+	# 	Width: 0.2
+
+
+
+TestCrystalGrow:
+	Warhead@Res: CreateResource
+		AddsResourceType: BlueTiberium
+		Size: 5,0
+		Density: 2, 9

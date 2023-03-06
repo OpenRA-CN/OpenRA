@@ -1,0 +1,304 @@
+DOGGIE:
+	Inherits@1: ^Infantry
+	Inherits@2: ^RegularInfantryDeath
+	Inherits@3: ^HealsOnTiberium
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@LeaveTib: ^LeaveTiberiumWhenDeath
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 0
+		Prerequisites: ~none
+	MapEditorData:
+		Categories: Critter
+	Tooltip:
+		Name: Tiberian Fiend
+	Health:
+		HP: 25000
+	Selectable:
+		Bounds: 724, 1448
+	Valued:
+		Cost: 500
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 6c512
+	Mobile:
+		Speed: 113
+	Voiced:
+		VoiceSet: Fiend
+	Targetable:
+		TargetTypes: Ground, Creep
+	Armament:
+		Weapon: FiendShard
+		LocalOffset: 0,0,533
+		# FiringAngle: 512
+		RequiresCondition: !WebDisable && !inside-tunnel
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+		# FiringAngle: 512
+		RequiresCondition: !WebDisable && !inside-tunnel
+	AttackWander:
+		WanderMoveRadius: 2
+		MinMoveDelay: 200
+		MaxMoveDelay: 600
+		RequiresCondition: !WebDisable && !inside-tunnel
+	-SpawnActorOnDeath@FLAMEGUY:
+	WithDeathAnimation@fire:
+		DeathSequence: die-
+		DeathTypes:
+			FireDeath: burning
+	HitShape:
+		Type: Circle
+			Radius: 213
+	GrantConditionOnTerrain:
+		Condition: hidingplace
+		TerrainTypes: Tiberium, BlueTiberium
+	GrantConditionOnMovement:
+		Condition: moving
+	GrantConditionOnAttack:
+		ArmamentNames: primary
+		Condition: attacking
+	RenderSprites:
+		Palette: greentiberium
+	WithSpriteBody:
+		RequiresCondition: hidingplace && !moving && !attacking
+		StartSequence: laydown
+		Sequence: hide
+	WithInfantryBody:
+		DefaultAttackSequence: attack
+		IdleSequences: idle1
+		RequiresCondition: !hidingplace || moving || attacking && !WebDisable && !inside-tunnel
+	DamageMultiplier@hidingplace:
+		RequiresCondition: hidingplace
+		Modifier: 70
+	UnitDisplayInfo:
+		IconSequence: testdisplay
+		IconPalette: player
+		IconPaletteIsPlayerPalette: true
+		IconScale: 0.9
+	Crushable:
+		CrushClasses: bigguy
+	Targetable@Crushable:
+		TargetTypes: Crushable
+	HitShape:
+		TargetableOffsets: 0,0,245
+		RequiresCondition: !hidingplace || moving || attacking && !WebDisable
+		Type: Circle
+			Radius: 145
+			VerticalTopOffset: 500
+			VerticalBottomOffset: 0
+	HitShape@prone:
+		TargetableOffsets: 0,0,32
+		RequiresCondition: hidingplace && !moving && !attacking || WebDisable
+		Type: Circle
+			Radius: 188
+			VerticalTopOffset: 64
+
+VISC_SML:
+	Inherits: ^Visceroid
+	Tooltip:
+		Name: Baby Visceroid
+	Health:
+		HP: 20000
+	Valued:
+		Cost: 100
+	AttackWander:
+		WanderMoveRadius: 2
+		MinMoveDelay: 30
+		MaxMoveDelay: 60
+	RenderSprites:
+		Image: vissml
+	Mobile:
+		Locomotor: smallvisc
+	Crushable:
+		CrushClasses: visceroid-fusing, infantry
+		WarnProbability: 0
+		CrushedByFriendlies: True
+	AutoCrusher:
+		TargetRelationships: Enemy, Neutral, Ally
+	TransformCrusherOnCrush:
+		IntoActor: visc_lrg
+		CrushClasses: visceroid-fusing
+	Explodes:
+		DeathTypes: TiberiumDeath, BulletDeath, SmallExplosionDeath, ExplosionDeath, EnergyDeath, FireDeath
+	Explodes@LeaveTib:
+		DeathTypes: TiberiumDeath, BulletDeath, SmallExplosionDeath, ExplosionDeath, EnergyDeath, FireDeath
+	UnitDisplayInfo:
+		IconSequence: idle
+		IconPalette: player
+		IconPaletteIsPlayerPalette: true
+		IconScale: 0.6
+	Targetable@Crushable:
+		TargetTypes: Crushable
+	ConsumableItem:
+		ThumbnailSequence: idle
+		ThumbnailPalette: player
+		ThumbnailPaletteIsPlayerPalette: true
+		UseAnim: act_putaway
+		UseFrame: 24
+
+VISC_LRG:
+	Inherits: ^Visceroid
+	Inherits@CRATESTATS: ^CrateStatModifiers
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Tooltip:
+		Name: Adult Visceroid
+	Health:
+		HP: 50000
+	Valued:
+		Cost: 500
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 4c0
+	Armament:
+		Weapon: SlimeAttack
+		FireDelay: 10
+	AutoTarget:
+		ScanRadius: 5
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 16
+	AttackWander:
+		WanderMoveRadius: 2
+		MinMoveDelay: 25
+		MaxMoveDelay: 50
+	WithAttackAnimation:
+		Sequence: attack
+	RenderSprites:
+		Image: vislrg
+	GrantConditionOnTime@FullHealthWhenCreate:
+		Condition: created
+		Tick: 2
+	ChangesHealth@FullHealthWhenCreate:
+		RequiresCondition: !created
+		PercentageStep: 100
+		Delay: 0
+		DamageCooldown: 0
+		StartIfBelow: 100
+		OneTimeTrigger: True
+	UnitDisplayInfo:
+		IconSequence: idle
+		IconPalette: player
+		IconPaletteIsPlayerPalette: true
+		IconScale: 0.7
+	Targetable@Crushable:
+		TargetTypes: Crushable
+	ConsumableItem:
+		ThumbnailSequence: idle
+		ThumbnailPalette: player
+		ThumbnailPaletteIsPlayerPalette: true
+		UseAnim: act_putaway
+		UseFrame: 24
+
+JFISH:
+	Inherits: ^Visceroid
+	Inherits@CRATESTATS: ^CrateStatModifiers
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Tooltip:
+		Name: Tiberium Floater
+	Buildable:
+		Queue: Infantry
+		BuildPaletteOrder: 0
+		Prerequisites: ~none
+	Valued:
+		Cost: 500
+	Health:
+		HP: 50000
+	RevealsShroud:
+		Range: 5c0
+	Mobile:
+		Speed: 72
+		Locomotor: hover
+	Armament:
+		Weapon: Tentacle
+		LocalOffset: 0,0,100
+		FireDelay: 10
+	AutoTarget:
+		ScanRadius: 5
+	AttackFrontal:
+		FacingTolerance: 16
+	AttackWander:
+		WanderMoveRadius: 6
+		MinMoveDelay: 250
+		MaxMoveDelay: 600
+	WithAttackAnimation:
+		Sequence: attack
+	WithAttackOverlay@muzzle:
+		Sequence: attack-shock
+		Palette: bright
+	RenderSprites:
+		Image: floater
+		Palette: player-nobright
+	Selectable:
+		Bounds: 965, 1930, 0, -301
+	AmbientSound:
+		SoundFiles: floatmov.aud, flotmov2.aud, flotmov3.aud, flotmov4.aud
+		Delay: 150, 450
+		Interval: 300, 800
+	HitShape:
+		Type: Circle
+			Radius: 363
+			VerticalTopOffset: 768
+	Targetable@floater:
+		TargetTypes: Floater
+	ExplodeWeapon@FloaterSpray:
+		Weapon: FloaterSpray
+		Chance: 70
+		Interval: 100
+	UnitDisplayInfo:
+		IconSequence: idle
+		IconPalette: player
+		IconPaletteIsPlayerPalette: true
+	-Crushable:
+	ConsumableItem:
+		ThumbnailSequence: idle
+		ThumbnailPalette: player
+		ThumbnailPaletteIsPlayerPalette: true
+		UseAnim: act_putaway
+		UseFrame: 24
+
+MINIVEIN:
+	Inherits: ^NonBuildingStaticActor
+	Inherits@2: ^SpriteActor
+	Inherits@AImicroManagable: ^AImicroManagable
+	RadarColorFromTerrain:
+		Terrain: Veins
+	Tooltip:
+		Name: Baby Veinhole
+	-Interactable:
+	Selectable:
+		Bounds: 1206,1809
+	SelectionDecorations:
+	WithDeathAnimation:
+		DeathSequence: dead
+		UseDeathTypeSuffix: false
+	HitShape:
+		TargetableOffsets: 0,0,310
+		Type: Circle
+			Radius: 368
+			VerticalTopOffset: 620
+	Health:
+		HP: 50000
+	Armor:
+		Type: Light
+	Targetable:
+		TargetTypes: Ground
+	WithMakeAnimation:
+		Condition: growing
+	SeedsResource:
+		RequiresCondition: !growing
+		ResourceType: Veins
+		Interval: 160
+	ChangesHealth:
+		PercentageStep: 2
+		StartIfBelow: 200
+		DamageCooldown: 50
+		Delay: 25
+	ProvidesPrerequisite@AIveinLimit1:
+		RequiresCondition: AImicroManage
+		Prerequisite: AIveinLimit1
+	ProvidesPrerequisite@AIveinLimit2:
+		RequiresPrerequisites: AIveinLimit1, AIveinLimit1
+		Prerequisite: AIveinLimit2

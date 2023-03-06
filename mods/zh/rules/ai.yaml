@@ -1,0 +1,347 @@
+Player:
+	ModularBot@TestAI:
+		Name: Test AI
+		Type: test
+	GrantConditionOnBotOwner@test:
+		Condition: enable-test-ai
+		Bots: test
+	HarvesterBotModule:
+		RequiresCondition: enable-test-ai
+		HarvesterTypes: harv
+		RefineryTypes: proc
+		ScanForIdleHarvestersInterval: 1069 ## This module is pref-questionable, set it long enough
+	## Help AI on better plug
+	ProvidesPrerequisite@pluggablevulcan:
+		RequiresCondition: !enable-test-ai
+		Prerequisite: plug.vulcan
+	ProvidesPrerequisite@pluggablemissile:
+		RequiresCondition: !enable-test-ai
+		Prerequisite: plug.missile
+	ProvidesPrerequisite@pluggableRPG:
+		RequiresCondition: !enable-test-ai
+		Prerequisite: plug.rpg
+	ProvidesPrerequisite@powertube:
+		RequiresCondition: !enable-test-ai
+		Prerequisite: plug.power
+	PowerDownBotModule:
+		RequiresCondition: enable-test-ai
+	CashTrickler@CashCheat: ## enough cash for test AI
+		Interval: 300
+		Amount: 750
+		ShowTicks: false
+		RequiresCondition: enable-test-ai
+	AutoDeployManager@AIall:
+		RequiresCondition: enable-test-ai
+	BaseBuilderBotModule@test:
+		RequiresCondition: enable-test-ai
+		MinimumExcessPower: 30
+		MaximumExcessPower: 200
+		ExcessPowerIncrement: 30
+		ExcessPowerIncreaseThreshold: 4
+		ConstructionYardTypes: gacnst
+		RefineryTypes: gdiref, gdiref2, gdiref3, gdiref4, nodref, nodref2, nodref3, nodref4 #proc
+		AdditionalMinimumRefineryCount: 0 ## We don't need this
+		InititalMinimumRefineryCount: 0 ## We don't need this
+		PowerTypes: gapowr, gapowrup, napowr, naapwr
+		BarracksTypes: gapile, nahand
+		VehiclesFactoryTypes: gaweap, naweap
+		ProductionTypes: gapile, nahand, gaweap, naweap, gahpad, nahpad
+		SiloTypes: gasilo
+		DefenseTypes: gavulc,garock,gacsam,gactwr,naobel,nalasr,nasam, titanugvulcan,titanugmissile
+		BuildingLimits:
+			#proc: 2
+			gdiref: 2
+			nodref: 2
+			gasilo: 2
+			gapowr: 10
+			napowr: 10
+			gapile: 2
+			nahand: 2
+			gaweap: 4
+			naweap: 4
+			garadr: 1
+			naradr: 1
+			gatech: 1
+			gtdrop: 1
+			natech: 1
+			natmpl: 1
+			nastlh: 1
+			gahpad: 7
+			nahpad: 7
+			gadept: 2
+			gavulc: 8
+			garock: 2
+			gacsam: 4
+			gactwr: 14
+			naobel: 2
+			nalasr: 8
+			nasam: 4
+			napuls: 1
+			namisl: 1
+			nawast: 1
+		BuildingFractions:
+			#proc: 100
+			gdiref: 100
+			nodref: 100
+			gapile: 100
+			nahand: 100
+			gaweap: 50
+			naweap: 50
+			garadr: 1
+			naradr: 1
+			gatech: 1
+			gtdrop: 1
+			natech: 1
+			natmpl: 1
+			nastlh: 1
+			gahpad: 1
+			nahpad: 1
+			gadept: 2
+			nalasr: 10
+			gavulc: 10
+			garock: 3
+			gacsam: 6
+			gactwr: 18
+			nasam: 6
+			naobel: 3
+			napuls: 1
+			nawast: 1
+			namisl: 1
+			gapowrup: 2
+			titanugvulcan: 14
+			titanugmissile: 8
+			gaplug: 1
+			gaplug3: 1
+			gaplug4: 1
+		BuildingDelays:
+			garadr: 4000
+			naradr: 4000
+			gatech: 7000
+			natech: 6000
+			proc: 600
+	BuildingRepairBotModule:
+		RequiresCondition: enable-test-ai
+	SquadManagerBotModule@test:
+		RequiresCondition: enable-test-ai
+		SquadSize: 20
+		ExcludeFromSquadsTypes: harv, mcv, dpod2, hunter, trnsport, weed, icbm, engineer, subtank, sapc
+		IgnoredEnemyTargetTypes: Wall, AIgnored
+		ConstructionYardTypes: gacnst
+		AirUnitsTypes: orca, orcab, scrin, apache, jumpjetair
+		ProtectionTypes: gapowr, gapowrup, gapile, gaweap, gahpad, gadept, garadr, gatech, gtdrop, gaplug, gagate_a, gagate_b, gactwr, gavulc, garock, gacsam, titanugvulcan, titanugmissile, napowr, naapwr, nahand, naweap, nahpad, naradr, natech, nastlh, natmpl, namisl, nawast, nagate_a, nagate_b, nalasr, naobel, nasam, weed, gacnst, proc, gasilo, napuls, mcv, harv
+		MinimumAttackForceDelay: 2500
+		AssignRolesInterval: 73
+		IdleScanRadius: 15
+		AttackScanRadius: 14
+		ProtectionScanRadius: 15
+		SuggestedGroundLeaderLocomotor: foot, wheeled, heavywheeled, tracked, critter, visceroid, smallvisc, walker, heavywalker, superwalker
+		SuggestedNavyLeaderLocomotor: Naval
+		GuerrillaTypes: smech, bggy, jumpjetair, hvr, bike, stnk, limped, apache
+	UnitBuilderBotModule@test:
+		RequiresCondition: enable-test-ai
+		UnitQueues: Vehicle, Infantry, Air
+		UnitsToBuild:
+			e1: 80
+			e2: 30
+			e3: 30
+			pfind: 30
+			stcmmdo: 6
+			cyborg: 30
+			weedguy: 12
+			jumpjetair: 15
+			ghost: 4
+			cyc2: 4
+			repair: 2
+			medic: 2
+			harv: 10
+			mmch: 15
+			hmec: 10
+			ttnk: 15
+			smech: 25
+			bggy: 25
+			hvr: 20
+			bike: 20
+			subtank: 10
+			sapc: 5
+			sonic: 10
+			stnk: 8
+			orca: 15
+			orcab: 11
+			apache: 15
+			scrin: 14
+			trnsport: 10
+			## test
+			rutest2: 40
+			apc: 1
+			jugg: 10
+			art2: 10
+			limped: 10
+			reaper: 5
+			weed: 1
+			icbm: 1
+			engineer: 1
+		UnitLimits:
+			stcmmdo: 1
+			harv: 4
+			weed: 3
+			medic: 14
+			repair: 1
+			ghost: 1
+			cyc2: 1
+			hmec: 1
+			apc: 1
+			trnsport: 2
+			engineer: 1
+	McvManagerBotModule@test:
+		RequiresCondition: enable-test-ai
+		McvTypes: mcv
+		ConstructionYardTypes: gacnst
+		McvFactoryTypes: gaweap, naweap
+		MinimumConstructionYardCount: 3
+		MinBaseRadius: 5
+		MaxBaseRadius: 30
+	CncEngineerBotModule@test:
+		RequiresCondition: enable-test-ai
+		EngineerActorTypes: engineer
+		CapturableActorTypes: gacnst, caarmr
+		RepairableActorTypes: well, gacnst, gaweap, naweap, garadr, naradr, gatech, natech, gaplug, natmpl, napuls, nastlh, namisl
+		RepairableHutActorTypes: cabhut
+	SupportPowerBotASModule:
+		RequiresCondition: enable-test-ai
+		Decisions:
+			ioncannon:
+				OrderName: Ioncannon
+				MinimumAttractiveness: 5000
+				MinimumScanTimeInterval: 83
+				MaximumScanTimeInterval: 100
+				Consideration@2:
+					Against: Enemy
+					Types: Ground, Water
+					Attractiveness: 1
+					TargetMetric: Value
+					CheckRadius: 4c0
+				Consideration@3:
+					Against: Ally
+					Types: Ground, Water
+					Attractiveness: -10
+					TargetMetric: Value
+					CheckRadius: 4c0
+			apocalypsemissile:
+				OrderName: ClusterMissileAttack
+				MinimumAttractiveness: 7000
+				MinimumScanTimeInterval: 83
+				MaximumScanTimeInterval: 100
+				Consideration@1:
+					Against: Enemy
+					Types: Ground, Water
+					Attractiveness: 1
+					TargetMetric: Value
+					CheckRadius: 6c0
+				Consideration@2:
+					Against: Ally
+					Types: Ground, Water
+					Attractiveness: -10
+					TargetMetric: Value
+					CheckRadius: 6c0
+			toxinMissile:
+				OrderName: ChemicalMissileAttack
+				MinimumAttractiveness: 3000
+				MinimumScanTimeInterval: 83
+				MaximumScanTimeInterval: 100
+				Consideration@1:
+					Against: Enemy
+					Types: Vehicle, Infantry
+					Attractiveness: 1
+					TargetMetric: Value
+					CheckRadius: 5c0
+				Consideration@2:
+					Against: Ally
+					Types: Ground, Water
+					Attractiveness: -10
+					TargetMetric: Value
+					CheckRadius: 5c0
+			droppod:
+				OrderName: Droppod
+				MinimumAttractiveness: 3000
+				MinimumScanTimeInterval: 83
+				MaximumScanTimeInterval: 100
+				Consideration@2:
+					Against: Enemy
+					Types: Building
+					Attractiveness: 10
+					TargetMetric: Value
+					CheckRadius: 5c0
+				Consideration@3:
+					Against: Enemy
+					Types: Defence
+					Attractiveness: -100
+					TargetMetric: Value
+					CheckRadius: 7c0
+				Consideration@4:
+					Against: Enemy
+					Types: Ground
+					Attractiveness: 1
+					TargetMetric: Value
+					CheckRadius: 5c0
+			icbmcluster:
+				OrderName: icbmcluster
+				MinimumAttractiveness: 3000
+				MinimumScanTimeInterval: 83
+				MaximumScanTimeInterval: 100
+				Consideration@1:
+					Against: Enemy
+					Types: Ground, Water
+					Attractiveness: 1
+					TargetMetric: Value
+					CheckRadius: 4c0
+				Consideration@2:
+					Against: Ally
+					Types: Ground, Water
+					Attractiveness: -10
+					TargetMetric: Value
+					CheckRadius: 4c0
+			OrcaAssult:
+				OrderName: OrcaAssult
+				MinimumAttractiveness: 1000
+				MinimumScanTimeInterval: 83
+				MaximumScanTimeInterval: 100
+				Consideration@1:
+					Against: Enemy
+					Types: Ground, Water
+					Attractiveness: 1
+					TargetMetric: Value
+					CheckRadius: 4c0
+				Consideration@2:
+					Against: Ally
+					Types: Ground, Water
+					Attractiveness: -10
+					TargetMetric: Value
+					CheckRadius: 4c0
+	GrantConditionOnPrerequisite@AIveinLimit2:
+		Prerequisites: AIveinLimit2
+		Condition: ai-limit2
+	SupportPowerBotASModule@veinbomb:
+		RequiresCondition: enable-test-ai && !ai-limit2
+		Decisions:
+			VeinBomb:
+				OrderName: VeinBomb
+				MinimumAttractiveness: 1
+				MinimumScanTimeInterval: 83
+				MaximumScanTimeInterval: 100
+				Consideration@2:
+					Against: Ally
+					Types: AIvein
+					Attractiveness: 100000
+					TargetMetric: Value
+					CheckRadius: 8c0
+	LoadCargoBotModule:
+		RequiresCondition: enable-test-ai
+		Transports: gtdrop, apc, sapc
+		Passengers: e1,e2,e3,cyborg,pfind,weedguy,ghost,cyc2,medic,limped,engineer,smech
+	SendUnitToAttackBotModule:
+		RequiresCondition: enable-test-ai
+		ActorsAndAttackDesire:
+			subtank: 10
+			sapc: 10
+		ValidTargets: Building
+		InvalidTargets: Defence

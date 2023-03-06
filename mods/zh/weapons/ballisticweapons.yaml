@@ -1,0 +1,315 @@
+^Cannon:
+	Inherits@BlueTibReactionInit: ^BlueTibReactionInit
+	ReloadDelay: 50
+	Range: 7c768
+	Report: 120mmf.aud
+	Projectile: Bullet
+		# Image: 120mm
+		# Shadow: true
+		# Palette: ra
+		DetectTargetFromLengthPercentage: 80
+		DetectTargetBeforeDist: 2c512
+		ContrailZOffset: 22
+		ContrailLength: 10
+		ContrailWidth: 125
+		ContrailImage: lineidle_loop
+		ContrailSequences: trail
+		ContrailStartColor: DBDB50
+		ContrailStartColorAlpha: 233
+		ContrailEndColor: BB6525
+		ContrailEndColorAlpha: 0 #64
+		ContrailWidthFadeRate: 0.5
+		ContrailDelay: 0
+		ContrailBlendMode: Additive
+		TrailImage: cannonsmokecircle
+		TrailPalette: effect
+		TrailDelay: 0
+		TrailInterval: 1
+		Speed: 800
+		Inaccuracy: 450
+		UseVerticalInaccuracy: true
+		OnlyHitToExplode: true
+		ExplodeUnderThisAltitude: -418
+		Blockable: false
+	Warhead@1Dam: Spread3DDamage
+		Spread: 125
+		Falloff: 100, 50, 25, 12, 6, 3, 0
+		Damage: 4800
+		Versus:
+			None: 50
+			Wood: 65
+			Light: 75
+			Heavy: 100
+			Concrete: 60
+		DamageTypes: Prone70Percent, TriggerProne, SmallExplosionDeath
+		ValidTargets: Ground, Water, Air, Trees, Wall
+	Warhead@2Eff: CreateEffect
+		Explosions: medium_clsn
+		ImpactSounds: expnew14.aud
+		ValidTargets: Ground, Air, Trees
+	Warhead@3EffWater: CreateEffect
+		Explosions: small_watersplash
+		ExplosionPalette: player
+		ImpactSounds: ssplash3.aud
+		ValidTargets: Water
+		InvalidTargets: Vehicle
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: MediumCrater
+		InvalidTargets: Vehicle, Building, Wall
+
+
+
+
+
+
+90mm:
+	Inherits: ^Cannon
+	Warhead@2Eff: CreateEffect
+		Explosions: small_clsn
+	Projectile: Bullet
+		ContrailWidth: 0c100
+		Inaccuracy: 310
+		TrailSequences: idle2
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: SmallCrater
+
+90mmx:
+	Inherits: 90mm
+	Range: 8c768
+
+120mm:
+	Inherits: ^Cannon
+	ReloadDelay: 75
+	Range: 8c768
+	Projectile: Bullet
+		ContrailWidth: 0c130
+		Blockable: false
+		LaunchAngle: 0
+		Inaccuracy: 310
+		TrailSequences: idle2
+	Warhead@1Dam: Spread3DDamage
+		Damage: 10500
+	# Warhead@ShockWave:	ShockWave
+	# 	Radius: 1c512
+	# 	LifeTime: 11
+	# 	Width: 0.11
+
+120mmx:
+	Inherits: ^Cannon
+	ReloadDelay: 80
+	# Burst: 2
+	# BurstDelays: 5
+	Warhead@1Dam: Spread3DDamage
+		Damage: 8000
+	# Warhead@ShockWave:	ShockWave
+	# 	Radius: 1c256
+	# 	LifeTime: 12
+	# 	Width: 0.11
+
+
+RPGTower:
+	Inherits: ^Cannon
+	ReloadDelay: 80
+	Range: 8c768
+	Report: glnch4.aud
+	Projectile: Bullet
+		Speed: 76
+		Acceleration: 9
+		MaxSpeed: 1024
+		Inaccuracy: 550
+		UseVerticalInaccuracy: true
+		Blockable: false
+		Image: canister
+		Shadow: true
+		LaunchAngle: 75
+		Palette: player
+		ContrailLength: 12
+		ContrailWidth: 0c156
+		ContrailStartColor: FFCF66A0
+		ContrailStartColorOuter: FFCF66A0
+		ContrailDelay: 0
+		ContrailBlendMode: Alpha
+	Warhead@1Dam: Spread3DDamage
+		Damage: 15000
+		Spread: 256
+		Versus:
+			None: 30
+			Wood: 75
+			Light: 90
+			Heavy: 100
+			Concrete: 70
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+	Warhead@2Eff: CreateEffect
+		Explosions: large_clsn
+	Warhead@BlueTibChainReact: TerrainReactionInit
+		Chance: 40
+	# Warhead@ShockWave:	ShockWave
+	# 	Radius: 2c0
+	# 	LifeTime: 12
+	# 	Width: 0.11
+	Warhead@ShockWave: CreateEffect #ShockWave
+		Image: twist
+		Explosions: shockgroundarti
+		ExplosionPalette: twist
+		ForceDisplayAtGroundLevel: true
+		ImpactActors: false
+		AirThreshold: 625
+
+TitanRPG:
+	Inherits: RPGTower
+	ReloadDelay: 120
+	Range: 8c768
+
+^ArtilleryWeapon:
+	Inherits: ^Cannon
+	Projectile: Bullet
+		Blockable: false
+		Image: 120mm
+		Palette: ra
+		ContrailLength: 12
+		ContrailWidth: 225
+		LaunchAngle: 75
+	Warhead@1Dam: Spread3DDamage
+		Spread: 255
+		Falloff: 100, 85, 50, 24, 10, 3
+		Versus:
+			None: 100
+			Wood: 85
+			Light: 68
+			Heavy: 35
+			Concrete: 35
+		DamageTypes: Prone100Percent, TriggerProne, ExplosionDeath
+	Warhead@BlueTibChainReact: TerrainReactionInit
+		Chance: 40
+
+^ArtilleryDeployCheck:
+	Range: 17c768
+	ReloadDelay: 20
+	MinRange: 5c0
+	ValidTargets: Ground, Water
+	Projectile: InstantHit
+
+155mm:
+	Inherits: ^ArtilleryWeapon
+	ReloadDelay: 110
+	Range: 18c0
+	MinRange: 5c0
+	TargetActorCenter: true
+	Projectile: Bullet
+		Speed: 384
+		LaunchAngle: 165
+		ContrailLength: 15
+	Warhead@1Dam: Spread3DDamage
+		Damage: 15000
+	Warhead@2Eff: CreateEffect
+		Explosions: large_explosion
+		ImpactSounds: expnew06.aud
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: LargeCrater
+	# Warhead@ShockWave:	ShockWave
+	# 	Radius: 2c0
+	# 	LifeTime: 13
+	# 	Width: 0.11
+	Warhead@ShockWave: CreateEffect #ShockWave
+		Image: twist
+		Explosions: shockgroundarti
+		ExplosionPalette: twist
+		ForceDisplayAtGroundLevel: true
+		ImpactActors: false
+		AirThreshold: 625
+
+155mmDeployCheck:
+	Inherits: ^ArtilleryDeployCheck
+
+Jugg90mm:
+	Inherits: ^ArtilleryWeapon
+	ReloadDelay: 150
+	Range: 18c0
+	MinRange: 5c0
+	# Burst: 3
+	# BurstDelays: 3, 5
+	Report: jugger1-single.aud
+	TargetActorCenter: true
+	Projectile: Bullet
+		Speed: 384
+		LaunchAngle: 150
+		Inaccuracy: 2c0
+		ContrailStartColor: 996600
+		ContrailEndColor: 330000
+		ContrailWidth: 144
+		TrailSequences: idle2
+	Warhead@1Dam: Spread3DDamage
+		Spread: 188
+		Damage: 7500
+	Warhead@2Eff: CreateEffect
+		Explosions: small_explosion
+		ImpactSounds: expnew13.aud
+	# Warhead@ShockWave:	ShockWave
+	# 	Radius: 1c256
+	# 	LifeTime: 11
+	# 	Width: 0.11
+	Warhead@ShockWave: CreateEffect #ShockWave
+		Image: twist
+		Explosions: shockgroundcannon
+		ExplosionPalette: twist
+		ForceDisplayAtGroundLevel: true
+		ImpactActors: false
+		AirThreshold: 625
+
+Jugg90mmDeployCheck:
+	Inherits: ^ArtilleryDeployCheck
+
+Grenade:
+	Inherits: ^ArtilleryWeapon
+	ReloadDelay: 60
+	Range: 5c768
+	-Report:
+	# Burst: 5
+	ValidTargets: Ground, Water, Trees
+	Projectile: Bullet
+		Speed: 226
+		Blockable: true
+		Shadow: true
+		LaunchAngle: 60
+		Inaccuracy: 400
+		TrailCount: 0
+		Image: DISCUS
+		Palette: effect
+		BounceCount: 2
+		BounceWeapon: GrenadeBounce
+		Width: 256
+		ContrailLength: 5
+		ContrailWidth: 180
+		ContrailStartColor: FFFFFF
+		ContrailStartColorOuter: FFFFFF
+		ContrailStartColorAlpha: 128
+		ContrailStartColorAlphaOuter: 64
+		ContrailEndColor: FFFFFF
+		ContrailEndColorOuter: FFFFFF
+		-ContrailImage:
+		ContrailEndColorAlpha: 10
+		ContrailEndColorAlphaOuter: 5
+	Warhead@1Dam: Spread3DDamage
+		Spread: 235
+		Damage: 5500
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 80
+			Heavy: 35
+			Concrete: 35
+		DamageTypes: Prone70Percent, TriggerProne, ExplosionDeath
+		ValidTargets: Ground, Trees, Air
+	Warhead@2Eff: CreateEffect
+		Explosions: small_grey_explosion
+		ImpactSounds: expnew13.aud
+		ValidTargets: Ground, Trees, Air
+	Warhead@BlueTibChainReact: TerrainReactionInit
+		Chance: 5
+
+GrenadeBounce:
+	Warhead@waterbounce: CreateEffect
+		ValidTargets: Water
+		Image: wake
+		Explosions: idle
+		ExplosionPalette: effect

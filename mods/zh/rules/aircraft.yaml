@@ -1,0 +1,1132 @@
+DPOD:
+	Inherits: ^Aircraft
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CARGOPIPS: ^CargoPips
+	Valued:
+		Cost: 10
+	Tooltip:
+		Name: Drop Pod
+	Aircraft:
+		IdleBehavior: Land
+		Pitch: 0
+		Roll: 0
+		TurnSpeed: 20
+		Speed: 149
+	Health:
+		HP: 6000
+	Armor:
+		Type: Light
+	Cargo:
+		Types: Infantry
+		MaxWeight: 1
+		UnloadVoice: Move
+		EjectOnDeath: true
+	Armament:
+		Weapon: VulcanTower
+	AttackAircraft:
+		Voice: Attack
+	AmmoPool:
+		Ammo: 5
+	-SpawnActorOnDeath:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		Margin: 4, 5
+		FullSequence: pip-ammo
+		EmptySequence: pip-ammoempty
+		Palette: pips
+
+DPOD2:
+	Inherits@2: ^ExistsInWorld
+	Valued:
+		Cost: 10
+	Tooltip:
+		Name: Drop Pod
+	Health:
+		HP: 6000
+	Armor:
+		Type: Light
+	Aircraft:
+		IdleBehavior: Land
+		TurnSpeed: 20
+		Speed: 300
+		CruiseAltitude: 16c0
+		MaximumPitch: 110
+		LandableTerrainTypes: Clear, Road, Rail, DirtRoad, Rough, Tiberium, BlueTiberium, Veins
+	AttackBomber:
+		Voice: Attack
+		PersistentTargeting: false
+		PauseOnCondition: empdisable
+		FacingTolerance: 512
+	Armament:
+		Weapon: DropVulcan
+	HiddenUnderFog:
+		Type: CenterPosition
+	BodyOrientation:
+		UseClassicPerspectiveFudge: False
+	RenderSprites:
+		Image: pod
+	WithFacingSpriteBody:
+	QuantizeFacingsFromSequence:
+	HitShape:
+	Interactable:
+	WithShadow:
+	LeavesTrails:
+		Image: largesmoke
+		MovingInterval: 3
+		SpawnAtLastPosition: False
+		Type: CenterPosition
+	FallsToEarth:
+		Explosion: DropPodExplode
+		Moves: true
+		UseAircraftSpeed: true
+		Velocity: 512
+		MaxVelocity: 512
+		MaximumSpinSpeed: 0
+	Cargo:
+		Types: Infantry
+		MaxWeight: 2
+		UnloadVoice:
+		EjectOnDeath: true
+		ForceEject: true
+	SpawnActorOnDeath:
+		Actor: E1
+
+DSHP:
+	Inherits: ^Aircraft
+	Inherits@CARGOPIPS: ^CargoPips
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Dropship
+	Aircraft:
+		IdleBehavior: Land
+		Pitch: 0
+		Roll: 0
+		TurnSpeed: 20
+		Speed: 168
+		TakeoffSounds: dropup1.aud
+		LandingSounds: dropdwn1.aud
+		IdealSeparation: 1275
+		CruiseAltitude: 12c512
+		AltitudeVelocity: 256
+		MoveIntoShroud: true
+	Health:
+		HP: 200000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 3c0
+		Type: CenterPosition
+	Cargo:
+		Types: Infantry
+		MaxWeight: 5
+		UnloadVoice: Move
+		EjectOnDeath: true
+	SpawnActorOnDeath:
+		Actor: DSHP.Husk
+		RequiresCondition: airborne
+
+# send infantry to spaceport for sending to target by droppod
+DSHP.DROPPOD:
+	Inherits: ^Aircraft
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Dropship
+	Health:
+		HP: 200000
+	Armor:
+		Type: Heavy
+	-Selectable:
+	-SelectionDecorations:
+	-UpdatesPlayerStatistics:
+	-MapEditorData:
+	RejectsOrders:
+	Interactable:
+	Aircraft:
+		IdleBehavior: LeaveMapAtClosestEdge
+		Pitch: 0
+		Roll: 0
+		TurnSpeed: 20
+		Speed: 1024
+		TakeoffSounds: dropup1.aud
+		LandingSounds: dropdwn1.aud
+		IdealSeparation: 1275
+		CruiseAltitude: 20c512
+		AltitudeVelocity: 128
+		MoveIntoShroud: true
+		TakeUpCellWhenLand: false
+	-Targetable@AIRBORNE:
+	-Targetable@GROUND:
+	-Targetable@REPAIR:
+	GrantConditionAboveAltitude:
+		MinAltitude: 10c0
+		Condition: outofsight
+	RevealsShroud@airborne:
+		RequiresCondition: !outofsight
+	RenderModels:
+		Image: dshp
+	WithModelBody:
+		RequiresCondition: !outofsight
+	RenderSprites:
+		Image: dshp
+	SpawnActorOnDeath:
+		Actor: DSHP.Husk
+		RequiresCondition: airborne
+	Cargo:
+		Types: Vehicle
+		MaxWeight: 16
+		UnloadVoice:
+		EjectOnDeath: true
+
+A10:
+	Inherits: ^EMPableAircraft
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: A10 "Thunder" Armoured Attacker
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Air
+		BuildPaletteOrder: 100
+		Prerequisites: ~none
+		Description: Armoured ground killer craft\nwith Naplam bombs and Vulcan cannon.\n  Strong vs Ground Target\n  Weak vs Aircraft
+	Selectable:
+		Bounds: 905, 1448
+	Voiced:
+		VoiceSet: Scrin
+	Aircraft:
+		VTOL: false
+		Pitch: 0
+		PitchSpeed: 15
+		# IdleBehavior: Land
+		Roll: 66
+		RollSpeed: 10
+		TurnSpeed: 12
+		Speed: 170
+		IdleTurnSpeed: 6
+		IdleSpeed: 170
+		TakeoffSounds: dropup1.aud
+		LandingSounds: dropdwn1.aud
+		CanHover: false
+		CanSlide: false
+	Health:
+		HP: 28000
+	Armor:
+		Type: Light
+	Armament@GUNS:
+		Weapon: A10Vulcan
+		LocalOffset: 1440,0,84
+		MuzzleSequence: muzzle
+		FacingTolerance: 40
+		ExhaustAllBurst: True
+		NotCheckFacingToExhaustAllBurst: True
+		NotCheckRangeToExhaustAllBurst: True
+	Armament@BOMBS:
+		Weapon: A10Napalm
+		FacingTolerance: 512
+		LocalOffset: 0,-256,27, 0,256,27
+		ExhaustAllBurst: True
+		BurstsPerFire: 2
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 512
+		PersistentTargeting: true
+		PauseOnCondition: empdisable
+		AttackType: Strafe
+		StrafeRunLength: 17c0
+		FacingFullOnTarget: true
+	RenderSprites:
+	DeathSounds:
+	SpawnActorOnDeath:
+		Actor: A10.Husk
+		RequiresCondition: !empdisable && airborne
+	SpawnActorOnDeath@EMP:
+		Actor: A10.Husk.EMP
+		RequiresCondition: empdisable && airborne
+	Rearmable:
+		RearmActors: gahpad, nahpad
+	RenderModels:
+		Scale: 1
+
+ORCA:
+	Inherits: ^EMPableAircraft
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: "Orca" Fighter
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Air
+		BuildPaletteOrder: 10
+		Prerequisites: ~gahpad
+		Description: Fast assault fighter with\ndual missile launchers.\n  Strong vs Buildings, Vehicles, Aircraft\n  Weak vs Infantry
+	Selectable:
+		Bounds: 905, 1448
+	Aircraft:
+		TurnSpeed: 32
+		Speed: 206
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		AltitudeVelocity: 128
+		CanSlide: false
+		TakeOffOnResupply: true
+	Health:
+		HP: 20000
+	Armor:
+		Type: Light
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: AttackAnything
+	Armament@AG:
+		Name: primary
+		Weapon: Hellfire
+		LocalOffset: 300,195,70, 300,-195,70
+		LocalYaw: -110, 110
+		PauseOnCondition: !ag-ammo
+	Armament@AA:
+		Name: secondary
+		Weapon: Skyfire
+		LocalOffset: 300,195,70, 300,-195,70
+		LocalYaw: -110, 110
+		PauseOnCondition: !aa-ammo
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: empdisable
+		AttackType: Hover
+	AmmoPool@hellfire:
+		Ammo: 6
+		Name: primary
+		Armaments: primary
+		ReloadCount: 2
+		AmmoCondition: ag-ammo
+	AmmoPool@skyfire:
+		Ammo: 6
+		Name: secondary
+		Armaments: secondary
+		ReloadCount: 2
+		AmmoCondition: aa-ammo
+	RenderSprites:
+	SpawnActorOnDeath:
+		Actor: ORCA.Husk
+		RequiresCondition: !empdisable && airborne
+	SpawnActorOnDeath@EMP:
+		Actor: ORCA.Husk.EMP
+		RequiresCondition: empdisable && airborne
+	Rearmable:
+		RearmActors: gahpad, nahpad
+		AmmoPools: primary, secondary
+	WithAmmoPipsDecoration@HellFire:
+		AmmoPools: primary
+		Position: BottomLeft
+		RequiresSelection: true
+		Margin: 5, 5
+		FullSequence: pip-misl2ammo
+		EmptySequence: pip-misl2ammoempty
+		Palette: pips
+		PipStride: 8,0
+	WithAmmoPipsDecoration@SkyFire:
+		AmmoPools: secondary
+		Position: BottomLeft
+		RequiresSelection: true
+		Margin: 5, 20
+		FullSequence: pip-mislammo
+		EmptySequence: pip-mislammoempty
+		Palette: pips
+		PipStride: 8,0
+
+
+
+ORCAB:
+	Inherits: ^EMPableAircraft
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: "Orca" Bomber
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Air
+		BuildPaletteOrder: 30
+		Prerequisites: ~gahpad, gatech
+		Description: Heavy Assault bomber.\n  Strong vs Buildings, Infantry, Light-Armored\n  Weak vs Heavy-Armored, Aircraft
+	Selectable:
+		Bounds: 905, 1448
+	Aircraft:
+		# CruiseAltitude: 5c512
+		TurnSpeed: 20
+		IdleTurnSpeed: 4
+		Speed: 144
+		IdleSpeed: 72
+		CruisingCondition: cruising
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		CanHover: false
+		CanSlide: false
+	Health:
+		HP: 30000
+	Armor:
+		Type: Heavy
+	AutoTarget:
+		ScanRadius: 6
+		InitialStance: HoldFire
+		InitialStanceAI: AttackAnything
+	Armament:
+		Weapon: Bomb
+		PauseOnCondition: !ammo
+		ExhaustAllBurst: True
+		NotCheckFacingToExhaustAllBurst: True
+		NotCheckRangeToExhaustAllBurst: True
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+		PersistentTargeting: false
+		PauseOnCondition: empdisable
+	AmmoPool:
+		Ammo: 10
+		ReloadCount: 5
+		ReloadDelay: 200
+		AmmoCondition: ammo
+	RenderSprites:
+	Hovers@CRUISING:
+		RequiresCondition: cruising
+	SpawnActorOnDeath:
+		Actor: ORCAB.Husk
+		RequiresCondition: !empdisable && airborne
+	SpawnActorOnDeath@EMP:
+		Actor: ORCAB.Husk.EMP
+		RequiresCondition: empdisable && airborne
+	Rearmable:
+		RearmActors: gahpad, nahpad
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		Margin: 4, 5
+		PipCount: 2
+		FullSequence: pip-ammo
+		EmptySequence: pip-ammoempty
+		Palette: pips
+
+ORCATRAN:
+	Inherits: ^EMPableAircraft
+	Inherits@CARGOPIPS: ^CargoPips
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: "Orca" Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Air
+		BuildPaletteOrder: 50
+		Prerequisites: ~disabled
+	RenderSprites:
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 84
+		LandableTerrainTypes: Clear, Road, Rail, DirtRoad, Rough, Tiberium, BlueTiberium, Veins
+		Crushes: crate, infantry
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		IdealSeparation: 1275
+	Health:
+		HP: 20000
+	Armor:
+		Type: Light
+	Cargo:
+		Types: Infantry
+		MaxWeight: 5
+		UnloadVoice: Move
+		EjectOnDeath: true
+		AfterUnloadDelay: 40
+	SpawnActorOnDeath:
+		Actor: ORCATRAN.Husk
+		RequiresCondition: !empdisable && airborne
+	SpawnActorOnDeath@EMP:
+		Actor: ORCATRAN.Husk.EMP
+		RequiresCondition: empdisable && airborne
+	Selectable:
+		Bounds: 1327, 1930, 0, -482
+	WithAircraftLandingEffect:
+		Image: caryland
+
+TRNSPORT:
+	Inherits: ^EMPableAircraft
+	Inherits@AImicroManagable: ^AImicroManagable
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: AttachCarryall
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Air
+		BuildPaletteOrder: 60
+		Prerequisites: ~gahpad, gadept
+		Description: VTOL aircraft capable of lifting\nand transporting vehicles.\n  Unarmed \n Deploy to switch between auto-carry and manual mode: \n-auto carry mode help harvester to harvest
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 149
+		Pitch: 0
+		Roll: 0
+		TakeoffSounds: dropup1.aud
+		LandingSounds: dropdwn1.aud
+	AutoAttachCarryall:
+		Voice: Move
+		LocalOffset: 0,0,-243
+		BeforeLoadDelay: 10
+		BeforeUnloadDelay: 10
+		AttachCarryableAnyCamp: true
+		AutoCarryCondition: autocarry || AImicroManage
+		CarryCondition: carried
+	WithDecoration@AutoAttachCarryall:
+		RequiresCondition: autocarry || AImicroManage
+		Position: BottomRight
+		Margin: 3, 4
+		Image: auto-tag
+		Sequence: idle
+		Palette: player
+		IsPlayerPalette: true
+	GrantConditionOnDeploy:
+		RequiresCondition: !AImicroManage && !carried
+		DeployedCondition: autocarry
+		CanDeployOnRamps: true
+		SkipMakeAnimation: true
+		Voice: Move
+	-Hovers@CRUISING:
+	Health:
+		HP: 17500
+	Armor:
+		Type: Light
+	RenderSprites:
+	Selectable:
+		Bounds: 1327, 1930, 0, -482
+	SpawnActorOnDeath:
+		Actor: TRNSPORT.Husk
+		RequiresCondition: !empdisable && airborne
+	SpawnActorOnDeath@EMP:
+		Actor: TRNSPORT.Husk.EMP
+		RequiresCondition: empdisable && airborne
+	WithAircraftLandingEffect:
+		Image: caryland
+	AutoDeployer@AI:
+		RequiresCondition: AImicroManage && carried
+		DeployChance: 100
+		DeployTrigger: Periodically
+		DeployTicks: 1512
+		UndeployTicks: 1512
+
+SCRIN:
+	Inherits: ^EMPableAircraft
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1700
+	Tooltip:
+		Name: "Banshee" Fighter
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Air
+		BuildPaletteOrder: 40
+		Prerequisites: ~nahpad, natech
+		Description: Advanced fighter-bomber craft\nwith twin plasma pulse cannons and proton bombs.\n  Strong vs All
+	Selectable:
+		Bounds: 905, 1448
+	Voiced:
+		VoiceSet: Scrin
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 275
+		IdleTurnSpeed: 6
+		IdleSpeed: 140
+		TakeoffSounds: dropup1.aud
+		LandingSounds: dropdwn1.aud
+		CanHover: false
+		CanSlide: false
+	Health:
+		HP: 28000
+	Armor:
+		Type: Light
+	RevealsShroud@airborne:
+		Range: 12c0
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: AttackAnything
+	Armament@PulseGun:
+		Weapon: ProtonPulse
+		LocalOffset: 555,155,120, 555,-155,120
+		BurstsPerFire: 2
+		PauseOnCondition: !ammo
+		FacingTolerance: 80
+	Armament@Bomb:
+		Weapon: ProtonBomb
+		LocalOffset: 111,0,80
+		PauseOnCondition: ammo < 8
+		AmmoUsage: 8
+	AttackAircraft:
+		Voice: Attack
+		PersistentTargeting: false
+		PauseOnCondition: empdisable
+		FacingTolerance: 512
+		# AttackType: Strafe
+		# StrafeRunLength: 17c0
+		FacingFullOnTarget: true
+	AmmoPool:
+		Ammo: 48
+		ReloadCount: 8
+		ReloadDelay: 20
+		AmmoCondition: ammo
+	RenderSprites:
+	DeathSounds:
+	SpawnActorOnDeath:
+		Actor: SCRIN.Husk
+		RequiresCondition: !empdisable && airborne
+	SpawnActorOnDeath@EMP:
+		Actor: SCRIN.Husk.EMP
+		RequiresCondition: empdisable && airborne
+	Rearmable:
+		RearmActors: gahpad, nahpad
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		Margin: 4, 5
+		PipCount: 6
+		FullSequence: pip-ammo
+		EmptySequence: pip-ammoempty
+		Palette: pips
+	Contrail@a:
+		Offset: -395,145,45
+		ZOffset: 88
+		TrailLength: 4
+		TrailWidth: 174
+		BlendMode: Additive
+		StartColorUsePlayerColor: false
+		EndColorUsePlayerColor: false
+		StartColorAlpha: 255
+		EndColorAlpha: 12
+		StartColor: 80FF80CF
+		EndColor: 80FF80CF
+		StartColorAlphaOuter: 64
+		EndColorAlphaOuter: 0
+		StartColorOuter: 80FF80CF
+		EndColorOuter: 80FF80CF
+		WidthFadeRate: 1
+	Contrail@b:
+		Offset: -395,-145,45
+		ZOffset: 88
+		TrailLength: 4
+		TrailWidth: 174
+		BlendMode: Additive
+		StartColorUsePlayerColor: false
+		EndColorUsePlayerColor: false
+		StartColorAlpha: 255
+		EndColorAlpha: 12
+		StartColor: 80FF80CF
+		EndColor: 80FF80CF
+		StartColorAlphaOuter: 64
+		EndColorAlphaOuter: 0
+		StartColorOuter: 80FF80CF
+		EndColorOuter: 80FF80CF
+		WidthFadeRate: 1
+
+APACHE:
+	Inherits: ^EMPableAircraft
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@CARGOPIPS: ^CargoPips
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: "Harpy" Attack Helicopter
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Air
+		BuildPaletteOrder: 20
+		Prerequisites: ~nahpad
+		Description: Anti-personnel support gunship\narmed with dual chain guns.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+	Selectable:
+		Bounds: 905, 1448
+	Aircraft:
+		Pitch: -32
+		PitchSpeed: 8
+		Roll: 16
+		RollSpeed: 8
+		TurnSpeed: 32
+		Speed: 180
+		CanSlide: false
+		TakeOffOnResupply: true
+	Cargo:
+		Types: Infantry
+		MaxWeight: 2
+		UnloadVoice: Move
+		EjectOnDeath: true
+		AfterUnloadDelay: 40
+		#InitialUnits: oxanna, slav
+	Health:
+		HP: 22500
+	Armor:
+		Type: Light
+	# AutoTarget:
+	# 	InitialStance: HoldFire
+	# 	InitialStanceAI: AttackAnything
+	Armament:
+		LocalOffset: 418,0,40
+		Weapon: HarpyClaw
+		# PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: empdisable
+		AttackType: Hover
+	# AmmoPool:
+	# 	Ammo: 100
+	# 	AmmoCondition: ammo
+	# 	ReloadCount: 8
+	# 	ReloadDelay: 20
+	WithIdleOverlay@ROTORAIR:
+		Offset: 85,0,346
+		Sequence: rotor
+		RequiresCondition: airborne
+	WithIdleOverlay@ROTORGROUND:
+		Offset: 85,0,346
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+	RenderSprites:
+	SpawnActorOnDeath:
+		Actor: APACHE.Husk
+		RequiresCondition: !empdisable && airborne
+	SpawnActorOnDeath@EMP:
+		Actor: APACHE.Husk.EMP
+		RequiresCondition: empdisable && airborne
+	# Rearmable:
+	# 	RearmActors: gahpad, nahpad
+	# WithAmmoPipsDecoration:
+	# 	Position: BottomLeft
+	# 	RequiresSelection: true
+	# 	Margin: 4, 5
+	# 	PipCount: 5
+	# 	FullSequence: pip-ammo
+	# 	EmptySequence: pip-ammoempty
+	# 	Palette: pips
+	# WithShadow:
+	WithModelBody:
+	RenderModels:
+		Scale: 1.2
+
+
+HUNTER:
+	Inherits@2: ^ExistsInWorld
+	Inherits@autotarget: ^AutoTargetAllAssaultMove
+	Buildable:
+		Queue: Air
+		BuildPaletteOrder: 99
+		Prerequisites: ~none
+	AutoTarget:
+		ScanRadius: 50
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Hunter-Seeker Droid
+	Health:
+		HP: 50000
+	Armor:
+		Type: Light
+	AttackWander:
+		WanderMoveRadius: 45
+		MinMoveDelay: 70
+		MaxMoveDelay: 120
+		RequiresCondition: stance-attackanything
+	Aircraft:
+		TurnSpeed: 64
+		Speed: 355
+		Pitch: 0
+		Roll: 0
+		VTOL: true
+		AltitudeVelocity: 78
+		CruiseAltitude: 3c128
+		CruisingCondition: cruising
+		MoveIntoShroud: true
+	RevealsShroud:
+		Range: 8c0
+		Type: CenterPosition
+		MaxHeightDelta: 1100
+	AttackAircraft:
+		FacingTolerance: 512
+		AttackType: Hover
+	Armament@PRIMARY:
+		Weapon: SuicideDash
+	GrantConditionOnAttack:
+		Condition: triggered
+	KillsSelf:
+		RequiresCondition: triggered
+	Explodes:
+		Weapon: HunterDash
+		EmptyWeapon: HunterDash
+		RequiresCondition: !triggered
+	Targetable:
+		TargetTypes: Ground, Vehicle
+	HiddenUnderFog:
+		Type: CenterPosition
+	BodyOrientation:
+		UseClassicPerspectiveFudge: False
+	RenderSprites:
+		Image: GGHUNT
+	WithFacingSpriteBody:
+	Hovers@CRUISING:
+		RequiresCondition: cruising
+	QuantizeFacingsFromSequence:
+	AppearsOnRadar:
+		UseLocation: true
+	Interactable:
+	HitShape:
+	MapEditorData:
+		Categories: System
+
+QDRONE:
+	Inherits: ^Aircraft
+	-UpdatesPlayerStatistics:
+	-Selectable:
+	-SelectionDecorations:
+	Interactable:
+	Tooltip:
+		Name: Recon Drone
+	Health:
+		HP: 5000
+	RevealsShroud@airborne:
+		Range: 5c0
+	RevealsShroud:
+		Range: 2c0
+	-RevealOnFire:
+	-Targetable@REPAIR:
+	DroneSpawnerSlave:
+		AttackCallBackDistance: 21c0
+	Targetable@Ignore:
+		TargetTypes: AIgnored
+	Aircraft:
+		MaximumPitch: 90
+		Repulsable: true
+		TurnSpeed: 16
+		Speed: 128
+		IdleTurnSpeed: 10
+		IdleSpeed: 64
+		AltitudeVelocity: 128
+		RepulsionSpeed: 16
+		VTOL: true
+		AirborneCondition: airborne
+		MoveIntoShroud: true
+		TakeUpCellWhenLand: false
+		CruiseAltitude: 2c0
+	AttackAircraft:
+		AttackType: Hover
+	RenderSprites:
+		Image: quaddrone-mini
+	Armament:
+		Weapon: DroneReconDummyWeapon
+		ShowInActorInfo: false
+	RejectsOrders:
+	-MapEditorData:
+	-SpawnActorOnDeath:
+	-RenderModels:
+	-WithModelBody:
+	-ActorLostNotification:
+	WithSpriteBody:
+	WithShadow:
+	WithDeathAnimation:
+		FallbackSequence: die
+		DeathSequence: die
+		DeathSequencePalette: effect
+		DeathPaletteIsPlayerPalette: false
+		UseDeathTypeSuffix: false
+		CrushedSequence: die
+		CrushedSequencePalette: effect
+	-WithIdleOverlay@DAMAGED1:
+	-WithIdleOverlay@DAMAGED2:
+	-WithIdleOverlay@DAMAGED3:
+
+RPGDRONE:
+	Inherits: ^Aircraft
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	-UpdatesPlayerStatistics:
+	-Selectable:
+	-SelectionDecorations:
+	Interactable:
+	Tooltip:
+		Name: SAM Drone
+	Health:
+		HP: 8000
+	RevealsShroud@airborne:
+		Range: 4c0
+	RevealsShroud:
+		Range: 1c0
+	-RevealOnFire:
+	-Targetable@REPAIR:
+	DroneSpawnerSlave:
+		AttackCallBackDistance: 12c0
+	Targetable@Ignore:
+		TargetTypes: AIgnored
+	Aircraft:
+		CanHover: false
+		CanSlide: false
+		Repulsable: true
+		TurnSpeed: 32
+		Speed: 140
+		IdleTurnSpeed: 10
+		IdleSpeed: 64
+		AltitudeVelocity: 128
+		RepulsionSpeed: 16
+		VTOL: true
+		AirborneCondition: airborne
+		MoveIntoShroud: true
+		TakeUpCellWhenLand: false
+		CruiseAltitude: 3c0
+	AttackAircraft:
+		FacingTolerance: 128
+	RenderSprites:
+		Image: rpgdrone
+	Armament:
+		Weapon: TitanMissile
+	RejectsOrders:
+	-MapEditorData:
+	-SpawnActorOnDeath:
+	-RenderModels:
+	-WithModelBody:
+	-ActorLostNotification:
+	AutoTarget:
+		ScanRadius: 8
+	QuantizeFacingsFromSequence:
+	WithFacingSpriteBody:
+	WithShadow:
+	WithDeathAnimation:
+		FallbackSequence: die
+		DeathSequence: die
+		DeathSequencePalette: effect
+		DeathPaletteIsPlayerPalette: false
+		UseDeathTypeSuffix: false
+		CrushedSequence: die
+		CrushedSequencePalette: effect
+	-WithIdleOverlay@DAMAGED1:
+	-WithIdleOverlay@DAMAGED2:
+	-WithIdleOverlay@DAMAGED3:
+
+REPAIRDRONE:
+	Inherits: ^Aircraft
+	Inherits@AUTOTARGET: ^AutoTargetRepair
+	-UpdatesPlayerStatistics:
+	-Selectable:
+	-SelectionDecorations:
+	Interactable:
+	Tooltip:
+		Name: Repair Drone
+	Health:
+		HP: 5000
+	-RevealsShroud@airborne:
+	-RevealsShroud:
+	-RevealOnFire:
+	-Targetable@REPAIR:
+	DroneSpawnerSlave:
+		AttackCallBackDistance: 8c0
+	Targetable@Ignore:
+		TargetTypes: AIgnored
+	Aircraft:
+		CanHover: true
+		CanSlide: false
+		MaximumPitch: 90
+		Repulsable: true
+		TurnSpeed: 16
+		Speed: 128
+		IdleTurnSpeed: 10
+		IdleSpeed: 64
+		AltitudeVelocity: 72
+		RepulsionSpeed: 16
+		VTOL: true
+		AirborneCondition: airborne
+		MoveIntoShroud: true
+		TakeUpCellWhenLand: false
+		CruiseAltitude: 2c0
+	AttackAircraft:
+		AttackType: Hover
+	RenderSprites:
+		Image: repairdrone-mini
+	Armament:
+		Weapon: RepairDrone
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+	RejectsOrders:
+	-MapEditorData:
+	-SpawnActorOnDeath:
+	-RenderModels:
+	-WithModelBody:
+	-ActorLostNotification:
+	QuantizeFacingsFromSequence:
+	WithFacingSpriteBody:
+	WithShadow:
+	WithDeathAnimation:
+		FallbackSequence: die
+		DeathSequence: die
+		DeathSequencePalette: effect
+		DeathPaletteIsPlayerPalette: false
+		UseDeathTypeSuffix: false
+		CrushedSequence: die
+		CrushedSequencePalette: effect
+	-WithIdleOverlay@DAMAGED1:
+	-WithIdleOverlay@DAMAGED2:
+	-WithIdleOverlay@DAMAGED3:
+
+## Support Power Aircraft
+SCRIN.VEIN:
+	Inherits: ^EMPableAircraft
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1700
+	Tooltip:
+		Name: "Banshee" Fighter
+	-UpdatesPlayerStatistics:
+	-Selectable:
+	-SelectionDecorations:
+	-MapEditorData:
+	RejectsOrders:
+	Interactable:
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 275
+		IdleTurnSpeed: 6
+		IdleSpeed: 140
+		TakeoffSounds: dropup1.aud
+		LandingSounds: dropdwn1.aud
+		CanHover: false
+		CanSlide: false
+	Health:
+		HP: 28000
+	Armor:
+		Type: Light
+	Armament@veinbomb:
+		Weapon: VeinBomb
+		LocalOffset: 111,0,80
+		FacingTolerance: 80
+	AmmoPool:
+		Ammo: 1
+	AttackBomber:
+		PersistentTargeting: false
+		PauseOnCondition: empdisable
+		FacingTolerance: 512
+		# AttackType: Strafe
+		# StrafeRunLength: 17c0
+		FacingFullOnTarget: true
+	SpawnActorOnDeath:
+		Actor: SCRIN.Husk
+		RequiresCondition: !empdisable && airborne
+	SpawnActorOnDeath@EMP:
+		Actor: SCRIN.Husk.EMP
+		RequiresCondition: empdisable && airborne
+	Contrail@a:
+		Offset: -395,145,45
+		ZOffset: 88
+		TrailLength: 4
+		TrailWidth: 174
+		BlendMode: Additive
+		StartColorUsePlayerColor: false
+		EndColorUsePlayerColor: false
+		StartColorAlpha: 255
+		EndColorAlpha: 12
+		StartColor: 80FF80CF
+		EndColor: 80FF80CF
+		StartColorAlphaOuter: 64
+		EndColorAlphaOuter: 0
+		StartColorOuter: 80FF80CF
+		EndColorOuter: 80FF80CF
+		WidthFadeRate: 1
+	Contrail@b:
+		Offset: -395,-145,45
+		ZOffset: 88
+		TrailLength: 4
+		TrailWidth: 174
+		BlendMode: Additive
+		StartColorUsePlayerColor: false
+		EndColorUsePlayerColor: false
+		StartColorAlpha: 255
+		EndColorAlpha: 12
+		StartColor: 80FF80CF
+		EndColor: 80FF80CF
+		StartColorAlphaOuter: 64
+		EndColorAlphaOuter: 0
+		StartColorOuter: 80FF80CF
+		EndColorOuter: 80FF80CF
+		WidthFadeRate: 1
+	RenderSprites:
+		Image: scrin
+	RenderModels:
+		Image: scrin
+
+ORCA.ASSULT:
+	Inherits: ^EMPableAircraft
+	Inherits@bounty: ^GlobalBounty
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: "Orca" Fighter
+	-Selectable:
+	-SelectionDecorations:
+	-UpdatesPlayerStatistics:
+	-MapEditorData:
+	RevealsShroud@airborne:
+		RequiresCondition: attacking
+	GrantConditionOnAttack:
+		Condition: attacking
+		RevokeDelay: 100
+	RejectsOrders:
+	Interactable:
+	Aircraft:
+		TurnSpeed: 32
+		Speed: 206
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		AltitudeVelocity: 128
+		CanSlide: false
+		TakeOffOnResupply: true
+	Health:
+		HP: 20000
+	Armor:
+		Type: Light
+	SpawnActorOnDeath:
+		Actor: ORCA.Husk
+		RequiresCondition: !empdisable && airborne
+	SpawnActorOnDeath@EMP:
+		Actor: ORCA.Husk.EMP
+		RequiresCondition: empdisable && airborne
+	AttackBomber:
+		PersistentTargeting: false
+		PauseOnCondition: empdisable
+		FacingTolerance: 512
+		FacingFullOnTarget: true
+	Armament:
+		Weapon: PulseHellfire
+		LocalOffset: 300,195,70, 300,-195,70
+		LocalYaw: -110, 110
+	RenderSprites:
+		Image: orca
+	RenderModels:
+		Image: orca
