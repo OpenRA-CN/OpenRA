@@ -63,7 +63,7 @@ beacon:
 		ZOffset: 2047
 
 lockon:
-	common: 
+	common:
 		Filename: lockon.shp
 		Length: 1
 		Start: 1
@@ -1659,7 +1659,7 @@ damagespark:
 		Frames: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	idle3:
 		Frames: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0,
-		
+
 auto-tag:
 	idle:
 		Filename: auto-tag.shp
@@ -1707,7 +1707,7 @@ laser:
 	Defaults:
 		ZOffset: 512
 		Length: *
-		Frames: 0,0,0,0,0,  0,0,0,0,0,  0,0,0,0,0,  0,0,0,0,0,
+		Frames: 0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0,
 		MeshType: Board
 		IgnoreWorldTint: true
 		BlendMode: Additive
@@ -1737,7 +1737,7 @@ fxring:
 		MeshType: Board
 	sonicburst:
 		Filename: FX_Ring.png
-		Frames: 0,0,0,0,0,  0,0,0,0,0,  0,0,0,0,0
+		Frames: 0,0,0,0,0,	0,0,0,0,0,	0,0,0,0,0
 		AlphaFade: True
 		Scale: 0.1
 

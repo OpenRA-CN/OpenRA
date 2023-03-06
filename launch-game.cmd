@@ -1,7 +1,7 @@
 @echo off
 title OpenRA
 for /F "delims==\ " %%x in ("%*") do (
-  if "%%~x" EQU "Game.Mod" (goto launch)
+	if "%%~x" EQU "Game.Mod" (goto launch)
 )
 
 @REM :choosemod
@@ -35,7 +35,7 @@ if exist Support\Logs (set logs=%cd%\Support\Logs)
 
 echo ----------------------------------------
 echo OpenRA has encountered a fatal error.
-echo   * Log Files are available in %logs%
-echo   * FAQ is available at https://github.com/OpenRA/OpenRA/wiki/FAQ
+echo	 * Log Files are available in %logs%
+echo	 * FAQ is available at https://github.com/OpenRA/OpenRA/wiki/FAQ
 echo ----------------------------------------
 pause

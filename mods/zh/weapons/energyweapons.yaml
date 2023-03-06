@@ -663,7 +663,7 @@ ProtonBomb:
 			Light: 75
 			Heavy: 32
 			Concrete: 100
-		DamageTypes: Prone100Percent, TriggerProne,  EnergyDeath
+		DamageTypes: Prone100Percent, TriggerProne,	EnergyDeath
 		ValidTargets: Ground, Water, Air, Trees
 	Warhead@2Eff: CreateEffect
 		Explosions: plasmaclsnlarge

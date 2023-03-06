@@ -15,7 +15,7 @@ BGGY:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 30
 		Prerequisites: ~naweap, ~techlevel.low
-		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: Fast scout and anti-infantry vehicle.\n	Strong vs Infantry, Light armor\n	Weak vs Vehicles, Aircraft
 	Mobile:
 		TurnSpeed: 40
 		MaxSpeed: 175
@@ -83,7 +83,7 @@ BIKE:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 40
 		Prerequisites: ~naweap, ~techlevel.low
-		Description: Fast scout vehicle, armed with\nrockets.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: Fast scout vehicle, armed with\nrockets.\n	Strong vs Vehicles, Aircraft\n	Weak vs Infantry
 	Mobile:
 		TurnSpeed: 32
 		MaxSpeed: 185
@@ -140,7 +140,7 @@ TTNK:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 60
 		Prerequisites: ~naweap, ~techlevel.medium
-		Description: Nod's main battle tank.\nCan deploy to gain extra protection and range.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+		Description: Nod's main battle tank.\nCan deploy to gain extra protection and range.\n	Strong vs Vehicles\n	Weak vs Infantry, Aircraft
 	Mobile:
 		TurnSpeed: 32
 		MaxSpeed: 85
@@ -243,7 +243,7 @@ TTNK:
 		DeployTrigger: Attack
 		DeployTicks: 5
 		UndeployTicks: 50
-	
+
 
 ART2:
 	Inherits: ^Tank
@@ -266,7 +266,7 @@ ART2:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 100
 		Prerequisites: ~naweap, naradr, ~techlevel.high
-		Description: Heavy Long Range Mobile Artillery.\nNeeds to deploy in order to shoot. \n-cannot deploy on ramp.\n  Strong vs Ground units\n  Weak vs Aircraft
+		Description: Heavy Long Range Mobile Artillery.\nNeeds to deploy in order to shoot. \n-cannot deploy on ramp.\n	Strong vs Ground units\n	Weak vs Aircraft
 	Health:
 		HP: 30000
 	Armor:
@@ -378,7 +378,7 @@ REPAIR:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 70
 		Prerequisites: ~naweap, ~techlevel.medium
-		Description: Repairs nearby vehicles.\n  Unarmed
+		Description: Repairs nearby vehicles.\n	Unarmed
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -431,7 +431,7 @@ WEED:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 170
 		Prerequisites: ~naweap, nawast, ~techlevel.superweapons
-		Description: Collects veins for processing.\n  Unarmed
+		Description: Collects veins for processing.\n	Unarmed
 	Harvester:
 		DeliveryBuildings: nawast
 		Capacity: 7
@@ -490,7 +490,7 @@ SAPC:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 110
 		Prerequisites: ~naweap, natech, ~techlevel.medium
-		Description: Troop transport that can move\nunderground to avoid detection.\n  Unarmed
+		Description: Troop transport that can move\nunderground to avoid detection.\n	Unarmed
 	Mobile:
 		TurnSpeed: 20
 		Speed: 40
@@ -569,7 +569,7 @@ SUBTANK:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 130
 		Prerequisites: ~naweap, natech, ~techlevel.high
-		Description: Subterranean Flame Tank.\nIs able to move underground.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks, Aircraft
+		Description: Subterranean Flame Tank.\nIs able to move underground.\n	Strong vs Infantry, Buildings\n	Weak vs Tanks, Aircraft
 	Mobile:
 		TurnSpeed: 24
 		Speed: 40
@@ -639,7 +639,7 @@ STNK:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 150
 		Prerequisites: ~naweap, natech, ~techlevel.high
-		Description: Lightly armoured tank equipped with a personal\nstealth generator. Armed with missiles.\nCan be spotted by infantry at close range.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: Lightly armoured tank equipped with a personal\nstealth generator. Armed with missiles.\nCan be spotted by infantry at close range.\n	Strong vs Vehicles, Aircraft\n	Weak vs Infantry
 	Mobile:
 		TurnSpeed: 40
 		Speed: 60
@@ -791,7 +791,7 @@ ICBM:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 149
 		Prerequisites: ~naweap, naradr, ~techlevel.high
-		Description: Long Range Missle Launcher.\nNeeds to deploy in order to shoot. \n-cannot deploy on ramp.\n  Strong vs Ground units\n  Weak vs Aircraft \n Maximum 1 can be builded.
+		Description: Long Range Missle Launcher.\nNeeds to deploy in order to shoot. \n-cannot deploy on ramp.\n	Strong vs Ground units\n	Weak vs Aircraft \n Maximum 1 can be builded.
 		BuildLimit: 1
 	Armor:
 		Type: Light

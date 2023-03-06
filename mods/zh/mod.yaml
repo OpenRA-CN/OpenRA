@@ -1,331 +1,328 @@
 Metadata:
-  Title: Zero Hour
-  Version: {DEV_VERSION}
-  Website: https://www.openra.net
-  WebIcon32: https://www.openra.net/images/icons/ts_32x32.png
-  WindowTitle: OpenMeow - Zero Hour
+	Title: Zero Hour
+	Version: {DEV_VERSION}
+	Website: https://www.openra.net
+	WebIcon32: https://www.openra.net/images/icons/ts_32x32.png
+	WindowTitle: OpenMeow - Zero Hour
 
 PackageFormats: Mix
 
 Packages:
-  ~^SupportDir|Content/zh
-  ^EngineDir
-  $zh: zh
-  ^EngineDir|mods/common: common
+	~^SupportDir|Content/zh
+	^EngineDir
+	$zh: zh
+	^EngineDir|mods/common: common
 
-  # Zero Hour
-  ~scores.mix
-  ~sidenc01.mix
-  ~sidenc02.mix
-  ~e01scd01.mix
-  ~e01scd02.mix
-  ~movies01.mix
-  ~movies02.mix
-  ~sidecd01.mix
-  ~sidecd02.mix
-  ~cache.mix
-  ~conquer.mix
-  ~isosnow.mix
-  ~isotemp.mix
-  ~local.mix
-  ~sidec01.mix: sidebar-gdi
-  ~sidec02.mix: sidebar-nod
-  ~sno.mix
-  ~snow.mix
-  ~sounds.mix
-  ~speech01.mix: speech-gdi
-  ~speech02.mix: speech-nod
-  ~tem.mix
-  ~temperat.mix
+	# Zero Hour
+	~scores.mix
+	~sidenc01.mix
+	~sidenc02.mix
+	~e01scd01.mix
+	~e01scd02.mix
+	~movies01.mix
+	~movies02.mix
+	~sidecd01.mix
+	~sidecd02.mix
+	~cache.mix
+	~conquer.mix
+	~isosnow.mix
+	~isotemp.mix
+	~local.mix
+	~sidec01.mix: sidebar-gdi
+	~sidec02.mix: sidebar-nod
+	~sno.mix
+	~snow.mix
+	~sounds.mix
+	~speech01.mix: speech-gdi
+	~speech02.mix: speech-nod
+	~tem.mix
+	~temperat.mix
 
-  zh|bits
-  zh|bits/audios
-  zh|bits/vxls
+	zh|bits
+	zh|bits/audios
+	zh|bits/vxls
 
-  # Issly's Voxel
-  zh|bits/vxls/VxlFromIssly
-  zh|bits/vxls/replace
-  zh|bits/caustics
-  zh|bits/actors
-  zh|bits/effects
-  zh|bits/projectiles
-  zh|bits/miscs
-  zh|assets
-  zh|assets/skeletons
-  zh|assets/animations
-  zh|assets/meshes
-  zh|assets/materials
-  zh|assets/textures
-  zh|assets/voice
+	# Issly's Voxel
+	zh|bits/vxls/VxlFromIssly
+	zh|bits/vxls/replace
+	zh|bits/caustics
+	zh|bits/actors
+	zh|bits/effects
+	zh|bits/projectiles
+	zh|bits/miscs
+	zh|assets
+	zh|assets/skeletons
+	zh|assets/animations
+	zh|assets/meshes
+	zh|assets/materials
+	zh|assets/textures
+	zh|assets/voice
 
-  zh|terrain
-  zh|terrain/temperate
-  zh|terrain/snow
-  zh|terrain/summer
+	zh|terrain
+	zh|terrain/temperate
+	zh|terrain/snow
+	zh|terrain/summer
 
-  zh|uibits
-  zh|3dtest
-  
-  # zh|tstest
-  # zh|tstest/asset
-  # zh|tstest/asset/mat
-  # zh|tstest/asset/audios
-  # zh|tstest/asset/anims
+	zh|uibits
+
+	# zh|tstest
+	# zh|tstest/asset
+	# zh|tstest/asset/mat
+	# zh|tstest/asset/audios
+	# zh|tstest/asset/anims
 
 
 MapFolders:
-  zh|maps: System
-  ~^SupportDir|maps/zh/{DEV_VERSION}: User
+	zh|maps: System
+	~^SupportDir|maps/zh/{DEV_VERSION}: User
 
 Rules:
-  zh|rules/ai.yaml
-  zh|rules/misc.yaml
-  zh|rules/player.yaml
-  zh|rules/world.yaml
-  zh|rules/palettes.yaml
-  zh|rules/defaults.yaml
-  zh|rules/aircraft.yaml
-  zh|rules/husks.yaml
-  zh|rules/civilian-infantry.yaml
-  zh|rules/critters.yaml
-  zh|rules/civilian-structures.yaml
-  zh|rules/civilian-vehicles.yaml
-  zh|rules/gdi-infantry.yaml
-  zh|rules/gdi-structures.yaml
-  zh|rules/gdi-support.yaml
-  zh|rules/gdi-vehicles.yaml
-  zh|rules/nod-infantry.yaml
-  zh|rules/nod-structures.yaml
-  zh|rules/nod-support.yaml
-  zh|rules/nod-vehicles.yaml
-  zh|rules/shared-infantry.yaml
-  zh|rules/shared-structures.yaml
-  zh|rules/shared-support.yaml
-  zh|rules/shared-vehicles.yaml
-  zh|rules/trees.yaml
-  zh|rules/bridges.yaml
+	zh|rules/ai.yaml
+	zh|rules/misc.yaml
+	zh|rules/player.yaml
+	zh|rules/world.yaml
+	zh|rules/palettes.yaml
+	zh|rules/defaults.yaml
+	zh|rules/aircraft.yaml
+	zh|rules/husks.yaml
+	zh|rules/civilian-infantry.yaml
+	zh|rules/critters.yaml
+	zh|rules/civilian-structures.yaml
+	zh|rules/civilian-vehicles.yaml
+	zh|rules/gdi-infantry.yaml
+	zh|rules/gdi-structures.yaml
+	zh|rules/gdi-support.yaml
+	zh|rules/gdi-vehicles.yaml
+	zh|rules/nod-infantry.yaml
+	zh|rules/nod-structures.yaml
+	zh|rules/nod-support.yaml
+	zh|rules/nod-vehicles.yaml
+	zh|rules/shared-infantry.yaml
+	zh|rules/shared-structures.yaml
+	zh|rules/shared-support.yaml
+	zh|rules/shared-vehicles.yaml
+	zh|rules/trees.yaml
+	zh|rules/bridges.yaml
 
-  zh|rpgtest/items.yaml
+	zh|rpgtest/items.yaml
 
-  zh|3dtest/testrulse.yaml
-
-  # zh|tstest/localtestrulse.yaml
+	# zh|tstest/localtestrulse.yaml
 
 Weapons:
-  zh|weapons/ballisticweapons.yaml
-  zh|weapons/energyweapons.yaml
-  zh|weapons/explosions.yaml
-  zh|weapons/healweapons.yaml
-  zh|weapons/missiles.yaml
-  zh|weapons/otherweapons.yaml
-  zh|weapons/smallguns.yaml
-  zh|weapons/superweapons.yaml
-  
-  # zh|tstest/localtestweapon.yaml
+	zh|weapons/ballisticweapons.yaml
+	zh|weapons/energyweapons.yaml
+	zh|weapons/explosions.yaml
+	zh|weapons/healweapons.yaml
+	zh|weapons/missiles.yaml
+	zh|weapons/otherweapons.yaml
+	zh|weapons/smallguns.yaml
+	zh|weapons/superweapons.yaml
+
+	# zh|tstest/localtestweapon.yaml
 
 Sequences:
-  zh|sequences/aircraft.yaml
-  zh|sequences/infantry.yaml
-  zh|sequences/misc.yaml
-  zh|sequences/civilian.yaml
-  zh|sequences/structures.yaml
-  zh|sequences/vehicles.yaml
-  zh|sequences/trees.yaml
-  zh|sequences/bridges.yaml
-  zh|sequences/critters.yaml
-  zh|sequences/test.yaml
-  zh|rpgtest/rpgmisc.yaml
+	zh|sequences/aircraft.yaml
+	zh|sequences/infantry.yaml
+	zh|sequences/misc.yaml
+	zh|sequences/civilian.yaml
+	zh|sequences/structures.yaml
+	zh|sequences/vehicles.yaml
+	zh|sequences/trees.yaml
+	zh|sequences/bridges.yaml
+	zh|sequences/critters.yaml
+	zh|sequences/test.yaml
+	zh|rpgtest/rpgmisc.yaml
 
-  # zh|tstest/localtestseq.yaml
+	# zh|tstest/localtestseq.yaml
 
 ModelSequences:
-  zh|sequences/voxels.yaml
+	zh|sequences/voxels.yaml
 
 MeshSequences:
-  zh|3dtest/meshes.yaml
 
-  # zh|tstest/localtestmes.yaml
+
+	# zh|tstest/localtestmes.yaml
 
 TileSets:
-  zh|tilesets/temperate.yaml
-  zh|tilesets/snow.yaml
+	zh|tilesets/temperate.yaml
+	zh|tilesets/snow.yaml
 
 MapGrid:
-  TileSize: 48,24
-  EnableDepthBuffer: False
-  Type: RectangularIsometric
-  MaximumTerrainHeight: 34
-  # SubCellOffsets: 0,0,0, -362,0,0, 0,362,0, 362,0,0
-  SubCellOffsets: 0,0,0, -256,128,0, 0,-128,0, 256,128,0
-  DefaultSubCell: 2
+	TileSize: 48,24
+	EnableDepthBuffer: False
+	Type: RectangularIsometric
+	MaximumTerrainHeight: 34
+	# SubCellOffsets: 0,0,0, -362,0,0, 0,362,0, 362,0,0
+	SubCellOffsets: 0,0,0, -256,128,0, 0,-128,0, 256,128,0
+	DefaultSubCell: 2
 
 WorldViewportSizes:
-  ZoomScale: 0.35
-  MaxZoomScale: 5
-  MaxZoomWindowHeight: 120
+	ZoomScale: 0.35
+	MaxZoomScale: 5
+	MaxZoomWindowHeight: 120
 
 Cursors:
-  zh|cursors.yaml
+	zh|cursors.yaml
 
 Chrome:
-  zh|chrome.yaml
+	zh|chrome.yaml
 
 Assemblies:
-  ^BinDir|OpenRA.Mods.Common.dll
-  ^BinDir|OpenRA.Mods.Cnc.dll
-  ^BinDir|OpenRA.Meow.RPG.dll
+	^BinDir|OpenRA.Mods.Common.dll
+	^BinDir|OpenRA.Mods.Cnc.dll
+	^BinDir|OpenRA.Meow.RPG.dll
 
 ChromeLayout:
-  common|chrome/ingame.yaml
-  common|chrome/ingame-chat.yaml
-  zh|chrome/ingame-transients.yaml
-  common|chrome/ingame-fmvplayer.yaml
-  common|chrome/ingame-menu.yaml
-  common|chrome/ingame-info.yaml
-  common|chrome/ingame-infoscripterror.yaml
-  common|chrome/ingame-infobriefing.yaml
-  common|chrome/ingame-infoobjectives.yaml
-  common|chrome/ingame-infostats.yaml
-  common|chrome/ingame-info-lobby-options.yaml
-  zh|chrome/ingame-observer.yaml
-  zh|chrome/ingame-player.yaml
-  common|chrome/ingame-perf.yaml
-  zh|chrome/ingame-debug.yaml
-  common|chrome/ingame-debug-hpf.yaml
-  common|chrome/ingame-debuginfo.yaml
-  common|chrome/ingame-infochat.yaml
-  common|chrome/mainmenu.yaml
-  common|chrome/mainmenu-prompts.yaml
-  zh|chrome/mainmenu-prerelease-notification.yaml
-  common|chrome/settings.yaml
-  common|chrome/settings-display.yaml
-  common|chrome/settings-audio.yaml
-  common|chrome/settings-input.yaml
-  zh|chrome/settings-hotkeys.yaml
-  common|chrome/settings-advanced.yaml
-  common|chrome/credits.yaml
-  common|chrome/lobby.yaml
-  common|chrome/lobby-mappreview.yaml
-  common|chrome/lobby-players.yaml
-  common|chrome/lobby-options.yaml
-  common|chrome/lobby-music.yaml
-  common|chrome/lobby-servers.yaml
-  common|chrome/lobby-kickdialogs.yaml
-  common|chrome/playerprofile.yaml
-  zh|chrome/color-picker.yaml
-  common|chrome/map-chooser.yaml
-  common|chrome/multiplayer-browser.yaml
-  common|chrome/multiplayer-browserpanels.yaml
-  common|chrome/multiplayer-createserver.yaml
-  common|chrome/multiplayer-directconnect.yaml
-  common|chrome/connection.yaml
-  common|chrome/replaybrowser.yaml
-  common|chrome/gamesave-browser.yaml
-  common|chrome/gamesave-loading.yaml
-  zh|chrome/dropdowns.yaml
-  common|chrome/musicplayer.yaml
-  common|chrome/tooltips.yaml
-  common|chrome/assetbrowser.yaml
-  common|chrome/missionbrowser.yaml
-  common|chrome/confirmation-dialogs.yaml
-  zh|chrome/editor.yaml
-  common|chrome/text-notifications.yaml
-  zh|chrome/tooltips.yaml
+	common|chrome/ingame.yaml
+	common|chrome/ingame-chat.yaml
+	zh|chrome/ingame-transients.yaml
+	common|chrome/ingame-fmvplayer.yaml
+	common|chrome/ingame-menu.yaml
+	common|chrome/ingame-info.yaml
+	common|chrome/ingame-infoscripterror.yaml
+	common|chrome/ingame-infobriefing.yaml
+	common|chrome/ingame-infoobjectives.yaml
+	common|chrome/ingame-infostats.yaml
+	common|chrome/ingame-info-lobby-options.yaml
+	zh|chrome/ingame-observer.yaml
+	zh|chrome/ingame-player.yaml
+	common|chrome/ingame-perf.yaml
+	zh|chrome/ingame-debug.yaml
+	common|chrome/ingame-debug-hpf.yaml
+	common|chrome/ingame-debuginfo.yaml
+	common|chrome/ingame-infochat.yaml
+	common|chrome/mainmenu.yaml
+	common|chrome/mainmenu-prompts.yaml
+	zh|chrome/mainmenu-prerelease-notification.yaml
+	common|chrome/settings.yaml
+	common|chrome/settings-display.yaml
+	common|chrome/settings-audio.yaml
+	common|chrome/settings-input.yaml
+	zh|chrome/settings-hotkeys.yaml
+	common|chrome/settings-advanced.yaml
+	common|chrome/credits.yaml
+	common|chrome/lobby.yaml
+	common|chrome/lobby-mappreview.yaml
+	common|chrome/lobby-players.yaml
+	common|chrome/lobby-options.yaml
+	common|chrome/lobby-music.yaml
+	common|chrome/lobby-servers.yaml
+	common|chrome/lobby-kickdialogs.yaml
+	common|chrome/playerprofile.yaml
+	zh|chrome/color-picker.yaml
+	common|chrome/map-chooser.yaml
+	common|chrome/multiplayer-browser.yaml
+	common|chrome/multiplayer-browserpanels.yaml
+	common|chrome/multiplayer-createserver.yaml
+	common|chrome/multiplayer-directconnect.yaml
+	common|chrome/connection.yaml
+	common|chrome/replaybrowser.yaml
+	common|chrome/gamesave-browser.yaml
+	common|chrome/gamesave-loading.yaml
+	zh|chrome/dropdowns.yaml
+	common|chrome/musicplayer.yaml
+	common|chrome/tooltips.yaml
+	common|chrome/assetbrowser.yaml
+	common|chrome/missionbrowser.yaml
+	common|chrome/confirmation-dialogs.yaml
+	zh|chrome/editor.yaml
+	common|chrome/text-notifications.yaml
+	zh|chrome/tooltips.yaml
 
 Translations:
-  common|languages/en.ftl
-  zh|languages/rules/en.ftl
+	common|languages/en.ftl
+	zh|languages/rules/en.ftl
 
 Voices:
-  zh|audio/voices.yaml
-  zh|audio/voices_ta.yaml
+	zh|audio/voices.yaml
+	zh|audio/voices_ta.yaml
 
 
-  # zh|tstest/localtestvoices.yaml
+	# zh|tstest/localtestvoices.yaml
 
 Notifications:
-  zh|audio/speech-generic.yaml
-  zh|audio/speech-singleplayer.yaml
-  zh|audio/sounds-generic.yaml
+	zh|audio/speech-generic.yaml
+	zh|audio/speech-singleplayer.yaml
+	zh|audio/sounds-generic.yaml
 
 Music:
-  zh|audio/music.yaml
+	zh|audio/music.yaml
 
 Hotkeys:
-  common|hotkeys/game.yaml
-  common|hotkeys/observer.yaml
-  common|hotkeys/production-common.yaml
-  common|hotkeys/supportpowers.yaml
-  common|hotkeys/viewport.yaml
-  common|hotkeys/chat.yaml
-  common|hotkeys/editor.yaml
-  common|hotkeys/control-groups.yaml
-  zh|hotkeys.yaml
-  zh|controler.yaml
+	common|hotkeys/game.yaml
+	common|hotkeys/observer.yaml
+	common|hotkeys/production-common.yaml
+	common|hotkeys/supportpowers.yaml
+	common|hotkeys/viewport.yaml
+	common|hotkeys/chat.yaml
+	common|hotkeys/editor.yaml
+	common|hotkeys/control-groups.yaml
+	zh|hotkeys.yaml
+	zh|controler.yaml
 
 LoadScreen: LogoStripeLoadScreen
-  Image: zh|uibits/loadscreen.png
-  Text: Updating EVA installation..., Changing perspective...
+	Image: zh|uibits/loadscreen.png
+	Text: Updating EVA installation..., Changing perspective...
 
 ServerTraits:
-  LobbyCommands
-  PlayerPinger
-  MasterServerPinger
-  LobbySettingsNotification
+	LobbyCommands
+	PlayerPinger
+	MasterServerPinger
+	LobbySettingsNotification
 
 ChromeMetrics:
-  common|metrics.yaml
-  zh|metrics.yaml
+	common|metrics.yaml
+	zh|metrics.yaml
 
 Fonts:
-  Ethnocentric.12:
-    Font: zh|fonts/ethnocentric.ttf
-    Size: 12
-    Ascender: 8
-  Ethnocentric.11:
-    Font: zh|fonts/ethnocentric.ttf
-    Size: 11
-    Ascender: 8
-  Ethnocentric.10:
-    Font: zh|fonts/ethnocentric.ttf
-    Size: 10
-    Ascender: 7
-  Ethnocentric.8:
-    Font: zh|fonts/ethnocentric.ttf
-    Size: 8
-    Ascender: 6
-  Tiny:
-    Font: common|FreeSans.ttf
-    Size: 10
-    Ascender: 8
-  TinyBold:
-    Font: common|FreeSansBold.ttf
-    Size: 10
-    Ascender: 8
-  Small:
-    Font: common|FreeSans.ttf
-    Size: 12
-    Ascender: 9
-  Regular:
-    Font: common|FreeSans.ttf
-    Size: 14
-    Ascender: 11
-  Bold:
-    Font: common|FreeSansBold.ttf
-    Size: 14
-    Ascender: 11
-  MediumBold:
-    Font: common|FreeSansBold.ttf
-    Size: 18
-    Ascender: 14
-  BigBold:
-    Font: common|FreeSansBold.ttf
-    Size: 24
-    Ascender: 18
-  Title:
-    Font: common|FreeSansBold.ttf
-    Size: 32
-    Ascender: 24
+	Ethnocentric.12:
+		Font: zh|fonts/ethnocentric.ttf
+		Size: 12
+		Ascender: 8
+	Ethnocentric.11:
+		Font: zh|fonts/ethnocentric.ttf
+		Size: 11
+		Ascender: 8
+	Ethnocentric.10:
+		Font: zh|fonts/ethnocentric.ttf
+		Size: 10
+		Ascender: 7
+	Ethnocentric.8:
+		Font: zh|fonts/ethnocentric.ttf
+		Size: 8
+		Ascender: 6
+	Tiny:
+		Font: common|FreeSans.ttf
+		Size: 10
+		Ascender: 8
+	TinyBold:
+		Font: common|FreeSansBold.ttf
+		Size: 10
+		Ascender: 8
+	Small:
+		Font: common|FreeSans.ttf
+		Size: 12
+		Ascender: 9
+	Regular:
+		Font: common|FreeSans.ttf
+		Size: 14
+		Ascender: 11
+	Bold:
+		Font: common|FreeSansBold.ttf
+		Size: 14
+		Ascender: 11
+	MediumBold:
+		Font: common|FreeSansBold.ttf
+		Size: 18
+		Ascender: 14
+	BigBold:
+		Font: common|FreeSansBold.ttf
+		Size: 24
+		Ascender: 18
+	Title:
+		Font: common|FreeSansBold.ttf
+		Size: 32
+		Ascender: 24
 
 DefaultOrderGenerator: UnitOrderGenerator
 
@@ -350,58 +347,58 @@ ModelSequenceFormat: DefaultModelSequence
 MeshSequenceFormat: DefaultMeshSequence
 
 AssetBrowser:
-  SpriteExtensions: .shp, .tem, .sno
-  ModelExtensions: .vxl
-  AudioExtensions: .aud, .wav
-  VideoExtensions: .vqa
+	SpriteExtensions: .shp, .tem, .sno
+	ModelExtensions: .vxl
+	AudioExtensions: .aud, .wav
+	VideoExtensions: .vqa
 
 GameSpeeds:
-  DefaultSpeed: default
-  Speeds:
-    slowest:
-      Name: options-game-speed.slowest
-      Timestep: 80
-      OrderLatency: 2
-    slower:
-      Name: options-game-speed.slower
-      Timestep: 50
-      OrderLatency: 3
-    default:
-      Name: options-game-speed.normal
-      Timestep: 40
-      OrderLatency: 3
-    fast:
-      Name: options-game-speed.fast
-      Timestep: 35
-      OrderLatency: 4
-    faster:
-      Name: options-game-speed.faster
-      Timestep: 30
-      OrderLatency: 4
-    fastest:
-      Name: options-game-speed.fastest
-      Timestep: 20
-      OrderLatency: 6
+	DefaultSpeed: default
+	Speeds:
+		slowest:
+			Name: options-game-speed.slowest
+			Timestep: 80
+			OrderLatency: 2
+		slower:
+			Name: options-game-speed.slower
+			Timestep: 50
+			OrderLatency: 3
+		default:
+			Name: options-game-speed.normal
+			Timestep: 40
+			OrderLatency: 3
+		fast:
+			Name: options-game-speed.fast
+			Timestep: 35
+			OrderLatency: 4
+		faster:
+			Name: options-game-speed.faster
+			Timestep: 30
+			OrderLatency: 4
+		fastest:
+			Name: options-game-speed.fastest
+			Timestep: 20
+			OrderLatency: 6
 
 ModContent:
-  InstallPromptMessage: Zero Hour requires artwork and audio from the original game.\n\nQuick Install will automatically download this content (without music\nor videos) from a mirror of the 2012 Zero Hour freeware release.\n\nAdvanced Install includes options for copying the music, videos, and\nother content from an original game disc or digital installation.
-  QuickDownload: quickinstall
-  HeaderMessage: Game content may be extracted from the original game discs or an\nexisting digital install. OpenRA can also download the base game\nfiles from an online mirror of the 2012 freeware release of TS.
-  Packages:
-    tibsun: Base Game Files
-      TestFiles: ^SupportDir|Content/zh/cache.mix, ^SupportDir|Content/zh/conquer.mix, ^SupportDir|Content/zh/isosnow.mix, ^SupportDir|Content/zh/isotemp.mix, ^SupportDir|Content/zh/local.mix, ^SupportDir|Content/zh/sidec01.mix, ^SupportDir|Content/zh/sidec02.mix, ^SupportDir|Content/zh/sno.mix, ^SupportDir|Content/zh/snow.mix, ^SupportDir|Content/zh/sounds.mix, ^SupportDir|Content/zh/speech01.mix, ^SupportDir|Content/zh/tem.mix, ^SupportDir|Content/zh/temperat.mix
-      Sources: tibsun, tfd, origin
-      Required: true
-      Download: basefiles
-    tibsun-music: Base Game Music
-      TestFiles: ^SupportDir|Content/zh/scores.mix
-      Sources: tibsun, tfd, origin
-  Downloads:
-    zh|installer/downloads.yaml
-  Sources:
-    zh|installer/firstdecade.yaml
-    zh|installer/origin.yaml
-    zh|installer/tibsun.yaml
+	InstallPromptMessage: Zero Hour requires artwork and audio from the original game.\n\nQuick Install will automatically download this content (without music\nor videos) from a mirror of the 2012 Zero Hour freeware release.\n\nAdvanced Install includes options for copying the music, videos, and\nother content from an original game disc or digital installation.
+	QuickDownload: quickinstall
+	HeaderMessage: Game content may be extracted from the original game discs or an\nexisting digital install. OpenRA can also download the base game\nfiles from an online mirror of the 2012 freeware release of TS.
+	Packages:
+		tibsun: Base Game Files
+			TestFiles: ^SupportDir|Content/zh/cache.mix, ^SupportDir|Content/zh/conquer.mix, ^SupportDir|Content/zh/isosnow.mix, ^SupportDir|Content/zh/isotemp.mix, ^SupportDir|Content/zh/local.mix, ^SupportDir|Content/zh/sidec01.mix, ^SupportDir|Content/zh/sidec02.mix, ^SupportDir|Content/zh/sno.mix, ^SupportDir|Content/zh/snow.mix, ^SupportDir|Content/zh/sounds.mix, ^SupportDir|Content/zh/speech01.mix, ^SupportDir|Content/zh/tem.mix, ^SupportDir|Content/zh/temperat.mix
+			Sources: tibsun, tfd, origin
+			Required: true
+			Download: basefiles
+		tibsun-music: Base Game Music
+			TestFiles: ^SupportDir|Content/zh/scores.mix
+			Sources: tibsun, tfd, origin
+	Downloads:
+		zh|installer/downloads.yaml
+	Sources:
+		zh|installer/firstdecade.yaml
+		zh|installer/origin.yaml
+		zh|installer/tibsun.yaml
 
 DiscordService:
-  ApplicationId: 712713986558394399
+	ApplicationId: 712713986558394399

@@ -26,7 +26,7 @@ TITANUGVULCAN:
 		Queue: Defense
 		BuildPaletteOrder: 80
 		Prerequisites: titan.vulcan, ~gaweap, ~techlevel.medium
-		Description: Give Titan an additional vulcan.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
+		Description: Give Titan an additional vulcan.\n	Strong vs Infantry, Light armor\n	Weak vs Aircraft
 	Plug:
 		Type: titan.vulcan
 	RenderSprites:
@@ -42,7 +42,7 @@ TITANUGMISSILE:
 		Queue: Defense
 		BuildPaletteOrder: 80
 		Prerequisites: titan.missile, ~gaweap, ~techlevel.medium
-		Description: Give Titan an additional missile.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: Give Titan an additional missile.\n	Strong vs Vehicles, Aircraft\n	Weak vs Infantry
 	Plug:
 		Type: titan.missile
 	RenderSprites:
@@ -65,7 +65,7 @@ JUMPJET:
 		Queue: Infantry
 		BuildPaletteOrder: 70
 		Prerequisites: ~gapile, garadr, ~techlevel.medium
-		Description: Airborne soldier.\n  Strong vs Infantry, Aircraft\n  Weak vs Vehicles
+		Description: Airborne soldier.\n	Strong vs Infantry, Aircraft\n	Weak vs Vehicles
 	Voiced:
 		VoiceSet: JumpJet
 	Mobile:

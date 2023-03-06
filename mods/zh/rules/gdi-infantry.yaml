@@ -8,7 +8,7 @@ E2:
 		Queue: Infantry
 		BuildPaletteOrder: 20
 		Prerequisites: ~gapile, ~techlevel.low
-		Description: Infantry armed with special explosive discs.\n  Strong vs Buildings, Infantry\n  Weak vs Vehicles, Aircraft
+		Description: Infantry armed with special explosive discs.\n	Strong vs Buildings, Infantry\n	Weak vs Vehicles, Aircraft
 	Valued:
 		Cost: 200
 	Tooltip:
@@ -54,7 +54,7 @@ MEDIC:
 		Queue: Infantry
 		BuildPaletteOrder: 50
 		Prerequisites: ~gapile, ~techlevel.low
-		Description: Heals nearby infantry.\n  Unarmed \n Undamaged by Tiberium field
+		Description: Heals nearby infantry.\n	Unarmed \n Undamaged by Tiberium field
 	Voiced:
 		VoiceSet: Medic
 	RevealsShroud:
@@ -134,7 +134,7 @@ JUMPJET:
 		UndeployTicks: 500
 		DeployChance: 100
 	UnitDisplayInfo:
-		Description: Airborne soldier now lands.\n  Strong vs Infantry \n  Weak vs Vehicles, Aircraft \n- Will fly when ordered to deploy
+		Description: Airborne soldier now lands.\n	Strong vs Infantry \n	Weak vs Vehicles, Aircraft \n- Will fly when ordered to deploy
 
 JUMPJETAIR:
 	Inherits: ^Aircraft
@@ -151,7 +151,7 @@ JUMPJETAIR:
 		Queue: Infantry
 		BuildPaletteOrder: 70
 		Prerequisites: ~gapile, garadr, ~techlevel.medium
-		Description: Airborne soldier.\n  Strong vs Infantry, Aircraft\n  Weak vs Vehicles \n- Will land when ordered to deploy
+		Description: Airborne soldier.\n	Strong vs Infantry, Aircraft\n	Weak vs Vehicles \n- Will land when ordered to deploy
 		BuildDuration: 250
 		BuildDurationModifier: 100
 	Voiced:
@@ -290,7 +290,7 @@ GHOST:
 		BuildPaletteOrder: 90
 		Prerequisites: ~gapile, gatech, ~techlevel.high
 		BuildLimit: 1
-		Description: Elite commando infantry, armed with\na railgun, pulse chain gun and C4.\n  Strong vs Ground\n  Weak vs Aircraft\n  Special Ability: Destroy Building with C4\nMaximum 1 can be trained.
+		Description: Elite commando infantry, armed with\na railgun, pulse chain gun and C4.\n	Strong vs Ground\n	Weak vs Aircraft\n	Special Ability: Destroy Building with C4\nMaximum 1 can be trained.
 	Voiced:
 		VoiceSet: Ghost
 	Armor:

@@ -721,7 +721,7 @@ GAPLUG:
 		Requirements:
 			plug.ioncannon: !build-incomplete && !plug.ioncannonb && !plug.ioncannona && !plug.hunterseekera && !plug.droppoda
 			plug.hunterseeker: !build-incomplete && !plug.hunterseekerb && !plug.ioncannona && !plug.hunterseekera && !plug.droppoda
-			plug.droppod: !build-incomplete &&  !plug.droppodb && !plug.ioncannona && !plug.hunterseekera && !plug.droppoda
+			plug.droppod: !build-incomplete &&	!plug.droppodb && !plug.ioncannona && !plug.hunterseekera && !plug.droppoda
 		EditorOptions:
 			plug.ioncannon: Ion Cannon
 			plug.hunterseeker: Hunter Seeker
@@ -761,7 +761,7 @@ GAPLUG:
 		Requirements:
 			plug.ioncannon: !build-incomplete && !plug.ioncannona && !plug.ioncannonb && !plug.hunterseekerb && !plug.droppodb
 			plug.hunterseeker: !build-incomplete && !plug.hunterseekera && !plug.ioncannonb && !plug.hunterseekerb && !plug.droppodb
-			plug.droppod: !build-incomplete && !plug.droppoda && !plug.ioncannonb && !plug.hunterseekerb  && !plug.droppodb
+			plug.droppod: !build-incomplete && !plug.droppoda && !plug.ioncannonb && !plug.hunterseekerb	&& !plug.droppodb
 		EditorOptions:
 			plug.ioncannon: Ion Cannon
 			plug.hunterseeker: Hunter Seeker

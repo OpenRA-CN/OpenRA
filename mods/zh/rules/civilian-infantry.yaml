@@ -8,7 +8,7 @@ WEEDGUY:
 		Queue: Infantry
 		BuildPaletteOrder: 75
 		Prerequisites: ~nahand, natech, ~techlevel.high
-		Description: Heavy infantry armed with a Toxin Sprayer.\n  Strong vs Infantry\n  Weak vs Armored units, Aircraft
+		Description: Heavy infantry armed with a Toxin Sprayer.\n	Strong vs Infantry\n	Weak vs Armored units, Aircraft
 	Valued:
 		Cost: 750
 	Tooltip:

@@ -196,7 +196,7 @@ A10:
 		Queue: Air
 		BuildPaletteOrder: 100
 		Prerequisites: ~none
-		Description: Armoured ground killer craft\nwith Naplam bombs and Vulcan cannon.\n  Strong vs Ground Target\n  Weak vs Aircraft
+		Description: Armoured ground killer craft\nwith Naplam bombs and Vulcan cannon.\n	Strong vs Ground Target\n	Weak vs Aircraft
 	Selectable:
 		Bounds: 905, 1448
 	Voiced:
@@ -270,7 +270,7 @@ ORCA:
 		Queue: Air
 		BuildPaletteOrder: 10
 		Prerequisites: ~gahpad
-		Description: Fast assault fighter with\ndual missile launchers.\n  Strong vs Buildings, Vehicles, Aircraft\n  Weak vs Infantry
+		Description: Fast assault fighter with\ndual missile launchers.\n	Strong vs Buildings, Vehicles, Aircraft\n	Weak vs Infantry
 	Selectable:
 		Bounds: 905, 1448
 	Aircraft:
@@ -364,7 +364,7 @@ ORCAB:
 		Queue: Air
 		BuildPaletteOrder: 30
 		Prerequisites: ~gahpad, gatech
-		Description: Heavy Assault bomber.\n  Strong vs Buildings, Infantry, Light-Armored\n  Weak vs Heavy-Armored, Aircraft
+		Description: Heavy Assault bomber.\n	Strong vs Buildings, Infantry, Light-Armored\n	Weak vs Heavy-Armored, Aircraft
 	Selectable:
 		Bounds: 905, 1448
 	Aircraft:
@@ -479,7 +479,7 @@ TRNSPORT:
 		Queue: Air
 		BuildPaletteOrder: 60
 		Prerequisites: ~gahpad, gadept
-		Description: VTOL aircraft capable of lifting\nand transporting vehicles.\n  Unarmed \n Deploy to switch between auto-carry and manual mode: \n-auto carry mode help harvester to harvest
+		Description: VTOL aircraft capable of lifting\nand transporting vehicles.\n	Unarmed \n Deploy to switch between auto-carry and manual mode: \n-auto carry mode help harvester to harvest
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 149
@@ -547,7 +547,7 @@ SCRIN:
 		Queue: Air
 		BuildPaletteOrder: 40
 		Prerequisites: ~nahpad, natech
-		Description: Advanced fighter-bomber craft\nwith twin plasma pulse cannons and proton bombs.\n  Strong vs All
+		Description: Advanced fighter-bomber craft\nwith twin plasma pulse cannons and proton bombs.\n	Strong vs All
 	Selectable:
 		Bounds: 905, 1448
 	Voiced:
@@ -663,7 +663,7 @@ APACHE:
 		Queue: Air
 		BuildPaletteOrder: 20
 		Prerequisites: ~nahpad
-		Description: Anti-personnel support gunship\narmed with dual chain guns.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+		Description: Anti-personnel support gunship\narmed with dual chain guns.\n	Strong vs Infantry, Light armor, Aircraft\n	Weak vs Vehicles
 	Selectable:
 		Bounds: 905, 1448
 	Aircraft:

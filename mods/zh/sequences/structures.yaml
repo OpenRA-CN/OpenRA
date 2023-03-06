@@ -3280,7 +3280,7 @@ gdiref:
 
 gdiref2:
 	Inherits: gdiref
-	Defaults: 
+	Defaults:
 		Filename: gdiref2.shp
 		Offset: 3, 32, 20
 	idle:
@@ -3299,7 +3299,7 @@ gdiref2:
 
 gdiref3:
 	Inherits: gdiref
-	Defaults: 
+	Defaults:
 		Filename: gdiref3.shp
 		Offset: 12, -42, 20
 		ZOffset: 8
@@ -3319,7 +3319,7 @@ gdiref3:
 
 gdiref4:
 	Inherits: gdiref
-	Defaults: 
+	Defaults:
 		Filename: gdiref4.shp
 		Offset: -62, -5, 20
 	idle:
@@ -3380,19 +3380,19 @@ nodref:
 		MeshType: Plane
 		Offset: -12, -38, 1
 		ZOffset: 0
-	emp-overlay:  
+	emp-overlay:
 		Filename: emp_fx01.shp
 		Length: *
 		Offset: 0, 0, 21
 		ZOffset: 512
 		IgnoreWorldTint: True
-	icon: 
+	icon:
 		Filename: nodreficon.shp
 		Offset: 0, 0
 
 nodref2:
 	Inherits: nodref
-	Defaults:  
+	Defaults:
 		Filename: nodref2.shp
 		Offset: 6, 36, 20
 	idle:
@@ -3410,7 +3410,7 @@ nodref2:
 
 nodref3:
 	Inherits: nodref
-	Defaults:  
+	Defaults:
 		Filename: nodref3.shp
 		Offset: 3, -36, 20
 	idle:
@@ -3429,7 +3429,7 @@ nodref3:
 
 nodref4:
 	Inherits: nodref
-	Defaults: 
+	Defaults:
 		Filename: nodref4.shp
 		Offset: -60, -3, 20
 	idle:

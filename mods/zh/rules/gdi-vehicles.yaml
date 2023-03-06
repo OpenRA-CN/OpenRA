@@ -100,7 +100,7 @@ HVR:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 80
 		Prerequisites: ~gaweap, garadr, ~techlevel.high
-		Description: Hovering vehicle armed with\nmid-long range missiles.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		Description: Hovering vehicle armed with\nmid-long range missiles.\n	Strong vs Vehicles, Aircraft\n	Weak vs Infantry
 	Mobile:
 		MaxSpeed: 99
 		Speed: 50
@@ -166,7 +166,7 @@ SMECH:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 20
 		Prerequisites: ~gaweap, ~techlevel.low
-		Description: Anti-personnel assualt walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: Anti-personnel assualt walker.\n	Strong vs Infantry, Light armor\n	Weak vs Vehicles, Aircraft
 	Mobile:
 		TurnSpeed: 64
 		MaxSpeed: 130
@@ -239,7 +239,7 @@ MMCH:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 50
 		Prerequisites: ~gaweap, ~techlevel.medium
-		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft\n Can recieve Weapon Plugin\n-can recieve all 3 kinds of plugin at the same time
+		Description: General purpose mechanized walker.\n	Strong vs Vehicles\n	Weak vs Infantry, Aircraft\n Can recieve Weapon Plugin\n-can recieve all 3 kinds of plugin at the same time
 	Mobile:
 		TurnSpeed: 24
 		MaxSpeed: 65
@@ -387,7 +387,7 @@ HMEC:
 		BuildAtProductionType: DropZone
 		Prerequisites: ~gaweap, gtdrop, ~techlevel.high
 		BuildLimit: 1
-		Description: Slow heavy walker.\nArmed with dual railguns, rocket launchers and chain gun.\n  Strong vs All\n  Weak vs Nothing\nMaximum 1 can be built.
+		Description: Slow heavy walker.\nArmed with dual railguns, rocket launchers and chain gun.\n	Strong vs All\n	Weak vs Nothing\nMaximum 1 can be built.
 	Mobile:
 		TurnSpeed: 12
 		MaxSpeed: 42
@@ -456,7 +456,7 @@ SONIC:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 120
 		Prerequisites: ~gaweap, gatech, ~techlevel.high
-		Description: Armored high-tech vehicle with\npowerful sonic armament.\n  Strong vs Ground\n  Weak vs Aircraft
+		Description: Armored high-tech vehicle with\npowerful sonic armament.\n	Strong vs Ground\n	Weak vs Aircraft
 	Targetable:
 		TargetTypes: Ground, Vehicle, Disruptor
 	Mobile:
@@ -514,7 +514,7 @@ JUGG:
 		BuildAtProductionType: Factory
 		BuildPaletteOrder: 100
 		Prerequisites: ~gaweap, garadr, ~techlevel.high
-		Description: Mobile Artillery Mech.\nNeeds to deploy in order to shoot. \n-cannot deploy on ramp.\n  Strong vs Ground units\n  Weak vs Aircraft
+		Description: Mobile Artillery Mech.\nNeeds to deploy in order to shoot. \n-cannot deploy on ramp.\n	Strong vs Ground units\n	Weak vs Aircraft
 	Health:
 		HP: 35000
 	Armor:
