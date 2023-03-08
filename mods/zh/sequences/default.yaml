@@ -1,0 +1,241 @@
+^RA2Animal:
+	Defaults:
+		Offset: 0, 0, 16
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 100
+	idle1:
+		Start: 56
+		Length: 15
+	idle2:
+		Start: 71
+		Length: 15
+	die1:
+		Start: 86
+		Length: 15
+	die2:
+		Start: 101
+		Length: 15
+	paradrop:
+	icon: xxicon
+
+^RA2BasicInfantry:
+	Inherits: ^RA2Animal
+	idle1:
+		Tick: 120
+	idle2:
+		Tick: 120
+	cheer:
+		Start: 245
+		Length: 8
+		Tick: 120
+	die1:
+		Start: 134
+	die2:
+		Start: 149
+	die4: nukedie
+		Length: *
+		Tick: 50
+	die5: yuridie
+		Length: *
+		Tick: 80
+	die6: electro
+		Length: *
+		Tick: 80
+
+^RA2ProneInfantry:
+	liedown:
+		Start: 212
+		Length: 2
+		Facings: 8
+	standup:
+		Start: 228
+		Length: 2
+		Facings: 8
+	prone-stand:
+		Frames: 86, 92, 98, 104, 110, 116, 122, 128
+		Facings: 8
+	prone-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+		Tick: 100
+
+^RA2Infantry:
+	Inherits@1: ^RA2BasicInfantry
+	Inherits@2: ^RA2ProneInfantry
+
+^RA2CivInfantry:
+	Inherits: ^RA2Infantry
+	Inherits@MC: ^MindControllable
+	-idle2:
+	die1:
+		Start: 71
+	die2:
+		Start: 71
+	-standup:
+	-liedown:
+	prone-stand:
+		Frames: 182, 188, 194, 200, 206, 212, 218, 224
+	prone-run:
+		Start: 182
+	shoot:
+		Start: 86
+		Length: 6
+		Facings: 8
+	cheer:
+		Start: 230
+		Length: 8
+	panic-stand:
+		Facings: 8
+	panic-run:
+		Start: 134
+		Length: 6
+		Facings: 8
+
+^MindControllable:
+	mindcontrol: yuricntl
+		Length: *
+		Offset: 0, -24, 24
+
+^Structure:
+	Defaults:
+		UseTilesetCode: true
+		TilesetOverrides:
+			TEMPERATE: GENERIC
+			URBAN: GENERIC
+		DepthSprite: isodepth.shp
+	idle:
+		ShadowStart: 3
+	make:
+		Length: 25
+		ShadowStart: 25
+		TilesetOverrides:
+			TEMPERATE: TEMPERATE
+			URBAN: URBAN
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	icon:
+		Offset: 0,0
+		UseTilesetCode: false
+
+^WithMachineGunMuzzle:
+	muzzle:
+		Facings: 8
+		Length: 6
+		Combine:
+			mgun-n:
+				Filename: mgun-n.shp
+				Length: 6
+				Offset: 0, 0
+				UseTilesetCode: false
+			mgun-nw:
+				Filename: mgun-nw.shp
+				Length: 6
+				Offset: 0, 0
+				UseTilesetCode: false
+			mgun-w:
+				Filename: mgun-w.shp
+				Length: 6
+				Offset: 0, 0
+				UseTilesetCode: false
+			mgun-sw:
+				Filename: mgun-sw.shp
+				Length: 6
+				Offset: 0, 0
+				UseTilesetCode: false
+			mgun-s:
+				Filename: mgun-s.shp
+				Length: 6
+				Offset: 0, 0
+				UseTilesetCode: false
+			mgun-se:
+				Filename: mgun-n.shp
+				Length: 6
+				Offset: 0, 0
+				UseTilesetCode: false
+			mgun-e:
+				Filename: mgun-e.shp
+				Length: 6
+				Offset: 0, 0
+				UseTilesetCode: false
+			mgun-ne:
+				Filename: mgun-ne.shp
+				Length: 6
+				Offset: 0, 0
+				UseTilesetCode: false
+
+^CivStructure:
+	Defaults:
+		UseTilesetCode: true
+		DepthSprite: isodepth.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	rubble:
+		Start: 3
+		ShadowStart: 7
+		ZOffset: -3c0
+
+^CivStructureNoRubble:
+	Inherits: ^CivStructure
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 4
+	-rubble:
+
+^Flag:
+	Inherits: ^CivStructureNoRubble
+	Defaults:
+		Offset: 0, -15, 15
+	flag:
+		Length: 16
+		ShadowStart: 16
+
+^Fence:
+	Defaults:
+		Offset: 0, -15, 15
+		UseTilesetCode: true
+		DepthSprite: isodepth.shp
+	idle:
+		Length: 16
+		ShadowStart: 32
+	damaged-idle:
+		Start: 16
+		Length: 16
+		ShadowStart: 48
+	icon:
+		Offset: 0,0
+		UseTilesetCode: false
+
+^Wall:
+	Inherits: ^Fence
+	Defaults:
+		Offset: 0, -12, 12
+		DepthSprite: isodepth.shp
+	idle:
+		ShadowStart: 48
+	damaged-idle:
+		ShadowStart: 64
+	critical-idle:
+		Start: 32
+		Length: 16
+		ShadowStart: 80
+	icon:
+		Offset: 0,0
+		UseTilesetCode: false
+
+^Prop:
+	Defaults:
+		Offset: 0, -15, 15
+		UseTilesetCode: true
+	idle:
+		ShadowStart: 3

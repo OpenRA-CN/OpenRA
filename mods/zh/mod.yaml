@@ -14,6 +14,31 @@ Packages:
 	^EngineDir|mods/common: common
 
 	# Zero Hour
+	~ra2.mix
+	~language.mix
+	~multi.mix
+	~audio.mix
+	~cache.mix
+	~cameo.mix
+	~conquer.mix: conquer
+	~generic.mix
+	~isogen.mix
+	~isosnow.mix
+	~isotemp.mix
+	~isourb.mix
+	~load.mix
+	~local.mix
+	~neutral.mix
+	~sidec01.mix
+	~sidec02.mix
+	~sno.mix
+	~snow.mix
+	~tem.mix
+	~temperat.mix
+	~theme.mix
+	~urb.mix
+	~urban.mix
+	~audio.bag
 	~scores.mix
 	~sidenc01.mix
 	~sidenc02.mix
@@ -23,7 +48,6 @@ Packages:
 	~movies02.mix
 	~sidecd01.mix
 	~sidecd02.mix
-	~cache.mix
 	~conquer.mix
 	~isosnow.mix
 	~isotemp.mix
@@ -109,6 +133,7 @@ Rules:
 	# zh|tstest/localtestrulse.yaml
 
 Weapons:
+	zh|weapons/machineguns.yaml
 	zh|weapons/ballisticweapons.yaml
 	zh|weapons/energyweapons.yaml
 	zh|weapons/explosions.yaml
@@ -121,10 +146,12 @@ Weapons:
 	# zh|tstest/localtestweapon.yaml
 
 Sequences:
+	zh|sequences/default.yaml
 	zh|sequences/aircraft.yaml
 	zh|sequences/infantry.yaml
 	zh|sequences/misc.yaml
 	zh|sequences/civilian.yaml
+	zh|sequences/civilian-structures.yaml
 	zh|sequences/structures.yaml
 	zh|sequences/vehicles.yaml
 	zh|sequences/trees.yaml
@@ -144,7 +171,8 @@ MeshSequences:
 	# zh|tstest/localtestmes.yaml
 
 TileSets:
-	zh|tilesets/temperate.yaml
+	zh|tilesets/urban.yaml
+	zh|tilesets/temperat.yaml
 	zh|tilesets/snow.yaml
 
 MapGrid:

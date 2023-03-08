@@ -1576,41 +1576,23 @@ naobel:
 		DepthSprite:
 
 nalasr:
+	Inherits: ^Structure
+	Inherits@Muzzle: ^WithMachineGunMuzzle
 	Defaults:
 		TilesetFilenames:
 			TEMPERATE: ntlasr.shp
 			SNOW: nalasr.shp
-		Offset: 0, -12, 12
-		DepthSprite: isodepth.shp
-	idle:
-		ShadowStart: 3
-	damaged-idle:
-		Start: 1
-		ShadowStart: 4
-	dead:
+		Offset: 0, -20, 20
+	idle: nalasr
+	damaged-idle: nalasr
+	critical-idle: nalasr
 		Start: 2
 		ShadowStart: 5
-		Tick: 400
-	make:
-		TilesetFilenames:
-			TEMPERATE: ntlasrmk.shp
-			SNOW: nalasrmk.shp
-		Length: 21
-		ShadowStart: 21
-	emp-overlay:
-		Filename: emp_fx01.shp
-		TilesetFilenames:
-		Length: *
-		Offset: 0, 0, 13
-		ZOffset: 512
-		BlendMode: Additive
-		IgnoreWorldTint: True
-		DepthSprite:
-	icon:
-		Filename: plticon.shp
-		TilesetFilenames:
-		Offset: 0, 0
-		DepthSprite:
+	make: nalasrmk
+		Length: 12
+		ShadowStart: 12
+		ZOffset: 0
+	icon: plticon
 
 nasam:
 	Defaults:

@@ -169,49 +169,51 @@ NAFNCE:
 		Bounds: 1448, 1448
 
 NALASR:
-	Inherits: ^Defense
-	Inherits@IDISABLE: ^DisableOnPowerDown
+	Inherits: ^VoxelLighting
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@RenderVoxel: ^RenderVoxel
-	Inherits@bounty: ^GlobalBounty
-	Valued:
-		Cost: 300
-	Tooltip:
-		Name: Laser Turret
 	Buildable:
-		Queue: Defense
-		Prerequisites: nahand, ~structures.nod, ~techlevel.low
-		BuildPaletteOrder: 90
-		Description: Basic base defense.\nRequires power to operate.\n-can be turned off to save power.\n	Strong vs Ground units\n	Weak vs Aircraft
+		Queue: Support
+		BuildPaletteOrder: 20
+		Prerequisites: barracks, ~structures.soviets
+		Description: Automated anti-infantry defense.
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Sentry Gun
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
 	Health:
-		HP: 50000
+		HP: 400
 	Armor:
-		Type: Wood
+		Type: Steel
 	RevealsShroud:
 		Range: 7c0
-	DetectCloaked:
-		Range: 3c0
+	Selectable:
+		Bounds: 50, 30, 0, -12
 	Turreted:
 		TurnSpeed: 40
 		InitialFacing: 896
-		Offset: 298,-171,0
-		RealignDelay: -1
+		Offset: 320,0,0
 	AttackTurreted:
-		PauseOnCondition: empdisable || disabled || build-incomplete
+		Voice: Attack
+		RequiresCondition: !build-incomplete
 	Armament:
-		Weapon: TurretLaserFire
-		LocalOffset: 543,0,411
-		PauseOnCondition: empdisable || disabled || build-incomplete
-	RevealsShroud:
-		Range: 7c0
+		Weapon: vulcan
+		LocalOffset: 544,128,480, 544,-128,480
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	BodyOrientation:
+		QuantizedFacings: 16
 	RenderModels:
-		ZOffset: 678
 	WithModelTurret:
 		RequiresCondition: !build-incomplete
-	Power:
-		Amount: -40
-	BodyOrientation:
-		QuantizedFacings: 0
+	WithRangeCircle:
+		Range: 6c0
+		Type: pillbox
+	AutoTarget:
+	RequiresBuildableArea:
+		Adjacent: 5
 
 NAOBEL:
 	Inherits: ^Defense

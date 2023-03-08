@@ -297,32 +297,21 @@
 	GivesBounty:
 		RequiresCondition: global-bounty
 
-^2x1Shape:
+^1x1Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
-			TopLeft: -1024, -512
-			BottomRight: 1024, 512
+			LocalYaw: -128
+			TopLeft: -512, -512
+			BottomRight: 512, 512
 
 ^1x2Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
+			LocalYaw: -128
 			TopLeft: -512, -1024
 			BottomRight: 512, 1024
-
-^2x2Shape:
-	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
-		Type: Rectangle
-			VerticalTopOffset: 762
-			TopLeft: -1024, -1024
-			BottomRight: 1024, 1024
 
 ^1x3Shape:
 	HitShape:
@@ -333,68 +322,108 @@
 			TopLeft: -512, -1536
 			BottomRight: 512, 1536
 
+^1x4Shape:
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			LocalYaw: -128
+			TopLeft: -512, -2048
+			BottomRight: 512, 2048
+
+^2x1Shape:
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			LocalYaw: -128
+			TopLeft: -1024, -512
+			BottomRight: 1024, 512
+
+^2x2Shape:
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			LocalYaw: -128
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 1024
+
+^2x3Shape:
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			LocalYaw: -128
+			TopLeft: -1024, -1536
+			BottomRight: 1024, 1536
+
+^2x5Shape:
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			LocalYaw: -128
+			TopLeft: -1024, -2560
+			BottomRight: 1024, 2560
+
+^2x6Shape:
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			LocalYaw: -128
+			TopLeft: -1024, -3072
+			BottomRight: 1024, 3072
+
 ^3x1Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
+			LocalYaw: -128
 			TopLeft: -1536, -512
 			BottomRight: 1536, 512
 
 ^3x2Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
+			LocalYaw: -128
 			TopLeft: -1536, -1024
 			BottomRight: 1536, 1024
 
-^2x3Shape:
-	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
-		Type: Rectangle
-			VerticalTopOffset: 762
-			TopLeft: -1024, -1536
-			BottomRight: 1024, 1536
-
 ^3x3Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
+			LocalYaw: -128
 			TopLeft: -1536, -1536
 			BottomRight: 1536, 1536
 
-^2x4Shape:
+^3x4Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
-			TopLeft: -1024, -2048
-			BottomRight: 1024, 2048
+			LocalYaw: -128
+			TopLeft: -1536, -2048
+			BottomRight: 1536, 2048
+
+^3x5Shape:
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			LocalYaw: -128
+			TopLeft: -1536, -2560
+			BottomRight: 1536, 2560
 
 ^4x2Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
 			TopLeft: -2048, -1024
 			BottomRight: 2048, 1024
 
-^3x4Shape:
+^4x3Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
-			TopLeft: -1536, -2048
-			BottomRight: 1536, 2048
+			LocalYaw: -128
+			TopLeft: -2048, -1536
+			BottomRight: 2048, 1536
 
 ^4x3FactoryWithBibShape:
 	HitShape:
@@ -405,66 +434,35 @@
 			TopLeft: -2048, -1536
 			BottomRight: 1024, 1536
 
-^4x3Shape:
-	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
-		Type: Rectangle
-			VerticalTopOffset: 762
-			TopLeft: -2048, -1536
-			BottomRight: 2048, 1536
-
 ^4x4Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
+			LocalYaw: -128
 			TopLeft: -2048, -2048
 			BottomRight: 2048, 2048
 
-^3x5Shape:
-	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
-		Type: Rectangle
-			VerticalTopOffset: 762
-			TopLeft: -1536, -2560
-			BottomRight: 1536, 2560
-
 ^5x3Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
+			LocalYaw: -128
 			TopLeft: -2560, -1536
 			BottomRight: 2560, 1536
 
-^2x5Shape:
+^5x4Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
-			TopLeft: -1024, -2560
-			BottomRight: 1024, 2560
-
-^2x6Shape:
-	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
-		Type: Rectangle
-			VerticalTopOffset: 762
-			TopLeft: -1024, -3072
-			BottomRight: 1024, 3072
+			LocalYaw: -128
+			TopLeft: -2560, -2048
+			BottomRight: 2560, 2048
 
 ^6x4Shape:
 	HitShape:
-		TargetableOffsets: 0,0,418
-		TargetableCellAdditionalOffset: 0,0,418
+		UseTargetableCellsOffsets: true
 		Type: Rectangle
-			VerticalTopOffset: 762
+			LocalYaw: -128
 			TopLeft: -3072, -2048
 			BottomRight: 3072, 2048
 
@@ -612,6 +610,23 @@
 		SpawnAfterDefeat: false
 		Probability: 35
 
+^Rubble:
+	Inherits@1: ^SpriteActor
+	Inherits@shape: ^1x1Shape
+	Building:
+		Dimensions: 1,1
+		Footprint: x
+	RenderSprites:
+		Palette: terrain
+	WithSpriteBody:
+		Sequence: rubble
+	FrozenUnderFog:
+	HitShape:
+		UseTargetableCellsOffsets: true
+	MapEditorData:
+		Categories: Building rubble
+	Interactable:
+
 ^OldBase:
 	Inherits: ^CivBuilding
 	Inherits@SHAPE: ^2x2Shape
@@ -728,6 +743,20 @@
 		Value: 0
 	BlocksProjectiles:
 		Height: 512
+
+^Fence:
+	Inherits: ^Wall
+	Valued:
+		Cost: 25
+	Health:
+		HP: 100
+	Armor:
+		Type: Wood
+	Crushable:
+		CrushClasses: fence
+	SoundOnDamageTransition:
+		DamagedSounds: gblacrua.wav, gblacrub.wav
+		DestroyedSounds: gblacrua.wav, gblacrub.wav
 
 ^BuildingPlug:
 	Interactable:
@@ -1979,3 +2008,56 @@
 	OwnerLostAction:
 		Action: Kill
 	WithSpriteBody:
+
+^BaseBuilding:
+	Inherits: ^Building
+	WithMakeAnimation:
+		Condition: build-incomplete
+	Sellable:
+		SellSounds: uselbuil.wav
+		RequiresCondition: !build-incomplete
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 3
+	GivesBuildableArea:
+		AreaTypes: building
+
+^SupportBuilding:
+	Inherits: ^BaseBuilding
+	-Capturable:
+	-CaptureNotification:
+	-ShakeOnDeath:
+
+^VoxelLighting:
+	Inherits: ^SupportBuilding
+	RenderModels:
+		Scale: 11.7
+		LightYaw: 800
+		LightPitch: 150
+		LightAmbientColor: -0.5,-0.5,-0.5
+		LightDiffuseColor: 1.4,1.4,1.4
+
+^Flag:
+	Inherits: ^CivBuilding
+	OwnerLostAction:
+		Action: ChangeOwner
+	Selectable:
+		Bounds: 50, 228, 0, 0
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
+	Tooltip:
+		Name: Flag
+	Health:
+		HP: 20
+	Armor:
+		Type: Steel
+	RevealsShroud:
+		Range: 6c0
+	WithIdleOverlay@flag:
+		Sequence: flag
+	SoundOnDamageTransition:
+		DamagedSounds: bmetdama.wav, bmetdamb.wav, bmetdamc.wav
+		DestroyedSounds: bmetdama.wav, bmetdamb.wav, bmetdamc.wav
+	MapEditorData:
+		Categories: Flag

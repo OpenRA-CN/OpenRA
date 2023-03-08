@@ -497,7 +497,7 @@ SAPC:
 		MaxSpeed: 71
 		SpeedAccleration: 2
 		PauseOnCondition: empdisable || loading || being-captured || carried
-		Locomotor: subterranean
+		Locomotor: wheeled
 	Health:
 		HP: 17500
 	Armor:
@@ -521,11 +521,6 @@ SAPC:
 	Targetable@UNDERGROUND:
 		TargetTypes: Underground
 		RequiresCondition: submerged
-	GrantConditionOnSubterraneanLayer:
-		Condition: submerged
-		SubterraneanTransitionImage: dig
-		SubterraneanTransitionSequence: idle
-		SubterraneanTransitionSound: subdril1.aud
 	AttachCarryable:
 		RequiresCondition: !submerged
 	WithDecoration@UNDERGROUND:
@@ -575,7 +570,7 @@ SUBTANK:
 		Speed: 40
 		MaxSpeed: 71
 		SpeedAccleration: 2
-		Locomotor: subterranean
+		Locomotor: wheeled
 	Health:
 		HP: 30000
 	Armor:
@@ -601,11 +596,6 @@ SUBTANK:
 	Targetable@UNDERGROUND:
 		TargetTypes: Underground
 		RequiresCondition: submerged
-	GrantConditionOnSubterraneanLayer:
-		Condition: submerged
-		SubterraneanTransitionImage: dig
-		SubterraneanTransitionSequence: idle
-		SubterraneanTransitionSound: subdril1.aud
 	AttachCarryable:
 		RequiresCondition: !submerged
 	WithDecoration@UNDERGROUND:

@@ -162,7 +162,7 @@ e3:
 		Filename: e4icon.shp
 
 engineer.gdi:
-	Inherits: ^BasicInfantry
+	Inherits: ^RA2Infantry
 	Defaults:
 		Filename: engineer.shp
 	icon:
@@ -251,44 +251,31 @@ slav:
 civ1:
 	Defaults:
 		Filename: civ1.shp
-	Inherits: ^BasicInfantry
-	attack:
-		Start: 164
-		Length: 6
-		Facings: 8
-		ShadowStart: 456
-	attack-muzzle:
-		Start: 164
-		Length: 6
-		Facings: 8
-		ShadowStart: 456
-		IgnoreWorldTint: True
-	panic-run:
-		Start: 86
-		Length: 6
-		Facings: 8
-		ShadowStart: 378
-	panic-stand:
-		Facings: 8
-		ShadowStart: 292
+	Inherits: ^RA2CivInfantry
 
 civ2:
 	Defaults:
 		Filename: civ2.shp
-	Inherits: ^BasicInfantry
-	panic-run:
-		Start: 86
-		Length: 6
-		Facings: 8
-		ShadowStart: 378
-	panic-stand:
-		Facings: 8
-		ShadowStart: 292
+	Inherits: ^RA2CivInfantry
 
 civ3:
 	Defaults:
 		Filename: civ3.shp
-	Inherits: civ1
+	Inherits: ^RA2CivInfantry
+	die1:
+		Length: 13
+	die2:
+		Length: 13
+	prone-stand:
+		Frames: 180, 186, 192, 198, 204, 210, 216, 222
+	prone-run:
+		Start: 180
+	shoot:
+		Start: 84
+	cheer:
+		Start: 228
+	panic-run:
+		Start: 132
 
 cyborg:
 	Inherits@defaults: ^InfantryBase
@@ -689,9 +676,6 @@ flameguy:
 		Filename: flameguy.shp
 		Facings: 8
 		Tick: 80
-		ShadowStart: 148
-		Offset: 0, 0, 16
-		IgnoreWorldTint: True
 	idle:
 	stand:
 	run:
@@ -700,5 +684,4 @@ flameguy:
 		Start: 44
 		Facings: 1
 		Length: 104
-		ShadowStart: 192
-		AlphaFade: True
+

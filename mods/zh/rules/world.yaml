@@ -145,22 +145,6 @@
 			BlueTiberium: 70
 			Veins: 70
 			Water: 80
-	SubterraneanLocomotor@SUBTERRANEAN:
-		Name: subterranean
-		Crushes: wall, crate, infantry
-		TerrainSpeeds:
-			Clear: 70
-			Road: 100
-			Bridge: 100
-			Rail: 100
-			DirtRoad: 90
-			Rough: 60
-			Tiberium: 70
-			BlueTiberium: 70
-			Veins: 70
-			Subterranean: 120
-		SubterraneanTransitionTerrainTypes: Clear, Rough
-		SubterraneanTransitionCost: 120
 	Locomotor@HOVER:
 		Name: hover
 		Crushes: crate
